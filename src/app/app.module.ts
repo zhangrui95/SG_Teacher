@@ -28,6 +28,8 @@ import { UsersPage } from '../pages/users/users';
 import { PhonePage } from '../pages/phone/phone'
 import { PasswordPage } from '../pages/password/password';
 import { UpdatePage } from "../pages/update/update";
+import { LoginsPage } from  '../pages/logins/logins'
+import { UserloginPage } from  '../pages/userlogin/userlogin'
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -54,6 +56,8 @@ import {HttpClientModule} from "@angular/common/http";
     UsersPage,
     PasswordPage,
     UpdatePage,
+    LoginsPage,
+    UserloginPage,
     PhonePage
   ],
   imports: [
@@ -77,7 +81,10 @@ import {HttpClientModule} from "@angular/common/http";
         { component: UsersPage, name: 'UsersPage', segment: 'user' },
         { component: PasswordPage, name: 'PasswordPage', segment: 'password' },
         { component: UpdatePage, name: 'UpdatePage', segment: 'update' },
-        { component: PhonePage, name: 'PhonePage', segment: 'phone' }
+        { component: LoginsPage, name: 'LoginsPage', segment: 'logins' },
+        { component: PhonePage, name: 'PhonePage', segment: 'phone' },
+        { component: UserloginPage, name: 'UserloginPage', segment: 'userlogin' },
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -102,6 +109,8 @@ import {HttpClientModule} from "@angular/common/http";
     UsersPage,
     PasswordPage,
     UpdatePage,
+    LoginsPage,
+    UserloginPage,
     PhonePage
   ],
   providers: [

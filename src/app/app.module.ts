@@ -35,6 +35,9 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import {HttpClientModule} from "@angular/common/http";
 
+import {Camera} from "@ionic-native/camera";
+import {ImagePicker} from "@ionic-native/image-picker";
+
 
 @NgModule({
   declarations: [
@@ -118,6 +121,8 @@ import {HttpClientModule} from "@angular/common/http";
     ConferenceData,
     UserData,
     InAppBrowser,
+    Camera,
+    ImagePicker,
     SplashScreen
   ]
 })

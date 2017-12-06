@@ -25,6 +25,10 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { UsersPage } from '../pages/users/users';
+import { PhonePage } from '../pages/phone/phone'
+import { PasswordPage } from '../pages/password/password';
+import { UpdatePage } from "../pages/update/update";
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -46,7 +50,11 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    UsersPage,
+    PasswordPage,
+    UpdatePage,
+    PhonePage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,11 @@ import { UserData } from '../providers/user-data';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: UsersPage, name: 'UsersPage', segment: 'user' },
+        { component: PasswordPage, name: 'PasswordPage', segment: 'password' },
+        { component: UpdatePage, name: 'UpdatePage', segment: 'update' },
+        { component: PhonePage, name: 'PhonePage', segment: 'phone' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -86,7 +98,11 @@ import { UserData } from '../providers/user-data';
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    UsersPage,
+    PasswordPage,
+    UpdatePage,
+    PhonePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>个人中心</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="header-box">
+    <div class="header-img">
+      <div class="head-img-box">
+        <img class="upload-img" src="../../assets/img/upload.png"/>
+      </div>
+    </div>
+    <div class="header-img user-name-box">
+      <div>张三</div>
+      <div>18686762078</div>
+    </div>
+  </div>
+  <ion-list>
+    <button ion-item (click)="goChangePhone()">
+      修改手机
+    </button>
+    <button ion-item (click)="goChangePassword()">
+      修改密码
+    </button>
+    <button ion-item (click)="goUpdate()">
+      版本更新
+    </button>
+  </ion-list>
+  <div class="btn" padding>
+    <button ion-button color="#404040" block>退出</button>
+  </div>
+</ion-content>

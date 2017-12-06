@@ -14,12 +14,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'phone.html',
 })
 export class PhonePage {
-
+  oldPhone;
+  newPhone;
+  pwd;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhonePage');
+  }
+  save(){
+    // console.log('111', this.oldPhone)
+    console.log(this.oldPhone,this.newPhone,this.pwd);
   }
 
 }

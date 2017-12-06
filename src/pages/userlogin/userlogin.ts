@@ -15,7 +15,7 @@ import { LoginsPage } from "../logins/logins";
 })
 export class UserloginPage {
 
-  login: UserSign = { username: '', password: '' , pwd: '', phone: '' };
+  login: UserSign = { username: '', password: '' , RealName: '', StuNo: '', phone: ''};
   submitted = false;
 
   constructor(public navCtrl: NavController, public userData: UserData) { }

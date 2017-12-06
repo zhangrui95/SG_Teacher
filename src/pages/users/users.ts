@@ -36,7 +36,7 @@ export class UsersPage {
   }
 
 
-  avatar: string = "../../assets/img/upload.png";
+  avatar = "../../assets/img/upload.png";
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

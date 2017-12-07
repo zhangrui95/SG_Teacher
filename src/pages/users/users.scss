@@ -1,0 +1,28 @@
+page-users {
+  .header-box{
+    width: 100%;
+    background: #404040;
+    overflow: hidden;
+  }
+  .header-img{
+    width: 35%;
+    float: left;
+  }
+  .user-name-box{
+    width: 65%;
+    margin-top: 20px;
+    div{
+      color: #fff;
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+  .upload-img{
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    margin: 15px auto;
+    display: block;
+    border-radius: 50px;
+  }
+}

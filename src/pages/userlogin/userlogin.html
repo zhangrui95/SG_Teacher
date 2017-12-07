@@ -1,0 +1,64 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>注册</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #loginForm="ngForm" novalidate>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label stacked color="primary">用户名</ion-label>
+      <ion-input class="input-border" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+                 required>
+      </ion-input>
+    </ion-item>
+    <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+      用户名不能为空
+    </p>
+
+    <ion-item>
+      <ion-label stacked color="primary">密码</ion-label>
+      <ion-input class="input-border" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+      密码不能为空
+    </p>
+
+    <ion-item>
+      <ion-label stacked color="primary">真实姓名</ion-label>
+      <ion-input class="input-border" [(ngModel)]="login.RealName" name="RealName" type="password" #RealName="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <p ion-text [hidden]="RealName.valid || submitted == false" color="danger" padding-left>
+      确认密码不能为空
+    </p>
+
+    <ion-item>
+      <ion-label stacked color="primary">手机号码</ion-label>
+      <ion-input class="input-border" [(ngModel)]="login.phone" name="phone" type="text" #phone="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <p ion-text [hidden]="phone.valid || submitted == false" color="danger" padding-left>
+      手机号码不能为空
+    </p>
+
+    <ion-item>
+      <ion-label stacked color="primary">学号</ion-label>
+      <ion-input class="input-border" [(ngModel)]="login.StuNo" name="StuNo" type="text" #StuNo="ngModel" required>
+      </ion-input>
+    </ion-item>
+    <p ion-text [hidden]="StuNo.valid || submitted == false" color="danger" padding-left>
+      学号不能为空
+    </p>
+
+  </ion-list>
+  </form>
+  <div padding="" class="btn">
+    <button ion-button (click)="onLogin(loginForm)" type="submit" block>注册</button>
+  </div>
+</ion-content>

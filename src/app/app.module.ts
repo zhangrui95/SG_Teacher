@@ -24,11 +24,20 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { UsersPage } from '../pages/users/users';
+import { PhonePage } from '../pages/phone/phone'
+import { PasswordPage } from '../pages/password/password';
+import { UpdatePage } from "../pages/update/update";
+import { LoginsPage } from  '../pages/logins/logins'
+import { UserloginPage } from  '../pages/userlogin/userlogin'
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import {HttpClientModule} from "@angular/common/http";
 import {ProxyHttpService} from "../providers/proxy.http.service";
+
+import {Camera} from "@ionic-native/camera";
+import {ImagePicker} from "@ionic-native/image-picker";
 
 
 @NgModule({
@@ -47,7 +56,13 @@ import {ProxyHttpService} from "../providers/proxy.http.service";
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    UsersPage,
+    PasswordPage,
+    UpdatePage,
+    LoginsPage,
+    UserloginPage,
+    PhonePage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +81,14 @@ import {ProxyHttpService} from "../providers/proxy.http.service";
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        { component: SignupPage, name: 'SignupPage', segment: 'signup' },
+        { component: UsersPage, name: 'UsersPage', segment: 'user' },
+        { component: PasswordPage, name: 'PasswordPage', segment: 'password' },
+        { component: UpdatePage, name: 'UpdatePage', segment: 'update' },
+        { component: LoginsPage, name: 'LoginsPage', segment: 'logins' },
+        { component: PhonePage, name: 'PhonePage', segment: 'phone' },
+        { component: UserloginPage, name: 'UserloginPage', segment: 'userlogin' },
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -87,7 +109,13 @@ import {ProxyHttpService} from "../providers/proxy.http.service";
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    UsersPage,
+    PasswordPage,
+    UpdatePage,
+    LoginsPage,
+    UserloginPage,
+    PhonePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -95,6 +123,8 @@ import {ProxyHttpService} from "../providers/proxy.http.service";
     ProxyHttpService,
     UserData,
     InAppBrowser,
+    Camera,
+    ImagePicker,
     SplashScreen
   ]
 })

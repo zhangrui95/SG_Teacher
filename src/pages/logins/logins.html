@@ -12,7 +12,7 @@
     <ion-list no-lines>
       <ion-item>
         <ion-label stacked color="primary">用户名</ion-label>
-        <ion-input class="input-border" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
+        <ion-input class="input-border" placeholder="请输入用户名/手机号码" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
                    required>
         </ion-input>
       </ion-item>
@@ -22,7 +22,7 @@
 
       <ion-item>
         <ion-label stacked color="primary">密码</ion-label>
-        <ion-input class="input-border" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+        <ion-input class="input-border" placeholder="请输入密码" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
         </ion-input>
       </ion-item>
       <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>

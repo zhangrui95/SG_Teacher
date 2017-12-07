@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
-import { NavController } from 'ionic-angular';
-
-import { UserData } from '../../providers/user-data';
-
+import {LoadingController, NavController, ToastController} from 'ionic-angular';
 import { UserOptions } from '../../interfaces/user-options';
-
+import { SigninPage } from "../signin/signin";
 import { UsersPage } from "../users/users"
-import { UserloginPage } from "../userlogin/userlogin";
-import { HttpClient } from "@angular/common/http";
+import {ProxyHttpService} from "../../providers/proxy.http.service";
 
 @Component({
   selector: 'page-logins',
@@ -19,27 +14,46 @@ export class LoginsPage {
 
   login: UserOptions = { username: '', password: '' };
   submitted = false;
-  IP_PORT = 'http://localhost:8080';
-  PROJECT_PATH = '/VisualizationMgt'
-  BASE_URL = this.IP_PORT + this.PROJECT_PATH;
-
-  constructor(public navCtrl: NavController, public userData: UserData, public http: HttpClient) { }
+  constructor(
+    public navCtrl: NavController,
+    public http: ProxyHttpService,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
+  ) { }
 
   onLogin(form: NgForm) {
     this.submitted = true;
-    this.navCtrl.push(UsersPage);
+    let loading = this.loadingCtrl.create({
+      content: '登录中...'
+    });
     if (form.valid) {
-      this.userData.login(this.login.username);
-      // let param = {LoginName: this.login.username, LoginPwd: this.login.password};
-      // this.http.get( this.BASE_URL + '/userstu/login.do', param).subscribe(res => {
-      //   console.log(res);
-      //   this.navCtrl.push(UsersPage);
-      // });
+      loading.present();
+      const params = {LoginName:this.login.username, LoginPwd:this.login.password}
+      this.http.login(params).subscribe(res => {
+        if(res['code'] == 0){
+          loading.dismiss();
+          this.navCtrl.push(UsersPage, {userid:'', name:res['username'], phone:res['phone'], userId:res['userId']});
+          // this.showToast('top',res['msg']);
+        }else{
+          loading.dismiss();
+          this.showToast('middle',res['msg']);
+        }
+      });
     }
   }
 
   onSignup() {
-    this.navCtrl.push(UserloginPage);
+    this.navCtrl.push(SigninPage);
+  }
+
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+
+    toast.present(toast);
   }
 
 }

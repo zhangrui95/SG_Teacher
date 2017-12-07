@@ -8,6 +8,5 @@ export interface UserSign {
   username: string,
   password: string,
   RealName: string,
-  StuNo: string,
   phone: string
 }

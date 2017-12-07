@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import {ProxyHttpService} from "../../providers/proxy.http.service";
 
-/**
- * Generated class for the PhonePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -16,16 +11,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class PhonePage {
   oldPhone;
   newPhone;
-  pwd;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PhonePage');
+  // pwd;
+  userId;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public http: ProxyHttpService,
+              public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController
+  ) {
+    this.userId = navParams.get('userId');
   }
   save(){
-    // console.log('111', this.oldPhone)
-    console.log(this.oldPhone,this.newPhone,this.pwd);
+    let loading = this.loadingCtrl.create({
+      content: '修改中...'
+    });
+    const params = {phone:this.oldPhone, newPhone:this.newPhone,userid:this.userId.toString()}
+    this.http.updatePhone(params).subscribe(res => {
+      if(res['code'] == 0){
+        loading.dismiss();
+        this.showToast('top',res['msg']);
+      }else{
+        loading.dismiss();
+        this.showToast('middle',res['msg']);
+      }
+    });
+  }
+
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+
+    toast.present(toast);
   }
 
 }

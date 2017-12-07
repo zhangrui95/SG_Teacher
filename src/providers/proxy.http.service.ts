@@ -22,6 +22,21 @@ export class ProxyHttpService {
     return this._post("/userstu/login.do",params)
   }
 
+  updatePhone(params){
+    return this._post("/userstu/updatePhone.do",params)
+  }
+
+  updatePass(params){
+    return this._post("/userstu/updatePass.do",params)
+  }
+
+  getVersionByType(params){
+    return this._post("/version/getVersionByType.do",params)
+  }
+
+  register(params){
+    return this._post("/userstu/register.do",params)
+  }
   _post(url,params?:any){
     return this.http.post(this.BASE_URL+url,JSON.stringify(params))
   }

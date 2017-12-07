@@ -29,8 +29,7 @@ import { PhonePage } from '../pages/phone/phone'
 import { PasswordPage } from '../pages/password/password';
 import { UpdatePage } from "../pages/update/update";
 import { LoginsPage } from  '../pages/logins/logins'
-import { UserloginPage } from  '../pages/userlogin/userlogin'
-
+import { SigninPage } from '../pages/signin/signin'
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import {HttpClientModule} from "@angular/common/http";
@@ -61,7 +60,7 @@ import {ImagePicker} from "@ionic-native/image-picker";
     PasswordPage,
     UpdatePage,
     LoginsPage,
-    UserloginPage,
+    SigninPage,
     PhonePage
   ],
   imports: [
@@ -87,7 +86,7 @@ import {ImagePicker} from "@ionic-native/image-picker";
         { component: UpdatePage, name: 'UpdatePage', segment: 'update' },
         { component: LoginsPage, name: 'LoginsPage', segment: 'logins' },
         { component: PhonePage, name: 'PhonePage', segment: 'phone' },
-        { component: UserloginPage, name: 'UserloginPage', segment: 'userlogin' },
+        { component: SigninPage, name: 'SigninPage', segment: 'signin' },
 
       ]
     }),
@@ -114,7 +113,7 @@ import {ImagePicker} from "@ionic-native/image-picker";
     PasswordPage,
     UpdatePage,
     LoginsPage,
-    UserloginPage,
+    SigninPage,
     PhonePage
   ],
   providers: [

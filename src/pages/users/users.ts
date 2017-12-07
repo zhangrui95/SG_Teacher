@@ -14,19 +14,19 @@ import { LoginsPage } from '../logins/logins'
   templateUrl: 'users.html',
 })
 export class UsersPage {
-
+  name;
+  phone;
+  userId;
   constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public imagePicker: ImagePicker, public camera: Camera) {
-  }
-
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UsersPage');
+    this.name = navParams.get('name');
+    this.phone = navParams.get('phone');
+    this.userId = navParams.get('userId');
   }
   goChangePhone(){
-    this.navCtrl.push(PhonePage);
+    this.navCtrl.push(PhonePage, {userId: this.userId});
   }
   goChangePassword(){
-    this.navCtrl.push(PasswordPage);
+    this.navCtrl.push(PasswordPage, {userId: this.userId});
   }
   goUpdate(){
     this.navCtrl.push(UpdatePage);

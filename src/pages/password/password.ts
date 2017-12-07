@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the PasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import {ProxyHttpService} from "../../providers/proxy.http.service";
 
 @IonicPage()
 @Component({
@@ -14,12 +8,47 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'password.html',
 })
 export class PasswordPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  oldpwd;
+  newpwd;
+  newpwds;
+  userId;
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public http: ProxyHttpService,
+              public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController
+              ) {
+    this.userId = navParams.get('userId');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PasswordPage');
+  save(){
+    let loading = this.loadingCtrl.create({
+      content: '修改中...'
+    });
+    if(this.newpwd === this.newpwds){
+      const params = {userid:this.userId.toString(),password:this.oldpwd,newPass:this.newpwd}
+      this.http.updatePass(params).subscribe(res => {
+        if(res['code'] == 0){
+          loading.dismiss();
+          this.showToast('top',res['msg']);
+        }else{
+          loading.dismiss();
+          this.showToast('middle',res['msg']);
+        }
+      });
+    } else {
+      this.showToast('middle', '两次密码输入不一致，请重新输入！');
+    }
+
   }
 
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+
+    toast.present(toast);
+  }
 }

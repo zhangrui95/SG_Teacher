@@ -28,6 +28,7 @@ import { SupportPage } from '../pages/support/support';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import {HttpClientModule} from "@angular/common/http";
+import {ProxyHttpService} from "../providers/proxy.http.service";
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import {HttpClientModule} from "@angular/common/http";
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ConferenceData,
+    ProxyHttpService,
     UserData,
     InAppBrowser,
     SplashScreen

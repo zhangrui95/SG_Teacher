@@ -25,20 +25,25 @@ export class PasswordPage {
     let loading = this.loadingCtrl.create({
       content: '修改中...'
     });
-    if(this.newpwd === this.newpwds){
-      const params = {userid:this.userId.toString(),password:this.oldpwd,newPass:this.newpwd}
-      this.http.updatePass(params).subscribe(res => {
-        if(res['code'] == 0){
-          loading.dismiss();
-          this.showToast('top',res['msg']);
-        }else{
-          loading.dismiss();
-          this.showToast('middle',res['msg']);
-        }
-      });
-    } else {
-      this.showToast('middle', '两次密码输入不一致，请重新输入！');
+    if(this.oldpwd==null||this.newpwd==null||this.newpwds==null){
+      this.showToast('top', '密码不能为空');
+    }else{
+      if(this.newpwd === this.newpwds){
+        const params = {userid:this.userId.toString(),password:this.oldpwd,newPass:this.newpwd}
+        this.http.updatePass(params).subscribe(res => {
+          if(res['code'] == 0){
+            loading.dismiss();
+            this.showToast('top',res['msg']);
+          }else{
+            loading.dismiss();
+            this.showToast('top',res['msg']);
+          }
+        });
+      } else {
+        this.showToast('top', '两次密码输入不一致，请重新输入！');
+      }
     }
+
 
   }
 

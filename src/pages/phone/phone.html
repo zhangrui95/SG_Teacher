@@ -8,27 +8,23 @@
 
 
 <ion-content padding>
-  <ion-list>
+  <ion-list inset>
 
     <ion-item>
       <ion-label fixed>原手机号</ion-label>
-      <ion-input [(ngModel)]="oldPhone" type="text"></ion-input>
+      <ion-input [(ngModel)]="oldPhone" type="number"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label fixed>新手机号</ion-label>
-      <ion-input [(ngModel)]="newPhone" type="text"></ion-input>
+      <ion-input [(ngModel)]="newPhone" type="number"></ion-input>
     </ion-item>
-
-    <!--<ion-item>-->
-      <!--<ion-label fixed>密码</ion-label>-->
-      <!--<ion-input [(ngModel)]="pwd" type="password"></ion-input>-->
-    <!--</ion-item>-->
+    <p></p>
 
   </ion-list>
 
   <div class="btn" padding>
-    <button ion-button color="#404040" block (click)="save()">提交</button>
+    <button ion-button block (click)="save()" style="height: 50px;">提交</button>
   </div>
 
 </ion-content>

@@ -10,3 +10,8 @@ export interface UserSign {
   RealName: string,
   phone: string
 }
+
+export interface ChangePhone {
+  oldPhone: number;
+  newPhone: number;
+}

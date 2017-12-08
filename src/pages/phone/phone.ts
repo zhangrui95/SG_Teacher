@@ -25,16 +25,21 @@ export class PhonePage {
     let loading = this.loadingCtrl.create({
       content: '修改中...'
     });
-    const params = {phone:this.oldPhone, newPhone:this.newPhone,userid:this.userId.toString()}
-    this.http.updatePhone(params).subscribe(res => {
-      if(res['code'] == 0){
-        loading.dismiss();
-        this.showToast('top',res['msg']);
-      }else{
-        loading.dismiss();
-        this.showToast('middle',res['msg']);
-      }
-    });
+    if(this.oldPhone == null||this.newPhone == null){
+      this.showToast('top','手机号不能为空');
+    }else{
+      const params = {phone:this.oldPhone, newPhone:this.newPhone,userid:this.userId.toString()}
+      this.http.updatePhone(params).subscribe(res => {
+        if(res['code'] == 0){
+          loading.dismiss();
+          this.showToast('top',res['msg']);
+        }else{
+          loading.dismiss();
+          this.showToast('top',res['msg']);
+        }
+      });
+    }
+
   }
 
   showToast(position: string, text: string) {

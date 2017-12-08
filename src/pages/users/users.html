@@ -14,7 +14,7 @@
       <div>{{phone}}</div>
     </div>
   </div>
-  <ion-list>
+  <ion-list inset>
     <button ion-item (click)="goChangePhone()">
       修改手机
     </button>
@@ -25,7 +25,7 @@
       版本更新
     </button>
   </ion-list>
-  <div class="btn" padding>
-    <button (click)="getOut()" ion-button color="#404040" block>退出</button>
+  <div style="margin-top: 50px;" padding>
+    <button (click)="getOut()" ion-button color="danger" style="height: 40px;" block>退  出</button>
   </div>
 </ion-content>

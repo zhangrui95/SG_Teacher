@@ -35,10 +35,10 @@ export class SigninPage {
         if(res['code'] == 0){
           loading.dismiss();
           this.goLogin();
-          this.showToast('middle',res['msg']);
+          this.showToast('top',res['msg']);
         }else{
           loading.dismiss();
-          this.showToast('middle',res['msg']);
+          this.showToast('top',res['msg']);
         }
       });
 

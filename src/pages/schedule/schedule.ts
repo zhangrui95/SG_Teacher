@@ -13,6 +13,7 @@ import { UserData } from '../../providers/user-data';
 
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import {LoginsPage} from "../logins/logins";
 
 
 @Component({
@@ -165,5 +166,8 @@ export class SchedulePage {
         toast.present();
       }, 1000);
     });
+  }
+  getLogins(){
+    this.navCtrl.push(LoginsPage);
   }
 }

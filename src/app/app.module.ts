@@ -37,6 +37,8 @@ import {ProxyHttpService} from "../providers/proxy.http.service";
 
 import {Camera} from "@ionic-native/camera";
 import {ImagePicker} from "@ionic-native/image-picker";
+import {IndexPage} from "../pages/index/index";
+import {ClassroomPage} from "../pages/classroom/classroom";
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import {ImagePicker} from "@ionic-native/image-picker";
     UpdatePage,
     LoginsPage,
     SigninPage,
-    PhonePage
+    PhonePage,
+    ClassroomPage,
+    IndexPage
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,8 @@ import {ImagePicker} from "@ionic-native/image-picker";
         { component: LoginsPage, name: 'LoginsPage', segment: 'logins' },
         { component: PhonePage, name: 'PhonePage', segment: 'phone' },
         { component: SigninPage, name: 'SigninPage', segment: 'signin' },
+        { component: IndexPage, name: 'IndexPage', segment: 'index' },
+        { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
 
       ]
     }),
@@ -114,7 +120,10 @@ import {ImagePicker} from "@ionic-native/image-picker";
     UpdatePage,
     LoginsPage,
     SigninPage,
-    PhonePage
+    PhonePage,
+    IndexPage,
+    ClassroomPage,
+    ClassroomPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

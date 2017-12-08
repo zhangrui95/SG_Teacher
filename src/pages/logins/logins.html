@@ -1,42 +1,24 @@
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>登录</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
+  <img src="../../assets/img/logo.png" class="logo"/>
   <form #loginForm="ngForm" novalidate>
     <ion-list no-lines>
       <ion-item>
-        <ion-label stacked color="primary">用户名</ion-label>
-        <ion-input class="input-border" placeholder="请输入用户名/手机号码" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
-                   required>
+        <ion-input class="input-border user-icon" placeholder="请输入用户名/手机号码" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" required>
         </ion-input>
       </ion-item>
-      <p ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
+      <p class="danger-text" ion-text [hidden]="username.valid || submitted == false" color="danger" padding-left>
         用户名不能为空
       </p>
-
       <ion-item>
-        <ion-label stacked color="primary">密码</ion-label>
-        <ion-input class="input-border" placeholder="请输入密码" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
+        <ion-icon ios="ios-lock" md="md-lock"></ion-icon>
+        <ion-input class="input-border lock-icon" placeholder="请输入密码" [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
         </ion-input>
       </ion-item>
-      <p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+      <p class="danger-text" ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
         密码不能为空
       </p>
     </ion-list>
-
-    <ion-row responsive-sm class="btn">
-      <ion-col>
-        <button ion-button (click)="onLogin(loginForm)" type="submit" block>登录</button>
-      </ion-col>
-      <ion-col>
-        <button ion-button (click)="onSignup()" color="danger" block>注册</button>
-      </ion-col>
-    </ion-row>
+    <button ion-button (click)="onLogin(loginForm)" type="submit" block style="margin: 20px 0;">登录</button>
+    <button ion-button (click)="onSignup()" color="light" block>注册</button>
   </form>
 </ion-content>

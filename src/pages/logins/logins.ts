@@ -3,8 +3,10 @@ import { NgForm } from '@angular/forms';
 import {LoadingController, NavController, ToastController} from 'ionic-angular';
 import { UserOptions } from '../../interfaces/user-options';
 import { SigninPage } from "../signin/signin";
-import { UsersPage } from "../users/users"
+// import { UsersPage } from "../users/users"
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {IndexPage} from "../index/index";
+// import { SecureStorage, SecureStorageObject } from '@ionic-native/secure-storage';
 
 @Component({
   selector: 'page-logins',
@@ -19,6 +21,7 @@ export class LoginsPage {
     public http: ProxyHttpService,
     public toastCtrl: ToastController,
     public loadingCtrl: LoadingController
+    // private secureStorage: SecureStorage
   ) { }
 
   onLogin(form: NgForm) {
@@ -32,8 +35,20 @@ export class LoginsPage {
       this.http.login(params).subscribe(res => {
         if(res['code'] == 0){
           loading.dismiss();
-          this.navCtrl.push(UsersPage, {userid:'', name:res['username'], phone:res['phone'], userId:res['userId']});
+          this.navCtrl.push(IndexPage, {userid:'', name:res['username'], phone:res['phone'], userId:res['userId']});
           // this.showToast('top',res['msg']);
+          // this.secureStorage.create('')
+          //   .then((storage: SecureStorageObject) => {
+          //     storage.get('name')
+          //       .then(
+          //       );
+          //     storage.set('name', res['username'])
+          //       .then(
+          //       );
+          //     storage.remove('name')
+          //       .then(
+          //       );
+          //   });
         }else{
           loading.dismiss();
           this.showToast('middle',res['msg']);

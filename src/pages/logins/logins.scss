@@ -1,2 +1,15 @@
 page-logins {
+  .logo{
+    display: block;
+    width: 45%;
+    margin: 40px auto;
+  }
+  .user-icon{
+    background:url("../../assets/img/icon2.png") no-repeat left 11px;
+    padding-left:20px;
+  }
+  .lock-icon{
+    background:url("../../assets/img/icon1.png") no-repeat left 11px;
+    padding-left:20px;
+  }
 }

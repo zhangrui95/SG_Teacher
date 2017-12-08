@@ -1,7 +1,7 @@
 <ion-content padding>
   <img src="../../assets/img/logo.png" class="logo"/>
   <form #loginForm="ngForm" novalidate>
-    <ion-list no-lines>
+    <ion-list inset>
       <ion-item>
         <ion-input class="input-border user-icon" placeholder="请输入用户名/手机号码" [(ngModel)]="login.username" name="username" type="text" #username="ngModel" required>
         </ion-input>

@@ -1,7 +1,7 @@
+$color:#404040;
 page-users {
   .header-box{
     width: 100%;
-    background: #404040;
     overflow: hidden;
   }
   .header-img{
@@ -12,7 +12,7 @@ page-users {
     width: 65%;
     margin-top: 20px;
     div{
-      color: #fff;
+      color: $color;
       font-size: 20px;
       line-height: 30px;
     }
@@ -20,7 +20,7 @@ page-users {
   .upload-img{
     width: 70px;
     height: 70px;
-    background: #fff;
+    background: $color;
     margin: 15px auto;
     display: block;
     border-radius: 50px;

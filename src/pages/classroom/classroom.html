@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>课堂演练</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>课程分组</ion-label>
+    <ion-select [(ngModel)]="gender" okText="确定" cancelText="取消">
+      <ion-option value="0">第一组</ion-option>
+      <ion-option value="1">第二组</ion-option>
+      <ion-option value="2">第三组</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-list no-lines  class="border-left">
+    <button ion-item *ngFor="let item of items">
+      {{ item }}
+    </button>
+  </ion-list>
+</ion-content>

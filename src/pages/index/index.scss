@@ -1,0 +1,22 @@
+page-index {
+  .toolbar-content-ios{
+    .header-img{
+      width: 44px;
+    }
+  }
+  .header-img{
+    width: 56px;
+    position: absolute;
+    top: 0;
+    right: 0px;
+  }
+  .title-img{
+    display: block;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    color: #404040;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
+}

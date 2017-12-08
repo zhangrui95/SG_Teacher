@@ -34,7 +34,7 @@ export class SigninPage {
       this.http.register(params).subscribe(res => {
         if(res['code'] == 0){
           loading.dismiss();
-          this.navCtrl.push(LoginsPage);
+          this.goLogin();
           this.showToast('middle',res['msg']);
         }else{
           loading.dismiss();
@@ -43,6 +43,10 @@ export class SigninPage {
       });
 
     }
+  }
+
+  goLogin(){
+    this.navCtrl.push(LoginsPage);
   }
 
   showToast(position: string, text: string) {

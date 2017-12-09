@@ -18,6 +18,8 @@ import {SupportPage} from '../pages/support/support';
 
 import {ConferenceData} from '../providers/conference-data';
 import {UserData} from '../providers/user-data';
+import {UsersPage} from "../pages/users/users";
+import {IndexPage} from "../pages/index/index";
 
 export interface PageInterface {
   title: string;
@@ -64,6 +66,7 @@ export class ConferenceApp {
   loggedInPages: PageInterface[] = [
     {title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person'},
     {title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help'},
+    {title: 'User', name: 'UsersPage', component: UsersPage, icon: 'person'},
     {title: 'Logout', name: 'TabsPage', component: TabsPage, icon: 'log-out', logsOut: true}
   ];
   loggedOutPages: PageInterface[] = [
@@ -71,8 +74,8 @@ export class ConferenceApp {
     {title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help'},
     {title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add'}
   ];
-  rootPage: any= SchedulePage;
-  private registerBackEvent: Function
+  rootPage: any= IndexPage;
+  // private registerBackEvent: Function
   registerBackButton
 
   exitApp() {
@@ -99,10 +102,10 @@ export class ConferenceApp {
               public splashScreen: SplashScreen,
               public toastCtrl: ToastController) {
     this.platformReady()
-    this.registerBackEvent = this.platform.registerBackButtonAction(() => {
-
-
-    }, 10)
+    // this.registerBackEvent = this.platform.registerBackButtonAction(() => {
+    //
+    //
+    // }, 10)
     // Check if the user has already seen the tutorial
     // this.storage.get('hasSeenTutorial')
     //   .then((hasSeenTutorial) => {

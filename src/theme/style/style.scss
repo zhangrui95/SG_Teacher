@@ -18,4 +18,13 @@ $color:#404040;
   text-align: center;
   color: $color;
 }
-
+.item-ios{
+  .icon-forward{
+    display: none;
+  }
+}
+.icon-forward{
+  color: #9a9a9a;
+  font-size: 20px;
+  line-height: 35px;
+}

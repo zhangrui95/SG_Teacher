@@ -1,22 +1,50 @@
+$color:#404040;
 page-index {
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
   .toolbar-content-ios{
     .header-img{
-      width: 44px;
+      width: 40px;
+      top: 2px;
     }
   }
   .header-img{
-    width: 56px;
+    width: 48px;
     position: absolute;
-    top: 0;
+    top: 4px;
     right: 0px;
   }
   .title-img{
     display: block;
     font-size: 1.3rem;
     line-height: 1.2;
-    color: #404040;
+    color: $color;
     font-weight: 700;
     margin: 0;
     padding: 0;
+  }
+  .img-left{
+    width: 40%;
+    height: auto;
+    margin:2% 5%;
+    float: left;
+  }
+  .til-name-box{
+    width: 50%;
+    text-align: center;
+    float: left;
+    margin-top: 14%;
+    p{
+      &:nth-child(1){
+        font-size: 1.1em;
+        color: $color;
+      }
+      &:nth-child(2){
+        font-size: 0.6em;
+        color: $color;
+      }
+    }
   }
 }

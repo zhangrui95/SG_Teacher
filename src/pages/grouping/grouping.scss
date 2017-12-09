@@ -1,0 +1,39 @@
+page-grouping {
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
+  .til-top{
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .img-top{
+    width: 75px;
+    display: block;
+    margin: 0 auto 30px;
+  }
+  .group-table{
+    td{
+      text-align: center;
+      height: 50px;
+      &:nth-child(1){
+        width: 40%;
+      }
+      &:nth-child(2){
+        width: 30%;
+      }
+      &:nth-child(3){
+        width: 30%;
+        button{
+          font-size: 14px;
+          width: 100px;
+          height: 30px;
+          background: #2e97df;
+        }
+      }
+
+    }
+  }
+}

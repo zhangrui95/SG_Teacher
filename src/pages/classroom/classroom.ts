@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {GroupingPage} from "../grouping/grouping";
 
-/**
- * Generated class for the ClassroomPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -21,6 +16,10 @@ export class ClassroomPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClassroomPage');
+  }
+
+  goGrouping(){
+    this.navCtrl.push(GroupingPage);
   }
 
 }

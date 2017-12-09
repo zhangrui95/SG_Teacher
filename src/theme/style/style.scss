@@ -1,3 +1,4 @@
+$color:#404040;
 ::-webkit-scrollbar
 {
   width: 1px;
@@ -11,3 +12,10 @@
 .mar-btn{
   margin-top: 50px;
 }
+.go-login{
+  font-size: 14px;
+  line-height: 0;
+  text-align: center;
+  color: $color;
+}
+

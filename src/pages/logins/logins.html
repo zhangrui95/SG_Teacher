@@ -18,9 +18,10 @@
         密码不能为空
       </p>
     </ion-list>
-    <div class="mar-btn" padding>
-      <button ion-button (click)="onLogin(loginForm)" type="submit" block style="margin-bottom:20px;height: 50px;">登  录</button>
-      <button ion-button (click)="onSignup()" color="light" block style="height: 50px;">注  册</button>
-    </div>
   </form>
+  <div class="mar-btn" padding>
+    <button ion-button (click)="onLogin(loginForm)" type="submit" block style="margin-bottom:20px;height: 50px;background: #2f96de;">登  录</button>
+    <button ion-button (click)="onSignup()" color="dark" outline style="height: 50px;width: 100%;">注  册</button>
+  </div>
+  <p class="go-login">忘记密码 ></p>
 </ion-content>

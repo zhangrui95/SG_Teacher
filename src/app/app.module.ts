@@ -39,6 +39,7 @@ import {Camera} from "@ionic-native/camera";
 import {ImagePicker} from "@ionic-native/image-picker";
 import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
+import {GroupingPage} from "../pages/grouping/grouping";
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import {ClassroomPage} from "../pages/classroom/classroom";
     SigninPage,
     PhonePage,
     ClassroomPage,
+    GroupingPage,
     IndexPage
   ],
   imports: [
@@ -93,6 +95,7 @@ import {ClassroomPage} from "../pages/classroom/classroom";
         { component: SigninPage, name: 'SigninPage', segment: 'signin' },
         { component: IndexPage, name: 'IndexPage', segment: 'index' },
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
+        { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
 
       ]
     }),
@@ -123,7 +126,7 @@ import {ClassroomPage} from "../pages/classroom/classroom";
     PhonePage,
     IndexPage,
     ClassroomPage,
-    ClassroomPage
+    GroupingPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

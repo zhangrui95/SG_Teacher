@@ -37,6 +37,11 @@ export class ProxyHttpService {
   register(params){
     return this._post("/userstu/register.do",params)
   }
+
+  updateHeadPic(params){
+    return this._post("/userstu/updateHeadPic.do",params)
+  }
+
   _post(url,params?:any){
     return this.http.post(this.BASE_URL+url,JSON.stringify(params))
   }

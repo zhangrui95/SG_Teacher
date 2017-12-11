@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ActionSheetController, AlertController} from 'ionic-angular';
+import {
+  IonicPage, NavController, NavParams, ActionSheetController, AlertController,
+  LoadingController, ToastController
+} from 'ionic-angular';
 
 import {ImagePicker, ImagePickerOptions} from "@ionic-native/image-picker";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -8,6 +11,7 @@ import { PasswordPage } from "../password/password"
 import { PhonePage } from '../phone/phone'
 import { UpdatePage } from '../update/update'
 import { LoginsPage } from '../logins/logins'
+import {ProxyHttpService} from "../../providers/proxy.http.service";
 @IonicPage()
 @Component({
   selector: 'page-users',
@@ -17,10 +21,22 @@ export class UsersPage {
   name;
   phone;
   userId;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public alertCtrl: AlertController, public imagePicker: ImagePicker, public camera: Camera) {
+  imagepath;
+  avatar = "../../assets/img/header.png";
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public actionSheetCtrl: ActionSheetController,
+              public alertCtrl: AlertController,
+              public imagePicker: ImagePicker,
+              public camera: Camera,
+              public http: ProxyHttpService,
+              public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController
+  ) {
     this.name = navParams.get('name');
     this.phone = navParams.get('phone');
     this.userId = navParams.get('userId');
+    this.imagepath = navParams.get('imagepath');
   }
   goChangePhone(){
     this.navCtrl.push(PhonePage, {userId: this.userId});
@@ -35,8 +51,13 @@ export class UsersPage {
     this.navCtrl.push(LoginsPage);
   }
 
-
-  avatar = "../../assets/img/header.png";
+  ionViewWillEnter(){
+    if(this.imagepath == '' || this.imagepath == null|| this.imagepath == '\\files\\Head\\crisisUser.png'){
+      this.avatar = "../../assets/img/header.png";
+    }else{
+      this.avatar = this.imagepath;
+    }
+  }
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -65,6 +86,24 @@ export class UsersPage {
       return value;
     });
   }
+
+  imgAdd(){
+    const params = {img:'', imgpath: this.avatar, userId: this.userId}
+    let loading = this.loadingCtrl.create({
+      content: '上传中...'
+    });
+    this.http.updateHeadPic(params).subscribe(res => {
+      if(res['code'] == 0){
+        loading.dismiss();
+        this.showToast('top', res['msg']);
+        this.avatar = res['ImgUrl'];
+      }else{
+        loading.dismiss();
+        this.showToast('top', res['msg']);
+      }
+    });
+  }
+
   takePhoto() {
     const options: CameraOptions = {
       quality: 100,
@@ -77,6 +116,7 @@ export class UsersPage {
     this.camera.getPicture(options).then(image => {
       console.log('Image URI: ' + image);
       this.avatar = image.slice(7);
+      this.imgAdd();
     }, error => {
       console.log('Error: ' + error);
     });
@@ -94,6 +134,7 @@ export class UsersPage {
       } else if (images.length === 1) {
         console.log('Image URI: ' + images[0]);
         this.avatar = images[0].slice(7);
+        this.imgAdd();
       }
     }, error => {
       console.log('Error: ' + error);
@@ -105,6 +146,15 @@ export class UsersPage {
     alert.present().then(value => {
       return value;
     });
+  }
+
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+    toast.present(toast);
   }
 
 }

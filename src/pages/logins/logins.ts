@@ -32,7 +32,7 @@ export class LoginsPage {
       this.http.login(params).subscribe(res => {
         if(res['code'] == 0){
           loading.dismiss();
-          this.navCtrl.push(IndexPage, {userid:'', name:res['username'], phone:res['phone'], userId:res['userId']});
+          this.navCtrl.push(IndexPage, {userid:'', name:res['username'], phone:res['phone'], userId:res['userId'],imagepath: res['imagepath']});
         }else{
           loading.dismiss();
           this.showToast('top',res['msg']);

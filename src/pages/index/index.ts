@@ -12,11 +12,13 @@ export class IndexPage {
   name;
   phone;
   userId;
+  imagepath;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.name = navParams.get('name');
     this.phone = navParams.get('phone');
     this.userId = navParams.get('userId');
+    this.imagepath = navParams.get('imagepath');
   }
 
   ionViewDidLoad() {
@@ -24,7 +26,7 @@ export class IndexPage {
   }
 
   getUser(){
-    this.navCtrl.push(UsersPage, {userId: this.userId, name:this.name, phone:this.phone});
+    this.navCtrl.push(UsersPage, {userId: this.userId, name:this.name, phone:this.phone,imagepath: this.imagepath});
   }
 
   getClassRoom(){

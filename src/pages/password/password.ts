@@ -53,7 +53,6 @@ export class PasswordPage {
       duration: 2000,
       position: position
     });
-
     toast.present(toast);
   }
 }

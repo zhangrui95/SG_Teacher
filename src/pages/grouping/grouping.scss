@@ -15,6 +15,8 @@ page-grouping {
     margin: 0 auto 30px;
   }
   .group-table{
+    margin: 0 auto;
+    width: 100%;
     td{
       text-align: center;
       height: 50px;
@@ -28,7 +30,7 @@ page-grouping {
         width: 30%;
         button{
           font-size: 14px;
-          width: 100px;
+          width: 85%;
           height: 30px;
           background: #2e97df;
         }

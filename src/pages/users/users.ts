@@ -88,7 +88,7 @@ export class UsersPage {
   }
 
   imgAdd(){
-    const params = {img:'', imgpath: this.avatar, userId: this.userId}
+    const params = {img: this.avatar, imgpath: this.imagepath , userId: this.userId}
     let loading = this.loadingCtrl.create({
       content: '上传中...'
     });

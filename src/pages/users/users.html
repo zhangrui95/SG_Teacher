@@ -6,8 +6,8 @@
 <ion-content>
   <div class="header-box">
     <div class="header-img">
-        <!--<img class="upload-img" src="assets/img/upload.png"/>-->
-      <div class="upload-img" tappable [ngStyle]="{'background-image': 'url('+avatar+')'}" (click)="presentActionSheet()"></div>
+        <img class="upload-img" [src]="avatar" (click)="presentActionSheet()">
+      <!--<div class="upload-img" tappable  (click)="presentActionSheet()"></div>-->
     </div>
     <div class="header-img user-name-box">
       {{name}}
@@ -28,6 +28,6 @@
     </button>
   </ion-list>
   <div class="mar-btn" padding>
-    <button (click)="getOut()" ion-button color="danger" block>退  出</button>
+    <button (click)="getOut()" ion-button color="danger" block>退出登录</button>
   </div>
 </ion-content>

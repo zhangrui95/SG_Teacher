@@ -1,25 +1,68 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import {LoadingController, NavController, ToastController} from 'ionic-angular';
-import { UserOptions } from '../../interfaces/user-options';
-import { SigninPage } from "../signin/signin";
+import {Component} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {Keyboard, LoadingController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
+import {UserOptions} from '../../interfaces/user-options';
+import {SigninPage} from "../signin/signin";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {IndexPage} from "../index/index";
+import {UserData} from "../../providers/user-data";
 
 @Component({
   selector: 'page-logins',
   templateUrl: 'logins.html',
 })
 export class LoginsPage {
-
-  login: UserOptions = { username: '', password: '' };
+  private registerBackEvent: Function
+  registerBackButton
+  login: UserOptions = {username: '', password: ''};
   submitted = false;
-  constructor(
-    public navCtrl: NavController,
-    public http: ProxyHttpService,
-    public toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
-  ) { }
+  exitApp() {
+    if(this.keyboard.isOpen()){
+      this.keyboard.close()
+      return
+    }
+    if(!this.platform.url().endsWith("logins")&&!this.platform.url().endsWith("index")){
+      this.navCtrl.pop()
+      return
+    }
+    if (this.registerBackButton) {
+      this.platform.exitApp()
+    } else {
+      this.registerBackButton = true
+      this.toastCtrl.create({
+        message: '再按一次退出应用',
+        duration: 2000,
+        position: 'bottom',
+        cssClass: 'toast-black'
+      }).present();
+      setTimeout(() => this.registerBackButton = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
+    }
+  }
+  constructor(public navCtrl: NavController,
+              public userData:UserData,
+              public http: ProxyHttpService,
+              public toastCtrl: ToastController,
+              public platform: Platform,
+              public navParams: NavParams,
+              public keyboard:Keyboard,
+              public loadingCtrl: LoadingController) {
+    this.registerBackEvent = this.platform.registerBackButtonAction(() => {
+
+      this.exitApp()
+    }, 10)
+
+  }
+  ionViewDidLoad() {
+    if(this.navParams.get('userName')){
+      this.login.username=this.navParams.get('userName')
+    }else{
+      this.userData.getLoginName().then(value => this.login.username=value)
+    }
+
+  }
+
+
+
 
   onLogin(form: NgForm) {
     this.submitted = true;
@@ -28,14 +71,21 @@ export class LoginsPage {
     });
     if (form.valid) {
       loading.present();
-      const params = {LoginName:this.login.username, LoginPwd:this.login.password}
+      const params = {LoginName: this.login.username, LoginPwd: this.login.password}
       this.http.login(params).subscribe(res => {
-        if(res['code'] == 0){
+        if (res['code'] == 0) {
           loading.dismiss();
-          this.navCtrl.push(IndexPage, {userid:'', name:res['username'], phone:res['phone'], userId:res['userId'],imagepath: res['imagepath']});
-        }else{
+          this.navCtrl.push(IndexPage, {
+            userid: '',
+            name: res['username'],
+            phone: res['phone'],
+            userId: res['userId'],
+            imagepath: res['imagepath']
+          });
+          this.userData.login(res['username'],res['userId'],  res['imagepath'], this.login.username)
+        } else {
           loading.dismiss();
-          this.showToast('top',res['msg']);
+          this.showToast('top', res['msg']);
         }
       });
     }

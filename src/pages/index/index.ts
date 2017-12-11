@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, Keyboard, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {UsersPage} from "../users/users";
 import {ClassroomPage} from "../classroom/classroom";
 
@@ -13,8 +13,37 @@ export class IndexPage {
   phone;
   userId;
   imagepath;
+  private registerBackEvent: Function
+  registerBackButton
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  exitApp() {
+    if(this.keyboard.isOpen()){
+      this.keyboard.close()
+      return
+    }
+    if(!this.platform.url().endsWith("logins")&&!this.platform.url().endsWith("index")){
+      this.navCtrl.pop()
+      return
+    }
+    if (this.registerBackButton) {
+      this.platform.exitApp()
+    } else {
+      this.registerBackButton = true
+      this.toastCtrl.create({
+        message: '再按一次退出应用',
+        duration: 2000,
+        position: 'bottom',
+        cssClass: 'toast-black'
+      }).present();
+      setTimeout(() => this.registerBackButton = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
+    }
+  }
+  constructor(public navCtrl: NavController, public navParams: NavParams,   public keyboard:Keyboard,public toastCtrl: ToastController,
+              public platform: Platform,) {
+    this.registerBackEvent = this.platform.registerBackButtonAction(() => {
+
+      this.exitApp()
+    }, 10)
     this.name = navParams.get('name');
     this.phone = navParams.get('phone');
     this.userId = navParams.get('userId');

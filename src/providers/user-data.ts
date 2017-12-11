@@ -30,34 +30,63 @@ export class UserData {
     }
   };
 
-  login(username: string): void {
+  login(username: string,userID:string,url:string,loginName:string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
+    this.setUserID(userID)
+    this.setAvatar(url)
+    this.setLoginName(loginName);
     this.events.publish('user:login');
   };
 
-  signup(username: string): void {
+  signup(username: string,userID?:string,url?:string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
+    this.setUserID(userID)
+    this.setAvatar(url)
     this.events.publish('user:signup');
   };
 
   logout(): void {
     this.storage.remove(this.HAS_LOGGED_IN);
     this.storage.remove('username');
+    this.storage.remove('userId');
+    this.storage.remove('avatarUrl');
     this.events.publish('user:logout');
   };
 
   setUsername(username: string): void {
     this.storage.set('username', username);
   };
-
+  setUserID(userId: string): void {
+    this.storage.set('userId', userId);
+  };
+  setLoginName(loginName: string): void {
+    this.storage.set('loginName', loginName);
+  };
+  setAvatar(url: string): void {
+    this.storage.set('avatarUrl', url);
+  };
   getUsername(): Promise<string> {
     return this.storage.get('username').then((value) => {
       return value;
     });
   };
-
+  getLoginName(): Promise<string> {
+    return this.storage.get('loginName').then((value) => {
+      return value;
+    });
+  };
+  getUserID(): Promise<string> {
+    return this.storage.get('userId').then((value) => {
+      return value;
+    });
+  };
+  getAvatar(): Promise<string> {
+    return this.storage.get('avatarUrl').then((value) => {
+      return value;
+    });
+  };
   hasLoggedIn(): Promise<boolean> {
     return this.storage.get(this.HAS_LOGGED_IN).then((value) => {
       return value === true;

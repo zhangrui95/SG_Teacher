@@ -20,6 +20,7 @@ import {ConferenceData} from '../providers/conference-data';
 import {UserData} from '../providers/user-data';
 import {UsersPage} from "../pages/users/users";
 import {IndexPage} from "../pages/index/index";
+import {LoginsPage} from "../pages/logins/logins";
 
 export interface PageInterface {
   title: string;
@@ -74,24 +75,9 @@ export class ConferenceApp {
     {title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help'},
     {title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add'}
   ];
-  rootPage: any= IndexPage;
-  // private registerBackEvent: Function
-  registerBackButton
+  rootPage: any;
 
-  exitApp() {
-    if (this.registerBackButton) {
-      this.platform.exitApp()
-    } else {
-      this.registerBackButton = true
-      this.toastCtrl.create({
-        message: '再按一次退出应用',
-        duration: 2000,
-        position: 'bottom',
-        cssClass: 'toast-black'
-      }).present();
-      setTimeout(() => this.registerBackButton = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
-    }
-  }
+
 
   constructor(public events: Events,
               public userData: UserData,
@@ -101,11 +87,14 @@ export class ConferenceApp {
               public storage: Storage,
               public splashScreen: SplashScreen,
               public toastCtrl: ToastController) {
+    this.userData.hasLoggedIn().then((hasLoggedIn) => {
+      if(hasLoggedIn){
+        this.rootPage=IndexPage;
+      }else{
+        this.rootPage=LoginsPage;
+      }
+    });
     this.platformReady()
-    // this.registerBackEvent = this.platform.registerBackButtonAction(() => {
-    //
-    //
-    // }, 10)
     // Check if the user has already seen the tutorial
     // this.storage.get('hasSeenTutorial')
     //   .then((hasSeenTutorial) => {
@@ -121,12 +110,8 @@ export class ConferenceApp {
     confData.load();
 
     // decide which menu items should be hidden by current login status stored in local storage
-    this.userData.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn === true);
-    });
-    this.enableMenu(true);
 
-    this.listenToLoginEvents();
+
   }
 
   openPage(page: PageInterface) {

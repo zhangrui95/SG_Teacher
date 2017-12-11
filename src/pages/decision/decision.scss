@@ -1,3 +1,37 @@
 page-decision {
-
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
+  .form-box{
+    width: 100%;
+    margin: 20px auto 0;
+    label{
+      display: inherit;
+      padding: 15px 0;
+      font-size: 16px;
+      line-height: 26px;
+      clear: both;
+    }
+    input{
+      width: 16px;
+      height: 16px;
+      float: left;
+      margin: 4px 5px;
+    }
+    span{
+      float: left;
+      width: 90%;
+    }
+  }
+  .mar-btn{
+    button{
+      height: 50px;
+      background: #2c3550;
+      width: 84%;
+      position: fixed;
+      bottom: 60px;
+      left: 8%;
+    }
+  }
 }

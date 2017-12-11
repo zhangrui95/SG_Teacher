@@ -12,6 +12,7 @@ import { PhonePage } from '../phone/phone'
 import { UpdatePage } from '../update/update'
 import { LoginsPage } from '../logins/logins'
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 @IonicPage()
 @Component({
   selector: 'page-users',
@@ -22,18 +23,19 @@ export class UsersPage {
   phone;
   userId;
   imagepath;
-  avatar = "./../assets/img/header.png";
+  avatar = "assets/img/header.png";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
               public alertCtrl: AlertController,
               public imagePicker: ImagePicker,
               public camera: Camera,
+              public userData:UserData,
               public http: ProxyHttpService,
               public toastCtrl: ToastController,
               public loadingCtrl: LoadingController
   ) {
-    this.name = navParams.get('name');
+    this.userData.getUsername().then(value => this.name=value)
     this.phone = navParams.get('phone');
     this.userId = navParams.get('userId');
     this.imagepath = navParams.get('imagepath');
@@ -48,15 +50,25 @@ export class UsersPage {
     this.navCtrl.push(UpdatePage);
   }
   getOut(){
+    this.userData.logout();
     this.navCtrl.push(LoginsPage);
-  }
 
+  }
   ionViewWillEnter(){
-    if(this.imagepath == '' || this.imagepath == null){
-      this.avatar = "./../assets/img/header.png";
+    let url;
+    this.userData.getAvatar().then(value => {
+      url=value;
+    })
+
+    if(url == '' || url == null|| url == '\\files\\Head\\crisisUser.png'){
+      this.avatar = "assets/img/header.png";
     }else{
-      this.avatar = this.imagepath;
+      this.avatar=ProxyHttpService.IP_PORT+url;
     }
+    let alert = this.alertCtrl.create({title: "上传失败", message: this.avatar, buttons: ["确定"]});
+    alert.present().then(value => {
+      return value;
+    });
   }
 
   presentActionSheet() {

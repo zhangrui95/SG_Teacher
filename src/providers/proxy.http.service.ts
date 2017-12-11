@@ -10,9 +10,9 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 @Injectable()
 export class ProxyHttpService {
 
-  public IP_PORT="http://192.168.0.52:8080";
-  public PROJECT_PACKAGE="/VisualizationMgt"
-  public BASE_URL=this.IP_PORT+this.PROJECT_PACKAGE
+  public static IP_PORT="http://192.168.0.52:8080";
+  public static PROJECT_PACKAGE="/VisualizationMgt"
+  public BASE_URL=ProxyHttpService.IP_PORT+ProxyHttpService.PROJECT_PACKAGE
   constructor(public http: HttpClient) {
 
   }

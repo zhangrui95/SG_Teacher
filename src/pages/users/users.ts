@@ -52,7 +52,7 @@ export class UsersPage {
   }
 
   ionViewWillEnter(){
-    if(this.imagepath == '' || this.imagepath == null|| this.imagepath == '\\files\\Head\\crisisUser.png'){
+    if(this.imagepath == '' || this.imagepath == null){
       this.avatar = "./../assets/img/header.png";
     }else{
       this.avatar = this.imagepath;

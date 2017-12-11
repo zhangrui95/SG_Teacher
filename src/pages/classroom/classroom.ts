@@ -10,7 +10,7 @@ import {GroupingPage} from "../grouping/grouping";
 })
 export class ClassroomPage {
   gender;
-  items = ['事件起因','第一次决策','第一次场景演练','第一次头脑风暴','第二次决策']
+  items = [{name:'事件起因',type: '0'},{name:'第一次决策',type:'1'},{name:'第一次场景推演',type:'2'},{name:'第一次头脑风暴',type:'3'},{name:'第二次决策',type:'1'}]
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

@@ -40,6 +40,7 @@ import {ImagePicker} from "@ionic-native/image-picker";
 import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
 import {GroupingPage} from "../pages/grouping/grouping";
+import {DecisionPage} from "../pages/decision/decision";
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import {GroupingPage} from "../pages/grouping/grouping";
     SigninPage,
     PhonePage,
     ClassroomPage,
+    DecisionPage,
     GroupingPage,
     IndexPage
   ],
@@ -95,6 +97,7 @@ import {GroupingPage} from "../pages/grouping/grouping";
         { component: SigninPage, name: 'SigninPage', segment: 'signin' },
         { component: IndexPage, name: 'IndexPage', segment: 'index' },
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
+        { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
 
       ]
@@ -126,6 +129,7 @@ import {GroupingPage} from "../pages/grouping/grouping";
     PhonePage,
     IndexPage,
     ClassroomPage,
+    DecisionPage,
     GroupingPage
   ],
   providers: [

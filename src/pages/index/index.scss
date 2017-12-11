@@ -1,5 +1,9 @@
 $color:#404040;
 page-index {
+  .card{
+    max-width: 700px;
+    margin:12px auto;
+  }
   .toolbar-title{
     font-size: 18px;
     font-weight: 100;
@@ -44,6 +48,18 @@ page-index {
       &:nth-child(2){
         font-size: 0.6em;
         color: $color;
+      }
+    }
+  }
+  @media screen and (min-width: 700px) {
+    .til-name-box{
+      p{
+        &:nth-child(1){
+          font-size: 2.1em;
+        }
+        &:nth-child(2){
+          font-size: 1.6em;
+        }
       }
     }
   }

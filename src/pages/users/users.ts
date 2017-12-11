@@ -22,7 +22,7 @@ export class UsersPage {
   phone;
   userId;
   imagepath;
-  avatar = "../../assets/img/header.png";
+  avatar = "./../assets/img/header.png";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
@@ -53,7 +53,7 @@ export class UsersPage {
 
   ionViewWillEnter(){
     if(this.imagepath == '' || this.imagepath == null|| this.imagepath == '\\files\\Head\\crisisUser.png'){
-      this.avatar = "../../assets/img/header.png";
+      this.avatar = "./../assets/img/header.png";
     }else{
       this.avatar = this.imagepath;
     }

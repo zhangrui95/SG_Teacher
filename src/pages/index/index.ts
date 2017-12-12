@@ -4,6 +4,7 @@ import {UsersPage} from "../users/users";
 import {ClassroomPage} from "../classroom/classroom";
 import {RecordsPage} from "../records/records";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {SimulationPage} from "../simulation/simulation";
 
 @IonicPage()
 @Component({
@@ -101,6 +102,10 @@ export class IndexPage {
 
   getRecords() {
     this.navCtrl.push(RecordsPage, {userId: this.userId, name: this.name, phone: this.phone});
+  }
+
+  getSimulation(){
+    this.navCtrl.push(SimulationPage, {userId: this.userId, name:this.name, phone:this.phone});
   }
 
 }

@@ -43,8 +43,10 @@ import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
 import {Base64} from "@ionic-native/base64";
 import {RecordsPage} from "../pages/records/records";
+import {SimulationPage} from "../pages/simulation/simulation";
 
 import {BaidutbPage} from "../pages/baidutb/baidutb";
+import {FindPasswordPage} from "../pages/find-password/find-password";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 @NgModule({
   declarations: [
@@ -72,9 +74,11 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
+    SimulationPage,
     RecordsPage,
     IndexPage,
-    BaidutbPage
+    BaidutbPage,
+    FindPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,9 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
-        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' }
+        { component: FindPasswordPage, name: 'FindPasswordPage', segment: 'findPassword' },
+        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' },
+        { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -138,7 +144,9 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     DecisionPage,
     GroupingPage,
     RecordsPage,
-    BaidutbPage
+    BaidutbPage,
+    SimulationPage,
+    FindPasswordPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

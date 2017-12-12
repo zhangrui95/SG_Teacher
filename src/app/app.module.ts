@@ -39,8 +39,9 @@ import {Camera} from "@ionic-native/camera";
 import {ImagePicker} from "@ionic-native/image-picker";
 import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
-
-import {BaidutbPage} from "../pages/baidutb/baidutb";
+import {GroupingPage} from "../pages/grouping/grouping";
+import {DecisionPage} from "../pages/decision/decision";
+import {RecordsPage} from "../pages/records/records";
 
 
 @NgModule({
@@ -67,8 +68,10 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     SigninPage,
     PhonePage,
     ClassroomPage,
-    IndexPage,
-    BaidutbPage
+    DecisionPage,
+    GroupingPage,
+    RecordsPage,
+    IndexPage
   ],
   imports: [
     BrowserModule,
@@ -96,7 +99,10 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
         { component: SigninPage, name: 'SigninPage', segment: 'signin' },
         { component: IndexPage, name: 'IndexPage', segment: 'index' },
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
-        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' }
+        { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
+        { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
+        { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -126,7 +132,9 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     PhonePage,
     IndexPage,
     ClassroomPage,
-    BaidutbPage
+    DecisionPage,
+    GroupingPage,
+    RecordsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

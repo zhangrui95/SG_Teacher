@@ -1,3 +1,4 @@
+$color:#404040;
 ::-webkit-scrollbar
 {
   width: 1px;
@@ -10,4 +11,38 @@
 }
 .mar-btn{
   margin-top: 50px;
+}
+.go-login{
+  font-size: 14px;
+  line-height: 0;
+  text-align: center;
+  color: $color;
+}
+.item-ios{
+  .icon-forward{
+    display: none;
+  }
+  .icon-show{
+    display: block;
+  }
+}
+.icon-forward{
+  color: #9a9a9a;
+  font-size: 20px;
+  line-height: 35px;
+}
+.toolbar-content-ios{
+  .head-img{
+    width: 1.1em;
+    top: 11px;
+  }
+  .head-top{
+    top: 13px;
+  }
+}
+.head-img{
+  width: 1.2em;
+  position: absolute;
+  top: 16px;
+  right: 15px;
 }

@@ -6,6 +6,7 @@ import {IonicPage, LoadingController, NavController, ToastController} from 'ioni
 import { UserSign } from '../../interfaces/user-options';
 import { LoginsPage } from "../logins/logins";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 
 
 @IonicPage()
@@ -20,13 +21,14 @@ export class SigninPage {
 
   constructor( public navCtrl: NavController,
                public http: ProxyHttpService,
+               public userData:UserData,
                public toastCtrl: ToastController,
                public loadingCtrl: LoadingController) { }
 
   onLogin(form: NgForm) {
     this.submitted = true;
     let loading = this.loadingCtrl.create({
-      content: '登录中...'
+      content: '注册中...'
     });
     if (form.valid) {
       loading.present();
@@ -34,19 +36,19 @@ export class SigninPage {
       this.http.register(params).subscribe(res => {
         if(res['code'] == 0){
           loading.dismiss();
-          this.goLogin();
-          this.showToast('top',res['msg']);
+          this.goLogin(this.login.username);
+          this.showToast('bottom',res['msg']);
         }else{
           loading.dismiss();
-          this.showToast('top',res['msg']);
+          this.showToast('bottom',res['msg']);
         }
       });
 
     }
   }
 
-  goLogin(){
-    this.navCtrl.push(LoginsPage);
+  goLogin(name:string){
+    this.navCtrl.push(LoginsPage,{userName:name});
   }
 
   showToast(position: string, text: string) {

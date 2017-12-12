@@ -85,4 +85,8 @@
     <engine name="ios" spec="~4.5.4" />
     <engine name="android" spec="~6.3.0" />
     <plugin name="cordova-plugin-camera" spec="^3.0.0" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.0">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
+    </plugin>
+    <plugin name="cordova-plugin-speechrecognition" spec="^1.2.0" />
 </widget>

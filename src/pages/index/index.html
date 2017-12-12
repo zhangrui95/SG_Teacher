@@ -1,42 +1,38 @@
  <ion-header>
   <ion-navbar  hideBackButton="true" color="dark">
     <ion-title>SG平台</ion-title>
-    <img src="../../assets/img/user.png" class="header-img" (click)="getUser()"/>
+    <img src="assets/img/user.png" class="head-img" (click)="getUser()"/>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
   <ion-card (click)="getClassRoom()">
-    <img src="../../assets/img/t1.png"/>
-    <ion-card-content>
-      <ion-card-title class="title-img">
-        课堂演练
-      </ion-card-title>
-    </ion-card-content>
+    <img class="img-left" src="assets/img/t1.png"/>
+    <div class="til-name-box">
+        <p>课堂演练</p>
+        <p>Classroom rehearsal</p>
+    </div>
   </ion-card>
   <ion-card>
-    <img src="../../assets/img/t2.png"/>
-    <ion-card-content>
-      <ion-card-title class="title-img">
-        模拟演练
-      </ion-card-title>
-    </ion-card-content>
+    <div class="til-name-box">
+        <p>模拟演练</p>
+        <p>Simulated drill</p>
+    </div>
+    <img class="img-left" src="assets/img/t2.png"/>
+  </ion-card>
+  <ion-card (click)="getRecords()">
+    <img class="img-left" src="assets/img/t3.png"/>
+    <div class="til-name-box">
+        <p>演练记录</p>
+        <p>Rehearsal record</p>
+    </div>
   </ion-card>
   <ion-card>
-    <img src="../../assets/img/t3.png"/>
-    <ion-card-content>
-      <ion-card-title class="title-img">
-        演练记录
-      </ion-card-title>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <img src="../../assets/img/t4.png"/>
-    <ion-card-content>
-      <ion-card-title class="title-img">
-        统计分析
-      </ion-card-title>
-    </ion-card-content>
+    <div class="til-name-box">
+        <p>数据分析</p>
+        <p>Data analysis</p>
+    </div>
+    <img class="img-left" src="assets/img/t4.png"/>
   </ion-card>
 </ion-content>

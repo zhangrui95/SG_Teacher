@@ -1,22 +1,33 @@
 <ion-header>
   <ion-navbar color="dark">
-    <ion-title>课堂演练</ion-title>
+    <ion-title>2017年食品汞超标事件</ion-title>
+    <img (click)="goGrouping()" src="assets/img/icon5.png" class="header-img"/>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-item>
-    <ion-label>课程分组</ion-label>
-    <ion-select [(ngModel)]="gender" okText="确定" cancelText="取消">
-      <ion-option value="0">第一组</ion-option>
-      <ion-option value="1">第二组</ion-option>
-      <ion-option value="2">第三组</ion-option>
-    </ion-select>
-  </ion-item>
   <ion-list no-lines  class="border-left">
-    <button ion-item *ngFor="let item of items">
-      {{ item }}
-    </button>
+    <div class="list" (click)="goGrouping()">
+      <img src="assets/img/icon3.png"/>
+      <button ion-item>
+        分组
+        <ion-icon class="icon-forward" name="ios-arrow-forward"  item-end></ion-icon>
+      </button>
+    </div>
+    <div class="list" *ngFor="let item of items" (click)="goPage(item.type)">
+      <img src="assets/img/icon3.png"/>
+      <button ion-item>
+        {{ item.name }}
+        <ion-icon class="icon-forward" name="ios-arrow-forward"  item-end></ion-icon>
+      </button>
+    </div>
+    <div class="list">
+      <img src="assets/img/icon.png"/>
+      <button ion-item>
+        最终走向
+        <ion-icon class="icon-forward" name="ios-arrow-forward"  item-end></ion-icon>
+      </button>
+    </div>
   </ion-list>
 </ion-content>

@@ -1,0 +1,24 @@
+page-records {
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
+  .item > ion-icon, .item-inner > ion-icon{
+    min-height: 1.8rem;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #999998;
+  }
+  .item h2{
+    color: #2c3451;
+    font-size: 1.4rem;
+    line-height: 3rem;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+  .item p{
+    font-size: 1.2rem;
+    color: #797979;
+  }
+}

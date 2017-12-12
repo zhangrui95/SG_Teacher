@@ -1,0 +1,21 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>演练记录</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list inset>
+    <ion-item *ngFor="let item of list">
+      <ion-thumbnail item-start>
+        <img src="{{item.img}}">
+      </ion-thumbnail>
+      <h2>{{item.name}}</h2>
+      <p>{{item.time}}</p>
+      <ion-icon class="img-icon-go" name="ios-arrow-forward" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

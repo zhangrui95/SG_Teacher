@@ -1,5 +1,9 @@
 $color:#404040;
 page-users {
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
   .header-box{
     width: 100%;
     overflow: hidden;
@@ -9,13 +13,11 @@ page-users {
     float: left;
   }
   .user-name-box{
+    height: 100px;
     width: 65%;
-    margin-top: 20px;
-    div{
-      color: $color;
-      font-size: 20px;
-      line-height: 30px;
-    }
+    color: $color;
+    font-size: 18px;
+    line-height: 100px;
   }
   .upload-img{
     width: 70px;
@@ -23,5 +25,22 @@ page-users {
     margin: 15px auto;
     display: block;
     border-radius: 50px;
+  }
+  .icon-forward{
+    font-size: 20px;
+    line-height: 35px;
+  }
+  .mar-btn{
+    button{
+      height: 50px;
+      background: #cb3c3c;
+      width: 84%;
+      position: fixed;
+      bottom: 60px;
+      left: 8%;
+    }
+  }
+  .input-wrapper{
+    font-size: 16px;
   }
 }

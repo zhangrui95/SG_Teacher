@@ -45,6 +45,7 @@ import {Base64} from "@ionic-native/base64";
 import {RecordsPage} from "../pages/records/records";
 
 import {BaidutbPage} from "../pages/baidutb/baidutb";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -147,6 +148,7 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     InAppBrowser,
     Camera,
     Base64,
+    BarcodeScanner,
     ImagePicker,
     SplashScreen
   ]

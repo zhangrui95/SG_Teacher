@@ -19,9 +19,45 @@ page-decision {
       float: left;
       margin: 4px 5px;
     }
-    span{
+    .option{
       float: left;
-      width: 90%;
+      width: 50px;
+      text-align: center;
+      margin-right: 0.5em;
+    }
+    .word{
+      float: left;
+      width: 78%;
+    }
+    input[type="radio"] + .option::before {
+      position: relative;
+      content: "\a0";
+      display: inline-block;
+      font-size: 12px;
+      width: 1em;
+      height: 1em;
+      margin-right: 1em;
+      border-radius: 50%;
+      border: 1px solid #d6d6d6;
+      text-indent: .15em;
+      line-height: 1;
+      padding: .25em;
+    }
+    input[type="radio"]:checked+ .option::before {
+      background-color: #2c3550;
+      border:1px solid #d6d6d6;
+      background-clip: content-box;
+      padding: .25em;
+    }
+    input[type="radio"]:checked + span{
+      color: #2c3550;
+    }
+    input[type="radio"]:checked + .option + .word{
+      color: #2c3550;
+    }
+    input[type="radio"] {
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
     }
   }
   .mar-btn{

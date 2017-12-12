@@ -42,6 +42,7 @@ import {ClassroomPage} from "../pages/classroom/classroom";
 import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
 import {RecordsPage} from "../pages/records/records";
+import {SimulationPage} from "../pages/simulation/simulation";
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {RecordsPage} from "../pages/records/records";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
+    SimulationPage,
     RecordsPage,
     IndexPage
   ],
@@ -102,7 +104,7 @@ import {RecordsPage} from "../pages/records/records";
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
-
+        { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -134,6 +136,7 @@ import {RecordsPage} from "../pages/records/records";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
+    SimulationPage,
     RecordsPage
   ],
   providers: [

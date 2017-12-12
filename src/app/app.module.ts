@@ -46,6 +46,7 @@ import {RecordsPage} from "../pages/records/records";
 import {SimulationPage} from "../pages/simulation/simulation";
 
 import {BaidutbPage} from "../pages/baidutb/baidutb";
+import {FindPasswordPage} from "../pages/find-password/find-password";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -75,7 +76,8 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     SimulationPage,
     RecordsPage,
     IndexPage,
-    BaidutbPage
+    BaidutbPage,
+    FindPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -106,6 +108,7 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
+        { component: FindPasswordPage, name: 'FindPasswordPage', segment: 'findPassword' },
         { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' },
         { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
       ]
@@ -142,7 +145,7 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     RecordsPage,
     BaidutbPage,
     SimulationPage,
-    RecordsPage
+    FindPasswordPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

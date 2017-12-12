@@ -41,6 +41,7 @@ import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
 import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
+import {RecordsPage} from "../pages/records/records";
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import {DecisionPage} from "../pages/decision/decision";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
+    RecordsPage,
     IndexPage
   ],
   imports: [
@@ -99,6 +101,7 @@ import {DecisionPage} from "../pages/decision/decision";
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
+        { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
 
       ]
     }),
@@ -130,7 +133,8 @@ import {DecisionPage} from "../pages/decision/decision";
     IndexPage,
     ClassroomPage,
     DecisionPage,
-    GroupingPage
+    GroupingPage,
+    RecordsPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

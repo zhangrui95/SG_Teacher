@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UsersPage} from "../users/users";
 
 /**
  * Generated class for the DecisionPage page.
@@ -20,6 +21,9 @@ export class DecisionPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DecisionPage');
+  }
+  getUser(){
+    this.navCtrl.push(UsersPage);
   }
 
 }

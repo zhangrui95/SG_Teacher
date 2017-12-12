@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, Keyboard, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {UsersPage} from "../users/users";
 import {ClassroomPage} from "../classroom/classroom";
+import {RecordsPage} from "../records/records";
 
 @IonicPage()
 @Component({
@@ -60,6 +61,10 @@ export class IndexPage {
 
   getClassRoom(){
     this.navCtrl.push(ClassroomPage, {userId: this.userId, name:this.name, phone:this.phone});
+  }
+
+  getRecords(){
+    this.navCtrl.push(RecordsPage, {userId: this.userId, name:this.name, phone:this.phone});
   }
 
 }

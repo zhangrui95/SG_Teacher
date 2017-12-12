@@ -1,7 +1,7 @@
  <ion-header>
   <ion-navbar  hideBackButton="true" color="dark">
     <ion-title>SG平台</ion-title>
-    <img src="assets/img/user.png" class="header-img" (click)="getUser()"/>
+    <img src="assets/img/user.png" class="head-img" (click)="getUser()"/>
   </ion-navbar>
 </ion-header>
 
@@ -21,7 +21,7 @@
     </div>
     <img class="img-left" src="assets/img/t2.png"/>
   </ion-card>
-  <ion-card>
+  <ion-card (click)="getRecords()">
     <img class="img-left" src="assets/img/t3.png"/>
     <div class="til-name-box">
         <p>演练记录</p>

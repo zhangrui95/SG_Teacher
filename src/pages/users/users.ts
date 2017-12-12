@@ -107,11 +107,11 @@ export class UsersPage {
     this.http.updateHeadPic(params).subscribe(res => {
       if(res['code'] == 0){
         loading.dismiss();
-        this.showToast('top', res['msg']);
+        this.showToast('bottom', res['msg']);
         this.avatar = res['ImgUrl'];
       }else{
         loading.dismiss();
-        this.showToast('top', res['msg']);
+        this.showToast('bottom', res['msg']);
       }
     });
   }

@@ -37,10 +37,10 @@ export class SigninPage {
         if(res['code'] == 0){
           loading.dismiss();
           this.goLogin(this.login.username);
-          this.showToast('top',res['msg']);
+          this.showToast('bottom',res['msg']);
         }else{
           loading.dismiss();
-          this.showToast('top',res['msg']);
+          this.showToast('bottom',res['msg']);
         }
       });
 

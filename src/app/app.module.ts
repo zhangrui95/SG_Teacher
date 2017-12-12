@@ -41,10 +41,11 @@ import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
 import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
+import {Base64} from "@ionic-native/base64";
 import {RecordsPage} from "../pages/records/records";
 import {SimulationPage} from "../pages/simulation/simulation";
 
-
+import {BaidutbPage} from "../pages/baidutb/baidutb";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -73,7 +74,8 @@ import {SimulationPage} from "../pages/simulation/simulation";
     GroupingPage,
     SimulationPage,
     RecordsPage,
-    IndexPage
+    IndexPage,
+    BaidutbPage
   ],
   imports: [
     BrowserModule,
@@ -104,6 +106,7 @@ import {SimulationPage} from "../pages/simulation/simulation";
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
+        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' },
         { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
       ]
     }),
@@ -136,6 +139,8 @@ import {SimulationPage} from "../pages/simulation/simulation";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
+    RecordsPage,
+    BaidutbPage,
     SimulationPage,
     RecordsPage
   ],
@@ -146,6 +151,7 @@ import {SimulationPage} from "../pages/simulation/simulation";
     UserData,
     InAppBrowser,
     Camera,
+    Base64,
     ImagePicker,
     SplashScreen
   ]

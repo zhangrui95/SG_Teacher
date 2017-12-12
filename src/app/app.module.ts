@@ -135,7 +135,8 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
-    RecordsPage
+    RecordsPage,
+    BaidutbPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

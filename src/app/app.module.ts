@@ -40,6 +40,8 @@ import {ImagePicker} from "@ionic-native/image-picker";
 import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
 
+import {BaidutbPage} from "../pages/baidutb/baidutb";
+
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import {ClassroomPage} from "../pages/classroom/classroom";
     SigninPage,
     PhonePage,
     ClassroomPage,
-    IndexPage
+    IndexPage,
+    BaidutbPage
   ],
   imports: [
     BrowserModule,
@@ -93,7 +96,7 @@ import {ClassroomPage} from "../pages/classroom/classroom";
         { component: SigninPage, name: 'SigninPage', segment: 'signin' },
         { component: IndexPage, name: 'IndexPage', segment: 'index' },
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
-
+        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -123,7 +126,7 @@ import {ClassroomPage} from "../pages/classroom/classroom";
     PhonePage,
     IndexPage,
     ClassroomPage,
-    ClassroomPage
+    BaidutbPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

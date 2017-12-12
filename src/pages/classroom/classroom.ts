@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GroupingPage} from "../grouping/grouping";
+import {DecisionPage} from "../decision/decision";
 
 
 @IonicPage()
@@ -22,4 +23,10 @@ export class ClassroomPage {
     this.navCtrl.push(GroupingPage);
   }
 
+  goPage(type){
+    console.log(type)
+    if(type == '1'){
+      this.navCtrl.push(DecisionPage)
+    }
+  }
 }

@@ -42,8 +42,9 @@ import {ClassroomPage} from "../pages/classroom/classroom";
 import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
 import {Base64} from "@ionic-native/base64";
+import {RecordsPage} from "../pages/records/records";
 
-
+import {BaidutbPage} from "../pages/baidutb/baidutb";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -70,7 +71,9 @@ import {Base64} from "@ionic-native/base64";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
-    IndexPage
+    RecordsPage,
+    IndexPage,
+    BaidutbPage
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,8 @@ import {Base64} from "@ionic-native/base64";
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
-
+        { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
+        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -131,7 +135,9 @@ import {Base64} from "@ionic-native/base64";
     IndexPage,
     ClassroomPage,
     DecisionPage,
-    GroupingPage
+    GroupingPage,
+    RecordsPage,
+    BaidutbPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

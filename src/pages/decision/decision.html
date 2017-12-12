@@ -1,18 +1,27 @@
-<!--
-  Generated template for the DecisionPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>decision</ion-title>
+  <ion-navbar color="dark">
+    <ion-title>课堂演练</ion-title>
+    <img src="assets/img/user.png" class="head-img head-top" (click)="getUser()"/>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <div>若你作为辉发乳业（集团）股份有限公司的决策者，关注到网贴后该如何决策？</div>
+  <form class="form-box">
+    <label>
+      <input type="radio" name="choice"/><span class="option">A</span><span class="word">公开调查帖子内容的真实性</span>
+    </label>
+    <label>
+      <input type="radio" name="choice"/><span class="option">B</span><span class="word">私下联系发帖人，删除网帖，控制消息的网络传播渠道</span>
+    </label>
+    <label>
+      <input type="radio" name="choice"/><span class="option">C</span><span class="word">公开调查帖子内容的真实性</span>
+    </label>
+  </form>
+  <div padding class="mar-btn">
+    <button ion-button type="submit" block>确认投票</button>
+  </div>
 </ion-content>

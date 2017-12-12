@@ -85,7 +85,7 @@ export class LoginsPage {
           this.userData.login(res['username'],res['userId'],  res['imagepath'], this.login.username)
         } else {
           loading.dismiss();
-          this.showToast('top', res['msg']);
+          this.showToast('bottom', res['msg']);
         }
       });
     }

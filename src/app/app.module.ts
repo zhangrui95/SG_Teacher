@@ -48,6 +48,8 @@ import {SimulationPage} from "../pages/simulation/simulation";
 import {BaidutbPage} from "../pages/baidutb/baidutb";
 import {FindPasswordPage} from "../pages/find-password/find-password";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {SimulationListPage} from "../pages/simulation-list/simulation-list";
+import {RecordsListPage} from "../pages/records-list/records-list";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -75,7 +77,9 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     DecisionPage,
     GroupingPage,
     SimulationPage,
+    SimulationListPage,
     RecordsPage,
+    RecordsListPage,
     IndexPage,
     BaidutbPage,
     FindPasswordPage
@@ -109,9 +113,11 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
+        { component: RecordsListPage, name: 'RecordsListPage', segment: 'recordsList' },
         { component: FindPasswordPage, name: 'FindPasswordPage', segment: 'findPassword' },
         { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' },
         { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
+        { component: SimulationListPage, name: 'SimulationListPage', segment: 'simulationList' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -144,8 +150,10 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
     DecisionPage,
     GroupingPage,
     RecordsPage,
+    RecordsListPage,
     BaidutbPage,
     SimulationPage,
+    SimulationListPage,
     FindPasswordPage
   ],
   providers: [

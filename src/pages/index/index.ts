@@ -5,6 +5,7 @@ import {ClassroomPage} from "../classroom/classroom";
 import {RecordsPage} from "../records/records";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {SimulationPage} from "../simulation/simulation";
+import {UserData} from "../../providers/user-data";
 
 @IonicPage()
 @Component({
@@ -53,15 +54,11 @@ export class IndexPage {
   }
 
   constructor(public ionicApp: IonicApp, public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public navParams: NavParams, public keyboard: Keyboard, public toastCtrl: ToastController,
-              public platform: Platform,) {
+              public platform: Platform, public userData:UserData) {
     this.registerBackEvent = this.platform.registerBackButtonAction(() => {
 
       this.exitApp()
     }, 10)
-    this.name = navParams.get('name');
-    this.phone = navParams.get('phone');
-    this.userId = navParams.get('userId');
-    this.imagepath = navParams.get('imagepath');
   }
 
   ionViewDidLoad() {

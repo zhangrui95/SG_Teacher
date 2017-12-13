@@ -53,11 +53,27 @@ export class UsersPage {
   goUpdate(){
     this.navCtrl.push(UpdatePage);
   }
-  getOut(){
-    this.userData.logout();
-    this.navCtrl.push(LoginsPage);
-
+  getOut() {
+    let confirm = this.alertCtrl.create({
+      title: '确定退出登录吗?',
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            this.userData.logout();
+            this.navCtrl.push(LoginsPage);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
+
   ionViewWillEnter(){
     let url;
     this.userData.getAvatar().then(value => {

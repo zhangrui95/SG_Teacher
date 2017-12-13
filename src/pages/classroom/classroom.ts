@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {GroupingPage} from "../grouping/grouping";
 import {DecisionPage} from "../decision/decision";
 
@@ -12,11 +12,18 @@ import {DecisionPage} from "../decision/decision";
 export class ClassroomPage {
   gender;
   items = [{name:'事件起因',type: '0'},{name:'第一次决策',type:'1'},{name:'第一次场景推演',type:'2'},{name:'第一次头脑风暴',type:'3'},{name:'第二次决策',type:'1'}]
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl:ToastController) {
   }
-
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+    toast.present(toast);
+  }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClassroomPage');
+
   }
 
   goGrouping(){

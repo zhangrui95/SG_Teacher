@@ -47,6 +47,7 @@ import {SimulationPage} from "../pages/simulation/simulation";
 
 import {BaidutbPage} from "../pages/baidutb/baidutb";
 import {FindPasswordPage} from "../pages/find-password/find-password";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -155,6 +156,7 @@ import {FindPasswordPage} from "../pages/find-password/find-password";
     InAppBrowser,
     Camera,
     Base64,
+    BarcodeScanner,
     ImagePicker,
     SplashScreen
   ]

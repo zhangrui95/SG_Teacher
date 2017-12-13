@@ -15,5 +15,6 @@ export interface findPassword {
   phone: string,
   password: string,
   password1: string,
-  verificationCode: string
+  verificationCode: string,
+  onshow: true
 }

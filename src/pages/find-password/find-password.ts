@@ -12,7 +12,7 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 export class FindPasswordPage {
 
 
-  login: findPassword = { phone: '', password: '' , password1: '', verificationCode: ''};
+  find: findPassword = { phone: '', password: '' , password1: '', verificationCode: '', onshow: true};
   submitted = false;
 
   constructor( public navCtrl: NavController,
@@ -26,7 +26,9 @@ export class FindPasswordPage {
 
     }
   }
-
+  toggle(){
+    console.log('toggle')
+  }
   showToast(position: string, text: string) {
     let toast = this.toastCtrl.create({
       message: text,

@@ -32,12 +32,15 @@ export class BaidutbPage {
     {tx_img: 'assets/img/user.png', name: '老王', floor: '第1楼', time: '今天 9：20', nr_src: '', nr: '测试测试测试测试测试测试测试'}
   ]
   isShow=false;
+  src='assets/img/juxing-10.png';
   mousedownd() {
     this.isShow = true
+    this.src = 'assets/img/yuyin-3.png';
   }
 
   mouseup() {
     this.isShow = false
+    this.src = 'assets/img/juxing-10.png';
   }
 
   constructor(public navCtrl: NavController,

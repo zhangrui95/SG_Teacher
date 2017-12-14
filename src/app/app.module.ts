@@ -43,8 +43,13 @@ import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
 import {Base64} from "@ionic-native/base64";
 import {RecordsPage} from "../pages/records/records";
+import {SimulationPage} from "../pages/simulation/simulation";
 
 import {BaidutbPage} from "../pages/baidutb/baidutb";
+import {FindPasswordPage} from "../pages/find-password/find-password";
+import {BarcodeScanner} from "@ionic-native/barcode-scanner";
+import {SimulationListPage} from "../pages/simulation-list/simulation-list";
+import {RecordsListPage} from "../pages/records-list/records-list";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -71,9 +76,13 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     ClassroomPage,
     DecisionPage,
     GroupingPage,
+    SimulationPage,
+    SimulationListPage,
     RecordsPage,
+    RecordsListPage,
     IndexPage,
-    BaidutbPage
+    BaidutbPage,
+    FindPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -104,7 +113,11 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
-        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' }
+        { component: RecordsListPage, name: 'RecordsListPage', segment: 'recordsList' },
+        { component: FindPasswordPage, name: 'FindPasswordPage', segment: 'findPassword' },
+        { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' },
+        { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
+        { component: SimulationListPage, name: 'SimulationListPage', segment: 'simulationList' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -137,7 +150,11 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     DecisionPage,
     GroupingPage,
     RecordsPage,
-    BaidutbPage
+    RecordsListPage,
+    BaidutbPage,
+    SimulationPage,
+    SimulationListPage,
+    FindPasswordPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },
@@ -147,6 +164,7 @@ import {BaidutbPage} from "../pages/baidutb/baidutb";
     InAppBrowser,
     Camera,
     Base64,
+    BarcodeScanner,
     ImagePicker,
     SplashScreen
   ]

@@ -50,6 +50,7 @@ import {FindPasswordPage} from "../pages/find-password/find-password";
 import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {SimulationListPage} from "../pages/simulation-list/simulation-list";
 import {RecordsListPage} from "../pages/records-list/records-list";
+import {GradePage} from "../pages/grade/grade";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -82,7 +83,8 @@ import {RecordsListPage} from "../pages/records-list/records-list";
     RecordsListPage,
     IndexPage,
     BaidutbPage,
-    FindPasswordPage
+    FindPasswordPage,
+    GradePage
   ],
   imports: [
     BrowserModule,
@@ -118,6 +120,7 @@ import {RecordsListPage} from "../pages/records-list/records-list";
         { component: BaidutbPage, name: 'BaidutbPage', segment: 'baidutb' },
         { component: SimulationPage, name: 'SimulationPage', segment: 'simulation' },
         { component: SimulationListPage, name: 'SimulationListPage', segment: 'simulationList' },
+        { component: GradePage, name: 'GradePage', segment: 'grade' },
       ]
     }),
     IonicStorageModule.forRoot()
@@ -154,7 +157,8 @@ import {RecordsListPage} from "../pages/records-list/records-list";
     BaidutbPage,
     SimulationPage,
     SimulationListPage,
-    FindPasswordPage
+    FindPasswordPage,
+    GradePage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

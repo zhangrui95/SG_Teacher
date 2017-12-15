@@ -1,7 +1,4 @@
 <div class="operation-box">
   <div class="operation" (click)="getBtn()">操作</div>
-  <div class="operation-min-box" [ngClass]="{'btnShow':showBtn}" style="top:0;left: 10px;">点名</div>
-  <div class="operation-min-box" [ngClass]="{'btnShow':showBtn}" style="top:10px;left: 110px;">讨论</div>
-  <div class="operation-min-box click-bg" [ngClass]="{'btnShow':showBtn}" style="bottom:110px;right: 10px;">事件</div>
-  <div class="operation-min-box" [ngClass]="{'btnShow':showBtn}" style="bottom:10px;right: 0px;">角色</div>
+  <div class="operation-min-box" *ngFor="let item of list;let index = index;" [ngClass]="{'btnShow':showBtn, 'click-bg':item.bgShow}" [ngStyle]="item.style" (click)="showBg(index)">{{item.name}}</div>
 </div>

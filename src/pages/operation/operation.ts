@@ -8,12 +8,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'operation.html',
 })
 export class OperationPage {
-
+  showBtn = false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OperationPage');
+  }
+
+  getBtn(){
+    if(!this.showBtn){
+      this.showBtn = true;
+    }else{
+      this.showBtn = false;
+    }
   }
 
 }

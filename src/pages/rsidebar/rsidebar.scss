@@ -3,6 +3,7 @@ page-rsidebar {
     position: fixed;
     bottom: 10px;
     right: -50px;
+    z-index: 999;
     li{
       width: 150px;
       height: 80px;

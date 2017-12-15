@@ -27,9 +27,13 @@ page-operation {
       background: #656666;
       border-radius: 80px;
       position: absolute;
+      display: none;
     }
     .click-bg{
       background: #25c6bd;
+    }
+    .btnShow{
+      display: block;
     }
   }
 }

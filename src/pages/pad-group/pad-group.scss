@@ -1,0 +1,52 @@
+page-pad-group {
+  .center{
+    width: 800px;
+    height: auto;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    z-index: 9999;
+    table{
+      width: 100%;
+      text-align: center;
+      margin-top: 70px;
+      tr{
+        border-bottom: 1px solid #e3e4e4;
+        height: 70px;
+        line-height: 70px;
+        font-size: 18px;
+        td{
+          &:nth-child(1){
+            width: 30%;
+            font-weight: 900;
+          }
+          &:nth-child(2){
+            width: 20%;
+          }
+          &:nth-child(3){
+            width: 50%;
+            .ranges{
+              width: 60%;
+              height: 20px;
+              border-radius: 50px;
+              background: -webkit-linear-gradient(right, #ff732f , #fe4479);
+              background: -o-linear-gradient(right, #ff732f , #fe4479);
+              background: -moz-linear-gradient(right, #ff732f , #fe4479);
+              background: linear-gradient(to right, #ff732f , #fe4479);
+            }
+          }
+        }
+      }
+    }
+    .btn-box{
+      width: 320px;
+      margin: 60px auto;
+      button{
+        width: 150px;
+        height: 42px;
+        border-radius: 15px;
+        background: #2bd0c8;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar  hideBackButton="true" color="dark">
+    <ion-title>2017年食品汞超标中毒事件</ion-title>
+  </ion-navbar>
+</ion-header>
+<page-rsidebar></page-rsidebar>
+<page-operation></page-operation>
+<ion-content>
+  <div class="center">
+      <table>
+        <tr *ngFor="let item of list;let index = index;">
+          <td>{{item.name}}</td>
+          <td>{{item.num}}人</td>
+          <td>
+            <div class="ranges" [ngStyle] = "style[index]" ></div>
+          </td>
+        </tr>
+      </table>
+      <div class="btn-box">
+        <button ion-button>随机分组</button>
+        <button ion-button>自由分组</button>
+      </div>
+  </div>
+</ion-content>

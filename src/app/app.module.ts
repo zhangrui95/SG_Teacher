@@ -54,6 +54,7 @@ import {GradePage} from "../pages/grade/grade";
 import {RsidebarPage} from "../pages/rsidebar/rsidebar";
 import {PadGroupPage} from "../pages/pad-group/pad-group";
 import {OperationPage} from "../pages/operation/operation";
+import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -90,6 +91,7 @@ import {OperationPage} from "../pages/operation/operation";
     GradePage,
     RsidebarPage,
     OperationPage,
+    PadGroupListPage,
     PadGroupPage
   ],
   imports: [
@@ -129,6 +131,7 @@ import {OperationPage} from "../pages/operation/operation";
         { component: GradePage, name: 'GradePage', segment: 'grade' },
         { component: RsidebarPage, name: 'RsidebarPage', segment: 'rsidebar' },
         { component: OperationPage, name: 'OperationPage', segment: 'operation' },
+        { component: PadGroupListPage, name: 'PadGroupListPage', segment: 'padGroupList' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
       ]
     }),
@@ -170,7 +173,8 @@ import {OperationPage} from "../pages/operation/operation";
     GradePage,
     RsidebarPage,
     PadGroupPage,
-    OperationPage
+    OperationPage,
+    PadGroupListPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

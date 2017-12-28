@@ -7,6 +7,10 @@ import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {SimulationPage} from "../simulation/simulation";
 import {UserData} from "../../providers/user-data";
 import {GradePage} from "../grade/grade";
+import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {ServerSocket} from "../../providers/ws.service";
+import {Subscription} from "rxjs/Subscription";
+import {WaitPage} from "../waitingStudentTakein/wait";
 
 @IonicPage()
 @Component({
@@ -55,17 +59,61 @@ export class IndexPage {
   }
 
   constructor(public ionicApp: IonicApp, public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public navParams: NavParams, public keyboard: Keyboard, public toastCtrl: ToastController,
-              public platform: Platform, public userData:UserData) {
+              public platform: Platform, public userData:UserData,public http:ProxyHttpService,public ws:ServerSocket) {
     this.registerBackEvent = this.platform.registerBackButtonAction(() => {
 
       this.exitApp()
     }, 10)
-  }
+    this.ws.connect()
 
+  }
+  selectedProject;
+  selectedClass;
+  selectedCourse;
+  projectList;
+  classList;
+  courseList;
+
+
+  private socketSubscription: Subscription
+
+  OnDestroy() {
+    this.socketSubscription.unsubscribe()
+  }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad IndexPage');
-  }
+    console.log('ionViewDidLoad')
+    this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
+      this.projectList=resProject['list'];
+      this.http.getCourseListByUid({pi:'1',ps:'9999',key:''}).subscribe(resCourse=>{
+        this.courseList=resCourse['list'];
+        this.http.classList({pi:'1',ps:'9999',key:''}).subscribe(resClass=>{
+          this.classList=resClass['list'];
+        })
+      })
+    })
+    if(this.ws.messages){
+      this.socketSubscription = this.ws.messages.subscribe((message: string) => {
+        console.log('received message from server11111: ', message)
+      })
+    }
 
+  }
+  ionViewDidLeave(){
+  }
+  next(){
+    this.http.start({p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{
+
+     if(res['code']=='0'){
+       this.userData.setProcessJsonData(JSON.parse(res['list'][0]['p_data']))
+       this.navCtrl.push(WaitPage, {sim_id:res['sim_id']});
+     }else{
+       this.showToast('bottom','创建演练失败')
+     }
+
+    })
+
+
+  }
   getUser() {
     this.navCtrl.push(UsersPage, {userId: this.userId, name: this.name, phone: this.phone, imagepath: this.imagepath});
   }

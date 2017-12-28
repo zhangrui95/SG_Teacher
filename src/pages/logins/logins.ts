@@ -81,9 +81,11 @@ export class LoginsPage {
             name: res['username'],
             phone: res['phone'],
             userId: res['userId'],
+            token: res['accesstoken'],
             imagepath: res['imagepath']
           });
-          this.userData.login(res['username'],res['userId'],  res['imagepath'], this.login.username)
+          console.log(res['accesstoken'])
+          this.userData.login(res['username'],res['accesstoken'],res['userId'],  res['imagepath'], this.login.username)
         } else {
           loading.dismiss();
           this.showToast('bottom', res['msg']);

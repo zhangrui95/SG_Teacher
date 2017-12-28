@@ -1,0 +1,54 @@
+$color:#404040;
+page-index {
+  .card{
+    max-width: 700px;
+    margin:12px auto;
+  }
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
+  .title-img{
+    display: block;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    color: $color;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
+  .img-left{
+    width: 40%;
+    height: auto;
+    margin:2% 5%;
+    float: left;
+  }
+  .til-name-box{
+    width: 50%;
+    text-align: center;
+    float: left;
+    margin-top: 14%;
+    p{
+      &:nth-child(1){
+        font-size: 1.1em;
+        color: $color;
+      }
+      &:nth-child(2){
+        font-size: 0.6em;
+        color: $color;
+      }
+    }
+  }
+  @media screen and (min-width: 700px) {
+    .til-name-box{
+      p{
+        &:nth-child(1){
+          font-size: 2.1em;
+        }
+        &:nth-child(2){
+          font-size: 1.6em;
+        }
+      }
+    }
+  }
+}

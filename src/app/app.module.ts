@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -55,6 +55,9 @@ import {RsidebarPage} from "../pages/rsidebar/rsidebar";
 import {PadGroupPage} from "../pages/pad-group/pad-group";
 import {OperationPage} from "../pages/operation/operation";
 import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
+import {ServerSocket} from "../providers/ws.service";
+import {ProcessJSONUtil} from "../providers/ProcessJSONUtil";
+import {WaitPage} from "../pages/waitingStudentTakein/wait";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -78,6 +81,7 @@ import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
     LoginsPage,
     SigninPage,
     PhonePage,
+    WaitPage,
     ClassroomPage,
     DecisionPage,
     GroupingPage,
@@ -118,7 +122,7 @@ import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
         { component: LoginsPage, name: 'LoginsPage', segment: 'logins' },
         { component: PhonePage, name: 'PhonePage', segment: 'phone' },
         { component: SigninPage, name: 'SigninPage', segment: 'signin' },
-        { component: IndexPage, name: 'IndexPage', segment: 'index' },
+        // { component: IndexPage, name: 'IndexPage', segment: 'index' },
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
@@ -133,6 +137,7 @@ import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
         { component: OperationPage, name: 'OperationPage', segment: 'operation' },
         { component: PadGroupListPage, name: 'PadGroupListPage', segment: 'padGroupList' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
+        { component: WaitPage, name: 'WaitPage', segment: 'wait' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -173,6 +178,7 @@ import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
     GradePage,
     RsidebarPage,
     PadGroupPage,
+    WaitPage,
     OperationPage,
     PadGroupListPage
   ],
@@ -186,6 +192,8 @@ import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
     Base64,
     BarcodeScanner,
     ImagePicker,
+    ServerSocket,
+    ProcessJSONUtil,
     SplashScreen
   ]
 })

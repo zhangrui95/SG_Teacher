@@ -7,32 +7,33 @@
 
 
 <ion-content padding>
-  <ion-card (click)="getClassRoom()">
-    <img class="img-left" src="assets/img/t1.png"/>
-    <div class="til-name-box">
-        <p>课堂演练</p>
-        <p>Classroom rehearsal</p>
-    </div>
-  </ion-card>
-  <ion-card (click)="getSimulation()">
-    <div class="til-name-box">
-        <p>模拟演练</p>
-        <p>Simulated drill</p>
-    </div>
-    <img class="img-left" src="assets/img/t2.png"/>
-  </ion-card>
-  <ion-card (click)="getRecords()">
-    <img class="img-left" src="assets/img/t3.png"/>
-    <div class="til-name-box">
-        <p>演练记录</p>
-        <p>Rehearsal record</p>
-    </div>
-  </ion-card>
-  <ion-card (click)="getGrade()">
-    <div class="til-name-box">
-        <p>数据分析</p>
-        <p>Data analysis</p>
-    </div>
-    <img class="img-left" src="assets/img/t4.png"/>
-  </ion-card>
+  <ion-list>
+    <ion-item>
+      <ion-label>项目列表</ion-label>
+      <ion-select [(ngModel)]="selectedProject">
+        <ion-option value="{{project.p_id}}" *ngFor="let project of projectList">{{project.p_name}}</ion-option>
+
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>班级列表</ion-label>
+      <ion-select [(ngModel)]="selectedClass">
+        <ion-option value="{{class.cla_id}}" *ngFor="let class of classList">{{class.cla_name}}</ion-option>
+
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>项目课程列表</ion-label>
+      <ion-select [(ngModel)]="selectedCourse">
+        <ion-option value="{{course.cour_id}}" *ngFor="let course of courseList">{{course.cour_name}}</ion-option>
+
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="next()"> 下一步</button>
+    </ion-item>
+
+  </ion-list>
+
+
 </ion-content>

@@ -52,7 +52,7 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <preference name="SplashShowOnlyFirstTime" value="false" />
-    <preference name="orientation" value="default" />
+    <preference name="orientation" value="landscape" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="StatusBarStyle" value="BlackOpaque" />
     <preference name="android-minSdkVersion" value="16" />

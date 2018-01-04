@@ -22,6 +22,13 @@ export class IndexPage {
   phone;
   userId;
   imagepath;
+  projectBrief = true;
+  choiceClass = false;
+  pName;
+  pDescription;
+  check = 0;
+  classIndex;
+  CourseIndex;
   private registerBackEvent: Function
   registerBackButton
 
@@ -79,9 +86,12 @@ export class IndexPage {
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad')
+    // console.log('ionViewDidLoad')
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
       this.projectList=resProject['list'];
+      console.log(this.projectList)
+      this.pName = this.projectList[0].p_name;
+      this.pDescription = this.projectList[0].p_description;
       this.http.getCourseListByUid({pi:'1',ps:'9999',key:''}).subscribe(resCourse=>{
         this.courseList=resCourse['list'];
         this.http.classList({pi:'1',ps:'9999',key:''}).subscribe(resClass=>{
@@ -156,6 +166,30 @@ export class IndexPage {
 
   getGrade(){
     this.navCtrl.push(GradePage);
+  }
+
+  getChoices(){
+    this.projectBrief = false;
+    this.choiceClass = true;
+  }
+
+  backProp(){
+    this.projectBrief = true;
+    this.choiceClass = false;
+  }
+
+  getClickProject(i){
+    this.check = i;
+    this.pName = this.projectList[i].p_name;
+    this.pDescription = this.projectList[i].p_description;
+  }
+
+  getClass(i){
+    this.classIndex = i;
+  }
+
+  getCourse(i){
+    this.CourseIndex = i;
   }
 
 }

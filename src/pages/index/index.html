@@ -1,39 +1,99 @@
  <ion-header>
   <ion-navbar  hideBackButton="true" color="dark">
-    <ion-title>SG平台</ion-title>
+    <ion-title>SG PLATFORM</ion-title>
     <img src="assets/img/user.png" class="head-img" (click)="getUser()"/>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label>项目列表</ion-label>
-      <ion-select [(ngModel)]="selectedProject">
-        <ion-option value="{{project.p_id}}" *ngFor="let project of projectList">{{project.p_name}}</ion-option>
+  <!--<ion-list>-->
+    <!--<ion-item>-->
+      <!--<ion-label>项目列表</ion-label>-->
+      <!--<ion-select [(ngModel)]="selectedProject">-->
+        <!--<ion-option value="{{project.p_id}}" *ngFor="let project of projectList">{{project.p_name}}</ion-option>-->
 
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>班级列表</ion-label>
-      <ion-select [(ngModel)]="selectedClass">
-        <ion-option value="{{class.cla_id}}" *ngFor="let class of classList">{{class.cla_name}}</ion-option>
-
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>项目课程列表</ion-label>
-      <ion-select [(ngModel)]="selectedCourse">
-        <ion-option value="{{course.cour_id}}" *ngFor="let course of courseList">{{course.cour_name}}</ion-option>
-
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <button ion-button (click)="next()"> 下一步</button>
-    </ion-item>
-
-  </ion-list>
-
-
+      <!--</ion-select>-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--<ion-label>班级列表</ion-label>-->
+      <!--<ion-select [(ngModel)]="selectedClass">-->
+        <!--<ion-option value="{{class.cla_id}}" *ngFor="let class of classList">{{class.cla_name}}</ion-option>-->
+      <!--</ion-select>-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--<ion-label>项目课程列表</ion-label>-->
+      <!--<ion-select [(ngModel)]="selectedCourse">-->
+        <!--<ion-option value="{{course.cour_id}}" *ngFor="let course of courseList">{{course.cour_name}}</ion-option>-->
+      <!--</ion-select>-->
+    <!--</ion-item>-->
+    <!--<ion-item>-->
+      <!--<button ion-button (click)="next()"> 下一步</button>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+  <div class="left-box">
+    <div class="til-box">选择演练项目</div>
+    <div class="scroll-right-box">
+      <!--<dl>-->
+        <!--<dt>-->
+          <!--<img src="../../assets/img/bjt.png" class="img-xm img-choice-border"/>-->
+        <!--</dt>-->
+        <!--<dd>1111</dd>-->
+      <!--</dl>-->
+      <dl *ngFor="let project of projectList;let i = index;" (click)="getClickProject(i)">
+        <dt>
+          <img src="{{project.p_image}}" class="{{i==check?'img-xm img-choice-border':'img-xm'}}"/>
+        </dt>
+        <dd>{{project.p_name}}</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="right-box" *ngIf="projectBrief">
+  <div class="til-box pad-left">项目简介</div>
+  <div class="pad-left left-scroll-box">
+    <div class="p-name">{{pName}}</div>
+    <div class="p-inr">{{pDescription}}</div>
+    <div class="p-name" style="font-size: 18px;">项目类型：危机演练</div>
+    <div class="choice-c" (click)="getChoices()">选择授课班级和课程</div>
+    <div style="overflow: hidden;">
+      <div class="choice-class">2017级公共管理一班<img src="assets/img/dui.png" class="dui"/></div>
+      <div class="choice-class">公共危机管理<img src="assets/img/dui.png" class="dui"/></div>
+      <div class="choice-class choice-btn" (click)="getChoices()">重新选择</div>
+    </div>
+  </div>
+  <button class="start-btn">开始演练</button>
+</div>
+  <div class="right-box" *ngIf="choiceClass">
+    <div class="til-box pad-left">
+      <div class="float-l">请选择授课班级及课程名称</div>
+      <div class="float-r" (click)="backProp()"><img class="float-l" src="assets/img/back.png" style="margin: 16px 5px;"/><span class="float-l" style="color:#ffbf00;">返回项目</span></div>
+    </div>
+    <div class="pad-left left-scroll-box">
+      <div class="til-border-top">
+        <div class="yellow-box"></div>
+        <div class="float-l">授课班级</div>
+        <div class="float-l choice-news-box">2017级公共管理一班</div>
+        <img src="assets/img/show.png" style="margin-top: 18px;" class="float-r"/>
+      </div>
+      <div style="overflow: hidden;">
+        <div *ngFor="let class of classList;let i = index;" (click)="getClass(i)" class="{{i==classIndex?'choice-class':'choice-class bor-white'}}">
+          {{class.cla_name}}
+          <img src="assets/img/dui.png" class="dui" *ngIf="i==classIndex"/>
+        </div>
+      </div>
+      <div class="til-border-top">
+        <div class="yellow-box"></div>
+        <div class="float-l">课程名称</div>
+        <div class="float-l choice-news-box">公共危机管理</div>
+        <img src="assets/img/show.png" style="margin-top: 18px;" class="float-r"/>
+      </div>
+      <div style="overflow: hidden;">
+        <div class="{{i == CourseIndex?'choice-class':'choice-class bor-white'}}" *ngFor="let course of courseList;let i = index;" (click)="getCourse(i)">
+          {{course.cour_name}}
+          <img src="assets/img/dui.png" class="dui" *ngIf="i == CourseIndex"/>
+        </div>
+      </div>
+    </div>
+    <button class="start-btn">确认选择</button>
+  </div>
 </ion-content>

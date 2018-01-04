@@ -42,7 +42,15 @@ export class ProxyHttpService {
   updateHeadPic(params) {
     return this._post("/userstu/updateHeadPic.do", params)
   }
-
+  addExercisesStep(params) {
+    return this._post("/tabletController/getNextStep.do", params)
+  }
+  getRandomGroForStu(params) {
+    return this._post("/tabletController/getRandomGroForStu.do", params)
+  }
+  getPushFreeGroListForPhone(params) {
+    return this._post("/tabletController/getPushFreeGroListForPhone.do", params)
+  }
   getSimulationList(params) {
     return this._get("/phoneAppController/getSimulationList.do", params)
   }
@@ -62,6 +70,7 @@ export class ProxyHttpService {
   _post(url, params?: any) {
     params.deviceType="pad"
     params.token=this.userData.userToken;
+    console.log('params=======>')
     console.log(JSON.stringify(params))
     return this.http.post(this.BASE_URL + url, JSON.stringify(params))
   }

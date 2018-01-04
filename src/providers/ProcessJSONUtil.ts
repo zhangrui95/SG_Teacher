@@ -11,29 +11,97 @@ export class ProcessJSONUtil {
   startNode;
   end_id;
   previousNode;
-  nextNodes: any[];
-  currNode;
+  currNodes;
+  data;
 
-  public parseStart(obj?: any) {
+
+  public parseStart(obj) {
     for (let node of obj) {
-      if(node==null){
+      if (node == null) {
         continue
       }
-      if (node.type == "start") {
-        this.startNode = node
-        this.currNode = node;
-        this.nextNodes = this.findNodesByIds(obj, node.node_id)
-        console.log('----next---')
-        console.log(this.nextNodes)
-        return node;
+      if (node.type == 'start') {
+        return node
       }
     }
+  }
+
+  public start(obj,sim_id) {
+    this.currNodes=new Array()
+    let nodeArray=new Array();
+   let node= this.parseStart(obj)
+    let bean =new NextBean();
+    bean.sim_id=sim_id;
+    bean.type=node.type;
+    if(node.node_id&&node.node_id.length>0){
+      bean.n_id=node.node_id[0];
+    }
+    bean.curr_n_id=node.id;
+    bean.g_id=node.group_id;
+    bean.n_name=node.text;
+
+    nodeArray.push(bean)
+    this.currNodes.push(node)
+    return nodeArray;
+  }
+
+
+  public isInGroup(obj) {
+
+    if (this.currNodes.length == 1) {
+      let nextid = this.currNodes[0].node_id;
+      let nextNode = this.findNodeById(obj, nextid);
+      if (nextNode.group_id != "-1" && nextNode.group_id != "-2") {
+        return true
+      }
+    }
+    return false;
+  }
+
+  public setCurrNode(currNode) {
+    this.currNodes = currNode
+  }
+  public parseNext(sim_id):Array<NextBean>{
+    let arr=new Array <NextBean>()
+
+    for(let node of this.currNodes){
+      let bean =new NextBean();
+      bean.sim_id=sim_id;
+      bean.type=node.type;
+      if(node.node_id&&node.node_id.length>0){
+        bean.n_id=node.node_id[0];
+      }
+      bean.curr_n_id=node.id;
+      bean.g_id=node.group_id;
+      bean.n_name=node.text;
+      arr.push(bean)
+    }
+    return arr;
+  }
+  public findNodeById(obj, id) {
+    console.log(obj)
+    for (let node of obj) {
+      if (node != null) {
+        if (node.type == 'group') {
+          for (let gNode of node.nodes) {
+            if (gNode.id == id) {
+              return gNode
+            }
+          }
+        } else {
+          if (node.id == id) {
+            return node
+          }
+        }
+      }
+    }
+
   }
 
   public parseEvent(obj) {
     let arr = new Array();
     for (let node of obj) {
-      if(node==null){
+      if (node == null) {
         continue
       }
       if (node.type == "event") {
@@ -43,103 +111,49 @@ export class ProcessJSONUtil {
     return arr;
   }
 
-  public stepNext(nextNode) {
 
-    this.previousNode = this.currNode;
-    this.currNode = nextNode;
-    console.log(this.previousNode)
-    console.log(this.currNode)
-  }
-
-  public parseGroup(obj) {
-    let arr = new Array();
+  public parseGroup(obj,sim_id) {
+    let arr = new Array<GroupItem>();
     for (let node of obj) {
-      if(node==null){
+      if (node == null) {
         continue
       }
       if (node.type == 'group') {
-        arr.push(node)
+        let item=new GroupItem();
+        item.type=node.props.group_type;
+        item.img=node.props.group_img;
+        item.text=node.props.group_text;
+        item.limit=node.props.group_limit
+        item.id=node.id
+        arr.push(item)
       }
     }
-    return arr;
+    let bean =new GroupBean();
+    bean.sim_id=sim_id;
+    bean.sim_id=18;
+    bean.GroupId=arr;
+    console.log(bean)
+    return bean;
   }
+}
 
-  public parseNext(obj, nextId) {
+export class NextBean {
+  public sim_id;
+  public g_id;
+  public n_id;
+  public n_name;
+  public type;
+  public curr_n_id
 
-    console.log(obj)
-    let arr = new Array()
-    for (let node of obj) {
-
-      if(node!=null){
-        console.log(node.id)
-        if (nextId.indexOf(node.id) != -1) {
-          arr.push(node)
-        }
-      }
-
-    }
-    return arr;
-  }
-
-  public isInGroup(node) {
-    if (node.group_id && node.group_id != '-1' && node.group_id != '-2') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public isGrouping() {
-    if (this.isInGroup(this.previousNode)) {
-      if (!this.isInGroup(this.currNode)) {
-        return true;
-      }
-    }
-    return false;
-  }
-  public findNodeById(obj,id){
-    for (let node of obj) {
-      if(node==null){
-        continue
-      }
-      if(node.type=="group"){
-        for(let groupNode of node.nodes){
-          if(groupNode==null){
-            continue
-          }
-          if(groupNode.id==id){
-            return groupNode;
-          }
-        }
-      }else{
-        if(node.id==id){
-          return node;
-        }
-      }
-    }
-    return null;
-  }
-  public findNodesByIds(obj,ids){
-    let arr=new Array();
-    for (let node of obj) {
-      if(node==null){
-        continue
-      }
-      if(node.type=="group"){
-        for(let groupNode of node.nodes){
-          if(groupNode==null){
-            continue
-          }
-          if(ids.indexOf(groupNode.id)!=-1){
-            arr.push( groupNode);
-          }
-        }
-      }else{
-        if(ids.indexOf(node.id)!=-1){
-          arr.push( node);
-        }
-      }
-    }
-    return arr;
-  }
+}
+export class GroupBean{
+  public sim_id;
+  public GroupId:Array<GroupItem>;
+}
+export class GroupItem{
+  public id;
+  public img;
+  public text;
+  public type;
+  public limit;
 }

@@ -77,9 +77,7 @@ export class IndexPage {
 
   private socketSubscription: Subscription
 
-  OnDestroy() {
-    this.socketSubscription.unsubscribe()
-  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad')
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
@@ -99,6 +97,8 @@ export class IndexPage {
 
   }
   ionViewDidLeave(){
+    if(this.socketSubscription)
+    this.socketSubscription.unsubscribe()
   }
   next(){
     this.http.start({p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{

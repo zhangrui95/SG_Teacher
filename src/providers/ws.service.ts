@@ -20,19 +20,24 @@ export class ServerSocket {
     // Using share() causes a single websocket to be created when the first
     // observer subscribes. This socket is shared with subsequent observers
     // and closed when the observer count falls to zero.
-    console.log('ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken+ "&type=pad")
-    this.messages = websocketConnect(
-      'ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken+ "&type=pad",
-      this.inputStream = new QueueingSubject<string>()
-    ).messages.share()
+    console.log('ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken + "&type=pad")
+    if (this.userData.userToken) {
+      this.messages = websocketConnect(
+        'ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken + "&type=pad",
+        this.inputStream = new QueueingSubject<string>()
+      ).messages.share()
+    }
 
   }
 
   public send(message: string): void {
+    if( this.inputStream){
+      this.inputStream.next(message)
+    }
     // If the websocket is not connected then the QueueingSubject will ensure
     // that messages are queued and delivered when the websocket reconnects.
     // A regular Subject can be used to discard messages sent when the websocket
     // is disconnected.
-    this.inputStream.next(message)
+
   }
 }

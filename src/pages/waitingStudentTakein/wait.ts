@@ -28,21 +28,21 @@ export class WaitPage {
 
   ionViewDidLoad() {
 
-    this.userData.getProcessJsonData().then(val=>{
-        console.log(val)
-    })
+
     if (this.ws.messages) {
       this.socketSubscription = this.ws.messages.subscribe((message: string) => {
-        console.log('received message from server11111: ', message)
+        console.log(message)
       })
     }
   }
 
   ionViewDidLeave() {
+    if( this.socketSubscription)
     this.socketSubscription.unsubscribe()
   }
 
   next() {
+
     this.navCtrl.push(PadGroupPage, {sim_id: this.navParams.data.sim_id});
 
   }

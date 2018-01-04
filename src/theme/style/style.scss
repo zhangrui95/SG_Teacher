@@ -3,7 +3,7 @@ $color:#404040;
 {
   width: 1px;
   height: 1px;
-  background-color: #fff;
+  background-color: transparent;
 }
 ul,li{
   list-style: none;
@@ -14,12 +14,6 @@ ul,li{
 }
 .mar-btn{
   margin-top: 50px;
-}
-.go-login{
-  font-size: 14px;
-  line-height: 0;
-  text-align: center;
-  color: $color;
 }
 .item-ios{
   .icon-forward{
@@ -34,24 +28,50 @@ ul,li{
   font-size: 20px;
   line-height: 35px;
 }
+.bg{
+  width: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  z-index: -1;
+}
+.danger-text{
+  margin: 0;
+  font-size: 14px;
+}
+.mar-btn{
+  margin-top: 50px;
+}
+.go-login{
+  font-size: 14px;
+  line-height: 0;
+  text-align: center;
+  color: #1aa7b8;
+}
 .toolbar-content-ios{
   .head-img{
-    width: 1.1em;
-    top: 11px;
+    width: 2.1em;
+    top: 4px;
   }
   .head-top{
     top: 13px;
   }
 }
 .head-img{
-  width: 1.2em;
+  width: 2.4em;
   position: absolute;
-  top: 16px;
+  top: 8px;
   right: 15px;
 }
 .no-date{
   text-align: center;
   margin-top: 20px;
+}
+.float-l{
+  float: left;
+}
+.float-r{
+  float: right;
 }
 // pad style
 .center{
@@ -106,4 +126,68 @@ ul,li{
       background: #2bd0c8;
     }
   }
+}
+.fixed-content{
+  background: url('./../assets/img/bjt.png') no-repeat;
+}
+.item-box{
+  font-size: 14px;
+  width:80%;
+  color: #959595;
+  margin: 10px auto;
+  overflow: hidden;
+}
+.or-word{
+  text-align: center;
+  color: #aaa;
+  font-size: 20px;
+  width: 20%;
+}
+.xian{
+  height: 1px;
+  background: #939393;
+  width: 40%;
+  margin-top: 12px;
+}
+.index-news-box {
+  margin-top: 20px;
+  float: left;
+  width: 100%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+}
+.mar-bottom{
+  margin-bottom: 15px;
+}
+.button-boxs{
+  .btn-green{
+    height: 46px;
+    background-color: #1aa7b8;
+    width: 96%;
+    margin: 0 auto;
+  }
+}
+.logo{
+  display: block;
+  width: 25%;
+  margin: 15% auto 20px;
+  max-width: 200px;
+}
+@media (max-width: 320px) {
+  .logo{
+    margin: 8% auto 20px;
+  }
+}
+.center-max{
+  max-width: 500px;
+  margin: 100px auto 0;
+}
+.zc-new-num{
+  color: #fff;
+  text-align: right;
+  padding-right: 20px;
+  font-size: 16px;
 }

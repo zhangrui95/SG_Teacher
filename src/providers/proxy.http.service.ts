@@ -67,6 +67,10 @@ export class ProxyHttpService {
     return this._post("/user/login.do", params)
   }
 
+  initPass(params){
+    return this._post("/userstu/initPass.do",params)
+  }
+
   _post(url, params?: any) {
     params.deviceType="pad"
     params.token=this.userData.userToken;

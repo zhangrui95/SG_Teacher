@@ -26,6 +26,10 @@ export class ProxyHttpService {
   updatePhone(params) {
     return this._post("/userstu/updatePhone.do", params)
   }
+  getPushScreen(params){
+    return this._post("/tabletController/getPushScreen.do", params)
+  }
+
 
   updatePass(params) {
     return this._post("/userstu/updatePass.do", params)
@@ -60,6 +64,11 @@ export class ProxyHttpService {
   getCourseListByUid(params?: any) {
     return this._get('/classManagerController/getCourseListByUid.do', params);
   }
+
+  getGroupDetail(params?: any) {
+    return this._get('/tabletController/getGroInformationList.do', params);
+  }
+
   start(params) {
     return this._post("/simulationController/addSimulation.do", params)
   }

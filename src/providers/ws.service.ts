@@ -24,7 +24,8 @@ export class ServerSocket {
     if (this.userData.userToken) {
       this.messages = websocketConnect(
         'ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken + "&type=pad",
-        this.inputStream = new QueueingSubject<string>()
+        this.inputStream =
+          new QueueingSubject<string>()
       ).messages.share()
     }
 

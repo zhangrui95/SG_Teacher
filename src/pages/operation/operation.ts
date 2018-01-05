@@ -9,6 +9,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class OperationPage {
   showBtn = false;
+  showAnimate=false;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -25,10 +26,13 @@ export class OperationPage {
   }
 
   showBg(){
+    this.showAnimate = true;
     this.showBtn = true;
   }
 
   hideBg(){
+
+
     this.showBtn = false;
   }
 }

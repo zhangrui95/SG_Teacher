@@ -23,6 +23,16 @@ export class RsidebarPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad RsidebarPage');
   }
+  onScreen(){
+    this.onNext.emit("screen")
+  }
+  onGoNext(){
+    this.onNext.emit("next")
+  }
+
+
+
+
   groupListShow(){
     this.showList = true;
   }

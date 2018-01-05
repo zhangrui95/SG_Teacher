@@ -17,7 +17,7 @@ export class PadGroupPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
-    this.sim_id = navParams.data.sim_id+""
+    this.sim_id = navParams.data.sim_id + ""
   }
 
   wsReciever
@@ -44,11 +44,12 @@ export class PadGroupPage {
         beans = this.processJson.parseNext(this.sim_id)
         this.sendNext({datas: beans})
       }
-    }else if(ev=='screen'){
-      let action ={action:'screen',datas:this.currNode}
+    } else if (ev == 'screen') {
+      this.currNode.n_id = '16'
+      let action = {action: 'screen', datas: this.currNode}
       console.log('screen=========>')
       console.log(action)
-      this.ws.send(JSON.stringify(action))
+      this.getPushScreen(action)
     }
   }
 
@@ -62,7 +63,7 @@ export class PadGroupPage {
   }
 
   sendNext(next) {
-/**[{"g_id":"-1","g_name":"少放点撒地方","n_id":"1","s_data":[],"action":"pad_process_upadte"}]*/
+    /**[{"g_id":"-1","g_name":"少放点撒地方","n_id":"1","s_data":[],"action":"pad_process_upadte"}]*/
     this.addExercisesStep(next)
   }
 
@@ -79,7 +80,7 @@ export class PadGroupPage {
     this.http.addExercisesStep(params).subscribe(res => {
       console.log("=======>")
       console.log(res)
-      this.currNode=res
+      this.currNode = res
     })
   }
 
@@ -98,7 +99,29 @@ export class PadGroupPage {
     })
   }
 
+  getPushScreen(params) {
+    this.http.getPushScreen(params).subscribe(res => {
+      console.log("=======>")
+      console.log(res)
+    })
+  }
+
+  showFlag = true;
+
+  onbActive() {
+    if (!this.showFlag) {
+      this.showFlag = true;
+
+      setTimeout(() => {
+        this.showFlag = false;
+      }, 5000)
+    }
+  }
+
   ionViewDidLoad() {
+    setTimeout(() => {
+      this.showFlag = false;
+    }, 5000)
     this.userData.getProcessJsonData().then(value => {
       this.jsonData = value;
 
@@ -109,7 +132,7 @@ export class PadGroupPage {
 
     if (this.ws.messages) {
       this.wsReciever = this.ws.messages.subscribe(msg => {
-        let curr= JSON.parse(msg);
+        let curr = JSON.parse(msg);
         let action = curr.action
         console.log('curr========>')
         console.log(curr)
@@ -119,7 +142,7 @@ export class PadGroupPage {
             //todo 自由分组 更新分组信息
             break;
           case 'pad_process_upadte':
-            this.currNode=curr
+            this.currNode = curr
             break
         }
 
@@ -128,5 +151,4 @@ export class PadGroupPage {
 
   }
 
-  ionView
 }

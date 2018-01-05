@@ -1,5 +1,9 @@
 <div class="operation-box">
-  <div class="{{showBtn?'animate-show oper-box':'animate-hide oper-box oper-box-hide'}}">
+  <div
+    class="oper-box"
+  [ngClass]="{'animate-show':showBtn,'oper-box-hide':!showBtn,'animate-hide':!showBtn&&showAnimate}"
+
+  >
     <div class="opers" (click)="hideBg()">
       <img src="assets/img/hide-list.png"/>
     </div>

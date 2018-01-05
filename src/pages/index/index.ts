@@ -10,7 +10,6 @@ import {GradePage} from "../grade/grade";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {Subscription} from "rxjs/Subscription";
-import {WaitPage} from "../waitingStudentTakein/wait";
 import {PadGroupPage} from "../pad-group/pad-group"
 
 @IonicPage()
@@ -98,6 +97,7 @@ export class IndexPage {
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
       this.projectList=resProject['list'];
       console.log(this.projectList)
+      this.selectedProject = this.projectList[0].p_id;
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
       this.http.getCourseListByUid({pi:'1',ps:'9999',key:''}).subscribe(resCourse=>{
@@ -119,11 +119,14 @@ export class IndexPage {
     this.socketSubscription.unsubscribe()
   }
   next(){
+    console.log('*****************')
+
+    console.log(this.selectedProject)
     this.http.start({p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{
 
      if(res['code']=='0'){
        this.userData.setProcessJsonData(JSON.parse(res['list'][0]['p_data']))
-       this.navCtrl.push(WaitPage, {sim_id:res['sim_id']});
+       this.navCtrl.push(PadGroupPage,{sim_id:res['sim_id']});
      }else{
        this.showToast('bottom','创建演练失败')
      }
@@ -188,6 +191,7 @@ export class IndexPage {
 
   getClickProject(i){
     this.check = i;
+    this.selectedProject = this.projectList[i].p_id;
     this.pName = this.projectList[i].p_name;
     this.pDescription = this.projectList[i].p_description;
   }
@@ -209,7 +213,10 @@ export class IndexPage {
       this.showToast('bottom',"请选择课程名称");
     }else{
       this.className = this.classList[this.classIndex].cla_name;
+      this.selectedClass = this.classList[this.classIndex]. cla_id;
+
       this.CourseName = this.courseList[this.CourseIndex].cour_name;
+      this.selectedCourse = this.courseList[this.CourseIndex].cour_id;
       this.backProp();
     }
   }
@@ -239,7 +246,8 @@ export class IndexPage {
   }
 
   getStart(){
-    this.navCtrl.push(PadGroupPage);
+    this.next();
+
   }
 
 }

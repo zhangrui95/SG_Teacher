@@ -1,12 +1,12 @@
-<ion-header>
+<ion-header  (click)="onbActive()">
   <ion-navbar  hideBackButton="true" color="dark">
     <ion-title>SG PLATFORM</ion-title>
-    <img src="assets/img/user.png" class="head-img" (click)="getUser()"/>
+    <!--<img src="assets/img/user.png" class="head-img" (click)="getUser()"/>-->
   </ion-navbar>
 </ion-header>
-<page-rsidebar (onNext)="onNext($event)"></page-rsidebar>
-<page-operation></page-operation>
-<ion-content>
+<page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" ></page-rsidebar>
+<page-operation  *ngIf="showFlag" ></page-operation>
+<ion-content  (click)="onbActive()">
   <div class="center" >
     <div class="img-box">
       <img src=""/>

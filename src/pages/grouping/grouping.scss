@@ -3,39 +3,83 @@ page-grouping {
     font-size: 18px;
     font-weight: 100;
   }
-  .til-top{
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    font-weight: 700;
+  .item-box{
+    margin: 20px auto 30px;
+    .xian{
+      width: 15%;
+      margin-top: 10px;
+    }
+    .or-word{
+      width: 70%;
+      font-size: 12px;
+    }
   }
-  .img-top{
-    width: 75px;
-    display: block;
-    margin: 0 auto 30px;
+  .box-center{
+    width: 70%;
+    margin: 80px auto 0;
+    height: 420px;
+    overflow-y: scroll;
   }
-  .group-table{
-    margin: 0 auto;
-    width: 100%;
-    td{
-      text-align: center;
-      height: 50px;
-      &:nth-child(1){
-        width: 40%;
-      }
-      &:nth-child(2){
-        width: 30%;
-      }
-      &:nth-child(3){
-        width: 30%;
-        button{
-          font-size: 14px;
-          width: 85%;
-          height: 30px;
-          background: #2e97df;
+  .group-list-box{
+    height: 61px;
+    border-bottom: 1px solid #333;
+    color: #ddd;
+    width: 46%;
+    float: left;
+    margin: 20px 2%;
+    .group-list{
+      height: 60px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 5px 5px 0 0;
+      width: 94%;
+      margin: 0 auto;
+      line-height: 60px;
+      .head-icon{
+        width: 60px;
+        height: 60px;
+        border-radius: 50px;
+        overflow: hidden;
+        background: #fff;
+        margin: -10px 0 0 10px;
+        img{
+          width: 50px;
+          height: 50px;
+          margin: 5px;
         }
       }
-
+      .group-name{
+        margin: 0 5px 0 10px;
+      }
+      .group-num{
+        margin: 0 5px;
+        color: #ffdc73;
+      }
+      .add-icon{
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+      }
+    }
+  }
+  .btn-box{
+    width: 485px;
+    margin: 30px auto 0;
+    button{
+      font-size: 18px;
+      color: #fff;
+      text-align: center;
+      line-height: 50px;
+      height: 50px;
+      width: 200px;
+      margin: 0 20px;
+      border-radius: 50px;
+      padding-left: 35px;
+      &:nth-child(1){
+        background: url("../../assets/img/sjfz.png") no-repeat 45px 12px #25aaba;
+      }
+      &:nth-child(2){
+        background: url("../../assets/img/zyfz.png") no-repeat 45px 12px  #0085b2;
+      }
     }
   }
 }

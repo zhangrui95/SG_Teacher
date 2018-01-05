@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>SG PLATFORM</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="center center-box">
+    <dl *ngFor="let stu of list;let i = index;" (click)="callStu(i)">
+      <dt><img class="{{StuIndex == i?'call-stu-header-img call-stu':'call-stu-header-img'}}" src="assets/img/img1.png"/></dt>
+      <dd class="{{StuIndex == i?'call-stu-name':''}}">{{stu.name}}</dd>
+    </dl>
+  </div>
+  <div class="btn-box">
+    <button>随机点名</button>
+    <button>确认点名</button>
+  </div>
+</ion-content>

@@ -196,4 +196,44 @@ page-index {
     height: auto;
     overflow: hidden;
   }
+  .mtk{
+    width:100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 9999;
+  }
+  .loading{
+    width: 90px;
+    margin: 50px auto 0;
+    display: block;
+  }
+  .pop-box{
+    width: 500px;
+    height: 300px;
+    background: #fff;
+    position: absolute;
+    top:20%;
+    left: 50%;
+    margin-left: -250px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .loading-word{
+    text-align: center;
+  }
+  .load-btn{
+    background: #0085b2;
+    color: #fff;
+    text-align: center;
+    width:60%;
+    margin: 40px auto 0;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    display:block;
+  }
 }

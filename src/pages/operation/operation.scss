@@ -1,39 +1,59 @@
 page-operation {
   .operation-box{
-    width: 270px;
-    height: 270px;
     position: fixed;
-    bottom: 0;
-    left: 0;
+    bottom: 50px;
+    left: 50px;
     z-index: 999;
     color: #fff;
-    .operation{
-      width: 120px;
-      height: 120px;
-      text-align: center;
-      line-height: 120px;
-      background: #2acdc5;
-      border-radius: 100px;
-      font-size: 20px;
-      position: absolute;
-      left: 20px;
-      bottom: 20px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 50px;
+    min-height: 90px;
+    .oper-box{
+      width: 90px;
+      height: 360px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50px;
     }
-    .operation-min-box{
-      width: 80px;
+    .oper-box-hide{
+      height: 0px;
+    }
+    .opers{
       height: 80px;
-      line-height: 80px;
-      text-align: center;
-      background: #656666;
-      border-radius: 80px;
+      img{
+        margin-top: 30px;
+      }
+    }
+    .oper{
+      height: 45px;
+      line-height: 45px;
+    }
+    .showList{
+      width: 90px;
+      height: 90px;
+      background: #297078;
+      border-radius: 50px;
       position: absolute;
-      display: none;
+      bottom: 0;
+      left: 0;
+      img{
+        width: 60px;
+        margin: 15px;
+      }
     }
-    .click-bg{
-      background: #25c6bd;
+    .animate-hide{
+      animation:hide 200ms;
     }
-    .btnShow{
-      display: block;
+    @keyframes hide{
+      from{height:360px;}
+      to{height:0px;}
+    }
+    .animate-show{
+      animation:move 200ms;
+    }
+    @keyframes move{
+      from{height:0px;}
+      to{height:360px;}
     }
   }
 }

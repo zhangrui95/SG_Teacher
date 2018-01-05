@@ -11,6 +11,7 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {Subscription} from "rxjs/Subscription";
 import {WaitPage} from "../waitingStudentTakein/wait";
+import {PadGroupPage} from "../pad-group/pad-group"
 
 @IonicPage()
 @Component({
@@ -31,6 +32,7 @@ export class IndexPage {
   className = '';
   CourseName = '';
   CourseIndex;
+  load = false;
   imgShow = 'assets/img/show.png';
   imgShows = 'assets/img/show.png';
   ShowOrHide = true;
@@ -212,6 +214,10 @@ export class IndexPage {
     }
   }
 
+  getLoading(){
+    this.load = true;
+  }
+
   show(){
     if(this.ShowOrHide){
       this.imgShow = 'assets/img/hide.png';
@@ -231,4 +237,9 @@ export class IndexPage {
       this.ShowCourse = true;
     }
   }
+
+  getStart(){
+    this.navCtrl.push(PadGroupPage);
+  }
+
 }

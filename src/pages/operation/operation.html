@@ -1,4 +1,14 @@
 <div class="operation-box">
-  <div class="operation" (click)="getBtn()">操作</div>
-  <div class="operation-min-box" *ngFor="let item of list;let index = index;" [ngClass]="{'btnShow':showBtn, 'click-bg':item.bgShow}" [ngStyle]="item.style" (click)="showBg(index)">{{item.name}}</div>
+  <div class="{{showBtn?'animate-show oper-box':'animate-hide oper-box oper-box-hide'}}">
+    <div class="opers" (click)="hideBg()">
+      <img src="assets/img/hide-list.png"/>
+    </div>
+    <div class="oper">讨论</div>
+    <div class="oper">角色</div>
+    <div class="oper">事件</div>
+    <div class="oper">选择</div>
+  </div>
+  <div class="showList" (click)="showBg()">
+    <img src="assets/img/dianji.png"/>
+  </div>
 </div>

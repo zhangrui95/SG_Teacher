@@ -61,7 +61,7 @@
       <div class="choice-class choice-btn" (click)="getChoices()">重新选择</div>
     </div>
   </div>
-  <button class="start-btn">开始演练</button>
+  <button class="start-btn" (click)="getLoading()">开始演练</button>
 </div>
   <div class="right-box" *ngIf="choiceClass">
     <div class="til-box pad-left">
@@ -95,5 +95,12 @@
       </div>
     </div>
     <button class="start-btn" (click)="getChoose()" >确认选择</button>
+  </div>
+  <div class="mtk" *ngIf="load">
+      <div class="pop-box">
+        <img src="../../assets/img/load.gif" class="loading"/>
+        <div class="loading-word">等待学生加入…</div>
+        <button class="load-btn" (click)="getStart()">继  续</button>
+      </div>
   </div>
 </ion-content>

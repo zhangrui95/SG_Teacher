@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the GroupingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +9,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GroupingPage {
   list = [
-    {name:'地方政府', num:'07'},
-    {name:'辉发乳业', num:'11'},
-    {name:'三特食品', num:'34'},
-    {name:'地方政府', num:'97'},
-    {name:'辉发乳业', num:'25'}
+    {img:'assets/img/img1.png',name:'地方政府', num:'07',limit:'99'},
+    {img:'assets/img/img1.png',name:'辉发乳业', num:'11',limit:'50'},
+    {img:'assets/img/img1.png',name:'三特食品', num:'34',limit:'145'},
+    {img:'assets/img/img1.png',name:'地方政府', num:'97',limit:'777'},
+    {img:'assets/img/img1.png',name:'辉发乳业', num:'11',limit:'50'},
+    {img:'assets/img/img1.png',name:'三特食品', num:'34',limit:'145'},
+    {img:'assets/img/img1.png',name:'地方政府', num:'97',limit:'777'},
+    {img:'assets/img/img1.png',name:'辉发乳业', num:'25',limit:'91'}
   ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

@@ -58,6 +58,9 @@ import {PadGroupListPage} from "../pages/pad-group-list/pad-group-list";
 import {ServerSocket} from "../providers/ws.service";
 import {ProcessJSONUtil} from "../providers/ProcessJSONUtil";
 import {WaitPage} from "../pages/waitingStudentTakein/wait";
+import {CallNamePage} from "../pages/call-name/call-name";
+import {CurrentGroupPage} from "../pages/current-group/current-group";
+import {CommentPage} from "../pages/comment/comment";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -96,7 +99,10 @@ import {WaitPage} from "../pages/waitingStudentTakein/wait";
     RsidebarPage,
     OperationPage,
     PadGroupListPage,
-    PadGroupPage
+    CurrentGroupPage,
+    CallNamePage,
+    PadGroupPage,
+    CommentPage
   ],
   imports: [
     BrowserModule,
@@ -136,6 +142,9 @@ import {WaitPage} from "../pages/waitingStudentTakein/wait";
         { component: RsidebarPage, name: 'RsidebarPage', segment: 'rsidebar' },
         { component: OperationPage, name: 'OperationPage', segment: 'operation' },
         { component: PadGroupListPage, name: 'PadGroupListPage', segment: 'padGroupList' },
+        { component: CallNamePage, name: 'CallNamePage', segment: 'callName' },
+        { component: CurrentGroupPage, name: 'CurrentGroupPage', segment: 'currentGroup' },
+        { component: CommentPage, name: 'CommentPage', segment: 'comment' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
         { component: WaitPage, name: 'WaitPage', segment: 'wait' }
       ]
@@ -180,7 +189,10 @@ import {WaitPage} from "../pages/waitingStudentTakein/wait";
     PadGroupPage,
     WaitPage,
     OperationPage,
-    PadGroupListPage
+    PadGroupListPage,
+    CallNamePage,
+    CurrentGroupPage,
+    CommentPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

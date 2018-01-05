@@ -1,7 +1,34 @@
 <ul class="r-side">
-  <li *ngFor="let item of list;let index = index" [ngClass]="{'click-bg':item.bgColor}" (click)="bgChange(index)">
-    <img src="{{item.img}}" class="img-icon" [ngClass]="{'key-icon':item.key}"/>
-    <p>{{item.name}}</p>
+  <li>
+    <div class="r-list-icon" (click)="groupListShow()">
+      <img src="assets/img/group.png" class="img-icon"/>
+    </div>
+    <div class="r-list-box" *ngIf="showList">
+      <img src="../../assets/img/hide-list-r.png" (click)="groupListHide()"/>
+      <div>三特食品</div>
+      <div>辉发乳业</div>
+      <div>群众</div>
+    </div>
+  </li>
+  <li>
+    <div class="r-list-icon">
+      <img src="assets/img/go.png" class="img-icon"/>
+    </div>
+  </li>
+  <li>
+    <div class="r-list-icon">
+      <img src="assets/img/detail.png" class="img-icon"/>
+    </div>
+  </li>
+  <li>
+    <div class="r-list-icon">
+      <img src="assets/img/view.png" class="img-icon"/>
+    </div>
+  </li>
+  <li>
+    <div class="r-list-icon">
+      <img src="assets/img/key.png" class="img-icon"/>
+    </div>
   </li>
 </ul>
 

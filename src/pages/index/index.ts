@@ -28,7 +28,13 @@ export class IndexPage {
   pDescription;
   check = 0;
   classIndex;
+  className = '';
+  CourseName = '';
   CourseIndex;
+  imgShow = 'assets/img/show.png';
+  imgShows = 'assets/img/show.png';
+  ShowOrHide = true;
+  ShowCourse = true;
   private registerBackEvent: Function
   registerBackButton
 
@@ -186,10 +192,43 @@ export class IndexPage {
 
   getClass(i){
     this.classIndex = i;
+    this.className = this.classList[i].cla_name;
   }
 
   getCourse(i){
     this.CourseIndex = i;
+    this.CourseName = this.courseList[i].cour_name;
   }
 
+  getChoose(){
+    if(this.classIndex == undefined){
+      this.showToast('bottom',"请选择授课班级");
+    }else if(this.CourseIndex == undefined){
+      this.showToast('bottom',"请选择课程名称");
+    }else{
+      this.className = this.classList[this.classIndex].cla_name;
+      this.CourseName = this.courseList[this.CourseIndex].cour_name;
+      this.backProp();
+    }
+  }
+
+  show(){
+    if(this.ShowOrHide){
+      this.imgShow = 'assets/img/hide.png';
+      this.ShowOrHide = false;
+    }else{
+      this.imgShow = 'assets/img/show.png';
+      this.ShowOrHide = true;
+    }
+  }
+
+  showCour(){
+    if(this.ShowCourse){
+      this.imgShows = 'assets/img/hide.png';
+      this.ShowCourse = false;
+    }else{
+      this.imgShows = 'assets/img/show.png';
+      this.ShowCourse = true;
+    }
+  }
 }

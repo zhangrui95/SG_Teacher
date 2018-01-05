@@ -54,10 +54,10 @@
     <div class="p-name">{{pName}}</div>
     <div class="p-inr">{{pDescription}}</div>
     <div class="p-name" style="font-size: 18px;">项目类型：危机演练</div>
-    <div class="choice-c" (click)="getChoices()">选择授课班级和课程</div>
-    <div style="overflow: hidden;">
-      <div class="choice-class">2017级公共管理一班<img src="assets/img/dui.png" class="dui"/></div>
-      <div class="choice-class">公共危机管理<img src="assets/img/dui.png" class="dui"/></div>
+    <div class="choice-c" (click)="getChoices()" *ngIf=" CourseName == '' ">选择授课班级和课程</div>
+    <div style="overflow: hidden;" *ngIf=" CourseName != '' ">
+      <div class="choice-class">{{className}}<img src="assets/img/dui.png" class="dui"/></div>
+      <div class="choice-class">{{CourseName}}<img src="assets/img/dui.png" class="dui"/></div>
       <div class="choice-class choice-btn" (click)="getChoices()">重新选择</div>
     </div>
   </div>
@@ -72,10 +72,10 @@
       <div class="til-border-top">
         <div class="yellow-box"></div>
         <div class="float-l">授课班级</div>
-        <div class="float-l choice-news-box">2017级公共管理一班</div>
-        <img src="assets/img/show.png" style="margin-top: 18px;" class="float-r"/>
+        <div class="float-l choice-news-box" *ngIf=" className != '' ">{{className}}</div>
+        <img src="{{imgShow}}" style="margin-top: 18px;" class="float-r" (click)="show()"/>
       </div>
-      <div style="overflow: hidden;">
+      <div class="{{ShowOrHide?'showAll':'hideAll'}}">
         <div *ngFor="let class of classList;let i = index;" (click)="getClass(i)" class="{{i==classIndex?'choice-class':'choice-class bor-white'}}">
           {{class.cla_name}}
           <img src="assets/img/dui.png" class="dui" *ngIf="i==classIndex"/>
@@ -84,16 +84,16 @@
       <div class="til-border-top">
         <div class="yellow-box"></div>
         <div class="float-l">课程名称</div>
-        <div class="float-l choice-news-box">公共危机管理</div>
-        <img src="assets/img/show.png" style="margin-top: 18px;" class="float-r"/>
+        <div class="float-l choice-news-box" *ngIf=" CourseName != '' ">{{CourseName}}</div>
+        <img src="{{imgShows}}" style="margin-top: 18px;" (click)="showCour()" class="float-r"/>
       </div>
-      <div style="overflow: hidden;">
+      <div class="{{ShowCourse?'showAll':'hideAll'}}">
         <div class="{{i == CourseIndex?'choice-class':'choice-class bor-white'}}" *ngFor="let course of courseList;let i = index;" (click)="getCourse(i)">
           {{course.cour_name}}
           <img src="assets/img/dui.png" class="dui" *ngIf="i == CourseIndex"/>
         </div>
       </div>
     </div>
-    <button class="start-btn">确认选择</button>
+    <button class="start-btn" (click)="getChoose()" >确认选择</button>
   </div>
 </ion-content>

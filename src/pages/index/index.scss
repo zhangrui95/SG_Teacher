@@ -188,4 +188,12 @@ page-index {
     padding: 0 10px;
     border-radius: 5px;
   }
+  .showAll{
+    height: 120px;
+    overflow: hidden;
+  }
+  .hideAll{
+    height: auto;
+    overflow: hidden;
+  }
 }

@@ -61,6 +61,11 @@ import {WaitPage} from "../pages/waitingStudentTakein/wait";
 import {CallNamePage} from "../pages/call-name/call-name";
 import {CurrentGroupPage} from "../pages/current-group/current-group";
 import {CommentPage} from "../pages/comment/comment";
+import {PadBdtbPage} from "../pages/pad-bdtb/pad-bdtb";
+import {PadQQPage} from "../pages/pad-qq/pad-qq";
+import {PadTnfbPage} from "../pages/pad-tnfb/pad-tnfb";
+import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
+
 import {GroupIndexPage} from "../pages/group-index/group-index";
 @NgModule({
   declarations: [
@@ -104,7 +109,11 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     CallNamePage,
     PadGroupPage,
     CommentPage,
-    GroupIndexPage
+    GroupIndexPage,
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage
   ],
   imports: [
     BrowserModule,
@@ -149,7 +158,11 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
         { component: CommentPage, name: 'CommentPage', segment: 'comment' },
         { component: GroupIndexPage, name: 'GroupIndexPage', segment: 'comment' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
-        { component: WaitPage, name: 'WaitPage', segment: 'wait' }
+        { component: WaitPage, name: 'WaitPage', segment: 'wait' },
+        { component: PadBdtbPage, name: 'PadBdtbPage', segment: 'pad-bdtb' },
+        { component: PadQQPage, name: 'PadQQPage', segment: 'pad-qq' },
+        { component: PadTnfbPage, name: 'PadTnfbPage', segment: 'pad-tnfb' },
+        { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -196,7 +209,16 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     CallNamePage,
     CurrentGroupPage,
     CommentPage,
-    GroupIndexPage
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage,
+    CommentPage,
+    GroupIndexPage,
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

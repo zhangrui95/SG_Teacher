@@ -12,7 +12,7 @@
     </dl>
   </div>
   <div class="btn-box">
-    <button>随机点名</button>
+    <button (click)="randomCheck()" [disabled]="inRandom">随机点名</button>
     <button (click)="callName()">确认点名</button>
   </div>
 </ion-content>

@@ -26,7 +26,28 @@ export class CallNamePage {
       this.list  = res['stuList'];
     });
   }
+  inRandom=false;
 
+  randomCheck(){
+    if(this.inRandom){
+      return
+    }
+    this.inRandom=true;
+    let times=0;
+    let int=setInterval(()=>{
+      times++
+      if(times<=20){
+        let random=Math.floor(Math.random()*this.list.length)
+        console.log(random)
+        this.StuIndex =random
+
+      }else{
+        clearInterval(int)
+        this.inRandom=false;
+      }
+    },500);
+    // this.StuIndex
+  }
   callStu(i){
     this.StuIndex = i;
   }

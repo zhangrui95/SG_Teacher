@@ -108,7 +108,11 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     CurrentGroupPage,
     CallNamePage,
     PadGroupPage,
-    CommentPage
+    CommentPage,
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage
   ],
   imports: [
     BrowserModule,
@@ -209,7 +213,11 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     PadTnfbPage,
     PadWeiboPage,
     CommentPage,
-    GroupIndexPage
+    GroupIndexPage,
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

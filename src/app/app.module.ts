@@ -109,6 +109,7 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     CallNamePage,
     PadGroupPage,
     CommentPage,
+    GroupIndexPage,
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,

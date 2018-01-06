@@ -11,13 +11,16 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 export class CallNamePage {
   list = [];
   StuIndex;
+  sim_id;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
               public http: ProxyHttpService) {
+      this.sim_id = this.navParams['sim_id'];
   }
 
   ionViewDidLoad() {
+    // const params = {sim_id: this.sim_id}
     const params = {sim_id: '18'}
     this.http.getAllStuList(params).subscribe(res => {
       this.list  = res['stuList'];

@@ -14,6 +14,10 @@ export class PadGroupPage {
 
   list = [];
   style = [];
+  jsonData;
+  currNode;
+  sim_id = "111";
+  keyInput = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
@@ -27,11 +31,6 @@ export class PadGroupPage {
   //   this.wsReciever.unsubscribe();
   // }
 
-  jsonData
-  currNode;
-  sim_id = "111";
-  keyInput = false;
-
   onNext(ev) {
     console.log(ev)
     if (ev == 'next') {
@@ -40,7 +39,6 @@ export class PadGroupPage {
         this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
         console.log(this.list)
         this.sendGroup()
-        alert(111222)
       } else {
         beans = this.processJson.parseNext(this.sim_id)
         this.sendNext({datas: beans})

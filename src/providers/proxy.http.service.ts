@@ -88,6 +88,11 @@ export class ProxyHttpService {
     return this._get('/tabletController/getPushCallStuId.do', params);
   }
 
+  addDiscussion(params){
+    return this._get('/tabletController/addDiscussion.do', params);
+  }
+
+
   _post(url, params?: any) {
     params.deviceType="pad"
     params.token=this.userData.userToken;

@@ -39,12 +39,10 @@ export class UsersPage {
               public loadingCtrl: LoadingController
   ) {
     this.userData.getUsername().then(value => this.name=value)
-    this.phone = navParams.get('phone');
+    this.userData.getUserPhone().then(value => this.phone=value)
     this.userData.getUserID().then(value => this.userId=value)
-
   }
   goChangePhone(){
-
     this.navCtrl.push(PhonePage, {userId: this.userId});
   }
   goChangePassword(){
@@ -208,6 +206,10 @@ export class UsersPage {
       position: position
     });
     toast.present(toast);
+  }
+
+  getClear(){
+    this.showToast('bottom', '清除缓存成功');
   }
 
 }

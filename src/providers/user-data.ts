@@ -34,22 +34,24 @@ export class UserData {
     }
   };
 
-  login(username: string, token: string, userID: string, url: string, loginName: string): void {
+
+  login(username: string,token:string,userID:string,url:string,phone:string,loginName:string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
     this.setUserID(userID)
     this.setAvatar(url)
-    console.log(token)
-    this.setToken(token)
+    this.setToken(token);
     this.setLoginName(loginName);
+    this.setPhone(phone);
     this.events.publish('user:login');
   };
 
-  signup(username: string, userID?: string, url?: string): void {
+  signup(username: string, userID?: string, url?: string,phone?:string): void {
     // this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
     this.setUserID(userID)
     this.setAvatar(url)
+    this.setPhone(phone);
     this.events.publish('user:signup');
   };
 
@@ -57,6 +59,7 @@ export class UserData {
     this.storage.remove(this.HAS_LOGGED_IN);
     this.storage.remove('username');
     this.storage.remove('userId');
+    this.storage.remove('phone');
     this.storage.remove('token');
     this.storage.remove('avatarUrl');
     this.events.publish('user:logout');
@@ -85,6 +88,10 @@ export class UserData {
     this.storage.set('loginName', loginName);
   };
 
+  setPhone(phone: string):void{
+    this.storage.set('phone', phone);
+  }
+
   setAvatar(url: string): void {
     this.storage.set('avatarUrl', url);
   };
@@ -112,7 +119,11 @@ export class UserData {
       return value;
     });
   };
-
+  getUserPhone(): Promise<string> {
+    return this.storage.get('phone').then((value) => {
+      return value;
+    });
+  };
   getUserID(): Promise<string> {
     return this.storage.get('userId').then((value) => {
       return value;

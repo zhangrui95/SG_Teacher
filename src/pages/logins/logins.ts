@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Keyboard, LoadingController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
+import { Keyboard, LoadingController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {UserOptions} from '../../interfaces/user-options';
 import {SigninPage} from "../signin/signin";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -16,10 +16,10 @@ export class LoginsPage {
   private registerBackEvent: Function
   registerBackButton
   login: UserOptions = {username: '', password: ''};
+  submitted = false;
   Imgsrc = 'assets/img/xmm.png';
   showEye = false;
   type = 'password';
-  submitted = false;
   exitApp() {
     if(this.keyboard.isOpen()){
       this.keyboard.close()
@@ -42,6 +42,7 @@ export class LoginsPage {
       setTimeout(() => this.registerBackButton = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
     }
   }
+
   constructor(public navCtrl: NavController,
               public userData:UserData,
               public http: ProxyHttpService,
@@ -50,6 +51,7 @@ export class LoginsPage {
               public navParams: NavParams,
               public keyboard:Keyboard,
               public loadingCtrl: LoadingController) {
+
     this.registerBackEvent = this.platform.registerBackButtonAction(() => {
 
       this.exitApp()
@@ -83,12 +85,11 @@ export class LoginsPage {
             userid: '',
             name: res['username'],
             phone: res['phone'],
+            token:res['token'],
             userId: res['userId'],
-            token: res['accesstoken'],
             imagepath: res['imagepath']
           });
-          console.log(res['accesstoken'])
-          this.userData.login(res['username'],res['accesstoken'],res['userId'],  res['imagepath'], this.login.username)
+          this.userData.login(res['username'],res['token'],res['userId'],res['imagepath'],res['phone'], this.login.username)
         } else {
           loading.dismiss();
           this.showToast('bottom', res['msg']);
@@ -126,5 +127,6 @@ export class LoginsPage {
       this.type = 'password';
     }
   }
+
 
 }

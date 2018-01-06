@@ -148,7 +148,7 @@ export class NextBean {
 }
 export class GroupBean{
   public sim_id;
-  public GroupId:Array<GroupItem>;
+  public GroupId:Array<GroupItem> =new Array();
 }
 export class GroupItem{
   public id;

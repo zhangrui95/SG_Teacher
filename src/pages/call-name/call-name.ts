@@ -63,7 +63,7 @@ export class CallNamePage {
   showToast(position: string, text: string) {
     let toast = this.toastCtrl.create({
       message: text,
-      duration: 2000,
+      duration: 20000,
       position: position
     });
     toast.present(toast);

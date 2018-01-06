@@ -3,7 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {UserData} from "../../providers/user-data";
-import {NextBean, ProcessJSONUtil} from "../../providers/ProcessJSONUtil";
+import {GroupBean, NextBean, ProcessJSONUtil} from "../../providers/ProcessJSONUtil";
 
 @IonicPage()
 @Component({
@@ -30,14 +30,14 @@ export class PadGroupPage {
   //   if(this.wsReciever)
   //   this.wsReciever.unsubscribe();
   // }
-
+  groupList=new GroupBean;
   onNext(ev) {
     console.log(ev)
     if (ev == 'next') {
       let beans = new Array<NextBean>();
       if (this.processJson.isInGroup(this.jsonData)) {
         this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
-        console.log(this.list)
+
         this.sendGroup()
       } else {
         beans = this.processJson.parseNext(this.sim_id)
@@ -52,6 +52,8 @@ export class PadGroupPage {
     } else if (ev == 'InputShow'){
       this.keyInput = true;
       this.showFlag = false;
+    }else if(ev.g_id){
+      console.log(ev.g_id)
     }
   }
 
@@ -114,9 +116,12 @@ export class PadGroupPage {
     if (!this.showFlag) {
       this.showFlag = true;
       this.keyInput = false;
-      setTimeout(() => {
+     setTimeout(() => {
+
         this.showFlag = false;
-      }, 5000)
+      }, 7000)
+    }else{
+
     }
   }
 
@@ -126,10 +131,12 @@ export class PadGroupPage {
     }, 5000)
     this.userData.getProcessJsonData().then(value => {
       this.jsonData = value;
-
+     this.groupList= this.processJson.parseGroup(this.jsonData,this.sim_id);
       console.log('start')
       this.sendNext({datas: this.processJson.start(this.jsonData, this.sim_id)})
     })
+
+
 
 
     if (this.ws.messages) {

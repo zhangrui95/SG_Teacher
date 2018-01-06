@@ -80,6 +80,14 @@ export class ProxyHttpService {
     return this._post("/userstu/initPass.do",params)
   }
 
+  getAllStuList(params){
+    return this._get('/tabletController/getAllStuList.do', params);
+  }
+
+  getPushCallStuId(params){
+    return this._get('/tabletController/getPushCallStuId.do', params);
+  }
+
   _post(url, params?: any) {
     params.deviceType="pad"
     params.token=this.userData.userToken;
@@ -96,6 +104,5 @@ export class ProxyHttpService {
     p = p.append("deviceType", "pad");
     p = p.append("token", this.userData.userToken)
    return this.http.get(this.BASE_URL + url, {params: p})
-
   }
 }

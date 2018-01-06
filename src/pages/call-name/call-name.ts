@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {ProxyHttpService} from "../../providers/proxy.http.service";
 
 
 @IonicPage()
@@ -8,17 +9,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'call-name.html',
 })
 export class CallNamePage {
-  list = [{name:'张三'},{name:'李四'},{name:'王二'},{name:'张菲菲'},{name:'马拉西亚'},{name:'李四'},{name:'王二'},{name:'李四'},{name:'王二'},{name:'张菲菲'},{name:'马拉西亚'},{name:'李四'},{name:'王二'},{name:'张菲菲'},{name:'马拉西亚'}]
+  list = [];
   StuIndex;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public toastCtrl: ToastController,
+              public http: ProxyHttpService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CallNamePage');
+    const params = {sim_id: '18'}
+    this.http.getAllStuList(params).subscribe(res => {
+      this.list  = res['stuList'];
+    });
   }
 
   callStu(i){
     this.StuIndex = i;
+  }
+
+  callName(){
+    let u_id = this.list[this.StuIndex]['Id'];
+    const params = {u_id: u_id}
+    this.http.getPushCallStuId(params).subscribe(res => {
+      this.showToast('bottom', res['msg']);
+    });
+  }
+
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+    toast.present(toast);
   }
 
 }

@@ -7,7 +7,7 @@
 <ion-content padding>
   <div class="center center-box">
     <dl *ngFor="let stu of list;let i = index;" (click)="callStu(i)">
-      <dt><img class="{{StuIndex == i?'call-stu-header-img call-stu':'call-stu-header-img'}}" src="{{stu.ImagePath!=null?stu.ImagePath:'assets/img/header.png'}}"/></dt>
+      <dt><img class="{{StuIndex == i?'call-stu-header-img call-stu animate-img':'call-stu-header-img'}}" src="{{stu.ImagePath!=null?stu.ImagePath:'assets/img/header.png'}}"/></dt>
       <dd class="{{StuIndex == i?'call-stu-name':''}}">{{stu.UserName}}</dd>
     </dl>
   </div>

@@ -1,17 +1,17 @@
 <ion-content padding>
   <div class="box-center">
-    <div class="group-list-box" *ngFor="let item of list">
+    <div class="group-list-box" *ngFor="let item of list.GroupId">
       <div class="group-list">
         <div class="float-l head-icon">
           <img src="{{item.img}}"/>
         </div>
-        <div class="float-l group-name">{{item.name}}</div>
-        <div class="float-l group-num">{{item.num}}/{{item.limit}}</div>
+        <div class="float-l group-name">{{item.text}}</div>
+        <div class="float-l group-num">{{item.num?item.num:'0'}}/{{item.limit}}</div>
       </div>
     </div>
   </div>
   <div class="btn-box">
-    <button>随机分组</button>
-    <button>自由分组</button>
+    <button (click)="getRandomGroForStu()">随机分组</button>
+    <button (click)="getPushFreeGroListForPhone()">自由分组</button>
   </div>
 </ion-content>

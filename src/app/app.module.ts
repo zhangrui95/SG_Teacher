@@ -207,7 +207,7 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,
-    PadWeiboPage
+    PadWeiboPage,
     CommentPage,
     GroupIndexPage
   ],

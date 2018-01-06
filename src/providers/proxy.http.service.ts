@@ -72,6 +72,11 @@ export class ProxyHttpService {
   start(params) {
     return this._post("/simulationController/addSimulation.do", params)
   }
+
+  addRoleForGro(params) {
+    return this._post("/tabletController/addRoleForGro.do", params)
+  }
+
   login(params) {
     return this._post("/user/login.do", params)
   }

@@ -11,7 +11,7 @@ page-operation {
     min-height: 90px;
     .oper-box{
       width: 90px;
-      height: 360px;
+      height: 315px;
       background: rgba(0,0,0,0.5);
       border-radius: 50px;
     }
@@ -45,7 +45,7 @@ page-operation {
       animation:hide 200ms;
     }
     @keyframes hide{
-      from{height:360px;}
+      from{height:315px;}
       to{height:0px;}
     }
     .animate-show{
@@ -53,7 +53,7 @@ page-operation {
     }
     @keyframes move{
       from{height:0px;}
-      to{height:360px;}
+      to{height:315px;}
     }
   }
 }

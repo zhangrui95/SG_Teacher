@@ -29,7 +29,9 @@ export class RsidebarPage {
   onGoNext(){
     this.onNext.emit("next")
   }
-
+  onInput(){
+      this.onNext.emit("InputShow");
+  }
 
 
 

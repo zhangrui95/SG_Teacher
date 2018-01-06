@@ -22,4 +22,37 @@ page-pad-group {
     font-size: 16px;
     line-height: 24px;
   }
+
+  .input-key-box{
+    width: 100%;
+    height: 80px;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    .input-key{
+      width: 74%;
+      padding: 0 2%;
+      height: 50px;
+      background: #fff;
+      border: 0;
+      border-radius: 5px;
+      margin: 15px 5%;
+      line-height: 50px;
+      font-size: 20px;
+    }
+    .send{
+      width: 10%;
+      margin: 15px 5% 0 0;
+      color: #fff;
+      border-radius: 5px;
+      background: #1aa7b8;
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+      border: 0;
+      font-size: 20px;
+    }
+  }
 }

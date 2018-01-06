@@ -7,10 +7,9 @@
     <div class="opers" (click)="hideBg()">
       <img src="assets/img/hide-list.png"/>
     </div>
-    <div class="oper">讨论</div>
-    <div class="oper">角色</div>
-    <div class="oper">事件</div>
-    <div class="oper">选择</div>
+    <div class="oper" (click)="goComment()">讨论</div>
+    <div class="oper" (click)="goCurrentGroup()">角色</div>
+    <div class="oper" (click)="goCallName()">选择</div>
   </div>
   <div class="showList" (click)="showBg()">
     <img src="assets/img/dianji.png"/>

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {CommentPage} from "../comment/comment";
+import {CurrentGroupPage} from "../current-group/current-group";
+import {CallNamePage} from "../call-name/call-name";
 
 
 @IonicPage()
@@ -31,8 +34,18 @@ export class OperationPage {
   }
 
   hideBg(){
-
-
     this.showBtn = false;
+  }
+
+  goComment(){
+    this.navCtrl.push(CommentPage);
+  }
+
+  goCurrentGroup(){
+    this.navCtrl.push(CurrentGroupPage);
+  }
+
+  goCallName(){
+    this.navCtrl.push(CallNamePage);
   }
 }

@@ -30,9 +30,10 @@ export class PadGroupPage {
   jsonData
   currNode;
   sim_id = "111";
+  keyInput = false;
 
   onNext(ev) {
-    console.log('next')
+    console.log(ev)
     if (ev == 'next') {
       let beans = new Array<NextBean>();
       if (this.processJson.isInGroup(this.jsonData)) {
@@ -50,6 +51,9 @@ export class PadGroupPage {
       console.log('screen=========>')
       console.log(action)
       this.getPushScreen(action)
+    } else if (ev == 'InputShow'){
+      this.keyInput = true;
+      this.showFlag = false;
     }
   }
 
@@ -111,7 +115,7 @@ export class PadGroupPage {
   onbActive() {
     if (!this.showFlag) {
       this.showFlag = true;
-
+      this.keyInput = false;
       setTimeout(() => {
         this.showFlag = false;
       }, 5000)

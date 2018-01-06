@@ -12,6 +12,7 @@ export class CurrentGroupPage {
   PIndex;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
+  box = [''];
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CurrentGroupPage');
@@ -19,6 +20,12 @@ export class CurrentGroupPage {
 
   pChoice(i){
     this.PIndex = i;
+  }
+  add(){
+    this.box.push('');
+  }
+  del(index){
+    this.box.splice(index, 1);
   }
 
 }

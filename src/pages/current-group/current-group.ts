@@ -36,7 +36,11 @@ export class CurrentGroupPage {
     this.box.push({roleDatas:'', roleNum:''});
   }
   del(index){
-    this.box.splice(index, 1);
+    if(this.box.length == 1){
+      this.showToast('bottom', '至少填写一条');
+    }else{
+      this.box.splice(index, 1);
+    }
   }
 
   back(){

@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {GroupBean} from "../../providers/ProcessJSONUtil";
 
 @IonicPage()
 @Component({
@@ -15,8 +16,12 @@ export class RsidebarPage {
   //   {type:'',name:'',img:'assets/img/key.png',bgColor: false,key:true},
   // ]
   showList = false;
+  @Input()
+  groupList=new GroupBean()
   @Output()
-  onNext= new EventEmitter<string>();
+  onNext= new EventEmitter<any>();
+
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -32,7 +37,9 @@ export class RsidebarPage {
   onInput(){
       this.onNext.emit("InputShow");
   }
-
+  onGroupChange(gid){
+    this.onNext.emit({g_id:gid,action:'groupChange'});
+  }
 
 
   groupListShow(){

@@ -4,7 +4,7 @@
     <!--<img src="assets/img/user.png" class="head-img" (click)="getUser()"/>-->
   </ion-navbar>
 </ion-header>
-<page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" ></page-rsidebar>
+<page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList" ></page-rsidebar>
 <page-operation  *ngIf="showFlag" [SimId]="sim_id"></page-operation>
 <ion-content  (click)="onbActive()">
   <div class="center" >

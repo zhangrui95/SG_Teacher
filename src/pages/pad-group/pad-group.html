@@ -7,33 +7,8 @@
 <page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" ></page-rsidebar>
 <page-operation  *ngIf="showFlag" [SimId]="sim_id"></page-operation>
 <ion-content  (click)="onbActive()">
-  <div class="center" >
-    <div class="img-box">
-      <img src=""/>
-    </div>
-    <div class="tile-img">
-      2017食品汞中毒事件
-    </div>
-    <div class="words">
-      kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.
-      kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.
-      kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.
-      kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.
-    </div>
-      <!--<table>-->
-        <!--<tr *ngFor="let item of list;let index = index;">-->
-          <!--<td>{{item.text}}</td>-->
-          <!--<td>{{item.limit}}人</td>-->
-          <!--<td>-->
-            <!--<div class="ranges" ></div>-->
-          <!--</td>-->
-        <!--</tr>-->
-      <!--</table>-->
-      <!--<div class="btn-box">-->
-        <!--<button ion-button (click)="random()">随机分组</button>-->
-        <!--<button ion-button (click)="free()">自由分组</button>-->
-      <!--</div>-->
-  </div>
+  <page-group-index *ngIf="false"></page-group-index>
+  <page-grouping></page-grouping>
 </ion-content>
 <div *ngIf="keyInput" class="input-key-box">
   <input class="input-key" type="text"/>

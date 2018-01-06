@@ -61,6 +61,7 @@ import {WaitPage} from "../pages/waitingStudentTakein/wait";
 import {CallNamePage} from "../pages/call-name/call-name";
 import {CurrentGroupPage} from "../pages/current-group/current-group";
 import {CommentPage} from "../pages/comment/comment";
+import {GroupIndexPage} from "../pages/group-index/group-index";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -102,7 +103,8 @@ import {CommentPage} from "../pages/comment/comment";
     CurrentGroupPage,
     CallNamePage,
     PadGroupPage,
-    CommentPage
+    CommentPage,
+    GroupIndexPage
   ],
   imports: [
     BrowserModule,
@@ -145,6 +147,7 @@ import {CommentPage} from "../pages/comment/comment";
         { component: CallNamePage, name: 'CallNamePage', segment: 'callName' },
         { component: CurrentGroupPage, name: 'CurrentGroupPage', segment: 'currentGroup' },
         { component: CommentPage, name: 'CommentPage', segment: 'comment' },
+        { component: GroupIndexPage, name: 'GroupIndexPage', segment: 'comment' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
         { component: WaitPage, name: 'WaitPage', segment: 'wait' }
       ]
@@ -192,7 +195,8 @@ import {CommentPage} from "../pages/comment/comment";
     PadGroupListPage,
     CallNamePage,
     CurrentGroupPage,
-    CommentPage
+    CommentPage,
+    GroupIndexPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

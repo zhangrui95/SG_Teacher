@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {GroupBean} from "../../providers/ProcessJSONUtil";
+import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {ServerSocket} from "../../providers/ws.service";
 
 
 @IonicPage()
@@ -7,23 +10,89 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-grouping',
   templateUrl: 'grouping.html',
 })
-export class GroupingPage {
-  list = [
-    {img:'assets/img/img1.png',name:'地方政府', num:'07',limit:'99'},
-    {img:'assets/img/img1.png',name:'辉发乳业', num:'11',limit:'50'},
-    {img:'assets/img/img1.png',name:'三特食品', num:'34',limit:'145'},
-    {img:'assets/img/img1.png',name:'地方政府', num:'97',limit:'777'},
-    {img:'assets/img/img1.png',name:'辉发乳业', num:'11',limit:'50'},
-    {img:'assets/img/img1.png',name:'三特食品', num:'34',limit:'145'},
-    {img:'assets/img/img1.png',name:'地方政府', num:'97',limit:'777'},
-    {img:'assets/img/img1.png',name:'辉发乳业', num:'25',limit:'91'}
-  ]
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class GroupingPage implements OnInit{
+  ngOnInit() {
+    console.log("grouping====================>")
+    console.log(this.list)
   }
+
+
+  @Input()
+  list =new GroupBean()
+  receiver;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService,public ws:ServerSocket) {
+    this.ws.connect()
+
+  }
+
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GroupingPage');
+
+
+    if (this.ws.messages) {
+      this.receiver = this.ws.messages.subscribe(msg => {
+        let curr = JSON.parse(msg);
+        let action = curr.action
+        switch (action) {
+          case 'phone_insert_group':
+            console.log('curr========>')
+            console.log(curr)
+
+            if(curr.datas['code']=='0'){
+              let arr= curr.datas['jsonGroOfStu'];
+              for(let g of arr){
+                for(let group of this.list.GroupId){
+                  if(g['g_id']==group.id){
+                    group.num=g['u_id'].split(',').length
+                  }
+                }
+              }
+            }
+
+            //todo 自由分组 更新分组信息
+            break;
+        }
+
+      })
+    }
+  }
+  ionViewDidLeave(){
+    this.receiver.unsubscribe()
   }
 
+
+
+  random() {
+    /**{"sim_id":18,"GroupId":[{"type":"fixed","img":"","text":"固定配额分组","limit":"3","id":"g1"},{"type":"percent","img":"","text":"比例配额分组","limit":"3","id":"g2"},{"type":"remain","img":"","text":"剩余配额分组","limit":"3","id":"g3"}],"deviceType":"pad","token":"234fc9e0329b40cdbd7691233e7ae5c6"}*/
+  }
+
+
+  getPushFreeGroListForPhone() {
+    this.http.getPushFreeGroListForPhone(this.list).subscribe(res => {
+      console.log("=======>")
+      console.log(res)
+    })
+  }
+
+  getRandomGroForStu() {
+    this.http.getRandomGroForStu(this.list).subscribe(res => {
+      console.log("=======>")
+      console.log(res)
+      //todo 随机分组 更新分组信息
+      if(res['code']=='0'){
+       let arr= res['jsonGroOfStu'];
+       for(let g of arr){
+         for(let group of this.list.GroupId){
+           if(g['g_id']==group.id){
+              group.num=g['u_id'].split(',').length
+           }
+         }
+       }
+      }
+
+
+
+
+    })
+  }
 }

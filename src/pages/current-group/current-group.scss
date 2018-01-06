@@ -31,6 +31,11 @@ page-current-group {
     color: #fff;
     text-align: center;
     margin: 10px 0;
+    font-size: 14px;
+    width: 80px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
   .call-stu-header-img{
     width: 80px;

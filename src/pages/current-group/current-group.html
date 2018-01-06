@@ -12,24 +12,26 @@
     <div class="xian float-l"></div>
   </div>
   <div class="center center-box">
-    <dl *ngFor="let item of list;let i = index;" (click)="pChoice(i)">
-      <dt><img class="{{PIndex == i?'call-stu-header-img call-stu':'call-stu-header-img'}}" src="assets/img/img1.png"/></dt>
-      <dd class="{{PIndex == i?'call-stu-name':''}}">{{item.name}}</dd>
-      <div class="group-num">{{item.num}}/{{item.limit}}</div>
-    </dl>
     <div>
+      <dl *ngFor="let item of list;let i = index;" (click)="pChoice(i)">
+        <dt><img class="{{PIndex == i?'call-stu-header-img call-stu':'call-stu-header-img'}}" src="{{item.g_image}}"/></dt>
+        <dd class="{{PIndex == i?'call-stu-name':''}}">{{item.g_name}}</dd>
+        <div class="group-num">{{num[i]}}/{{item.g_limit}}</div>
+      </dl>
+    </div>
+    <div style="clear: both;">
       <img src="../../assets/img/add.png" class="add-img" (click)="add()" style="margin-top: 10px;"/>
-      <div class="float-l ">
+      <div class="float-l">
         <div class="input-box" *ngFor="let i of box;let index = index;">
-          <input type="text" class="input-name float-l" placeholder="请输入角色名称"/>
-          <input type="number" class="input-name num-input float-l" placeholder="请输入角色人数"/>
+          <input type="text" class="input-name float-l" placeholder="请输入角色名称" [(ngModel)] = "i.roleDatas"/>
+          <input type="number" class="input-name num-input float-l" placeholder="请输入角色人数" [(ngModel)]="i.roleNum"/>
           <img src="../../assets/img/del-icon.png" class="add-img" (click)="del(index)"/>
         </div>
       </div>
     </div>
   </div>
   <div class="btn-box">
-    <button>确认</button>
+    <button (click)="getOk()">确认</button>
     <button (click)="back()">取消</button>
   </div>
 </ion-content>

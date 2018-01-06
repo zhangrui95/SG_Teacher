@@ -61,6 +61,11 @@ import {WaitPage} from "../pages/waitingStudentTakein/wait";
 import {CallNamePage} from "../pages/call-name/call-name";
 import {CurrentGroupPage} from "../pages/current-group/current-group";
 import {CommentPage} from "../pages/comment/comment";
+import {PadBdtbPage} from "../pages/pad-bdtb/pad-bdtb";
+import {PadQQPage} from "../pages/pad-qq/pad-qq";
+import {PadTnfbPage} from "../pages/pad-tnfb/pad-tnfb";
+import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
+
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -102,7 +107,11 @@ import {CommentPage} from "../pages/comment/comment";
     CurrentGroupPage,
     CallNamePage,
     PadGroupPage,
-    CommentPage
+    CommentPage,
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage
   ],
   imports: [
     BrowserModule,
@@ -146,7 +155,11 @@ import {CommentPage} from "../pages/comment/comment";
         { component: CurrentGroupPage, name: 'CurrentGroupPage', segment: 'currentGroup' },
         { component: CommentPage, name: 'CommentPage', segment: 'comment' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
-        { component: WaitPage, name: 'WaitPage', segment: 'wait' }
+        { component: WaitPage, name: 'WaitPage', segment: 'wait' },
+        { component: PadBdtbPage, name: 'PadBdtbPage', segment: 'pad-bdtb' },
+        { component: PadQQPage, name: 'PadQQPage', segment: 'pad-qq' },
+        { component: PadTnfbPage, name: 'PadTnfbPage', segment: 'pad-tnfb' },
+        { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' }
       ]
     }),
     IonicStorageModule.forRoot()
@@ -192,7 +205,11 @@ import {CommentPage} from "../pages/comment/comment";
     PadGroupListPage,
     CallNamePage,
     CurrentGroupPage,
-    CommentPage
+    CommentPage,
+    PadBdtbPage,
+    PadQQPage,
+    PadTnfbPage,
+    PadWeiboPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

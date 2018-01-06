@@ -118,15 +118,17 @@ export class IndexPage {
     if(this.socketSubscription)
     this.socketSubscription.unsubscribe()
   }
+  sim_id
   next(){
     console.log('*****************')
-
     console.log(this.selectedProject)
     this.http.start({p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{
 
      if(res['code']=='0'){
+       this.load = true;
+       this.sim_id=res['sim_id']
        this.userData.setProcessJsonData(JSON.parse(res['list'][0]['p_data']))
-       this.navCtrl.push(PadGroupPage,{sim_id:res['sim_id']});
+
      }else{
        this.showToast('bottom','创建演练失败')
      }
@@ -222,7 +224,8 @@ export class IndexPage {
   }
 
   getLoading(){
-    this.load = true;
+
+    this.next();
   }
 
   show(){
@@ -246,8 +249,8 @@ export class IndexPage {
   }
 
   getStart(){
-    this.next();
 
+    this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id});
   }
 
 }

@@ -28,4 +28,8 @@ export class CurrentGroupPage {
     this.box.splice(index, 1);
   }
 
+  back(){
+    window.history.back();
+  }
+
 }

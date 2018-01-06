@@ -5,9 +5,8 @@
     </div>
     <div class="r-list-box" *ngIf="showList">
       <img src="../../assets/img/hide-list-r.png" (click)="groupListHide()"/>
-      <div>三特食品</div>
-      <div>辉发乳业</div>
-      <div>群众</div>
+      <div *ngFor="let s of groupList.GroupId" (click)="onGroupChange(s.id)">{{s.text}}</div>
+
     </div>
   </li>
   <li>

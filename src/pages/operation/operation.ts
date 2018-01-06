@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CommentPage} from "../comment/comment";
 import {CurrentGroupPage} from "../current-group/current-group";
@@ -13,6 +13,7 @@ import {CallNamePage} from "../call-name/call-name";
 export class OperationPage {
   showBtn = false;
   showAnimate=false;
+  @Input() SimId;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -38,14 +39,14 @@ export class OperationPage {
   }
 
   goComment(){
-    this.navCtrl.push(CommentPage);
+    this.navCtrl.push(CommentPage,{sim_id: this.SimId});
   }
 
   goCurrentGroup(){
-    this.navCtrl.push(CurrentGroupPage);
+    this.navCtrl.push(CurrentGroupPage,{sim_id: this.SimId});
   }
 
   goCallName(){
-    this.navCtrl.push(CallNamePage);
+    this.navCtrl.push(CallNamePage,{sim_id: this.SimId});
   }
 }

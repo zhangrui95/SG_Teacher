@@ -11,19 +11,43 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 export class CallNamePage {
   list = [];
   StuIndex;
+  sim_id;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
               public http: ProxyHttpService) {
+      this.sim_id = this.navParams['sim_id'];
   }
 
   ionViewDidLoad() {
+    // const params = {sim_id: this.sim_id}
     const params = {sim_id: '18'}
     this.http.getAllStuList(params).subscribe(res => {
       this.list  = res['stuList'];
     });
   }
+  inRandom=false;
 
+  randomCheck(){
+    if(this.inRandom){
+      return
+    }
+    this.inRandom=true;
+    let times=0;
+    let int=setInterval(()=>{
+      times++
+      if(times<=20){
+        let random=Math.floor(Math.random()*this.list.length)
+        console.log(random)
+        this.StuIndex =random
+
+      }else{
+        clearInterval(int)
+        this.inRandom=false;
+      }
+    },500);
+    // this.StuIndex
+  }
   callStu(i){
     this.StuIndex = i;
   }
@@ -39,7 +63,7 @@ export class CallNamePage {
   showToast(position: string, text: string) {
     let toast = this.toastCtrl.create({
       message: text,
-      duration: 2000,
+      duration: 20000,
       position: position
     });
     toast.present(toast);

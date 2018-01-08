@@ -67,6 +67,8 @@ import {PadTnfbPage} from "../pages/pad-tnfb/pad-tnfb";
 import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
 
 import {GroupIndexPage} from "../pages/group-index/group-index";
+import {PadDanmuPage} from "../pages/pad-danmu/pad-danmu";
+import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -113,7 +115,9 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,
-    PadWeiboPage
+    PadWeiboPage,
+    PadDanmuPage,
+    PadDecisionPage
   ],
   imports: [
     BrowserModule,
@@ -162,7 +166,10 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
         { component: PadBdtbPage, name: 'PadBdtbPage', segment: 'pad-bdtb' },
         { component: PadQQPage, name: 'PadQQPage', segment: 'pad-qq' },
         { component: PadTnfbPage, name: 'PadTnfbPage', segment: 'pad-tnfb' },
-        { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' }
+        { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' },
+        { component: PadDanmuPage, name: 'PadDanmuPage', segment: 'pad-danmu' },
+        { component: PadDecisionPage, name: 'PadDecisionPage', segment: 'pad-decision' }
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -218,7 +225,9 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,
-    PadWeiboPage
+    PadWeiboPage,
+    PadDanmuPage,
+    PadDecisionPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

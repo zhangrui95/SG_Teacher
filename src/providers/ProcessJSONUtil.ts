@@ -155,5 +155,6 @@ export class GroupItem{
   public img;
   public text;
   public type;
+  public num=0;
   public limit;
 }

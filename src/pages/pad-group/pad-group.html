@@ -8,7 +8,7 @@
 <page-operation  *ngIf="showFlag" [SimId]="sim_id"></page-operation>
 <ion-content  (click)="onbActive()">
   <page-group-index *ngIf="false"></page-group-index>
-  <page-grouping></page-grouping>
+  <page-grouping [list]="groupList" ></page-grouping>
 </ion-content>
 <div *ngIf="keyInput" class="input-key-box">
   <input class="input-key" type="text"/>

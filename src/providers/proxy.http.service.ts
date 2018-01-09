@@ -64,7 +64,10 @@ export class ProxyHttpService {
   getCourseListByUid(params?: any) {
     return this._get('/classManagerController/getCourseListByUid.do', params);
   }
-
+  updateExeState(params?: any) {
+    //sim_id
+    return this._get('/tabletController/updateExeState.do', params);
+  }
   getGroupDetail(params?: any) {
     return this._get('/tabletController/getGroInformationList.do', params);
   }
@@ -84,7 +87,9 @@ export class ProxyHttpService {
   initPass(params){
     return this._post("/userstu/initPass.do",params)
   }
-
+  testAddStus(params){
+    return this._get('/tabletController/addStuFroExe.do', params);
+  }
   getAllStuList(params){
     return this._get('/tabletController/getAllStuList.do', params);
   }

@@ -38,14 +38,19 @@ export class RsidebarPage {
       this.onNext.emit("InputShow");
   }
   onGroupChange(gid){
+
     this.onNext.emit({g_id:gid,action:'groupChange'});
   }
-
+  resetTimer(){
+    this.onNext.emit("reset");
+  }
 
   groupListShow(){
+    this.resetTimer()
     this.showList = true;
   }
   groupListHide(){
+    this.resetTimer()
     this.showList = false;
   }
 

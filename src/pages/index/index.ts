@@ -96,7 +96,7 @@ export class IndexPage {
     // console.log('ionViewDidLoad')
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
       this.projectList=resProject['list'];
-      console.log(this.projectList)
+
       this.selectedProject = this.projectList[0].p_id;
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
@@ -119,6 +119,7 @@ export class IndexPage {
     this.socketSubscription.unsubscribe()
   }
   sim_id
+
   next(){
     console.log('*****************')
     console.log(this.selectedProject)
@@ -127,8 +128,10 @@ export class IndexPage {
      if(res['code']=='0'){
        this.load = true;
        this.sim_id=res['sim_id']
-       this.userData.setProcessJsonData(JSON.parse(res['list'][0]['p_data']))
-
+       this.userData.setProcessJsonData(res['list'][0]['p_data'])
+       this.http.testAddStus({sim_id: this.sim_id}).subscribe(res=>{
+         console.log(res)
+       })
      }else{
        this.showToast('bottom','创建演练失败')
      }

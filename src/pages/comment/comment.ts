@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 
-
+import { UUID } from 'angular2-uuid';
 @IonicPage()
 @Component({
   selector: 'page-comment',
@@ -24,8 +24,10 @@ export class CommentPage {
   }
 
   getcomment(){
+    let uuid = UUID.UUID();
+    console.log(uuid)
     // const params = {sim_id: this.sim_id, n_id: '112334134', title: '讨论', content: this.content}
-    const params = {sim_id: '18', n_id: '112334134', title: '讨论', content: this.content}
+    const params = {sim_id: '18', n_id: uuid, title: '讨论', content: this.content}
     this.http.addDiscussion(params).subscribe(res => {
       if(res['code'] == '0'){
         this.showToast('bottom', res['msg']);

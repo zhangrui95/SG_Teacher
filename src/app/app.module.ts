@@ -69,6 +69,7 @@ import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
 import {GroupIndexPage} from "../pages/group-index/group-index";
 import {PadDanmuPage} from "../pages/pad-danmu/pad-danmu";
 import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
+import {PadDefaultPage} from "../pages/pad-default/pad-default";
 import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
 @NgModule({
   declarations: [
@@ -118,6 +119,8 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
     PadTnfbPage,
     PadWeiboPage,
     PadDanmuPage,
+    PadDecisionPage,
+    PadDefaultPage,
     PadDecisionPage,
     CommentDetailPage
   ],
@@ -171,7 +174,8 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
         { component: PadTnfbPage, name: 'PadTnfbPage', segment: 'pad-tnfb' },
         { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' },
         { component: PadDanmuPage, name: 'PadDanmuPage', segment: 'pad-danmu' },
-        { component: PadDecisionPage, name: 'PadDecisionPage', segment: 'pad-decision' }
+        { component: PadDecisionPage, name: 'PadDecisionPage', segment: 'pad-decision' },
+        { component: PadDefaultPage, name: 'PadDefaultPage', segment: 'pad-default' }
 
       ]
     }),
@@ -230,7 +234,9 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
     PadWeiboPage,
     PadDanmuPage,
     PadDecisionPage,
-    CommentDetailPage
+    CommentDetailPage,
+    PadDecisionPage,
+    PadDefaultPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

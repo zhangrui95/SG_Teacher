@@ -14,11 +14,11 @@ export class PadGroupPage {
 
   list = [];
   style = [];
-  jsonData;
+  jsonData:any;
   currNode;
   sim_id = "111";
   keyInput = false;
-
+  sType='default';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
     this.sim_id = navParams.data.sim_id + ""
@@ -31,9 +31,10 @@ export class PadGroupPage {
   //   this.wsReciever.unsubscribe();
   // }
   groupList=new GroupBean;
-  onNext(ev) {
-    console.log(ev)
-    if (ev == 'next') {
+  onNext(ev?) {
+    this.resetTimer()
+
+   if (ev == 'next') {
       let beans = new Array<NextBean>();
       if (this.processJson.isInGroup(this.jsonData)) {
         this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
@@ -46,8 +47,7 @@ export class PadGroupPage {
     } else if (ev == 'screen') {
       this.currNode.n_id = '16'
       let action = {action: 'screen', datas: this.currNode}
-      console.log('screen=========>')
-      console.log(action)
+
       this.getPushScreen(action)
     } else if (ev == 'InputShow'){
       this.keyInput = true;
@@ -111,29 +111,35 @@ export class PadGroupPage {
   }
 
   showFlag = true;
-
+  counter;
   onbActive() {
     if (!this.showFlag) {
       this.showFlag = true;
       this.keyInput = false;
-     setTimeout(() => {
-
-        this.showFlag = false;
-      }, 7000)
-    }else{
 
     }
+    this.resetTimer()
+  }
+  resetTimer(){
+    clearTimeout(this.counter)
+    this.counter= setTimeout(() => {
+      this.showFlag = false;
+      console.log("time up")
+    }, 5000)
   }
 
   ionViewDidLoad() {
-    setTimeout(() => {
+    this.counter= setTimeout(() => {
       this.showFlag = false;
     }, 5000)
     this.userData.getProcessJsonData().then(value => {
-      this.jsonData = value;
+      this.jsonData =JSON.parse(value);
+      console.log('jsonData=================>')
+      console.log(this.jsonData)
      this.groupList= this.processJson.parseGroup(this.jsonData,this.sim_id);
-      console.log('start')
-      this.sendNext({datas: this.processJson.start(this.jsonData, this.sim_id)})
+      let startBean=this.processJson.start(this.jsonData, this.sim_id)
+
+      this.sendNext({datas: startBean})
     })
 
 

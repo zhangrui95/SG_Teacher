@@ -120,7 +120,7 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
     PadWeiboPage,
     PadDanmuPage,
     PadDecisionPage,
-    PadDefaultPage
+    PadDefaultPage,
     PadDecisionPage,
     CommentDetailPage
   ],

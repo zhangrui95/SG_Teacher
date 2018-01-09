@@ -16,6 +16,7 @@ export class ProcessJSONUtil {
 
 
   public parseStart(obj) {
+
     for (let node of obj) {
       if (node == null) {
         continue
@@ -114,6 +115,7 @@ export class ProcessJSONUtil {
 
   public parseGroup(obj,sim_id) {
     let arr = new Array<GroupItem>();
+
     for (let node of obj) {
       if (node == null) {
         continue

@@ -38,7 +38,6 @@ export class GroupingPage implements OnInit{
             console.log('curr========>')
             console.log(curr)
 
-            if(curr.datas['code']=='0'){
               let arr= curr.datas['jsonGroOfStu'];
               for(let g of arr){
                 for(let group of this.list.GroupId){
@@ -47,7 +46,6 @@ export class GroupingPage implements OnInit{
                   }
                 }
               }
-            }
 
             //todo 自由分组 更新分组信息
             break;
@@ -68,30 +66,30 @@ export class GroupingPage implements OnInit{
 
 
   getPushFreeGroListForPhone() {
+    this.groupingBtnEnable=true;
     this.http.getPushFreeGroListForPhone(this.list).subscribe(res => {
       console.log("=======>")
       console.log(res)
     })
   }
-
+  groupingBtnEnable=false
   getRandomGroForStu() {
+    this.groupingBtnEnable=true;
     this.http.getRandomGroForStu(this.list).subscribe(res => {
-      console.log("=======>")
-      console.log(res)
+
       //todo 随机分组 更新分组信息
-      if(res['code']=='0'){
+
+        console.log("=======>")
+        console.log(res)
        let arr= res['jsonGroOfStu'];
        for(let g of arr){
          for(let group of this.list.GroupId){
+           console.log("=======>")
            if(g['g_id']==group.id){
-              group.num=g['u_id'].split(',').length
+              group.num=(g['u_id']+"").split(',').length
            }
          }
        }
-      }
-
-
-
 
     })
   }

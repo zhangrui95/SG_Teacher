@@ -1,5 +1,4 @@
-$color:#404040;
-page-index {
+page-comment-detail {
   .card{
     max-width: 700px;
     margin:12px auto;
@@ -52,7 +51,7 @@ page-index {
     }
   }
   .left-box{
-    width: 35%;
+    width: 15%;
     border-right: 1px solid #848484;
     height: 100%;
     color: #fff;
@@ -63,7 +62,7 @@ page-index {
     }
   }
   .right-box{
-    width: 65%;
+    width: 85%;
     height: 100%;
     color: #fff;
     float: left;
@@ -133,11 +132,13 @@ page-index {
     dt{
       width: 100%;
       text-align: center;
+      position: relative;
       .img-xm{
-        width: 300px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
         border: 2px solid #bbb;
         margin: 0 auto;
+        border-radius: 100px;
       }
       .img-choice-border{
         border: 2px solid #1aa7b8;
@@ -235,5 +236,23 @@ page-index {
     line-height: 40px;
     font-size: 16px;
     display:block;
+  }
+  .num-box{
+    background: #f53d3d;
+    color: #fff;
+    padding:2px 8px;
+    border-radius: 20px;
+    position: absolute;
+    left: 66%;
+    top:7px;
+  }
+  .comment{
+    width: 92%;
+    background: rgba(0,0,0,0.5);
+    border-radius: 3px;
+    color: #fff;
+    margin: 20px auto;
+    padding: 15px;
+    font-size: 18px;
   }
 }

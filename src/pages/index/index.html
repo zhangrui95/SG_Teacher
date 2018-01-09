@@ -53,7 +53,7 @@
   <div class="pad-left left-scroll-box">
     <div class="p-name">{{pName}}</div>
     <div class="p-inr">{{pDescription}}</div>
-    <div class="p-name" style="font-size: 18px;">项目类型：危机演练</div>
+    <div class="p-name" style="font-size: 18px;">项目类型：{{pType}}</div>
     <div class="choice-c" (click)="getChoices()" *ngIf=" CourseName == '' ">选择授课班级和课程</div>
     <div style="overflow: hidden;" *ngIf=" CourseName != '' ">
       <div class="choice-class">{{className}}<img src="assets/img/dui.png" class="dui"/></div>

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CommentPage} from "../comment/comment";
 import {CurrentGroupPage} from "../current-group/current-group";
@@ -14,6 +14,7 @@ export class OperationPage {
   showBtn = false;
   showAnimate=false;
   @Input() SimId;
+  @Output() ev:EventEmitter<any>= new EventEmitter<any>();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -30,11 +31,13 @@ export class OperationPage {
   }
 
   showBg(){
+    this.sendEv()
     this.showAnimate = true;
     this.showBtn = true;
   }
 
   hideBg(){
+    this.sendEv()
     this.showBtn = false;
   }
 
@@ -48,5 +51,9 @@ export class OperationPage {
 
   goCallName(){
     this.navCtrl.push(CallNamePage,{sim_id: this.SimId});
+  }
+
+  sendEv(){
+    this.ev.emit("reset");
   }
 }

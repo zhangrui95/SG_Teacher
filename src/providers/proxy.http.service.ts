@@ -93,6 +93,10 @@ export class ProxyHttpService {
     return this._get('/tabletController/getPushCallStuId.do', params);
   }
 
+  getComment(params){
+    return this._get('/tabletController/getComment.do ', params);
+  }
+
   addDiscussion(params){
     return this._get('/tabletController/addDiscussion.do', params);
   }

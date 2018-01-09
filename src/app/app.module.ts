@@ -69,6 +69,7 @@ import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
 import {GroupIndexPage} from "../pages/group-index/group-index";
 import {PadDanmuPage} from "../pages/pad-danmu/pad-danmu";
 import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
+import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -117,7 +118,8 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
     PadTnfbPage,
     PadWeiboPage,
     PadDanmuPage,
-    PadDecisionPage
+    PadDecisionPage,
+    CommentDetailPage
   ],
   imports: [
     BrowserModule,
@@ -160,6 +162,7 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
         { component: CallNamePage, name: 'CallNamePage', segment: 'callName' },
         { component: CurrentGroupPage, name: 'CurrentGroupPage', segment: 'currentGroup' },
         { component: CommentPage, name: 'CommentPage', segment: 'comment' },
+        { component: CommentDetailPage, name: 'CommentDetailPage', segment: 'commentDetail' },
         { component: GroupIndexPage, name: 'GroupIndexPage', segment: 'comment' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
         { component: WaitPage, name: 'WaitPage', segment: 'wait' },
@@ -220,14 +223,14 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
     PadQQPage,
     PadTnfbPage,
     PadWeiboPage,
-    CommentPage,
     GroupIndexPage,
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,
     PadWeiboPage,
     PadDanmuPage,
-    PadDecisionPage
+    PadDecisionPage,
+    CommentDetailPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

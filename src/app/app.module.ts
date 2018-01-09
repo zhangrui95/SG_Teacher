@@ -67,6 +67,9 @@ import {PadTnfbPage} from "../pages/pad-tnfb/pad-tnfb";
 import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
 
 import {GroupIndexPage} from "../pages/group-index/group-index";
+import {PadDanmuPage} from "../pages/pad-danmu/pad-danmu";
+import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
+import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -113,7 +116,10 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,
-    PadWeiboPage
+    PadWeiboPage,
+    PadDanmuPage,
+    PadDecisionPage,
+    CommentDetailPage
   ],
   imports: [
     BrowserModule,
@@ -156,13 +162,17 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
         { component: CallNamePage, name: 'CallNamePage', segment: 'callName' },
         { component: CurrentGroupPage, name: 'CurrentGroupPage', segment: 'currentGroup' },
         { component: CommentPage, name: 'CommentPage', segment: 'comment' },
+        { component: CommentDetailPage, name: 'CommentDetailPage', segment: 'commentDetail' },
         { component: GroupIndexPage, name: 'GroupIndexPage', segment: 'comment' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
         { component: WaitPage, name: 'WaitPage', segment: 'wait' },
         { component: PadBdtbPage, name: 'PadBdtbPage', segment: 'pad-bdtb' },
         { component: PadQQPage, name: 'PadQQPage', segment: 'pad-qq' },
         { component: PadTnfbPage, name: 'PadTnfbPage', segment: 'pad-tnfb' },
-        { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' }
+        { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' },
+        { component: PadDanmuPage, name: 'PadDanmuPage', segment: 'pad-danmu' },
+        { component: PadDecisionPage, name: 'PadDecisionPage', segment: 'pad-decision' }
+
       ]
     }),
     IonicStorageModule.forRoot()
@@ -213,12 +223,14 @@ import {GroupIndexPage} from "../pages/group-index/group-index";
     PadQQPage,
     PadTnfbPage,
     PadWeiboPage,
-    CommentPage,
     GroupIndexPage,
     PadBdtbPage,
     PadQQPage,
     PadTnfbPage,
-    PadWeiboPage
+    PadWeiboPage,
+    PadDanmuPage,
+    PadDecisionPage,
+    CommentDetailPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

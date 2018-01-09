@@ -10,16 +10,16 @@
       <div class="group-list-box">
         <div class="group-list float-l">
           <div class="float-l head-icon">
-            <img src="{{item.img}}"/>
+            <img src="{{item.g_image}}"/>
           </div>
-          <div class="float-l group-name">{{item.name}}</div>
-          <div class="float-l group-num">{{item.num}}/{{item.num}}</div>
+          <div class="float-l group-name">{{item.g_name}}</div>
+          <div class="float-l group-num">{{num[i]}}/{{item.g_limit}}</div>
         </div>
-        <img src="{{imgShow}}" style="margin-top: 18px;" (click)="showCour(i)" class="float-r"/>
+        <img src="{{item.imgShow}}" style="margin-top: 18px;" (click)="showCour(i)" class="float-r"/>
       </div>
-      <div class="stu-box stu-show">
-        <div class="choice-class" *ngFor="let stu of item.student">
-          {{stu.name}}
+      <div [ngClass]="{'stu-box stu-show':item.show,'stu-box':!item.show}">
+        <div class="choice-class" *ngFor="let stu of item.listStus;let i = index;">
+          {{stu.UserName}}
         </div>
       </div>
     </div>

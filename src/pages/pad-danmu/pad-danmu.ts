@@ -11,11 +11,11 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-pad-tnfb',
-  templateUrl: 'pad-tnfb.html',
+  selector: 'page-pad-danmu',
+  templateUrl: 'pad-danmu.html',
 })
 
-export class PadTnfbPage {
+export class PadDanmuPage {
   items=[
     {
       src:'../../assets/img/user.png',

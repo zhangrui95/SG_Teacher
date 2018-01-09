@@ -47,13 +47,23 @@ export class CurrentGroupPage {
     window.history.back();
   }
   getOk(){
+    let roleName;
+    let roleNum;
     for(let i in this.box){
-      this.roleDatas[i] = {roleName: this.box[i].roleDatas, roleNum:this.box[i].roleNum.toString()}
+      roleName = this.box[i].roleDatas;
+      roleNum = this.box[i].roleNum;
+      this.roleDatas[i] = {roleName: roleName, roleNum: roleNum.toString()}
     }
-    const params = {sim_id: '18', g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
-    this.http.addRoleForGro(params).subscribe(res => {
-      this.showToast('bottom', res['msg']);
-    })
+    if(roleName === ''||roleNum === ''){
+      this.showToast('bottom', '角色名称和人数不能为空');
+    }else if(roleNum <= 0){
+      this.showToast('bottom', '人数最少为1');
+    }else{
+      const params = {sim_id: '18', g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
+      this.http.addRoleForGro(params).subscribe(res => {
+        this.showToast('bottom', res['msg']);
+      });
+    }
   }
 
   showToast(position: string, text: string) {

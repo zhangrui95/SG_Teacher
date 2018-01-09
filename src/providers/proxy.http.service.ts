@@ -94,7 +94,7 @@ export class ProxyHttpService {
   }
 
   getComment(params){
-    return this._get('/tabletController/getComment.do ', params);
+    return this._get('/tabletController/getComment.do', params);
   }
 
   addDiscussion(params){

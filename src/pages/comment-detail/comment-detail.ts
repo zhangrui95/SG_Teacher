@@ -8,7 +8,12 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
   templateUrl: 'comment-detail.html',
 })
 export class CommentDetailPage {
-
+  list;
+  commentList = [];
+  commentNum;
+  StuNum;
+  StuNumList = [];
+  StuIndex = 0;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService) {
   }
 
@@ -17,10 +22,21 @@ export class CommentDetailPage {
   }
 
   getComment(){
-    const params = {sim_id: '18'}
+    const params = {sim_id: '18', n_id:'6'}
     this.http.getComment(params).subscribe(res => {
-      console.log(res)
+      this.list = res['stuList'];
+      this.StuNum = res['stuList'].length;
+      this.commentList = res['stuList'][0].commentList;
+      this.commentNum = this.commentList.length;
+      for(let i in this.list){
+        this.StuNumList.push(res['stuList'][i].commentList.length);
+      }
     });
+  }
+  getStuClick(i){
+    this.commentList = this.list[i].commentList;
+    this.commentNum = this.commentList.length;
+    this.StuIndex = i;
   }
 
 }

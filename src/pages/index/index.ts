@@ -31,6 +31,8 @@ export class IndexPage {
   classIndex;
   className = '';
   CourseName = '';
+  OldclassName = '';
+  OldCourseName = '';
   CourseIndex;
   load = false;
   imgShow = 'assets/img/show.png';
@@ -85,6 +87,8 @@ export class IndexPage {
   selectedProject;
   selectedClass;
   selectedCourse;
+  OldselectedClass;
+  OldselectedCourse;
   projectList;
   classList;
   courseList;
@@ -184,11 +188,19 @@ export class IndexPage {
   }
 
   getChoices(){
+    this.OldclassName = this.className;
+    this.OldCourseName = this.CourseName;
+    this.OldselectedClass = this.selectedClass;
+    this.OldselectedCourse = this.selectedCourse;
     this.projectBrief = false;
     this.choiceClass = true;
   }
 
   backProp(){
+    this.className = this.OldclassName;
+    this.CourseName = this.OldCourseName;
+    this.selectedClass = this.OldselectedClass;
+    this.selectedCourse = this.OldselectedCourse;
     this.projectBrief = true;
     this.choiceClass = false;
   }
@@ -222,12 +234,12 @@ export class IndexPage {
 
       this.CourseName = this.courseList[this.CourseIndex].cour_name;
       this.selectedCourse = this.courseList[this.CourseIndex].cour_id;
-      this.backProp();
+      this.projectBrief = true;
+      this.choiceClass = false;
     }
   }
 
   getLoading(){
-
     this.next();
   }
 

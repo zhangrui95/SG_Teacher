@@ -1,26 +1,25 @@
 <ion-header>
   <ion-navbar  hideBackButton="true" color="dark">
     <ion-title>互动详情</ion-title>
-    <img src="assets/img/user.png" class="head-img" (click)="getUser()"/>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <div class="left-box">
-    <div class="til-box">学生姓名[20]</div>
+    <div class="til-box">学生姓名 [{{StuNum}}] </div>
     <div class="scroll-right-box">
-      <dl>
+      <dl *ngFor="let item of list;let i = index;" (click)="getStuClick(i)">
         <dt>
-          <img src="../../assets/img/img1.png" class="img-xm img-choice-border"/>
-          <span class="num-box">99</span>
+          <img src="../../assets/img/img1.png" class="{{StuIndex === i?'img-xm img-choice-border':'img-xm'}}"/>
+          <span class="num-box">{{StuNumList[i]}}</span>
         </dt>
-        <dd>范菲菲</dd>
+        <dd class="{{StuIndex === i?'word-color':''}}">{{item.UserName}}</dd>
       </dl>
     </div>
   </div>
   <div class="right-box">
-    <div class="til-box pad-left">讨论详情[10]</div>
+    <div class="til-box pad-left">讨论详情 [{{commentNum}}] </div>
     <div>
-     <div class="comment">dsfsdfdsf</div>
+     <div class="comment" *ngFor="let comment of commentList">{{comment.answer}}</div>
     </div>
   </div>
 </ion-content>

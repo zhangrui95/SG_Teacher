@@ -26,6 +26,7 @@ export class IndexPage {
   choiceClass = false;
   pName;
   pDescription;
+  pType;
   check = 0;
   classIndex;
   className = '';
@@ -100,6 +101,7 @@ export class IndexPage {
       this.selectedProject = this.projectList[0].p_id;
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
+      this.pType = this.projectList[0].p_type;
       this.http.getCourseListByUid({pi:'1',ps:'9999',key:''}).subscribe(resCourse=>{
         this.courseList=resCourse['list'];
         this.http.classList({pi:'1',ps:'9999',key:''}).subscribe(resClass=>{
@@ -196,6 +198,7 @@ export class IndexPage {
     this.selectedProject = this.projectList[i].p_id;
     this.pName = this.projectList[i].p_name;
     this.pDescription = this.projectList[i].p_description;
+    this.pType = this.projectList[i].p_type;
   }
 
   getClass(i){

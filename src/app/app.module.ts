@@ -69,6 +69,7 @@ import {PadWeiboPage} from "../pages/pad-weibo/pad-weibo";
 import {GroupIndexPage} from "../pages/group-index/group-index";
 import {PadDanmuPage} from "../pages/pad-danmu/pad-danmu";
 import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
+import {PadDefaultPage} from "../pages/pad-default/pad-default";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -117,7 +118,8 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
     PadTnfbPage,
     PadWeiboPage,
     PadDanmuPage,
-    PadDecisionPage
+    PadDecisionPage,
+    PadDefaultPage
   ],
   imports: [
     BrowserModule,
@@ -168,7 +170,8 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
         { component: PadTnfbPage, name: 'PadTnfbPage', segment: 'pad-tnfb' },
         { component: PadWeiboPage, name: 'PadWeiboPage', segment: 'pad-weibo' },
         { component: PadDanmuPage, name: 'PadDanmuPage', segment: 'pad-danmu' },
-        { component: PadDecisionPage, name: 'PadDecisionPage', segment: 'pad-decision' }
+        { component: PadDecisionPage, name: 'PadDecisionPage', segment: 'pad-decision' },
+        { component: PadDefaultPage, name: 'PadDefaultPage', segment: 'pad-default' }
 
       ]
     }),
@@ -227,7 +230,8 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
     PadTnfbPage,
     PadWeiboPage,
     PadDanmuPage,
-    PadDecisionPage
+    PadDecisionPage,
+    PadDefaultPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

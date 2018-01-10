@@ -30,10 +30,8 @@ export class PadGroupListPage {
     this.http.getGroupDetail(params).subscribe(res => {
       for (let i in res){
         this.num.push(res[i].listStus.length);
-        res[i].show = false;
-        res[0].show = true;
-        res[i].imgShow = 'assets/img/show.png';
-        res[0].imgShow = 'assets/img/hide.png';
+        res[i].show = true;
+        res[i].imgShow = 'assets/img/hide.png';
       }
       this.list = res;
     })

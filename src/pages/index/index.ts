@@ -36,9 +36,9 @@ export class IndexPage {
   CourseIndex;
   load = false;
   imgShow = 'assets/img/hide.png';
-  imgShows = 'assets/img/show.png';
+  imgShows = 'assets/img/hide.png';
   ShowOrHide = false;
-  ShowCourse = true;
+  ShowCourse = false;
   private registerBackEvent: Function
   registerBackButton
 

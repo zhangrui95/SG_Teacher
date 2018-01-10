@@ -31,7 +31,9 @@ export class PadGroupListPage {
       for (let i in res){
         this.num.push(res[i].listStus.length);
         res[i].show = false;
+        res[0].show = true;
         res[i].imgShow = 'assets/img/show.png';
+        res[0].imgShow = 'assets/img/hide.png';
       }
       this.list = res;
     })

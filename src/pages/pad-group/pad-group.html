@@ -7,13 +7,13 @@
 <page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList" ></page-rsidebar>
 <page-operation (ev)="onNext($event)" *ngIf="showFlag" [SimId]="sim_id"></page-operation>
 <ion-content  (click)="onbActive()">
-  <page-group-index *ngIf="sType=='default'"></page-group-index>
+  <page-group-index [s_data]="currScence"*ngIf="sType=='default'"></page-group-index>
   <page-grouping [list]="groupList"  *ngIf="sType=='group'"></page-grouping>
-  <page-pad-qq  *ngIf="sType=='qq'"></page-pad-qq>
-  <page-pad-tnfb  *ngIf="sType=='storm'"></page-pad-tnfb>
-  <page-pad-weibo  *ngIf="sType=='weibo'"></page-pad-weibo>
-  <page-pad-bdtb  *ngIf="sType=='baidu'"></page-pad-bdtb>
-  <page-pad-decision  *ngIf="sType=='fork'"></page-pad-decision>
+  <page-pad-qq   [s_data]="currScence" *ngIf="sType=='qq'"></page-pad-qq>
+  <page-pad-tnfb   [s_data]="currScence"*ngIf="sType=='storm'"></page-pad-tnfb>
+  <page-pad-weibo   [s_data]="currScence"*ngIf="sType=='weibo'"></page-pad-weibo>
+  <page-pad-bdtb   [s_data]="currScence"*ngIf="sType=='baidu'"></page-pad-bdtb>
+  <page-pad-decision   [s_data]="currScence"*ngIf="sType=='fork'"></page-pad-decision>
 </ion-content>
 <div *ngIf="keyInput" class="input-key-box">
   <input class="input-key" type="text"/>

@@ -65,6 +65,9 @@ export class PadGroupPage {
   }
 
   getSelectScence() {
+    if(this.currNode&& this.currNode.length==1){
+      return this.currNode[0]
+    }
     for (let s of this.currNode) {
       console.log(s.g_id)
       console.log(this.currGid)
@@ -203,6 +206,7 @@ export class PadGroupPage {
         this.currNode =listScenes
 
         this.processJson.setCurrNode(this.currNode)
+        this.currScence = this.getSelectScence();
       })
 
 

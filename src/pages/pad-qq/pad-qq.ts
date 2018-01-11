@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 /**
@@ -64,7 +64,8 @@ items=[
   }
 
 ]
-
+  @Input()
+  s_data :any=new Object();
   constructor(public navCtrl: NavController,
               public navParams: NavParams) {
 

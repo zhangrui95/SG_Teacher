@@ -203,6 +203,7 @@ export class PadGroupPage {
         this.currNode =listScenes
 
         this.processJson.setCurrNode(this.currNode)
+        this.currScence = this.getSelectScence();
       })
 
 

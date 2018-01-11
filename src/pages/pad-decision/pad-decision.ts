@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UsersPage} from "../users/users";
 
@@ -8,7 +8,8 @@ import {UsersPage} from "../users/users";
   templateUrl: 'pad-decision.html',
 })
 export class PadDecisionPage {
-
+  @Input()
+  s_data :any=new Object();
   issue = '若你作为辉发乳业（集团）股份有限公司的决策者，关注到网贴后该如何决策？';
   options = [
     {id:'0',option:'A', text:'公开调查帖子内容的真实性'},

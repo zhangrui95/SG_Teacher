@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
@@ -8,7 +8,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'group-index.html',
 })
 export class GroupIndexPage {
-
+  @Input()
+  s_data :any=new Object();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

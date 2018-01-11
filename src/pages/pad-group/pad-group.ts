@@ -31,21 +31,42 @@ export class PadGroupPage {
   //   this.wsReciever.unsubscribe();
   // }
   groupList = new GroupBean;
+  isGrouped = false;
 
   onNext(ev?) {
     this.resetTimer()
 
     if (ev == 'next') {
       let beans = new Array<NextBean>();
+
+      if (!this.isGrouped) {
+        console.log(this.currScence)
+        if (this.currScence) {
+          for (let o of this.jsonData) {
+            console.log(this.currScence)
+            if (o.id == this.currScence.n_id) {
+              if (o.type == 'grouping') {
+                this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
+                console.log(this.groupList)
+                this.sType = "group"
+                this.isGrouped = true;
+                return;
+              }
+            }
+          }
+        }
+      }
+
       if (this.processJson.isInGroup(this.jsonData)) {
         // this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
 
-        beans = this.processJson.parseGroupingNext(this.sim_id,this.jsonData)
+        beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
         this.sendNext({type: 'grouping', datas: beans})
       } else {
         beans = this.processJson.parseNext(this.sim_id)
         this.sendNext({type: "", datas: beans})
       }
+
     } else if (ev == 'screen') {
       let action
       for (let s of this.currNode) {
@@ -65,7 +86,7 @@ export class PadGroupPage {
   }
 
   getSelectScence() {
-    if(this.currNode&& this.currNode.length==1){
+    if (this.currNode && this.currNode.length == 1) {
       return this.currNode[0]
     }
     for (let s of this.currNode) {
@@ -77,7 +98,7 @@ export class PadGroupPage {
     }
   }
 
-  currGid='-1';
+  currGid = '-1';
 
   free() {
     this.getPushFreeGroListForPhone(this.processJson.parseGroup(this.jsonData, this.sim_id))
@@ -107,9 +128,10 @@ export class PadGroupPage {
 
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
-      console.log("=======>")
-      if(params.type=='grouping'){
-        this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
+
+
+      if (params.type == 'grouping') {
+
         if (this.groupList && this.groupList.GroupId && this.groupList.GroupId.length > 0) {
           this.currGid = this.groupList.GroupId[0].id
         }
@@ -119,6 +141,7 @@ export class PadGroupPage {
 
       this.processJson.setCurrNode(this.currNode)
       this.currScence = this.getSelectScence();
+
       console.log(this.currScence)
       //tieba QQ weibo brain bullet select web
       if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
@@ -141,6 +164,7 @@ export class PadGroupPage {
       } else {
         this.sType = 'default';
       }
+
       // this.processJson.setCurrNode("");
     })
   }
@@ -199,11 +223,15 @@ export class PadGroupPage {
 
       let startBean = this.processJson.start(this.jsonData, this.sim_id)
       console.log(startBean)
-      this.http.getScence({n_id:startBean[0].curr_n_id}).subscribe(res=>{
+      this.http.getScence({n_id: startBean[0].curr_n_id}).subscribe(res => {
         console.log(res)
-        let listScenes=new Array()
-        listScenes.push({g_id:startBean[0].g_id,n_id:startBean[0].curr_n_id,s_data:JSON.parse(res['list'][0]["s_data"])})
-        this.currNode =listScenes
+        let listScenes = new Array()
+        listScenes.push({
+          g_id: startBean[0].g_id,
+          n_id: startBean[0].curr_n_id,
+          s_data: JSON.parse(res['list'][0]["s_data"])
+        })
+        this.currNode = listScenes
 
         this.processJson.setCurrNode(this.currNode)
         this.currScence = this.getSelectScence();

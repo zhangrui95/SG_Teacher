@@ -82,7 +82,8 @@ export class ProcessJSONUtil {
       for(let o of obj){
         if(o.id==node.n_id){
           for(let nid of o.node_id){
-            bean.next_n_id.push(nid);
+            bean.next_n_id.push({g_id:this.findNodeById(obj,nid).group_id,n_id:nid});
+
           }
         }
       }

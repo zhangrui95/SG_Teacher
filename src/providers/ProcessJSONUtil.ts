@@ -48,33 +48,70 @@ export class ProcessJSONUtil {
 
 
   public isInGroup(obj) {
+    console.log('isInGroup=========================>')
+    console.log(this.currNodes)
+    for(let node of obj){
 
-    if (this.currNodes.length == 1) {
-      let nextid = this.currNodes[0].node_id;
-      let nextNode = this.findNodeById(obj, nextid);
-      if (nextNode.group_id != "-1" && nextNode.group_id != "-2") {
-        return true
+      if(this.currNodes&&this.currNodes.length>0){
+          if(node.id==this.currNodes[0].n_id){
+
+            if(node.type=='grouping'){
+              console.log(node)
+
+              return true;
+            }
+          }
       }
     }
+
     return false;
   }
 
   public setCurrNode(currNode) {
     this.currNodes = currNode
   }
+
+  public parseGroupingNext(sim_id,obj):Array<NextBean>{
+    let arr=new Array <NextBean>()
+
+    for(let node of this.currNodes){
+      console.log("***========>")
+      console.log(node)
+      let bean =new NextBean();
+      bean.sim_id=sim_id;
+      for(let o of obj){
+        if(o.id==node.n_id){
+          for(let nid of o.node_id){
+            bean.next_n_id.push(nid);
+          }
+        }
+      }
+
+      bean.type=node.type;
+
+      bean.curr_n_id=node.n_id;
+      bean.g_id=node.g_id;
+      bean.n_name=node.s_data.name;
+      console.log(bean)
+      arr.push(bean)
+    }
+    return arr;
+  }
   public parseNext(sim_id):Array<NextBean>{
     let arr=new Array <NextBean>()
 
     for(let node of this.currNodes){
+      console.log("***========>")
+      console.log(node)
+
       let bean =new NextBean();
       bean.sim_id=sim_id;
       bean.type=node.type;
-      if(node.node_id&&node.node_id.length>0){
-        bean.n_id=node.node_id[0];
-      }
-      bean.curr_n_id=node.id;
-      bean.g_id=node.group_id;
-      bean.n_name=node.text;
+
+      bean.curr_n_id=node.n_id;
+      bean.g_id=node.g_id;
+      bean.n_name=node.s_data.name;
+      console.log(bean)
       arr.push(bean)
     }
     return arr;
@@ -132,7 +169,6 @@ export class ProcessJSONUtil {
     }
     let bean =new GroupBean();
     bean.sim_id=sim_id;
-    bean.sim_id=18;
     bean.GroupId=arr;
     console.log(bean)
     return bean;
@@ -142,6 +178,7 @@ export class ProcessJSONUtil {
 export class NextBean {
   public sim_id;
   public g_id;
+  public next_n_id=new Array();
   public n_id;
   public n_name;
   public type;

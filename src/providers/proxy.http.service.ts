@@ -90,6 +90,9 @@ export class ProxyHttpService {
   testAddStus(params){
     return this._get('/tabletController/addStuFroExe.do', params);
   }
+  getScence(params){
+    return this._get('/phoneAppController/getScenesById.do', params);
+  }
   getAllStuList(params){
     return this._get('/tabletController/getAllStuList.do', params);
   }

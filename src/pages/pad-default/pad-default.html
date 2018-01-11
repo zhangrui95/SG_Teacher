@@ -8,5 +8,34 @@
 </ion-header>
 
 <ion-content padding>
-
+  <div *ngIf="name=='tieba'">
+    <div
+      style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: 65px 0px 0px 90px;width: 80%;height: auto;">
+      <div
+        style="background-color: white;border-radius: 0.5em;height:53px;width:53px;margin: 25px 0px 5px 25px; display:inline-block;">
+        <img src="../../assets/img/bdtb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
+      </div>
+      <div style="margin: -5px 0px 0px 30px;">
+        <h2 style="color:white;float: left;margin: -40px 0px 0px 70px;">贴吧圣诞舞会</h2>
+      </div>
+      <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
+      <h4 style="color:white;margin: 15px 10px 25px 30px;display: inline-block;">
+        贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了</h4>
+    </div>
+  </div>
+  <div *ngIf="name=='weibo'">
+    <div
+      style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: 65px 0px 0px 90px;width: 80%;height: auto;">
+      <div
+        style="background-color: white;border-radius: 0.5em;height:53px;width:53px;margin: 25px 0px 5px 25px; display:inline-block;">
+        <img src="../../assets/img/xlwb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
+      </div>
+      <div style="margin: -5px 0px 0px 30px;">
+        <h2 style="color:white;float: left;margin: -40px 0px 0px 70px;">贴吧圣诞舞会</h2>
+      </div>
+      <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
+      <h4 style="color:white;margin: 15px 10px 25px 30px;display: inline-block;">
+        贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了</h4>
+    </div>
+  </div>
 </ion-content>

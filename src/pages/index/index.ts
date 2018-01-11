@@ -103,6 +103,9 @@ export class IndexPage {
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
       this.loading = false;
       this.projectList=resProject['list'];
+      if(!this.projectList||this.projectList.length==0){
+        return
+      }
       this.selectedProject = this.projectList[0].p_id;
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
@@ -211,10 +214,13 @@ export class IndexPage {
 
   getClickProject(i){
     this.check = i;
-    this.selectedProject = this.projectList[i].p_id;
-    this.pName = this.projectList[i].p_name;
-    this.pDescription = this.projectList[i].p_description;
-    this.pType = this.projectList[i].p_type;
+    if(this.projectList[i]){
+      this.selectedProject = this.projectList[i].p_id;
+      this.pName = this.projectList[i].p_name;
+      this.pDescription = this.projectList[i].p_description;
+      this.pType = this.projectList[i].p_type;
+    }
+
   }
 
   getClass(i){

@@ -7,39 +7,12 @@
 
 
 <ion-content padding>
-  <!--<ion-list>-->
-    <!--<ion-item>-->
-      <!--<ion-label>项目列表</ion-label>-->
-      <!--<ion-select [(ngModel)]="selectedProject">-->
-        <!--<ion-option value="{{project.p_id}}" *ngFor="let project of projectList">{{project.p_name}}</ion-option>-->
-
-      <!--</ion-select>-->
-    <!--</ion-item>-->
-    <!--<ion-item>-->
-      <!--<ion-label>班级列表</ion-label>-->
-      <!--<ion-select [(ngModel)]="selectedClass">-->
-        <!--<ion-option value="{{class.cla_id}}" *ngFor="let class of classList">{{class.cla_name}}</ion-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
-    <!--<ion-item>-->
-      <!--<ion-label>项目课程列表</ion-label>-->
-      <!--<ion-select [(ngModel)]="selectedCourse">-->
-        <!--<ion-option value="{{course.cour_id}}" *ngFor="let course of courseList">{{course.cour_name}}</ion-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
-    <!--<ion-item>-->
-      <!--<button ion-button (click)="next()"> 下一步</button>-->
-    <!--</ion-item>-->
-  <!--</ion-list>-->
   <div class="left-box">
     <div class="til-box">选择演练项目</div>
     <div class="scroll-right-box">
-      <!--<dl>-->
-        <!--<dt>-->
-          <!--<img src="../../assets/img/bjt.png" class="img-xm img-choice-border"/>-->
-        <!--</dt>-->
-        <!--<dd>1111</dd>-->
-      <!--</dl>-->
+      <div class="load-box" *ngIf="loading">
+        <img class="float-l" src="../../assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
+      </div>
       <dl *ngFor="let project of projectList;let i = index;" (click)="getClickProject(i)">
         <dt>
           <img src="{{project.p_image}}" class="{{i==check?'img-xm img-choice-border':'img-xm'}}"/>

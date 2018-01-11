@@ -35,10 +35,10 @@ export class IndexPage {
   OldCourseName = '';
   CourseIndex;
   load = false;
-  imgShow = 'assets/img/show.png';
-  imgShows = 'assets/img/show.png';
-  ShowOrHide = true;
-  ShowCourse = true;
+  imgShow = 'assets/img/hide.png';
+  imgShows = 'assets/img/hide.png';
+  ShowOrHide = false;
+  ShowCourse = false;
   private registerBackEvent: Function
   registerBackButton
 
@@ -92,6 +92,7 @@ export class IndexPage {
   projectList;
   classList;
   courseList;
+  loading = true;
 
 
   private socketSubscription: Subscription
@@ -100,8 +101,8 @@ export class IndexPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad')
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
+      this.loading = false;
       this.projectList=resProject['list'];
-
       this.selectedProject = this.projectList[0].p_id;
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;

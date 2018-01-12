@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {UserData} from "../../providers/user-data";
@@ -19,7 +19,7 @@ export class PadGroupPage {
   sim_id = "111";
   keyInput = false;
   sType = 'default';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
+  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
     this.sim_id = navParams.data.sim_id + ""
   }
@@ -33,10 +33,23 @@ export class PadGroupPage {
   groupList = new GroupBean;
   isGrouped = false;
 
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+    toast.present(toast);
+  }
+
   onNext(ev?) {
     this.resetTimer()
 
     if (ev == 'next') {
+      if (!this.grouped) {
+        this.showToast("bottom", '请先选择分组类型')
+        return;
+      }
       let beans = new Array<NextBean>();
 
       if (!this.isGrouped) {
@@ -50,6 +63,7 @@ export class PadGroupPage {
                 console.log(this.groupList)
                 this.sType = "group"
                 this.isGrouped = true;
+                this.grouped = false;
                 return;
               }
             }
@@ -59,9 +73,13 @@ export class PadGroupPage {
 
       if (this.processJson.isInGroup(this.jsonData)) {
         // this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
+        let f = confirm("是否确定结束分组并进入下一步？");
+        if (f) {
+          beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
+          this.sendNext({type: 'grouping', datas: beans})
+          return;
+        }
 
-        beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-        this.sendNext({type: 'grouping', datas: beans})
       } else {
         beans = this.processJson.parseNext(this.sim_id)
         this.sendNext({type: "", datas: beans})
@@ -81,18 +99,52 @@ export class PadGroupPage {
     } else if (ev.g_id) {
       this.currGid = ev.g_id
       this.currScence = this.getSelectScence();
+      console.log(this.currScence )
+      if (this.currScence) {
+        if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
+          this.sType = 'baidu';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_QQ') != -1) {
+          this.sType = 'qq';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_weibo') != -1) {
+          this.sType = 'weibo';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
+          this.sType = 'storm';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_bullet') != -1) {
+          this.sType = 'danmu';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
+          this.sType = 'fork';
+        } else {
+          this.sType = 'default';
+        }
+      } else {
+        this.sType = 'empty';
+      }
       console.log(ev.g_id)
+    } else if (ev == "grouped") {
+      this.grouped = true;
     }
   }
+
+  grouped = true;
 
   getSelectScence() {
     if (this.currNode && this.currNode.length == 1) {
       return this.currNode[0]
     }
     for (let s of this.currNode) {
+
       console.log(s.g_id)
       console.log(this.currGid)
+
       if (s.g_id == this.currGid) {
+        if (s.s_data.length == 0) {
+          return null
+        }
         return s
       }
     }
@@ -125,7 +177,9 @@ export class PadGroupPage {
   }
 
   currScence;
-
+  addStart(params){
+    this.http.addExercisesStep(params).subscribe(res => {console.log(res)})
+  }
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
 
@@ -144,27 +198,32 @@ export class PadGroupPage {
 
       console.log(this.currScence)
       //tieba QQ weibo brain bullet select web
-      if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
-        this.sType = 'baidu';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
-      }
-      else if (JSON.stringify(this.currScence).indexOf('SG_QQ') != -1) {
-        this.sType = 'qq';
-      }
-      else if (JSON.stringify(this.currScence).indexOf('SG_weibo') != -1) {
-        this.sType = 'weibo';
-      }
-      else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
-        this.sType = 'storm';
-      }
-      else if (JSON.stringify(this.currScence).indexOf('SG_bullet') != -1) {
-        this.sType = 'danmu';
-      }
-      else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
-        this.sType = 'fork';
-      } else {
-        this.sType = 'default';
-      }
+      if (this.currScence) {
 
+
+        if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
+          this.sType = 'baidu';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_QQ') != -1) {
+          this.sType = 'qq';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_weibo') != -1) {
+          this.sType = 'weibo';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
+          this.sType = 'storm';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_bullet') != -1) {
+          this.sType = 'danmu';
+        }
+        else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
+          this.sType = 'fork';
+        } else {
+          this.sType = 'default';
+        }
+      } else {
+        this.sType = 'empty';
+      }
       // this.processJson.setCurrNode("");
     })
   }
@@ -235,6 +294,8 @@ export class PadGroupPage {
 
         this.processJson.setCurrNode(this.currNode)
         this.currScence = this.getSelectScence();
+        let beans = this.processJson.getSendStart(this.sim_id)
+        this.addStart({type: "start", datas: beans})
       })
 
 
@@ -253,7 +314,7 @@ export class PadGroupPage {
             //todo 自由分组 更新分组信息
             break;
           case 'pad_process_upadte':
-            this.currNode = curr
+            // this.currNode = curr
             break
         }
 

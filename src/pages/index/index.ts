@@ -139,9 +139,9 @@ export class IndexPage {
        this.load = true;
        this.sim_id=res['sim_id']
        this.userData.setProcessJsonData(res['list'][0]['p_data'])
-       this.http.testAddStus({sim_id: this.sim_id}).subscribe(res=>{
-         console.log(res)
-       })
+       // this.http.testAddStus({sim_id: this.sim_id}).subscribe(res=>{
+       //   console.log(res)
+       // })
      }else{
        this.showToast('bottom','创建演练失败')
      }

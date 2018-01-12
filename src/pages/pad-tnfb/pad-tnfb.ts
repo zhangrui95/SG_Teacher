@@ -18,6 +18,8 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 export class PadTnfbPage {
   @Input()
   s_data :any=new Object();
+  @Input()
+  sim_id :any=new Object();
   items=[
     {
       src:'../../assets/img/user.png',

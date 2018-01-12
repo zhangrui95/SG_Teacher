@@ -66,6 +66,8 @@ items=[
 ]
   @Input()
   s_data :any=new Object();
+  @Input()
+  sim_id :any=new Object();
   constructor(public navCtrl: NavController,
               public navParams: NavParams) {
 

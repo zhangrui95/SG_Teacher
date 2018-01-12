@@ -98,6 +98,25 @@ export class ProcessJSONUtil {
     }
     return arr;
   }
+  getSendStart(sim_id){
+    let arr=new Array <NextBean>()
+
+    for(let node of this.currNodes){
+      console.log("***========>")
+      console.log(node)
+
+      let bean =new NextBean();
+      bean.sim_id=sim_id;
+      bean.type=node.type;
+
+      bean.curr_n_id=node.n_id;
+      bean.g_id=node.g_id;
+      bean.n_name=node.s_data.name;
+      console.log(bean)
+      arr.push(bean)
+    }
+    return arr;
+  }
   public parseNext(sim_id):Array<NextBean>{
     let arr=new Array <NextBean>()
 

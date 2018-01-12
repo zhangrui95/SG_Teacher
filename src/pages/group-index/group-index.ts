@@ -10,6 +10,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class GroupIndexPage {
   @Input()
   s_data :any=new Object();
+  @Input()
+  sim_id :any=new Object();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

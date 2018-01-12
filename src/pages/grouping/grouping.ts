@@ -16,9 +16,11 @@ export class GroupingPage implements OnInit{
     console.log(this.list)
   }
 
-
+  @Input()
+  sim_id =new Object()
   @Input()
   list =new GroupBean()
+
   @Output()
     onGrouped=new EventEmitter();
   receiver;

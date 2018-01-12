@@ -22,6 +22,8 @@ export class PadBdtbPage implements OnInit{
   }
   @Input()
   s_data :any=new Object();
+  @Input()
+  sim_id :any=new Object();
 items=[
   {
     src:'../../assets/img/user.png',

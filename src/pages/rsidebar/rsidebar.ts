@@ -39,6 +39,7 @@ export class RsidebarPage {
   }
   onGroupChange(gid){
 
+    this.showList = false;
     this.onNext.emit({g_id:gid,action:'groupChange'});
   }
   resetTimer(){

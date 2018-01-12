@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 
 /**
@@ -15,7 +15,11 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
   templateUrl: 'pad-bdtb.html',
 })
 
-export class PadBdtbPage {
+export class PadBdtbPage implements OnInit{
+  ngOnInit(): void {
+    console.log("*s_data=>>>>>>>>>>>>>>>>>>")
+    console.log(this.s_data)
+  }
   @Input()
   s_data :any=new Object();
 items=[

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GroupBean} from "../../providers/ProcessJSONUtil";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -19,6 +19,8 @@ export class GroupingPage implements OnInit{
 
   @Input()
   list =new GroupBean()
+  @Output()
+    onGrouped=new EventEmitter();
   receiver;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService,public ws:ServerSocket) {
     this.ws.connect()
@@ -70,13 +72,15 @@ export class GroupingPage implements OnInit{
     this.http.getPushFreeGroListForPhone(this.list).subscribe(res => {
       console.log("=======>")
       console.log(res)
+
+      this.onGrouped.emit("grouped");
     })
   }
   groupingBtnEnable=false
   getRandomGroForStu() {
     this.groupingBtnEnable=true;
     this.http.getRandomGroForStu(this.list).subscribe(res => {
-
+      this.onGrouped.emit("grouped");
       //todo 随机分组 更新分组信息
 
         console.log("=======>")

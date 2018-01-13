@@ -141,7 +141,7 @@ export class IndexPage {
       if(resClass['list'] == ''){
         this.classText = '暂无班级'
       }else{
-        this.classText = ''
+        this.classText = '';
         this.classList=resClass['list'];
         this.className = this.classList[this.classIndex].cla_name;
         this.selectedClass= this.classList[this.classIndex].cla_id;
@@ -230,10 +230,10 @@ export class IndexPage {
 
   getChoices(){
     this.getclassList()
-    // this.OldclassName = this.className;
-    // this.OldCourseName = this.CourseName;
-    // this.OldselectedClass = this.selectedClass;
-    // this.OldselectedCourse = this.selectedCourse;
+    this.OldclassName = this.className;
+    this.OldCourseName = this.CourseName;
+    this.OldselectedClass = this.selectedClass;
+    this.OldselectedCourse = this.selectedCourse;
     this.projectBrief = false;
     this.choiceClass = true;
   }

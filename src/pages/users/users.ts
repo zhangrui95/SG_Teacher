@@ -79,7 +79,7 @@ export class UsersPage {
 
 
       if(!url||url.length==0){
-        this.avatar = "assets/img/header.png";
+        this.avatar = "assets/img/head1.jpg";
       }else{
         this.avatar=url;
       }

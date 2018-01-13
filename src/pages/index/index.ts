@@ -264,7 +264,6 @@ export class IndexPage {
     this.courseList=new Array()
     this.className="";
     this.CourseName="";
-    // this.selectedProject = this.projectList[i].p_id;
     if(this.projectList[i]){
 
       this.selectedProject = this.projectList[i].p_id;
@@ -282,6 +281,7 @@ export class IndexPage {
     this.className = this.classList[i].cla_name;
     this.selectedClass = this.classList[this.classIndex]. cla_id;
     this.Course_loading = true;
+    this.CourseIndex = 0;
     this.getCourseList();
   }
 

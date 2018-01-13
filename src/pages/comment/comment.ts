@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 
 import { UUID } from 'angular2-uuid';
+import {UserData} from "../../providers/user-data";
 @IonicPage()
 @Component({
   selector: 'page-comment',
@@ -11,8 +12,10 @@ import { UUID } from 'angular2-uuid';
 export class CommentPage {
   content;
   sim_id;
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public http: ProxyHttpService) {
-    this.sim_id = this.navParams['sim_id'];
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController, public navParams: NavParams, public http: ProxyHttpService,public userData:UserData) {
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+    })
   }
 
   ionViewDidLoad() {
@@ -27,7 +30,7 @@ export class CommentPage {
     let uuid = UUID.UUID();
     console.log(uuid)
     // const params = {sim_id: this.sim_id, n_id: '112334134', title: '讨论', content: this.content}
-    const params = {sim_id: '18', n_id: uuid, title: '讨论', content: this.content}
+    const params = {sim_id: this.sim_id, n_id: uuid, title: '讨论', content: this.content}
     this.http.addDiscussion(params).subscribe(res => {
       if(res['code'] == '0'){
         this.showToast('bottom', res['msg']);

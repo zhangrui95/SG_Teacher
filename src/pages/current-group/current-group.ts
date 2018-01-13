@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , ToastController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 
 
 @IonicPage()
@@ -11,14 +12,18 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 export class CurrentGroupPage {
   list;
   PIndex;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public http: ProxyHttpService) {
+  sim_id;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public http: ProxyHttpService,public userData:UserData) {
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+    })
   }
   box = [{roleDatas:'', roleNum:''}];
   num = [];
   roleDatas = [];
 
   ionViewDidLoad() {
-    const params = {sim_id: '18'}
+    const params = {sim_id:this.sim_id}
     this.http.getGroupDetail(params).subscribe(res => {
       console.log(res);
       this.list = res;
@@ -59,7 +64,7 @@ export class CurrentGroupPage {
     }else if(roleNum <= 0){
       this.showToast('bottom', '人数最少为1');
     }else{
-      const params = {sim_id: '18', g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
+      const params = {sim_id: this.sim_id, g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
       this.http.addRoleForGro(params).subscribe(res => {
         this.showToast('bottom', res['msg']);
       });

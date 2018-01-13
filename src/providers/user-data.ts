@@ -50,6 +50,7 @@ export class UserData {
     // this.storage.set(this.HAS_LOGGED_IN, true);
     this.setUsername(username);
     this.setUserID(userID)
+
     this.setAvatar(url)
     this.setPhone(phone);
     this.events.publish('user:signup');
@@ -104,6 +105,15 @@ export class UserData {
 
   getToken(): Promise<string> {
     return this.storage.get('token').then((value) => {
+      return value;
+    });
+  };
+  setSimid(token: string): void {
+    this.storage.set('simid', token);
+  };
+
+  getSimid(): Promise<string> {
+    return this.storage.get('simid').then((value) => {
       return value;
     });
   };

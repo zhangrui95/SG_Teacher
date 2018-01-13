@@ -22,6 +22,10 @@ export class PadGroupPage {
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
     this.sim_id = navParams.data.sim_id + ""
+
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+    })
   }
 
   wsReciever
@@ -310,7 +314,20 @@ export class PadGroupPage {
         console.log(curr)
         switch (action) {
           case 'phone_insert_group':
+            let arr= curr.list;
 
+
+
+
+            for(let g of arr){
+              for(let group of  this.groupList.GroupId){
+                if(g['g_id']==group.id){
+                  // group.num=g['u_id'].split(',').length
+                  group.num=g['StuTotal']
+                  // alert(   group.num)
+                }
+              }
+            }
             //todo 自由分组 更新分组信息
             break;
           case 'pad_process_upadte':

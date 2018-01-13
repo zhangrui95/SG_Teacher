@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GroupBean} from "../../providers/ProcessJSONUtil";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -10,10 +10,45 @@ import {ServerSocket} from "../../providers/ws.service";
   selector: 'page-grouping',
   templateUrl: 'grouping.html',
 })
-export class GroupingPage implements OnInit{
+export class GroupingPage implements OnInit,OnDestroy{
+  ngOnDestroy(): void {
+    this.receiver.unsubscribe()
+  }
+
   ngOnInit() {
+    this.ws.connect()
     console.log("grouping====================>")
     console.log(this.list)
+    if (this.ws.messages) {
+      this.receiver = this.ws.messages.subscribe(msg => {
+        let curr = JSON.parse(msg);
+        let action = curr.action
+        switch (action) {
+          case 'phone_insert_group':
+            console.log('curr========>')
+            console.log(curr)
+            //StuTotal
+            let arr= curr.list;
+            for(let g of arr){
+              console.log(g)
+              for(let group of this.list.GroupId){
+                console.log(group)
+                console.log(group.id)
+                console.log(g['g_id'])
+                if(g['g_id']==group.id){
+                  // group.num=g['u_id'].split(',').length
+                  group.num=g['StuTotal']
+                  alert(   group.num)
+                }
+              }
+            }
+
+            //todo 自由分组 更新分组信息
+            break;
+        }
+
+      })
+    }
   }
 
   @Input()
@@ -25,7 +60,7 @@ export class GroupingPage implements OnInit{
     onGrouped=new EventEmitter();
   receiver;
   constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService,public ws:ServerSocket) {
-    this.ws.connect()
+
 
   }
 
@@ -33,33 +68,10 @@ export class GroupingPage implements OnInit{
   ionViewDidLoad() {
 
 
-    if (this.ws.messages) {
-      this.receiver = this.ws.messages.subscribe(msg => {
-        let curr = JSON.parse(msg);
-        let action = curr.action
-        switch (action) {
-          case 'phone_insert_group':
-            console.log('curr========>')
-            console.log(curr)
 
-              let arr= curr.datas['jsonGroOfStu'];
-              for(let g of arr){
-                for(let group of this.list.GroupId){
-                  if(g['g_id']==group.id){
-                    group.num=g['u_id'].split(',').length
-                  }
-                }
-              }
-
-            //todo 自由分组 更新分组信息
-            break;
-        }
-
-      })
-    }
   }
   ionViewDidLeave(){
-    this.receiver.unsubscribe()
+
   }
 
 

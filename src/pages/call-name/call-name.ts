@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 
 
 @IonicPage()
@@ -15,13 +16,16 @@ export class CallNamePage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
-              public http: ProxyHttpService) {
-      this.sim_id = this.navParams['sim_id'];
+              public http: ProxyHttpService,
+              public userData:UserData) {
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+    })
   }
 
   ionViewDidLoad() {
     // const params = {sim_id: this.sim_id}
-    const params = {sim_id: '18'}
+    const params = {sim_id: this.userData}
     this.http.getAllStuList(params).subscribe(res => {
       this.list  = res['stuList'];
     });

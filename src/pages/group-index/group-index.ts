@@ -9,7 +9,7 @@ import {Subscription} from "rxjs/Subscription";
   selector: 'page-group-index',
   templateUrl: 'group-index.html',
 })
-export class GroupIndexPage implements OnInit,OnDestroy{
+export class GroupIndexPage implements OnInit, OnDestroy {
   @Input()
   s_data: any = new Object();
   @Input()
@@ -28,22 +28,43 @@ export class GroupIndexPage implements OnInit,OnDestroy{
     console.log(this.s_data.s_data.componentList)
     this.datas = this.s_data.s_data.componentList;
     this.ws.connect();
-    if(this.ws.messages){
+    if (this.ws.messages) {
       console.log(this.ws.messages)
-      this.ws.messages.subscribe(res=>{
+      this.ws.messages.subscribe(res => {
         console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         console.log(res)
         //{"action":"push_content_start","content":"11111"}
       })
     }
+    let txtValues = new Array();
+    let title;
+    let content;
+    for (let com of  this.s_data.s_data.componentList) {
+      let name = com.name;
+      if (name == 'txt') {
+        txtValues.push(com.data.text)
+
+      }
+
+    }
+    if (txtValues.length == 2) {
+      if (txtValues[0].length >txtValues[1].length) {
+        title = txtValues[1]
+        content = txtValues[0]
+      } else {
+        content = txtValues[1]
+        title = txtValues[0]
+      }
+
+    }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams ,public ws: ServerSocket) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket) {
   }
 
   getData() {
@@ -56,6 +77,7 @@ export class GroupIndexPage implements OnInit,OnDestroy{
   ionViewDidLoad() {
     console.log('ionViewDidLoad GroupIndexPage');
   }
+
   // ionViewDidEnter() {
   //   if (this.ws.messages) {
   //     this.socketSubscription = this.ws.messages.subscribe((message: string) => {

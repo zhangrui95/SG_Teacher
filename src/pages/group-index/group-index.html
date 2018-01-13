@@ -1,35 +1,37 @@
 <!--<div class="center" >-->
-  <!--<div class="img-box">-->
-    <!--<img src=""/>-->
-  <!--</div>-->
-  <!--<div class="tile-img">-->
-    <!--2017食品汞中毒事件-->
-  <!--</div>-->
-  <!--<div class="words">-->
-    <!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
-    <!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
-    <!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
-    <!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
-  <!--</div>-->
+<!--<div class="img-box">-->
+<!--<img src=""/>-->
+<!--</div>-->
+<!--<div class="tile-img">-->
+<!--2017食品汞中毒事件-->
+<!--</div>-->
+<!--<div class="words">-->
+<!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
+<!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
+<!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
+<!--kjdhfsa  jdsaljf fdsafh fjj fdsk  fkdsaklfjj fkks lllldsa dsao.-->
+<!--</div>-->
 <!--</div>-->
 
-<div class="center" *ngFor="let items of datas;let n=index">
-  <div class="img-box">
+<div class="center">
+  <div class="img-box" *ngFor="let items of datas;">
     <div *ngIf="items.name=='img'">
       <!--<img src="{{items.data.src}}" style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>-->
-      <img src="../assets/img/add.png" style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>
+      <img src="../assets/img/add.png"
+           style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>
     </div>
     <div *ngIf="items.name=='video'">
       <!--<v src=""/>-->
       <video>
-        <source src="{{items.data.src}}" type='video/mp4' style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}">
+        <source src="{{items.data.src}}" type='video/mp4'
+                style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}">
       </video>
     </div>
   </div>
-  <div class="tile-img">
-    <span style="color: white;font-size: xx-large;"  *ngIf="items.name=='txt'">{{items.data.text}}</span>
-  </div>
-  <div class="words">
-    <span style="color: white;font-size: larger;"  *ngIf="items.name=='txt'">{{items.data.text}}</span>
-  </div>
+    <div class="tile-img">
+      <span style="color: white;font-size: xx-large;" >{{title}}</span>
+    </div>
+    <div class="words">
+      <span style="color: white;font-size: larger;" >{{content}}</span>
+    </div>
 </div>

@@ -57,6 +57,9 @@ export class GroupIndexPage implements OnInit, OnDestroy {
       }
 
     }
+
+    this.title=title;
+    this.content=content;
   }
 
   ngOnDestroy() {

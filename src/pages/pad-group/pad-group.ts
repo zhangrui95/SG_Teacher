@@ -137,7 +137,7 @@ export class PadGroupPage {
       this.grouped = true;
     }else  if(ev=='detail'){
       if(this.sType = "group"){
-        this.navCtrl.push(PadGroupListPage,{sim_id:this.sim_id,n_id:this.curr_nid})
+        this.navCtrl.push(PadGroupListPage)
       }else{
         if (this.sType =='weibo'||
           this.sType =='danmu'||
@@ -145,7 +145,7 @@ export class PadGroupPage {
           this.sType =='qq'||
           this.sType =='baidu'
         ) {
-          this.navCtrl.push(CommentDetailPage,{sim_id:this.sim_id,n_id:this.curr_nid})
+          this.navCtrl.push(CommentDetailPage,{n_id:this.curr_nid})
         }
 
 

@@ -1,28 +1,65 @@
-<ion-content >
-  <div ion-fixed
-    style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: 65px 0px 0px 90px;width: 80%;height: auto;">
-    <div
-      style="background-color: white;border-radius: 0.5em;height:53px;width:53px;margin: 25px 0px 5px 25px; display:inline-block;">
-      <img src="../../assets/img/bdtb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
+<ion-content>
+  <div #topBox ion-fixed class="top_box">
+    <div class="div_img">
+      <img src="../../assets/img/bdtb.png"/>
     </div>
-    <div style="margin: -5px 0px 0px 30px;">
-      <h2 style="color:white;float: left;margin: -40px 0px 0px 70px;">贴吧圣诞舞会</h2>
+    <div class="div_title">
+      <span>{{title}}</span>
     </div>
     <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
-    <h4 style="color:white;margin: 15px 10px 25px 30px;display: inline-block;">
-    {{s_data.name}}</h4>
-  </div>
-  <div *ngFor="let item of items">
-    <div>
-    <img src="{{item.src}}" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-    <h3 style="color:white; margin:-73px 0px 25px 185px; ">{{item.name}}</h3><br>
-    <h5 style="color: white;margin: -30px 0px 25px 185px;">{{item.time}}</h5>
-    <div style="width: 85%">
-      <h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">
-        {{item.nr}}
-      </h5>
+    <p #nr class="p_content">
+      {{content}}</p>
+    <div #show class="ss">
+      <img src="../../assets/img/z_mo.png"/>
+      <span (click)="show_div()">全部展开</span>
     </div>
-    <hr style="border-top: 1px dashed white;width: 80%;margin: 50px 0px 15px 95px" />
+    <div #hide class="ss" style="display: none">
+      <img src="../../assets/img/z_mo.png" style="transform:rotate(-180deg)"/>
+      <span (click)="hide_div()">收起</span>
+    </div>
+  </div>
+  <div #list>
+    <!--<div *ngFor="let item of items;let n=index">-->
+      <!--<div style="margin-left: 20px;">-->
+        <!--<img style=" height: 50px;width: 50px;float: left;margin-top: 20px;" [src]="item.ImagePath">-->
+        <!--<div style="float: left;margin: 15px 0px 0px 15px;">-->
+          <!--<span style="color:white">{{item.UserName}}</span>-->
+          <!--<br/><span style="color:#d8d8d8">第{{n+1}}楼 | {{item.createtime}}</span>-->
+        <!--</div>-->
+        <!--<span style="margin: 65px 0px 0px -175px;float: left;color: #d8d8d8;">{{item.answer}}</span>-->
+      <!--</div>-->
+      <!--<hr style="border-top: 1px dashed #929292;width: 100%;margin: 30px 0px 10px 0px;float: left;" />-->
+    <!--</div>-->
+
+
+
+    <!--<div *ngFor="let item of items">-->
+      <!--<div>-->
+        <!--<img [src]="item.src" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>-->
+        <!--<h3 style="color:white; margin:-73px 0px 25px 185px; ">{{item.name}}</h3><br>-->
+        <!--<h5 style="color: white;margin: -30px 0px 25px 185px;">{{item.time}}</h5>-->
+        <!--<div style="width: 85%">-->
+          <!--<h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">-->
+            <!--{{item.nr}}-->
+          <!--</h5>-->
+        <!--</div>-->
+        <!--<hr style="border-top: 1px dashed white;width: 80%;margin: 50px 0px 15px 95px"/>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <div *ngFor="let item of items;let n=index">
+      <div>
+        <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
+        <h3 style="color:white; margin:-73px 0px 25px 185px; ">{{item.UserName}}</h3><br>
+        <h5 style="color: white;margin: -30px 0px 25px 185px;">第{{n+1}}楼 | {{item.createtime}}</h5>
+        <div style="width: 85%">
+          <h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">
+            {{item.answer}}
+          </h5>
+        </div>
+        <hr style="border-top: 1px dashed white;width: 80%;margin: 50px 0px 15px 95px"/>
+      </div>
     </div>
   </div>
 </ion-content>

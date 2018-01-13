@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {UsersPage} from "../users/users";
 
@@ -7,11 +7,22 @@ import {UsersPage} from "../users/users";
   selector: 'page-pad-decision',
   templateUrl: 'pad-decision.html',
 })
-export class PadDecisionPage {
+export class PadDecisionPage implements OnInit {
+  ngOnInit() {
+    console.log("grouping====================>")
+    console.log(this.s_data.s_data.componentList[0].data.fillData)
+    this.getData();
+  }
+
   @Input()
   s_data :any=new Object();
   @Input()
   sim_id :any=new Object();
+  datas: any;
+  title;
+  content;
+
+
   issue = '若你作为辉发乳业（集团）股份有限公司的决策者，关注到网贴后该如何决策？';
   options = [
     {id:'0',option:'A', text:'公开调查帖子内容的真实性'},
@@ -20,7 +31,8 @@ export class PadDecisionPage {
   ]
   Id;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams) {
   }
 
   getForm(item){
@@ -33,5 +45,14 @@ export class PadDecisionPage {
 
   vote(){
     console.log(this.Id);
+  }
+  getData() {
+    this.datas = this.s_data.s_data.componentList[0].data.fillData;
+    this.title = this.datas.title;
+    this.content = this.datas.content;
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad BaidutbPage');
   }
 }

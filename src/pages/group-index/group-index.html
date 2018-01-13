@@ -16,9 +16,9 @@
 <div class="center">
   <div class="img-box" *ngFor="let items of datas;">
     <div *ngIf="items.name=='img'">
-      <!--<img src="{{items.data.src}}" style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>-->
-      <img src="../assets/img/add.png"
-           style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>
+      <img src="{{items.data.src}}" style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>
+      <!--<img src="../assets/img/add.png"-->
+           <!--style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>-->
     </div>
     <div *ngIf="items.name=='video'">
       <!--<v src=""/>-->

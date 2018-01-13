@@ -24,6 +24,9 @@ export class PadTnfbPage implements OnInit, AfterViewInit {
   @ViewChild('show') show: ElementRef;
   @ViewChild('hide') hide: ElementRef;
   @ViewChild('nr') nr: ElementRef;
+  @ViewChild('show_hide') show_hide: ElementRef;
+  @ViewChild('hr_hid') hr_hid: ElementRef;
+
 
   ngOnInit() {
     console.log("grouping====================>")
@@ -32,6 +35,8 @@ export class PadTnfbPage implements OnInit, AfterViewInit {
     this.g_id=this.s_data.g_id;
     this.getData();
     this.getAnswerOfStuList();
+
+
   }
 
   @Input()
@@ -79,6 +84,15 @@ export class PadTnfbPage implements OnInit, AfterViewInit {
     this.datas = this.s_data.s_data.componentList[0].data.fillData;
     this.title = this.datas.title;
     this.content = this.datas.content;
+    if(this.content==""){
+      this.show_hide.nativeElement.style.display = 'none';
+      this.hr_hid.nativeElement.style.display = 'none';
+
+    }
+    else {
+      this.show_hide.nativeElement.style.display = 'block';
+      this.hr_hid.nativeElement.style.display = 'block';
+    }
   }
 
   getAnswerOfStuList() {

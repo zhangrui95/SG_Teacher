@@ -1,10 +1,14 @@
 <ion-content padding>
-  <div style="margin: 40px 0px 0px 75px;">
-  <div style="color: white">{{issue}}</div>
+  <div style="margin: 40px 10% 0px 15%;">
+  <div style="color: white;font-size:large;margin:100px 0px 20px 0px;">{{title}}</div>
+    <!--<div style="color: white;font-size:large;margin:100px 0px 20px 0px;">{{issue}}</div>-->
   <!--<form class="form-box">-->
-    <label *ngFor="let item of options" (change)="getForm(item)">
-      <input type="radio" name="choice" /><span class="option">{{item.option}}</span><span class="word">{{item.text}}</span>
+    <label style="font-size:larger;color:white;margin-bottom:20px; display:-webkit-box;" *ngFor="let item of select;let n = index" (change)="getForm(item)">
+      <input type="radio" name="choice" /><span class="word">{{item.value}}</span><br>
     </label>
+    <!--<label *ngFor="let item of options" style="font-size:larger;color:white;margin-bottom:20px; display:-webkit-box;">-->
+      <!--<input type="radio" name="choice" /><span class="option">{{item.option}}</span><span class="word">{{item.text}}</span><br>-->
+    <!--</label>-->
   <!--</form>-->
   <!--<div padding class="mar-btn">-->
     <!--<button ion-button type="submit" block (click)="vote()">确认投票</button>-->

@@ -17,7 +17,8 @@ export class GroupIndexPage implements OnInit, OnDestroy {
   datas;
   n_id;
   g_id;
-
+  name;
+src;
   title;
   content;
   txt_length;
@@ -36,14 +37,20 @@ export class GroupIndexPage implements OnInit, OnDestroy {
         //{"action":"push_content_start","content":"11111"}
       })
     }
+
     let txtValues = new Array();
     let title;
     let content;
     for (let com of  this.s_data.s_data.componentList) {
       let name = com.name;
+
       if (name == 'txt') {
         txtValues.push(com.data.text)
 
+      }
+      else {
+        this.name=name;
+        this.src=com.data.src;
       }
 
     }

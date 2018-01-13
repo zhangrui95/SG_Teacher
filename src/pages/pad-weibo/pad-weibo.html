@@ -6,16 +6,18 @@
     <div class="div_title">
       <span>{{title}}</span>
     </div>
-    <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
+    <hr #hr_hid style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
     <p #nr class="p_content">
       {{content}}</p>
-    <div #show class="ss">
-      <img src="../../assets/img/z_mo.png"/>
-      <span (click)="show_div()">全部展开</span>
-    </div>
-    <div #hide class="ss" style="display: none">
-      <img src="../../assets/img/z_mo.png" style="transform:rotate(-180deg)"/>
-      <span (click)="hide_div()">收起</span>
+    <div #show_hide>
+      <div #show class="ss">
+        <img src="../../assets/img/z_mo.png"/>
+        <span (click)="show_div()">全部展开</span>
+      </div>
+      <div #hide class="ss" style="display: none">
+        <img src="../../assets/img/z_mo.png" style="transform:rotate(-180deg)"/>
+        <span (click)="hide_div()">收起</span>
+      </div>
     </div>
   </div>
   <div #list>

@@ -141,7 +141,7 @@ export class IndexPage {
       if(resClass['list'] == ''){
         this.classText = '暂无班级'
       }else{
-        this.classText = ''
+        this.classText = '';
         this.classList=resClass['list'];
         this.className = this.classList[this.classIndex].cla_name;
         this.selectedClass= this.classList[this.classIndex].cla_id;
@@ -230,10 +230,10 @@ export class IndexPage {
 
   getChoices(){
     this.getclassList()
-    // this.OldclassName = this.className;
-    // this.OldCourseName = this.CourseName;
-    // this.OldselectedClass = this.selectedClass;
-    // this.OldselectedCourse = this.selectedCourse;
+    this.OldclassName = this.className;
+    this.OldCourseName = this.CourseName;
+    this.OldselectedClass = this.selectedClass;
+    this.OldselectedCourse = this.selectedCourse;
     this.projectBrief = false;
     this.choiceClass = true;
   }
@@ -264,7 +264,6 @@ export class IndexPage {
     this.courseList=new Array()
     this.className="";
     this.CourseName="";
-    // this.selectedProject = this.projectList[i].p_id;
     if(this.projectList[i]){
 
       this.selectedProject = this.projectList[i].p_id;
@@ -282,6 +281,7 @@ export class IndexPage {
     this.className = this.classList[i].cla_name;
     this.selectedClass = this.classList[this.classIndex]. cla_id;
     this.Course_loading = true;
+    this.CourseIndex = 0;
     this.getCourseList();
   }
 

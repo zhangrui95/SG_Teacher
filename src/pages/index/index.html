@@ -27,8 +27,8 @@
     <div class="p-name">{{pName}}</div>
     <div class="p-inr">{{pDescription}}</div>
     <div class="p-name" style="font-size: 18px;">项目类型：{{pType}}</div>
-    <div class="choice-c" (click)="getChoices()" *ngIf=" CourseName == '' ">选择授课班级和课程</div>
-    <div style="overflow: hidden;" *ngIf=" CourseName != '' ">
+    <div class="choice-c" (click)="getChoices()" *ngIf="btnShowChoice">选择授课班级和课程</div>
+    <div style="overflow: hidden;" *ngIf="nextBtnShowChoice">
       <div class="choice-class">{{className}}<img src="assets/img/dui.png" class="dui"/></div>
       <div class="choice-class">{{CourseName}}<img src="assets/img/dui.png" class="dui"/></div>
       <div class="choice-class choice-btn" (click)="getChoices()">重新选择</div>
@@ -48,6 +48,10 @@
         <div class="float-l choice-news-box" *ngIf=" className != '' ">{{className}}</div>
         <img src="{{imgShow}}" style="margin-top: 18px;" class="float-r" (click)="show()"/>
       </div>
+      <div class="load-box" *ngIf="Class_loading">
+        <img class="float-l" src="../../assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
+      </div>
+      <div class="nodate-text">{{classText}}</div>
       <div class="{{ShowOrHide?'showAll':'hideAll'}}">
         <div *ngFor="let class of classList;let i = index;" (click)="getClass(i)" class="{{i==classIndex?'choice-class':'choice-class bor-white'}}">
           {{class.cla_name}}
@@ -60,6 +64,10 @@
         <div class="float-l choice-news-box" *ngIf=" CourseName != '' ">{{CourseName}}</div>
         <img src="{{imgShows}}" style="margin-top: 18px;" (click)="showCour()" class="float-r"/>
       </div>
+      <div class="load-box" *ngIf="Course_loading">
+        <img class="float-l" src="../../assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
+      </div>
+      <div class="nodate-text">{{CourseText}}</div>
       <div class="{{ShowCourse?'showAll':'hideAll'}}">
         <div class="{{i == CourseIndex?'choice-class':'choice-class bor-white'}}" *ngFor="let course of courseList;let i = index;" (click)="getCourse(i)">
           {{course.cour_name}}

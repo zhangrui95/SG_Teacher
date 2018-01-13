@@ -23,6 +23,7 @@ export class PadGroupPage {
   keyInput = false;
   content;
   n_id;
+  userId;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
@@ -30,6 +31,7 @@ export class PadGroupPage {
     this.userData.getSimid().then(val=>{
       this.sim_id=val;
     })
+    this.userData.getUserID().then(value => this.userId=value)
     this.n_id = this.navParams.get('n_id');
   }
 
@@ -365,14 +367,9 @@ export class PadGroupPage {
   }
 
   getcomment(){
-    const params = {sim_id: this.sim_id, n_id: this.curr_nid.nid, title: '讨论', content: this.content}
-    this.http.addDiscussion(params).subscribe(res => {
-      if(res['code'] == '0'){
-        this.showToast('bottom', res['msg']);
-        this.content = '';
-      }else{
-        this.showToast('bottom', res['msg']);
-      }
+    const params = {sim_id: this.sim_id,g_id: this.currGid,u_id: this.userId, n_id: this.curr_nid.nid, answer: this.content}
+    this.http.addStuAnswer(params).subscribe(res => {
+      console.log(res)
     });
   }
 

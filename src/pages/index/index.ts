@@ -28,12 +28,12 @@ export class IndexPage {
   pDescription;
   pType;
   check = 0;
-  classIndex;
+  classIndex = 0;
   className = '';
   CourseName = '';
   OldclassName = '';
   OldCourseName = '';
-  CourseIndex;
+  CourseIndex = 0;
   load = false;
   imgShow = 'assets/img/hide.png';
   imgShows = 'assets/img/hide.png';
@@ -93,6 +93,13 @@ export class IndexPage {
   classList;
   courseList;
   loading = true;
+  Class_loading = false;
+  Course_loading = false;
+  sim_id;
+  btnShowChoice = true;
+  nextBtnShowChoice = false;
+  classText = '';
+  CourseText= '';
 
 
   private socketSubscription: Subscription
@@ -100,23 +107,7 @@ export class IndexPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad')
-    this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
-      this.loading = false;
-      this.projectList=resProject['list'];
-      if(!this.projectList||this.projectList.length==0){
-        return
-      }
-      this.selectedProject = this.projectList[0].p_id;
-      this.pName = this.projectList[0].p_name;
-      this.pDescription = this.projectList[0].p_description;
-      this.pType = this.projectList[0].p_type;
-      this.http.getCourseListByUid({pi:'1',ps:'9999',key:''}).subscribe(resCourse=>{
-        this.courseList=resCourse['list'];
-        this.http.classList({pi:'1',ps:'9999',key:''}).subscribe(resClass=>{
-          this.classList=resClass['list'];
-        })
-      })
-    })
+   this.getProjectList();
     if(this.ws.messages){
       this.socketSubscription = this.ws.messages.subscribe((message: string) => {
         console.log('received message from server11111: ', message)
@@ -128,7 +119,48 @@ export class IndexPage {
     if(this.socketSubscription)
     this.socketSubscription.unsubscribe()
   }
-  sim_id
+
+  getProjectList(){
+    this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
+      this.loading = false;
+      this.projectList=resProject['list'];
+      if(!this.projectList||this.projectList.length==0){
+        return
+      }
+      this.selectedProject = this.projectList[0].p_id;
+      this.pName = this.projectList[0].p_name;
+      this.pDescription = this.projectList[0].p_description;
+      this.pType = this.projectList[0].p_type;
+      this.getclassList();
+    })
+  }
+
+  getclassList(){
+    this.http.classList({pi:'1',ps:'9999',key:'',p_id: this.selectedProject}).subscribe(resClass=>{
+      this.Class_loading = false;
+      if(resClass['list'] == ''){
+        this.classText = '暂无班级'
+      }else{
+        this.classText = ''
+        this.classList=resClass['list'];
+        this.className = this.classList[this.classIndex].cla_name;
+        this.getCourseList();
+      }
+    })
+  }
+
+  getCourseList(){
+    this.http.getCourseListByUid({pi:'1',ps:'9999',key:'',cla_id: this.selectedClass,p_id: this.selectedProject}).subscribe(resCourse=>{
+      this.Course_loading = false;
+      if(resCourse['list'] == ''){
+        this.CourseText= '暂无课程';
+      }else{
+        this.CourseText= '';
+        this.courseList=resCourse['list'];
+        this.CourseName = this.courseList[this.CourseIndex].cour_name;
+      }
+    })
+  }
 
   next(){
     console.log('*****************')
@@ -215,6 +247,17 @@ export class IndexPage {
 
   getClickProject(i){
     this.check = i;
+    this.Class_loading = true;
+    this.getclassList();
+    this.btnShowChoice = true;
+    this.nextBtnShowChoice = false;
+    this.classIndex = 0;
+    this.CourseIndex = 0;
+    this.selectedClass = '';
+    this.selectedCourse = '';
+    this.classText = '';
+    this.CourseText = '';
+    // this.selectedProject = this.projectList[i].p_id;
     if(this.projectList[i]){
       this.selectedProject = this.projectList[i].p_id;
       this.pName = this.projectList[i].p_name;
@@ -227,11 +270,15 @@ export class IndexPage {
   getClass(i){
     this.classIndex = i;
     this.className = this.classList[i].cla_name;
+    this.selectedClass = this.classList[this.classIndex]. cla_id;
+    this.Course_loading = true;
+    this.getCourseList();
   }
 
   getCourse(i){
     this.CourseIndex = i;
     this.CourseName = this.courseList[i].cour_name;
+    this.selectedCourse = this.courseList[this.CourseIndex].cour_id;
   }
 
   getChoose(){
@@ -242,11 +289,12 @@ export class IndexPage {
     }else{
       this.className = this.classList[this.classIndex].cla_name;
       this.selectedClass = this.classList[this.classIndex]. cla_id;
-
       this.CourseName = this.courseList[this.CourseIndex].cour_name;
       this.selectedCourse = this.courseList[this.CourseIndex].cour_id;
       this.projectBrief = true;
       this.choiceClass = false;
+      this.btnShowChoice = false;
+      this.nextBtnShowChoice = true;
     }
   }
 
@@ -279,7 +327,6 @@ export class IndexPage {
   }
 
   getStart(){
-
     this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id});
   }
 

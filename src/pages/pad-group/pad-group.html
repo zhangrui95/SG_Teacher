@@ -17,6 +17,6 @@
   <page-pad-decision  [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='fork'"></page-pad-decision>
 </ion-content>
 <div *ngIf="keyInput" class="input-key-box">
-  <input class="input-key" type="text"/>
-  <button class="send">发 送</button>
+  <input class="input-key" type="text" [(ngModel)]="content"/>
+  <button class="send" (click)="getcomment()">发 送</button>
 </div>

@@ -21,14 +21,16 @@ export class PadGroupPage {
   sim_id = "111";
   curr_nid={nid:""};
   keyInput = false;
+  content;
+  n_id;
   sType = 'default';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
     this.sim_id = navParams.data.sim_id + ""
-
     this.userData.getSimid().then(val=>{
       this.sim_id=val;
     })
+    this.n_id = this.navParams.get('n_id');
   }
 
   wsReciever
@@ -358,6 +360,18 @@ export class PadGroupPage {
       })
     }
 
+  }
+
+  getcomment(){
+    const params = {sim_id: this.sim_id, n_id: this.n_id, title: '讨论', content: this.content}
+    this.http.addDiscussion(params).subscribe(res => {
+      if(res['code'] == '0'){
+        this.showToast('bottom', res['msg']);
+        this.content = '';
+      }else{
+        this.showToast('bottom', res['msg']);
+      }
+    });
   }
 
 }

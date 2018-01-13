@@ -4,6 +4,7 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 
 import { UUID } from 'angular2-uuid';
 import {UserData} from "../../providers/user-data";
+// import { UUID } from 'angular2-uuid';
 @IonicPage()
 @Component({
   selector: 'page-comment',

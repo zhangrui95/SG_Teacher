@@ -1,22 +1,13 @@
-<ion-header>
-
-  <ion-navbar color="dark">
-    <ion-title>课堂演练</ion-title>
-    <img src="assets/img/user.png" class="head-img head-top" (click)="getUser()"/>
-  </ion-navbar>
-
-</ion-header>
-
 <ion-content padding>
   <div style="margin: 40px 0px 0px 75px;">
   <div style="color: white">{{issue}}</div>
-  <form class="form-box">
+  <!--<form class="form-box">-->
     <label *ngFor="let item of options" (change)="getForm(item)">
       <input type="radio" name="choice" /><span class="option">{{item.option}}</span><span class="word">{{item.text}}</span>
     </label>
-  </form>
-  <div padding class="mar-btn">
-    <button ion-button type="submit" block (click)="vote()">确认投票</button>
-  </div>
+  <!--</form>-->
+  <!--<div padding class="mar-btn">-->
+    <!--<button ion-button type="submit" block (click)="vote()">确认投票</button>-->
+  <!--</div>-->
   </div>
 </ion-content>

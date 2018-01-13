@@ -1,51 +1,53 @@
-<ion-header>
-  <ion-navbar color="dark">
-    <ion-title>QQ群</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content class="cards-bg social-cards">
-  <div ion-fixed
-       style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: 65px 0px 0px 90px;width: 80%;height: auto;">
-    <div
-      style="background-color: white;border-radius: 0.5em;height:53px;width:53px;margin: 25px 0px 5px 25px; display:inline-block;">
+  <div #topBox ion-fixed class="top_box">
+    <div class="div_img">
       <img src="../../assets/img/qqun.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
     </div>
-    <div style="margin: -5px 0px 0px 30px;">
-      <h2 style="color:white;float: left;margin: -40px 0px 0px 70px;">贴吧圣诞舞会</h2>
+    <div class="div_title">
+      <span>{{title}}</span>
     </div>
     <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
-    <h4 style="color:white;margin: 15px 10px 25px 30px;display: inline-block;">
-      贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了！贴吧圣诞舞蹈大会开始征集了</h4>
-  </div>
-  <div *ngFor="let item of items">
-    <div *ngIf="item.name!='阿呆'" style="float: left">
-      <div style="">
-        <img src="{{item.src}}" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-        <h3 style="color:white; margin:-70px 0px 25px 175px">{{item.name}}</h3>
-      </div>
-      <div
-        style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: -5px 0px 0px 170px;width: 43%;height: auto;float: left">
-        <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.nr}}</h5>
-      </div>
+    <p #nr class="p_content">
+      {{content}}</p>
+    <div #show class="ss">
+      <img src="../../assets/img/z_mo.png"/>
+      <span (click)="show_div()">全部展开</span>
     </div>
-    <div *ngIf="item.name=='阿呆'" style="float: right">
-      <div style="">
-        <img src="{{item.src}}" style="margin:10px 125px 0px 0px;width: 80px;height: 80px;float: right;"/>
-        <h3 style="color:white; margin:25px 8px 25px 0px;float: right">{{item.name}}</h3>
-      </div>
-      <div>
-        <div
-          style="background-color: black;background: rgba(0,0,0,0.5);float: right;border-radius: 1em;margin: 70px -50px 0px 0px;width: 43%;height: auto;">
-          <h5 style="color:#d8d8d8;margin: 15px 25px 15px 25px;display: inline-block;">{{item.nr}}</h5>
+    <div #hide class="ss" style="display: none">
+      <img src="../../assets/img/z_mo.png" style="transform:rotate(-180deg)"/>
+      <span (click)="hide_div()">收起</span>
+    </div>
+  </div>
+  <div #list>
+    <div *ngFor="let item of items">
+      <!--<div *ngIf="item.UserName!=name" style="float: left">-->
+        <div style="">
+          <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
+          <h3 style="color:white; margin:-70px 0px 25px 175px">{{item.UserName}}</h3>
         </div>
         <div
-          style="background-color: #1aa7b8;border-radius: 2em;margin: 10px 370px 0px 0px;width: 27%;background: rgba(26, 167, 184, 0.5);float: right;">
-          <h5 style="color:white;margin: 7px 0px 7px 15px;display: inline-block;">
-            15秒之内可撤销此消息&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:white ">撤销</a>
-          </h5>
+          style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: -5px 0px 0px 170px;width: 43%;height: auto;float: left">
+          <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>
         </div>
-      </div>
+      <!--</div>-->
+      <!--<div *ngIf="item.UserName==name" style="float: right">-->
+        <!--<div style="">-->
+          <!--<img [src]="item.ImagePath" style="margin:10px 125px 0px 0px;width: 80px;height: 80px;float: right;"/>-->
+          <!--<h3 style="color:white; margin:25px 8px 25px 0px;float: right">{{item.UserName}}</h3>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<div-->
+            <!--style="background-color: black;background: rgba(0,0,0,0.5);float: right;border-radius: 1em;margin: 70px -50px 0px 0px;width: 43%;height: auto;">-->
+            <!--<h5 style="color:#d8d8d8;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>-->
+          <!--</div>-->
+          <!--<div-->
+            <!--style="background-color: #1aa7b8;border-radius: 2em;margin: 10px 370px 0px 0px;width: 27%;background: rgba(26, 167, 184, 0.5);float: right;">-->
+            <!--<h5 style="color:white;margin: 7px 0px 7px 15px;display: inline-block;">-->
+              <!--15秒之内可撤销此消息&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:white ">撤销</a>-->
+            <!--</h5>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
     </div>
   </div>
 </ion-content>

@@ -2,8 +2,63 @@ page-pad-tnfb {
   .border-left{
     border-left: 1px solid #404040;
   }
-  .scroll-content{
-    margin-top:300px !important;
+  //.scroll-content{
+  //  margin-top:300px !important;
+  //}
+  .ss {
+    float: right;
+    margin: 0px 20px 10px 0px;
+  }
+  .ss span {
+    color: #f7d56f;
+    font-size: large;
+  }
+  .ss img {
+    width: 21px;
+    height: 21px;
+    float: left;
+    margin: 3px 5px 0px 0px;
+  }
+  .p_content {
+    color: white;
+    margin: 15px 10px 25px 30px;
+    display: inline-block;
+    font-size: large;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  .top_box {
+    background-color: black;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 1em;
+    margin: 65px 0px 0px 90px;
+    width: 80%;
+    height: auto;
+  }
+  .div_img {
+    background-color: white;
+    border-radius: 0.5em;
+    height: 53px;
+    width: 53px;
+    margin: 25px 0px 5px 25px;
+    display: inline-block;
+  }
+  .div_img img {
+    margin: 5px 0px 0px 6px;
+    width: 41px;
+    height: 44px
+  }
+  .div_title {
+    margin: -5px 0px 0px 30px;
   }
 
+  .div_title span {
+    color: white;
+    float: left;
+    margin: -40px 0px 0px 70px;
+    font-size: x-large;
+  }
 }

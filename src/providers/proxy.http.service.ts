@@ -109,6 +109,10 @@ export class ProxyHttpService {
     return this._get('/tabletController/addDiscussion.do', params);
   }
 
+  getAnswerOfStuList(params){
+    return this._post("/phoneAppController/getAnswerOfStuList.do",params)
+  }
+
 
   _post(url, params?: any) {
     params.deviceType="pad"

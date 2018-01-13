@@ -131,7 +131,7 @@ export class IndexPage {
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
       this.pType = this.projectList[0].p_type;
-      this.getclassList();
+      // this.getclassList();
     })
   }
 
@@ -144,6 +144,7 @@ export class IndexPage {
         this.classText = ''
         this.classList=resClass['list'];
         this.className = this.classList[this.classIndex].cla_name;
+        this.selectedClass= this.classList[this.classIndex].cla_id;
         this.getCourseList();
       }
     })
@@ -228,10 +229,11 @@ export class IndexPage {
   }
 
   getChoices(){
-    this.OldclassName = this.className;
-    this.OldCourseName = this.CourseName;
-    this.OldselectedClass = this.selectedClass;
-    this.OldselectedCourse = this.selectedCourse;
+    this.getclassList()
+    // this.OldclassName = this.className;
+    // this.OldCourseName = this.CourseName;
+    // this.OldselectedClass = this.selectedClass;
+    // this.OldselectedCourse = this.selectedCourse;
     this.projectBrief = false;
     this.choiceClass = true;
   }
@@ -247,8 +249,9 @@ export class IndexPage {
 
   getClickProject(i){
     this.check = i;
+
     this.Class_loading = true;
-    this.getclassList();
+
     this.btnShowChoice = true;
     this.nextBtnShowChoice = false;
     this.classIndex = 0;
@@ -257,12 +260,19 @@ export class IndexPage {
     this.selectedCourse = '';
     this.classText = '';
     this.CourseText = '';
+    this.classList=new Array();
+    this.courseList=new Array()
+    this.className="";
+    this.CourseName="";
     // this.selectedProject = this.projectList[i].p_id;
     if(this.projectList[i]){
+
       this.selectedProject = this.projectList[i].p_id;
+      this.getclassList();
       this.pName = this.projectList[i].p_name;
       this.pDescription = this.projectList[i].p_description;
       this.pType = this.projectList[i].p_type;
+
     }
 
   }

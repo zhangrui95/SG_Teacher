@@ -17,6 +17,7 @@ export class GroupIndexPage implements OnInit{
       this.ws.messages.subscribe(res=>{
         console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         console.log(res)
+        //{"action":"push_content_start","content":"11111"}
       })
     }
 

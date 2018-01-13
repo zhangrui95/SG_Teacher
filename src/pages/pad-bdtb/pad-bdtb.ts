@@ -1,6 +1,6 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
 ///<reference path="../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ServerSocket} from "../../providers/ws.service";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -19,7 +19,7 @@ import {Subscription} from "rxjs/Subscription";
   templateUrl: 'pad-bdtb.html',
 })
 
-export class PadBdtbPage implements OnInit, AfterViewInit {
+export class PadBdtbPage implements OnInit,OnDestroy, AfterViewInit {
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
   @ViewChild('show') show: ElementRef;
@@ -41,9 +41,20 @@ export class PadBdtbPage implements OnInit, AfterViewInit {
       this.ws.messages.subscribe(res => {
         console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         console.log(res)
+        if (JSON.parse(res)['action'] != null) {
+          if (JSON.parse(res)['action'] == 'phone_scene_answers_update') {
+            this.items = JSON.parse(res)['list']
+          }
+        }
       })
     }
   }
+
+  ngOnDestroy() {
+    if (this.socketSubscription)
+      this.socketSubscription.unsubscribe();
+  }
+
   @Input()
   s_data :any=new Object();
   @Input()
@@ -144,23 +155,5 @@ export class PadBdtbPage implements OnInit, AfterViewInit {
     this.hide.nativeElement.style.display = 'none';
     this.nr.nativeElement.style.display = '-webkit-box';
     this.p_height();
-  }
-
-  ionViewDidEnter() {
-    if (this.ws.messages) {
-      this.socketSubscription = this.ws.messages.subscribe((message: string) => {
-        console.log('received message from server11111:' + message);
-        if (JSON.parse(message)['action'] != null) {
-          if (JSON.parse(message)['action'] == 'phone_scene_answers_update') {
-            this.items = JSON.parse(message)['list']
-          }
-        }
-      })
-    }
-  }
-
-  ionViewDidLeave() {
-    if (this.socketSubscription)
-      this.socketSubscription.unsubscribe();
   }
 }

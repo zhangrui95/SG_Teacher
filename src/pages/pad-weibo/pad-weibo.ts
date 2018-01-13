@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Subscription} from "rxjs/Subscription";
 import {ServerSocket} from "../../providers/ws.service";
@@ -18,7 +18,7 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
   templateUrl: 'pad-weibo.html',
 })
 
-export class PadWeiboPage implements OnInit, AfterViewInit {
+export class PadWeiboPage implements OnInit,OnDestroy, AfterViewInit {
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
   @ViewChild('show') show: ElementRef;
@@ -34,6 +34,24 @@ export class PadWeiboPage implements OnInit, AfterViewInit {
     this.g_id=this.s_data.g_id;
     this.getData();
     this.getAnswerOfStuList();
+    this.ws.connect();
+    if (this.ws.messages) {
+      console.log(this.ws.messages)
+      this.ws.messages.subscribe(res => {
+        console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        console.log(res)
+        if (JSON.parse(res)['action'] != null) {
+          if (JSON.parse(res)['action'] == 'phone_scene_answers_update') {
+            this.items = JSON.parse(res)['list']
+          }
+        }
+      })
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.socketSubscription)
+      this.socketSubscription.unsubscribe();
   }
 
   @Input()
@@ -136,23 +154,5 @@ export class PadWeiboPage implements OnInit, AfterViewInit {
     this.hide.nativeElement.style.display = 'none';
     this.nr.nativeElement.style.display = '-webkit-box';
     this.p_height();
-  }
-
-  ionViewDidEnter() {
-    if (this.ws.messages) {
-      this.socketSubscription = this.ws.messages.subscribe((message: string) => {
-        console.log('received message from server11111:' + message);
-        if (JSON.parse(message)['action'] != null) {
-          if (JSON.parse(message)['action'] == 'phone_scene_answers_update') {
-            this.items = JSON.parse(message)['list']
-          }
-        }
-      })
-    }
-  }
-
-  ionViewDidLeave() {
-    if (this.socketSubscription)
-      this.socketSubscription.unsubscribe();
   }
 }

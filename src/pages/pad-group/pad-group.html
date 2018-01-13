@@ -5,7 +5,7 @@
   </ion-navbar>
 </ion-header>
 <page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList" ></page-rsidebar>
-<page-operation (ev)="onNext($event)" *ngIf="showFlag" [SimId]="sim_id"></page-operation>
+<page-operation (ev)="onNext($event)" *ngIf="showFlag" [SimId]="sim_id" ></page-operation>
 <ion-content  (click)="onbActive()">
   <page-pad-default *ngIf="sType=='empty'"></page-pad-default>
   <page-group-index [sim_id]="sim_id"[s_data]="currScence"*ngIf="sType=='default'"></page-group-index>

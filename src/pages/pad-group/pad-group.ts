@@ -4,6 +4,8 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {UserData} from "../../providers/user-data";
 import {GroupBean, NextBean, ProcessJSONUtil} from "../../providers/ProcessJSONUtil";
+import {CommentDetailPage} from "../comment-detail/comment-detail";
+import {PadGroupListPage} from "../pad-group-list/pad-group-list";
 
 @IonicPage()
 @Component({
@@ -17,6 +19,7 @@ export class PadGroupPage {
   jsonData: any;
   currNode;
   sim_id = "111";
+  curr_nid={nid:""};
   keyInput = false;
   sType = 'default';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
@@ -103,6 +106,7 @@ export class PadGroupPage {
     } else if (ev.g_id) {
       this.currGid = ev.g_id
       this.currScence = this.getSelectScence();
+      this.curr_nid.nid=this.currScence.n_id;
       console.log(this.currScence )
       if (this.currScence) {
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
@@ -131,6 +135,23 @@ export class PadGroupPage {
       console.log(ev.g_id)
     } else if (ev == "grouped") {
       this.grouped = true;
+    }else  if(ev=='detail'){
+      if(this.sType = "group"){
+        this.navCtrl.push(PadGroupListPage,{sim_id:this.sim_id,n_id:this.curr_nid})
+      }else{
+        if (this.sType =='weibo'||
+          this.sType =='danmu'||
+          this.sType =='storm'||
+          this.sType =='qq'||
+          this.sType =='baidu'
+        ) {
+          this.navCtrl.push(CommentDetailPage,{sim_id:this.sim_id,n_id:this.curr_nid})
+        }
+
+
+      }
+
+
     }
   }
 
@@ -199,12 +220,10 @@ export class PadGroupPage {
 
       this.processJson.setCurrNode(this.currNode)
       this.currScence = this.getSelectScence();
-
+      this.curr_nid.nid=this.currScence.n_id;
       console.log(this.currScence)
       //tieba QQ weibo brain bullet select web
       if (this.currScence) {
-
-
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
           this.sType = 'baidu';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
         }
@@ -298,6 +317,7 @@ export class PadGroupPage {
 
         this.processJson.setCurrNode(this.currNode)
         this.currScence = this.getSelectScence();
+        this.curr_nid.nid=this.currScence.n_id;
         let beans = this.processJson.getSendStart(this.sim_id)
         this.addStart({type: "start", datas: beans})
       })

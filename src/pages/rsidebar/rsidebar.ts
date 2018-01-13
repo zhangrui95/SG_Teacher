@@ -45,7 +45,9 @@ export class RsidebarPage {
   resetTimer(){
     this.onNext.emit("reset");
   }
-
+  onGoDetail(){
+    this.onNext.emit("detail");
+  }
   groupListShow(){
     this.resetTimer()
     this.showList = true;

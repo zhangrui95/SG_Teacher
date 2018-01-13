@@ -14,6 +14,7 @@ export class OperationPage {
   showBtn = false;
   showAnimate=false;
   @Input() SimId;
+  @Input() nId;
   @Output() ev:EventEmitter<any>= new EventEmitter<any>();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

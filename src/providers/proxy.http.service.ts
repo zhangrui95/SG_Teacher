@@ -59,10 +59,10 @@ export class ProxyHttpService {
     return this._get("/phoneAppController/getSimulationList.do", params)
   }
   classList(params?: any) {
-    return this._get('/classManagerController/getClassManagerList.do', params)
+    return this._get('/tabletController/getClassByPId.do', params)
   }
   getCourseListByUid(params?: any) {
-    return this._get('/classManagerController/getCourseListByUid.do', params);
+    return this._get('/tabletController/getCourseById.do', params);
   }
   updateExeState(params?: any) {
     //sim_id
@@ -110,9 +110,12 @@ export class ProxyHttpService {
   }
 
   getAnswerOfStuList(params){
-    return this._post("/phoneAppController/getAnswerOfStuList.do",params)
+    return this._post("/phoneAppController/getAnswerOfStuList.do",params);
   }
 
+  addStuAnswer(params){
+    return this._post("/phoneAppController/addStuAnswer.do",params);
+  }
 
   _post(url, params?: any) {
     params.deviceType="pad"

@@ -41,7 +41,7 @@ export class PadQQPage implements OnInit,OnDestroy, AfterViewInit {
         console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         console.log(res)
         if (JSON.parse(res)['action'] != null) {
-          if (JSON.parse(res)['action'] == 'phone_scene_answers_update') {
+          if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
             this.items = JSON.parse(res)['list']
           }
         }

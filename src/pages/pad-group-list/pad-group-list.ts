@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 
 @IonicPage()
 @Component({
@@ -11,8 +12,12 @@ export class PadGroupListPage {
 
   list;
   num = [];
+  sim_id;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService,public userData:UserData) {
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+    })
     this.getGroupDetail();
   }
 
@@ -26,7 +31,7 @@ export class PadGroupListPage {
     }
   }
   getGroupDetail(){
-    let params = {sim_id:'18'}
+    let params = {sim_id:this.sim_id}
     this.http.getGroupDetail(params).subscribe(res => {
       for (let i in res){
         this.num.push(res[i].listStus.length);

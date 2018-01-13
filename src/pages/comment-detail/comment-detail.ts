@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
+import { UUID } from 'angular2-uuid';
 
 @IonicPage()
 @Component({
@@ -14,7 +16,11 @@ export class CommentDetailPage {
   StuNum;
   StuNumList = [];
   StuIndex = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService) {
+  sim_id;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService,public userData:UserData) {
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+    })
   }
 
   ionViewWillEnter() {
@@ -22,7 +28,8 @@ export class CommentDetailPage {
   }
 
   getComment(){
-    const params = {sim_id: '18', n_id:'6'}
+    let uuid = UUID.UUID();
+    const params = {sim_id: this.sim_id, n_id: uuid}
     this.http.getComment(params).subscribe(res => {
       this.list = res['stuList'];
       this.StuNum = res['stuList'].length;

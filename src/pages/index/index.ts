@@ -84,8 +84,8 @@ export class IndexPage {
     this.ws.connect()
 
   }
-  selectedProject;
-  selectedClass;
+  selectedProject = '';
+  selectedClass = '';
   selectedCourse;
   OldselectedClass;
   OldselectedCourse;
@@ -251,7 +251,11 @@ export class IndexPage {
   }
 
   getLoading(){
-    this.next();
+    if(this.selectedProject === ''||this.selectedClass === ''){
+      this.showToast('bottom',"请选择授课班级和课程");
+    }else{
+      this.next();
+    }
   }
 
   show(){

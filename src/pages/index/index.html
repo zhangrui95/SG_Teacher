@@ -11,7 +11,7 @@
     <div class="til-box">选择演练项目</div>
     <div class="scroll-right-box">
       <div class="load-box" *ngIf="loading">
-        <img class="float-l" src="../../assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
+        <img class="float-l" src="assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
       </div>
       <dl *ngFor="let project of projectList;let i = index;" (click)="getClickProject(i)">
         <dt>
@@ -49,7 +49,7 @@
         <img src="{{imgShow}}" style="margin-top: 18px;" class="float-r" (click)="show()"/>
       </div>
       <div class="load-box" *ngIf="Class_loading">
-        <img class="float-l" src="../../assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
+        <img class="float-l" src="assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
       </div>
       <div class="nodate-text">{{classText}}</div>
       <div class="{{ShowOrHide?'showAll':'hideAll'}}">
@@ -65,7 +65,7 @@
         <img src="{{imgShows}}" style="margin-top: 18px;" (click)="showCour()" class="float-r"/>
       </div>
       <div class="load-box" *ngIf="Course_loading">
-        <img class="float-l" src="../../assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
+        <img class="float-l" src="assets/img/loads.gif" style="width: 26px;margin-right: 10px;"><span class="float-l"> 加载中…</span>
       </div>
       <div class="nodate-text">{{CourseText}}</div>
       <div class="{{ShowCourse?'showAll':'hideAll'}}">
@@ -79,7 +79,7 @@
   </div>
   <div class="mtk" *ngIf="load">
       <div class="pop-box">
-        <img src="../../assets/img/load.gif" class="loading"/>
+        <img src="assets/img/load.gif" class="loading"/>
         <div class="loading-word">等待学生加入…</div>
         <button class="load-btn" (click)="getStart()">继  续</button>
       </div>

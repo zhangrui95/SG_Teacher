@@ -4,7 +4,7 @@
       <img src="assets/img/group.png" class="img-icon"/>
     </div>
     <div class="r-list-box" *ngIf="showList">
-      <img src="../../assets/img/hide-list-r.png" (click)="groupListHide()"/>
+      <img src="assets/img/hide-list-r.png" (click)="groupListHide()"/>
       <div *ngFor="let s of groupList.GroupId" ><span (click)="onGroupChange(s.id)">{{s.text}}</span></div>
 
     </div>

@@ -52,13 +52,16 @@ export class PadGroupPage {
     });
     toast.present(toast);
   }
-
   onNext(ev?) {
     this.resetTimer()
 
     if (ev == 'next') {
       if (!this.grouped) {
         this.showToast("bottom", '请先选择分组类型')
+        return;
+      }
+      if (!this.currScence) {
+        this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         return;
       }
       let beans = new Array<NextBean>();
@@ -86,8 +89,9 @@ export class PadGroupPage {
         // this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
         let f = confirm("是否确定结束分组并进入下一步？");
         if (f) {
+          let remain_g_id=this.processJson.getRemainGroup(this.jsonData)
           beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-          this.sendNext({type: 'grouping', datas: beans})
+          this.sendNext({type: 'grouping', datas: beans,remain_g_id:remain_g_id,sim_id:this.sim_id})
           return;
         }
 
@@ -103,38 +107,55 @@ export class PadGroupPage {
           action = {action: 'screen', datas: s}
         }
       }
+      if(this.sType=='group'){
+        action = {action: 'screen', datas: this.groupList}
+      }
       this.getPushScreen(action)
     } else if (ev == 'InputShow') {
       this.keyInput = true;
       this.showFlag = false;
     } else if (ev.g_id) {
+      if(this.currNode.length<=1){
+        this.showToast("bottom", '尚未进行分组操作，不能切换')
+        return ;
+      }
       this.currGid = ev.g_id
       this.currScence = this.getSelectScence();
+      if (!this.currScence) {
+        this.showToast("bottom", '该分组暂无法查看状态')
+        return;
+      }
       this.curr_nid.nid=this.currScence.n_id;
+
       console.log(this.currScence )
       if (this.currScence) {
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
-          this.sType = 'baidu';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
+
+          this.changeSType('baidu')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_QQ') != -1) {
-          this.sType = 'qq';
+
+          this.changeSType('qq')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_weibo') != -1) {
-          this.sType = 'weibo';
+
+          this.changeSType('weibo')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
-          this.sType = 'storm';
+
+          this.changeSType('storm')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_bullet') != -1) {
-          this.sType = 'danmu';
+          this.changeSType('danmu')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
-          this.sType = 'fork';
+          this.changeSType('fork')
         } else {
-          this.sType = 'default';
+
+          this.changeSType('default')
         }
       } else {
-        this.sType = 'empty';
+        this.changeSType('empty')
       }
       console.log(ev.g_id)
     } else if (ev == "grouped") {
@@ -178,7 +199,12 @@ export class PadGroupPage {
       }
     }
   }
-
+  changeSType(sType){
+    this.sType = '';
+    setTimeout(()=>{
+      this.sType=sType
+    },500)
+  }
   currGid = '-1';
 
   free() {
@@ -224,32 +250,43 @@ export class PadGroupPage {
 
       this.processJson.setCurrNode(this.currNode)
       this.currScence = this.getSelectScence();
+      if (!this.currScence) {
+        this.showToast("bottom", '请各组参与人员配合完成当前步骤')
+        return;
+      }
+
       this.curr_nid.nid=this.currScence.n_id;
+
       console.log(this.currScence)
       //tieba QQ weibo brain bullet select web
       if (this.currScence) {
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
-          this.sType = 'baidu';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
+
+          this.changeSType('baidu')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_QQ') != -1) {
-          this.sType = 'qq';
+
+          this.changeSType('qq')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_weibo') != -1) {
-          this.sType = 'weibo';
+
+          this.changeSType('weibo')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
-          this.sType = 'storm';
+
+          this.changeSType('storm')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_bullet') != -1) {
-          this.sType = 'danmu';
+          this.changeSType('danmu')
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
-          this.sType = 'fork';
+          this.changeSType('fork')
         } else {
-          this.sType = 'default';
+
+          this.changeSType('default')
         }
       } else {
-        this.sType = 'empty';
+        this.changeSType('empty')
       }
       // this.processJson.setCurrNode("");
     })
@@ -348,12 +385,11 @@ export class PadGroupPage {
             for(let g of arr){
               for(let group of  this.groupList.GroupId){
                 if(g['g_id']==group.id){
-                  // group.num=g['u_id'].split(',').length
                   group.num=g['StuTotal']
-                  // alert(   group.num)
                 }
               }
             }
+
             //todo 自由分组 更新分组信息
             break;
           case 'pad_process_upadte':

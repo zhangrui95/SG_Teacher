@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {GroupBean} from "../../providers/ProcessJSONUtil";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
@@ -38,7 +38,6 @@ export class GroupingPage implements OnInit,OnDestroy{
                 if(g['g_id']==group.id){
                   // group.num=g['u_id'].split(',').length
                   group.num=g['StuTotal']
-                  alert(   group.num)
                 }
               }
             }
@@ -59,7 +58,7 @@ export class GroupingPage implements OnInit,OnDestroy{
   @Output()
     onGrouped=new EventEmitter();
   receiver;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService,public ws:ServerSocket) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService,public ws:ServerSocket,public toastCtrl:ToastController) {
 
 
   }
@@ -99,16 +98,30 @@ export class GroupingPage implements OnInit,OnDestroy{
 
         console.log("=======>")
         console.log(res)
-       let arr= res['jsonGroOfStu'];
-       for(let g of arr){
-         for(let group of this.list.GroupId){
-           console.log("=======>")
-           if(g['g_id']==group.id){
+      if(res['code']==0){
+        let arr= res['jsonGroOfStu'];
+        for(let g of arr){
+          for(let group of this.list.GroupId){
+            console.log("=======>")
+            if(g['g_id']==group.id){
               group.num=(g['u_id']+"").split(',').length
-           }
-         }
-       }
+            }
+          }
+        }
+      }else{
+        this.getPushFreeGroListForPhone()
+        this.showToast('bottom',"当前参与人数不满足随机分组最低人数要求，系统将自动进行自由分组");
+      }
+
 
     })
+  }
+  showToast(position: string, text: string) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 2000,
+      position: position
+    });
+    toast.present(toast);
   }
 }

@@ -5,7 +5,6 @@
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
-
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -15,7 +14,7 @@
     <allow-navigation href="http://*/*" />
     <allow-navigation href="tel:*" />
     <allow-navigation href="mailto:*" />
-    <platform name="android" >
+    <platform name="android">
         <allow-intent href="market:*" />
         <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
         <icon src="resources/android/icon/drawable-xxxhdpi-icon.png" />

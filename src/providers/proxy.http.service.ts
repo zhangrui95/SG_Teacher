@@ -29,6 +29,9 @@ export class ProxyHttpService {
   getPushScreen(params){
     return this._post("/tabletController/getPushScreen.do", params)
   }
+  getAnswerOfStuList(params) {
+    return this._post("/phoneAppController/getAnswerOfStuList.do", params)
+  }
 
 
   updatePass(params) {
@@ -109,9 +112,6 @@ export class ProxyHttpService {
     return this._get('/tabletController/addDiscussion.do', params);
   }
 
-  getAnswerOfStuList(params){
-    return this._post("/phoneAppController/getAnswerOfStuList.do",params);
-  }
 
   addStuAnswer(params){
     return this._post("/phoneAppController/addStuAnswer.do",params);

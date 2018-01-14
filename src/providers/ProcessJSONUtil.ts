@@ -70,7 +70,16 @@ export class ProcessJSONUtil {
   public setCurrNode(currNode) {
     this.currNodes = currNode
   }
-
+  public getRemainGroup(obj){
+    for(let o of obj){
+      if(o.type=='group'){
+        o.props.type
+        if(o.props.group_type=="remain"){
+          return o.id
+        }
+      }
+    }
+  }
   public parseGroupingNext(sim_id,obj):Array<NextBean>{
     let arr=new Array <NextBean>()
 

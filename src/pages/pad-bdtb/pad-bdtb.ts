@@ -1,6 +1,6 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
 ///<reference path="../../../node_modules/@angular/core/src/metadata/lifecycle_hooks.d.ts"/>
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ServerSocket} from "../../providers/ws.service";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -19,12 +19,14 @@ import {Subscription} from "rxjs/Subscription";
   templateUrl: 'pad-bdtb.html',
 })
 
-export class PadBdtbPage implements OnInit, AfterViewInit {
+export class PadBdtbPage implements OnInit,OnDestroy, AfterViewInit {
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
   @ViewChild('show') show: ElementRef;
   @ViewChild('hide') hide: ElementRef;
   @ViewChild('nr') nr: ElementRef;
+  @ViewChild('show_hide') show_hide: ElementRef;
+  @ViewChild('hr_hid') hr_hid: ElementRef;
 
   ngOnInit() {
     console.log("grouping====================>")
@@ -39,9 +41,20 @@ export class PadBdtbPage implements OnInit, AfterViewInit {
       this.ws.messages.subscribe(res => {
         console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         console.log(res)
+        if (JSON.parse(res)['action'] != null) {
+          if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
+            this.items = JSON.parse(res)['list']
+          }
+        }
       })
     }
   }
+
+  ngOnDestroy() {
+    if (this.socketSubscription)
+      this.socketSubscription.unsubscribe();
+  }
+
   @Input()
   s_data :any=new Object();
   @Input()
@@ -85,7 +98,15 @@ export class PadBdtbPage implements OnInit, AfterViewInit {
     this.datas = this.s_data.s_data.componentList[0].data.fillData;
     this.title = this.datas.title;
     this.content = this.datas.content;
+    if(this.content==""){
+      this.show_hide.nativeElement.style.display = 'none';
+      this.hr_hid.nativeElement.style.display = 'none';
 
+    }
+    else {
+      this.show_hide.nativeElement.style.display = 'block';
+      this.hr_hid.nativeElement.style.display = 'block';
+    }
     // this.title = 'jdsiajdoi';
     // this.content = '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十';
   }
@@ -134,23 +155,5 @@ export class PadBdtbPage implements OnInit, AfterViewInit {
     this.hide.nativeElement.style.display = 'none';
     this.nr.nativeElement.style.display = '-webkit-box';
     this.p_height();
-  }
-
-  ionViewDidEnter() {
-    if (this.ws.messages) {
-      this.socketSubscription = this.ws.messages.subscribe((message: string) => {
-        console.log('received message from server11111:' + message);
-        if (JSON.parse(message)['action'] != null) {
-          if (JSON.parse(message)['action'] == 'phone_scene_answers_update') {
-            this.items = JSON.parse(message)['list']
-          }
-        }
-      })
-    }
-  }
-
-  ionViewDidLeave() {
-    if (this.socketSubscription)
-      this.socketSubscription.unsubscribe();
   }
 }

@@ -14,24 +14,28 @@
 <!--</div>-->
 
 <div class="center">
-  <div class="img-box" *ngFor="let items of datas;">
-    <div *ngIf="items.name=='img'">
-      <img src="{{items.data.src}}" style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>
+  <div class="img-box" >
+    <div *ngIf="name=='img'">
+      <img src="{{src}}"/>
+      <!--<img src="{{items.data.src}}"
+              style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>-->
       <!--<img src="../assets/img/add.png"-->
            <!--style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>-->
     </div>
-    <div *ngIf="items.name=='video'">
+    <div *ngIf="name=='video'">
       <!--<v src=""/>-->
       <video>
-        <source src="{{items.data.src}}" type='video/mp4'
-                style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}">
+        <source src="{{src}}" type='video/mp4'>
+        <!--<source src="{{items.data.src}}" type='video/mp4'-->
+                <!--style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}">-->
+
       </video>
     </div>
   </div>
     <div class="tile-img">
-      <span style="color: white;font-size: xx-large;" >{{title}}</span>
+      <span >{{title}}</span>
     </div>
     <div class="words">
-      <span style="color: white;font-size: larger;" >{{content}}</span>
+      <span>{{content}}</span>
     </div>
 </div>

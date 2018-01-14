@@ -338,6 +338,7 @@ export class IndexPage {
 
   getStart(){
     this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id});
+    this.load = false;
   }
 
 }

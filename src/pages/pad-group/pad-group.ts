@@ -373,4 +373,8 @@ export class PadGroupPage {
     });
   }
 
+  getOut(){
+    this.navCtrl.pop();
+  }
+
 }

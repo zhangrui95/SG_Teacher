@@ -1,26 +1,15 @@
-<ion-content>
-  <div #topBox ion-fixed class="top_box">
+<ion-content #ion_content>
+  <div class="top_box">
     <div class="div_img">
       <img src="assets/img/xlwb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
     </div>
     <div class="div_title">
       <span>{{title}}</span>
     </div>
-    <hr #hr_hid style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
-    <p #nr class="p_content">
+    <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
+    <p class="p_content">
       {{content}}</p>
-    <div #show_hide>
-      <div #show class="ss">
-        <img src="assets/img/z_mo.png"/>
-        <span (click)="show_div()">全部展开</span>
-      </div>
-      <div #hide class="ss" style="display: none">
-        <img src="assets/img/z_mo.png" style="transform:rotate(-180deg)"/>
-        <span (click)="hide_div()">收起</span>
-      </div>
-    </div>
   </div>
-  <div #list>
     <div *ngFor="let item of items;let n=index">
       <div>
         <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
@@ -38,5 +27,4 @@
         <hr style="border-top: 1px dashed #929292;width: 80%;margin: 50px 0px 15px 95px"/>
       </div>
     </div>
-  </div>
 </ion-content>

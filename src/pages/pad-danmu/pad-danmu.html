@@ -1,5 +1,5 @@
 <ion-content #ion_content>
-  <div  ion-fixed class="top_box">
+  <div #topBox class="top_box">
     <div class="div_img">
       <img src="assets/img/bdtb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
     </div>
@@ -25,7 +25,7 @@
       <!--<hr style="border-top: 1px solid #929292;width: 80%;margin: 50px 0px 15px 95px;float: left" />-->
     <!--</div>-->
   <!--</div>-->
-
+<div #list>
     <div *ngFor="let item of items;let n=index">
       <div>
         <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
@@ -39,5 +39,5 @@
         <hr style="border-top: 1px solid #929292;width: 80%;margin: 50px 0px 15px 95px;float: left" />
       </div>
     </div>
-
+</div>
 </ion-content>

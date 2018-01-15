@@ -1,5 +1,5 @@
 <ion-content #ion_content>
-  <div class="top_box">
+  <div #topBox class="top_box">
     <div class="div_img">
       <img src="assets/img/xlwb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
     </div>
@@ -10,10 +10,14 @@
     <p class="p_content">
       {{content}}</p>
   </div>
+  <div #list>
     <div *ngFor="let item of items;let n=index">
       <div>
         <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-        <h3 style="color:white; margin:-70px 0px 25px 185px; ">{{item.UserName}}</h3><br>
+        <div style="color:white; margin:-85px 0px 50px 185px; ">
+          <span style="font-size: x-large">{{item.UserName}}</span>
+          <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>
+        </div>
         <h5 style="color: white;margin: -30px 0px 25px 185px;">第{{n+1}}楼 | {{item.createtime}}</h5>
         <div style="float: right;margin:-85px 115px 0px 0px;">
           <!--<img src="../../assets/img/view.png" />-->
@@ -27,4 +31,5 @@
         <hr style="border-top: 1px dashed #929292;width: 80%;margin: 50px 0px 15px 95px"/>
       </div>
     </div>
+  </div>
 </ion-content>

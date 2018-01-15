@@ -117,6 +117,10 @@ export class ProxyHttpService {
     return this._post("/phoneAppController/addStuAnswer.do",params);
   }
 
+  getBaseurl(){
+    return ProxyHttpService.IP_PORT+ProxyHttpService.PROJECT_PACKAGE;
+  }
+
   _post(url, params?: any) {
     params.deviceType="pad"
     params.token=this.userData.userToken;

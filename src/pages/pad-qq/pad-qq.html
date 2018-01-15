@@ -1,24 +1,28 @@
 <ion-content #ion_content class="cards-bg social-cards">
-  <div class="top_box">
+  <div #topBox class="top_box">
     <div class="div_img">
       <img src="assets/img/qqun.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
     </div>
     <div class="div_title">
-      <span>{{title}}</span>
+      <span>dasdasdasdas</span>
     </div>
     <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
     <p class="p_content">
-      {{content}}</p>
+      dasdasdasdasdsd</p>
   </div>
-    <div *ngFor="let item of items">
+  <div #list>
+    <!--<div *ngFor="let item of items">-->
       <!--<div *ngIf="item.UserName!=name" style="float: left">-->
         <div style="">
-          <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-          <h3 style="color:white; margin:-70px 0px 25px 175px">{{item.UserName}}</h3>
+          <img [src]="" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
+          <div style="color:white; margin:-85px 0px 50px 185px; ">
+            <span style="font-size: x-large">dasdasdasdas</span>
+            <span style="font-size: medium;padding-left: 10px">dasdasdasdasd</span>
+          </div>
         </div>
         <div
           style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: -5px 0px 0px 170px;width: 43%;height: auto;float: left">
-          <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>
+          <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">dasdsadasdasd</h5>
         </div>
       <!--</div>-->
       <!--<div *ngIf="item.UserName==name" style="float: right">-->
@@ -40,4 +44,5 @@
         <!--</div>-->
       <!--</div>-->
     </div>
+  <!--</div>-->
 </ion-content>

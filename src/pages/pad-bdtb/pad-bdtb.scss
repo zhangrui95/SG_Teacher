@@ -25,11 +25,11 @@ page-pad-bdtb {
     margin: 15px 10px 25px 30px;
     display: inline-block;
     font-size: large;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    //overflow: hidden;
+    //text-overflow: ellipsis;
+    //display: -webkit-box;
+    //-webkit-line-clamp: 3;
+    //-webkit-box-orient: vertical;
   }
   .top_box {
     background-color: black;

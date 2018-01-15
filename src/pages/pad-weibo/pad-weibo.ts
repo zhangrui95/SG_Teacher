@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import { Component,  Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Subscription} from "rxjs/Subscription";
 import {ServerSocket} from "../../providers/ws.service";
@@ -21,6 +21,9 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 export class PadWeiboPage implements OnInit,OnDestroy {
   @ViewChild('ion_content')
   ion_content
+
+  @ViewChild('topBox') topBox: ElementRef;
+  @ViewChild('list') list: ElementRef;
 
   ngOnInit() {
     console.log("grouping====================>")
@@ -109,9 +112,15 @@ export class PadWeiboPage implements OnInit,OnDestroy {
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
 
-      // for (var i = 0; i < res['list'].length; i++) {
-      //   res['list'][i].ImagePath = this.sanitizer.bypassSecurityTrustResourceUrl(this.http.BASE_URL + res['list'][i].ImagePath);
-      // }
+      for (var i = 0; i < res['list'].length; i++) {
+        let url=res['list'][i].ImagePath;
+        if(url==''||url.length==0){
+          res['list'][i].ImagePath = "assets/img/header.png";
+        }else{
+          // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+          res['list'][i].ImagePath=this.http.getBaseurl() + url;
+        }
+      }
 
       this.items = res['list']
       setTimeout(() => {
@@ -125,5 +134,10 @@ export class PadWeiboPage implements OnInit,OnDestroy {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BaidutbPage');
+  }
+
+  ngAfterViewInit() {
+    // const height = this.topBox.nativeElement.offsetHeight;
+    // this.list.nativeElement.style.marginTop = height + 65 + 'px';
   }
 }

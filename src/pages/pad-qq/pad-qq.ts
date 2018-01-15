@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import { Component,  Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ServerSocket} from "../../providers/ws.service";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -21,30 +21,34 @@ import {Subscription} from "rxjs/Subscription";
 export class PadQQPage implements OnInit,OnDestroy {
   @ViewChild('ion_content')
   ion_content
+
+  @ViewChild('topBox') topBox: ElementRef;
+  @ViewChild('list') list: ElementRef;
+
   ngOnInit() {
     console.log("grouping====================>")
-    console.log(this.s_data.s_data.componentList[0].data.fillData)
-    this.n_id=this.s_data.n_id;
-    this.g_id=this.s_data.g_id;
-    this.getData();
-    this.getAnswerOfStuList();
-    this.ws.connect();
-    if (this.ws.messages) {
-      console.log(this.ws.messages)
-      this.ws.messages.subscribe(res => {
-        console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        console.log(res)
-        if (JSON.parse(res)['action'] != null) {
-          if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            this.items.push(JSON.parse(res)['list'])
-            setTimeout(() => {
-
-              this.ion_content.scrollToBottom(500);
-            }, 1000)
-          }
-        }
-      })
-    }
+    // console.log(this.s_data.s_data.componentList[0].data.fillData)
+    // this.n_id=this.s_data.n_id;
+    // this.g_id=this.s_data.g_id;
+    // this.getData();
+    // this.getAnswerOfStuList();
+    // this.ws.connect();
+    // if (this.ws.messages) {
+    //   console.log(this.ws.messages)
+    //   this.ws.messages.subscribe(res => {
+    //     console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    //     console.log(res)
+    //     if (JSON.parse(res)['action'] != null) {
+    //       if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
+    //         this.items.push(JSON.parse(res)['list'])
+    //         setTimeout(() => {
+    //
+    //           this.ion_content.scrollToBottom(500);
+    //         }, 1000)
+    //       }
+    //     }
+    //   })
+    // }
   }
 
   ngOnDestroy() {
@@ -134,9 +138,15 @@ export class PadQQPage implements OnInit,OnDestroy {
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
 
-      // for (var i = 0; i < res['list'].length; i++) {
-      //   res['list'][i].ImagePath = this.sanitizer.bypassSecurityTrustResourceUrl(this.http.BASE_URL + res['list'][i].ImagePath);
-      // }
+      for (var i = 0; i < res['list'].length; i++) {
+        let url=res['list'][i].ImagePath;
+        if(url==''||url.length==0){
+          res['list'][i].ImagePath = "assets/img/header.png";
+        }else{
+          // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+          res['list'][i].ImagePath=this.http.getBaseurl() + url;
+        }
+      }
 
       this.items = res['list']
       setTimeout(() => {
@@ -150,5 +160,10 @@ export class PadQQPage implements OnInit,OnDestroy {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad BaidutbPage');
+  }
+
+  ngAfterViewInit() {
+    // const height = this.topBox.nativeElement.offsetHeight;
+    // this.list.nativeElement.style.marginTop = height + 65 + 'px';
   }
 }

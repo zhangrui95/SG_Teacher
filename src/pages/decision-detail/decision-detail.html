@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>决策详情</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="top-words">{{title}}</div>
+  <div class="choice-list-box" [ngClass]="{'choice-list-box-auto':item.lookStu,'choice-list-box-height':!item.lookStu}" *ngFor="let item of list;let i = index;">
+    <div class="float-l" style="width: 10%;">
+      <div class="choice-style">{{Choice[i]}}</div>
+      <div class="choice-person-num">{{item.total}}人</div>
+    </div>
+    <div class="float-l" style="width: 90%;">
+      <div class="float-l til-box" style="width: 80%;">
+        <div>{{topic[i]}}</div>
+        <div class="yellow-box float-l" [ngStyle] = "percentage[i]"></div><div class="float-l num-bfb">{{percentageNum[i]}}</div>
+      </div>
+      <div class="float-r look-stu-btn" (click)="lookStuList(i)">{{item.btnText}}</div>
+    </div>
+    <ul class="stu-list">
+      <li *ngFor="let stu of item.Stus">{{stu.stuName}}</li>
+    </ul>
+  </div>
+</ion-content>

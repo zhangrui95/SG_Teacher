@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 
 @IonicPage()
 @Component({
@@ -7,17 +9,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'decision-detail.html',
 })
 export class DecisionDetailPage {
-  list = [{"total":"2","Stus":[{"u_id":"1","stuName":"张三"},{"u_id":"3","stuName":"王五"}]},{"total":"5","Stus":[{"u_id":"1","stuName":"张三"},{"u_id":"2","stuName":"李四"},{"u_id":"3","stuName":"王五"},{"u_id":"2","stuName":"士大夫"},{"u_id":"2","stuName":"王芳芳"}]},{"total":"3","Stus":[{"u_id":"1","stuName":"张三"},{"u_id":"2","stuName":"李四"},{"u_id":"3","stuName":"王五"}]}];
-  topic = ['文化素质是范德萨加沙拉酱三角阀是啥房间里','含税单价卡哈萨克达案发后','的撒浩丰科技富士康和第三'];
-  title = '大神加上了大家沙基里放假卡仕达，哈就好打开撒，阿道夫几点开始分散！'
-  StuTotal = '20'
+  // list = [{"value":"一心向学","total":"2","Stus":[{"u_id":"1","stuName":"张三"},{"u_id":"3","stuName":"王五"}]},{"value":"一心向学fasdfs","total":"5","Stus":[{"u_id":"1","stuName":"张三"},{"u_id":"2","stuName":"李四"},{"u_id":"3","stuName":"王五"},{"u_id":"2","stuName":"士大夫"},{"u_id":"2","stuName":"王芳芳"}]},{"value":"一心向学，阿斯顿发生，发放！","total":"3","Stus":[{"u_id":"1","stuName":"张三"},{"u_id":"2","stuName":"李四"},{"u_id":"3","stuName":"王五"}]}];
+  list = [];
+  title = ''
+  // StuTotal = '20'
+  StuTotal;
   Choice = [];
   percentage = [];
   percentageNum = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  sim_id;
+  g_id;
+  n_id;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http: ProxyHttpService, public userData: UserData) {
+    this.userData.getSimid().then(val=>{
+      this.sim_id = val;
+    });
+    this.g_id = this.navParams.get('g_id');
+    this.n_id = this.navParams.get('n_id');
   }
 
   ionViewWillEnter() {
+    let params = {sim_id:this.sim_id,g_id:this.g_id,n_id:this.n_id};
+    this.http.getDecide(params).subscribe(res => {
+      console.log(res)
+      this.list = res['select'];
+      this.StuTotal = res['StuTotal'];
+      this.title = res['text'];
+    });
     for(let i in this.list){
       this.list[i]['lookStu'] = false;
       this.list[i]['btnText'] = '查看投票学生';
@@ -26,7 +44,6 @@ export class DecisionDetailPage {
       let percent = parseInt(this.list[i].total) / parseInt(this.StuTotal)*100;
       this.percentageNum.push(percent +'%');
       this.percentage.push({width:+ percent +'%'});
-      console.log(this.percentage)
     }
   }
 

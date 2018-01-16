@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Subscription} from "rxjs/Subscription";
 import {ServerSocket} from "../../providers/ws.service";
@@ -18,14 +18,12 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
   templateUrl: 'pad-weibo.html',
 })
 
-export class PadWeiboPage implements OnInit,OnDestroy, AfterViewInit {
+export class PadWeiboPage implements OnInit,OnDestroy {
+  @ViewChild('ion_content')
+  ion_content
+
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
-  @ViewChild('show') show: ElementRef;
-  @ViewChild('hide') hide: ElementRef;
-  @ViewChild('nr') nr: ElementRef;
-  @ViewChild('show_hide') show_hide: ElementRef;
-  @ViewChild('hr_hid') hr_hid: ElementRef;
 
   ngOnInit() {
     console.log("grouping====================>")
@@ -42,7 +40,11 @@ export class PadWeiboPage implements OnInit,OnDestroy, AfterViewInit {
         console.log(res)
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            this.items = JSON.parse(res)['list']
+            this.items.push(JSON.parse(res)['list'])
+            setTimeout(() => {
+
+              this.ion_content.scrollToBottom(500);
+            }, 1000)
           }
         }
       })
@@ -98,15 +100,6 @@ export class PadWeiboPage implements OnInit,OnDestroy, AfterViewInit {
     this.datas = this.s_data.s_data.componentList[0].data.fillData;
     this.title = this.datas.title;
     this.content = this.datas.content;
-    if(this.content==""){
-      this.show_hide.nativeElement.style.display = 'none';
-      this.hr_hid.nativeElement.style.display = 'none';
-
-    }
-    else {
-      this.show_hide.nativeElement.style.display = 'block';
-      this.hr_hid.nativeElement.style.display = 'block';
-    }
   }
 
   getAnswerOfStuList() {
@@ -119,12 +112,21 @@ export class PadWeiboPage implements OnInit,OnDestroy, AfterViewInit {
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
 
-      // for (var i = 0; i < res['list'].length; i++) {
-      //   res['list'][i].ImagePath = this.sanitizer.bypassSecurityTrustResourceUrl(this.http.BASE_URL + res['list'][i].ImagePath);
-      // }
+      for (var i = 0; i < res['list'].length; i++) {
+        let url=res['list'][i].ImagePath;
+        if(url==''||url.length==0){
+          res['list'][i].ImagePath = "assets/img/header.png";
+        }else{
+          // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+          res['list'][i].ImagePath=this.http.getBaseurl() + url;
+        }
+      }
 
       this.items = res['list']
+      setTimeout(() => {
 
+        this.ion_content.scrollToBottom(500);
+      }, 1000)
     });
   }
 
@@ -135,24 +137,7 @@ export class PadWeiboPage implements OnInit,OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.p_height();
-  }
-
-  p_height(){
-    const height = this.topBox.nativeElement.offsetHeight;
-    this.list.nativeElement.parentElement.style.marginTop = height + 65 + 'px';
-  }
-
-  show_div(){
-    this.hide.nativeElement.style.display = 'block';
-    this.show.nativeElement.style.display = 'none';
-    this.nr.nativeElement.style.display = 'block';
-    this.p_height();
-  }
-  hide_div(){
-    this.show.nativeElement.style.display = 'block';
-    this.hide.nativeElement.style.display = 'none';
-    this.nr.nativeElement.style.display = '-webkit-box';
-    this.p_height();
+    // const height = this.topBox.nativeElement.offsetHeight;
+    // this.list.nativeElement.style.marginTop = height + 65 + 'px';
   }
 }

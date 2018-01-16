@@ -24,11 +24,11 @@ page-pad-danmu {
     margin: 15px 10px 25px 30px;
     display: inline-block;
     font-size: large;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    //overflow: hidden;
+    //text-overflow: ellipsis;
+    //display: -webkit-box;
+    //-webkit-line-clamp: 3;
+    //-webkit-box-orient: vertical;
   }
   .top_box {
     background-color: black;
@@ -36,7 +36,7 @@ page-pad-danmu {
     border-radius: 1em;
     margin: 65px 0px 0px 90px;
     width: 80%;
-    height: auto;
+    min-height: 100px;
   }
   .div_img {
     background-color: white;

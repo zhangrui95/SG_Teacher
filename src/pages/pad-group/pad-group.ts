@@ -24,6 +24,7 @@ export class PadGroupPage {
   content;
   n_id;
   userId;
+  mapShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
@@ -54,7 +55,6 @@ export class PadGroupPage {
   }
   onNext(ev?) {
     this.resetTimer()
-
     if (ev == 'next') {
       if (!this.grouped) {
         this.showToast("bottom", '请先选择分组类型')
@@ -114,7 +114,9 @@ export class PadGroupPage {
     } else if (ev == 'InputShow') {
       this.keyInput = true;
       this.showFlag = false;
-    } else if (ev.g_id) {
+    } else if(ev == 'mapShow'){
+      this.mapShow = true;
+    }else if (ev.g_id) {
       if(this.currNode.length<=1){
         this.showToast("bottom", '尚未进行分组操作，不能切换')
         return ;
@@ -411,6 +413,10 @@ export class PadGroupPage {
 
   getOut(){
     this.navCtrl.pop();
+  }
+
+  mapOpen(){
+    this.mapShow = false;
   }
 
 }

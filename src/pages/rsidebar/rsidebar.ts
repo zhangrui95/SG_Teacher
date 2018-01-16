@@ -56,5 +56,8 @@ export class RsidebarPage {
     this.resetTimer()
     this.showList = false;
   }
+  getMapShow(){
+    this.onNext.emit("mapShow");
+  }
 
 }

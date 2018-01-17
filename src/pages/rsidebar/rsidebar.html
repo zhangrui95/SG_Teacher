@@ -1,6 +1,6 @@
 <ul class="r-side">
   <li>
-    <div class="r-list-icon" (click)="getMapShow()">
+    <div class="r-list-icon" *ngIf="isGold" (click)="getMapShow()">
       <img src="assets/img/map-btn.png" class="img-icon"/>
     </div>
   </li>

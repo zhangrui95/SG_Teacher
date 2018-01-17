@@ -20,7 +20,7 @@ import {Subscription} from "rxjs/Subscription";
 })
 
 export class PadBdtbPage implements OnInit,OnDestroy {
-  @ViewChild('ion_content')
+  @ViewChild('co')
   ion_content
 
   @ViewChild('topBox') topBox: ElementRef;
@@ -30,22 +30,23 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   // @ViewChild('nr') nr: ElementRef;
   // @ViewChild('show_hide') show_hide: ElementRef;
   // @ViewChild('hr_hid') hr_hid: ElementRef;
+  refresh(){
+    setTimeout(()=>{
+      this.ion_content.resize();
+      this.ion_content.scrollToBottom(500);
+    },500)
 
+  }
   ngOnInit() {
-    console.log("grouping====================>")
-    console.log(this.s_data.s_data.componentList[0].data.fillData)
+
     this.n_id = this.s_data.n_id;
     this.g_id = this.s_data.g_id;
     this.getData();
     this.getAnswerOfStuList();
     this.ws.connect();
     if (this.ws.messages) {
-      console.log(this.ws.messages)
       this.ws.messages.subscribe(res => {
-        console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        console.log(res)
-        console.log('-------------------res.list--------------------')
-        console.log(JSON.parse(res))
+
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
             // this.items.push(JSON.parse(res)['list'])
@@ -55,21 +56,18 @@ export class PadBdtbPage implements OnInit,OnDestroy {
             // console.log('-----------------this.items--------------'+JSON.stringify(this.items))
             // console.log('-----------------this.items--------------'+this.items['UserName'])
 
-            for (var i = 0; i < item.length; i++) {
-              let url=item[i].imagePath;
-              // console.log('url:'+url)
-              if(url==''||url.length==0){
-                item[i].imagePath = "assets/img/header.png";
-              }else{
-                // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
-                item[i].imagePath=this.http.getBaseurl() + url;
-              }
-            }
+            // for (var i = 0; i < item.length; i++) {
+            //   let url=item[i].imagePath;
+            //   // console.log('url:'+url)
+            //   if(url==''||url.length==0){
+            //     item[i].imagePath = "assets/img/header.png";
+            //   }else{
+            //     // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+            //     item[i].imagePath=this.http.getBaseurl() + url;
+            //   }
+            // }
             this.items=item
-            setTimeout(() => {
-
-              this.ion_content.scrollToBottom(500);
-            }, 1000)
+            this.refresh()
           }
         }
       })
@@ -149,27 +147,26 @@ export class PadBdtbPage implements OnInit,OnDestroy {
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
       // console.log('this.items:'+res['list'].length)
-      for (var i = 0; i < res['list'].length; i++) {
-        let url=res['list'][i].ImagePath;
-        // console.log('url:'+url)
-        if(url==''||url.length==0){
-          res['list'][i].ImagePath = "assets/img/header.png";
-        }else{
-          // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
-          res['list'][i].ImagePath=this.http.getBaseurl() + url;
-        }
-      }
+      // for (var i = 0; i < res['list'].length; i++) {
+      //   let url=res['list'][i].ImagePath;
+      //   // console.log('url:'+url)
+      //   if(url==''||url.length==0){
+      //     res['list'][i].ImagePath = "assets/img/header.png";
+      //   }else{
+      //     // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+      //     res['list'][i].ImagePath=this.http.getBaseurl() + url;
+      //   }
+      // }
 
       this.items = res['list']
+      // this.ion_content.scrollToBottom(500);
 
-      setTimeout(() => {
-
-        this.ion_content.scrollToBottom(500);
-      }, 1000)
     });
   }
   private socketSubscription: Subscription
-
+  getFullPath(path){
+    return this.http.getBaseurl()+path
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad BaidutbPage');
   }

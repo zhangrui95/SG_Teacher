@@ -15,9 +15,7 @@ export class PadGroupListPage {
   sim_id;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService,public userData:UserData) {
-    this.userData.getSimid().then(val=>{
-      this.sim_id=val;
-    })
+
     this.getGroupDetail();
   }
 
@@ -30,15 +28,22 @@ export class PadGroupListPage {
       this.list[i].imgShow = 'assets/img/show.png';
     }
   }
+  getFullPath(path){
+    return this.http.getBaseurl()+path
+  }
   getGroupDetail(){
-    let params = {sim_id:this.sim_id}
-    this.http.getGroupDetail(params).subscribe(res => {
-      for (let i in res){
-        this.num.push(res[i].listStus.length);
-        res[i].show = true;
-        res[i].imgShow = 'assets/img/hide.png';
-      }
-      this.list = res;
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+      let params = {sim_id:this.sim_id}
+      this.http.getGroupDetail(params).subscribe(res => {
+        for (let i in res){
+          this.num.push(res[i].listStus.length);
+          res[i].show = true;
+          res[i].imgShow = 'assets/img/hide.png';
+        }
+        this.list = res;
+      })
     })
+
   }
 }

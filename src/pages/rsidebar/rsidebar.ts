@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {GroupBean} from "../../providers/ProcessJSONUtil";
+import {UserData} from "../../providers/user-data";
 
 @IonicPage()
 @Component({
@@ -21,11 +22,17 @@ export class RsidebarPage {
   @Output()
   onNext= new EventEmitter<any>();
 
+  isGold=false;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public userData :UserData) {
   }
   ionViewDidLoad() {
+    this.userData.getSimType().then(value => {
+      if(value=='gold'){
+        this.isGold=true
+      }
+    })
     console.log('ionViewDidLoad RsidebarPage');
   }
   onScreen(){

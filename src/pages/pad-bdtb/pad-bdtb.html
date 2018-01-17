@@ -1,4 +1,4 @@
-<ion-content #ion_content>
+<ion-content #co>
   <div #topBox class="top_box">
     <div class="div_img">
       <img src="assets/img/bdtb.png"/>
@@ -7,7 +7,7 @@
       <span>{{title}}</span>
     </div>
     <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
-    <p class="p_content">
+    <p class="p_content" >
       {{content}}</p>
     <!--<div #show_hide>-->
     <!--<div #show class="ss">-->
@@ -24,9 +24,13 @@
   <div #list>
     <div *ngFor="let item of items;let n=index">
       <div style="margin:50px 0px 0px 5px;">
-        <img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px;float:left;"/>
+        <img [src]="item.imagePath?getFullPath(item.imagePath):'assets/img/header.png'" style="margin:10px 0px 0px 85px;width: 80px;height: 80px;float:left;"/>
         <div style="color:white; margin:10px 0px 0px 16px;float:left;width:80%;">
           <span style="font-size: large">{{item.userName}}</span>
+      <!--<div>-->
+        <!--<img [src]="item.ImagePath?getFullPath(item.ImagePath):'assets/img/header.png'" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>-->
+        <!--<div style="color:white; margin:-85px 0px 50px 185px; ">-->
+          <!--<span style="font-size: x-large">{{item.UserName}}</span>-->
           <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>
         </div>
 

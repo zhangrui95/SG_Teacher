@@ -171,6 +171,11 @@ export class IndexPage {
      if(res['code']=='0'){
        this.load = true;
        this.sim_id=res['sim_id']
+
+       this.userData.setSimType(JSON.parse(res['list'][0]['p_type']).value)
+       this.userData.getSimType().then(res=>{
+         console.log(res)
+       })
        this.userData.setSimid(this.sim_id)
        this.userData.setProcessJsonData(res['list'][0]['p_data'])
        // this.http.testAddStus({sim_id: this.sim_id}).subscribe(res=>{

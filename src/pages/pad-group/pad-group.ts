@@ -6,6 +6,7 @@ import {UserData} from "../../providers/user-data";
 import {GroupBean, NextBean, ProcessJSONUtil} from "../../providers/ProcessJSONUtil";
 import {CommentDetailPage} from "../comment-detail/comment-detail";
 import {PadGroupListPage} from "../pad-group-list/pad-group-list";
+import {DecisionDetailPage} from "../decision-detail/decision-detail";
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class PadGroupPage {
   jsonData: any;
   currNode;
   sim_id = "111";
-  curr_nid={nid:""};
+  curr_nid = {nid: ""};
   keyInput = false;
   content;
   n_id;
@@ -29,11 +30,11 @@ export class PadGroupPage {
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
     // this.sim_id = navParams.data.sim_id + ""
-    this.userData.getSimid().then(val=>{
-      this.sim_id=val;
+    this.userData.getSimid().then(val => {
+      this.sim_id = val;
       console.log(val)
     })
-    this.userData.getUserID().then(value => this.userId=value)
+    this.userData.getUserID().then(value => this.userId = value)
     this.n_id = this.navParams.get('n_id');
   }
 
@@ -54,6 +55,7 @@ export class PadGroupPage {
     });
     toast.present(toast);
   }
+
   onNext(ev?) {
     this.resetTimer()
     if (ev == 'next') {
@@ -91,9 +93,9 @@ export class PadGroupPage {
         // this.list = this.processJson.parseGroup(this.jsonData, this.sim_id).GroupId
         let f = confirm("是否确定结束分组并进入下一步？");
         if (f) {
-          let remain_g_id=this.processJson.getRemainGroup(this.jsonData)
+          let remain_g_id = this.processJson.getRemainGroup(this.jsonData)
           beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-          this.sendNext({type: 'grouping', datas: beans,remain_g_id:remain_g_id,sim_id:this.sim_id})
+          this.sendNext({type: 'grouping', datas: beans, remain_g_id: remain_g_id, sim_id: this.sim_id})
           return;
         }
 
@@ -106,22 +108,22 @@ export class PadGroupPage {
       let action
       for (let s of this.currNode) {
         if (s.g_id == this.currGid) {
-          action = {action: 'screen', datas: s,n_id:this.currScence.n_id,sim_id:this.sim_id}
+          action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
         }
       }
-      if(this.sType=='group'){
-        action = {action: 'screen', datas: this.groupList,n_id:this.currScence.n_id,sim_id:this.sim_id}
+      if (this.sType == 'group') {
+        action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
       }
       this.getPushScreen(action)
     } else if (ev == 'InputShow') {
       this.keyInput = true;
       this.showFlag = false;
-    } else if(ev == 'mapShow'){
+    } else if (ev == 'mapShow') {
       this.mapShow = true;
-    }else if (ev.g_id) {
-      if(this.currNode.length<=1){
+    } else if (ev.g_id) {
+      if (this.currNode.length <= 1) {
         this.showToast("bottom", '尚未进行分组操作，不能切换')
-        return ;
+        return;
       }
       this.currGid = ev.g_id
       this.currScence = this.getSelectScence();
@@ -129,9 +131,9 @@ export class PadGroupPage {
         this.showToast("bottom", '该分组暂无法查看状态')
         return;
       }
-      this.curr_nid.nid=this.currScence.n_id;
+      this.curr_nid.nid = this.currScence.n_id;
 
-      console.log(this.currScence )
+      console.log(this.currScence)
       if (this.currScence) {
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
 
@@ -164,17 +166,24 @@ export class PadGroupPage {
       console.log(ev.g_id)
     } else if (ev == "grouped") {
       this.grouped = true;
-    }else  if(ev=='detail'){
-      if(this.sType = "group"){
+    } else if (ev == 'detail') {
+      if (this.sType == "group") {
+        alert('分组详情')
         this.navCtrl.push(PadGroupListPage)
-      }else{
-        if (this.sType =='weibo'||
-          this.sType =='danmu'||
-          this.sType =='storm'||
-          this.sType =='qq'||
-          this.sType =='baidu'
+      } else {
+        if (this.sType == 'weibo' ||
+          this.sType == 'danmu' ||
+          this.sType == 'storm' ||
+          this.sType == 'qq' ||
+          this.sType == 'baidu'
         ) {
-          this.navCtrl.push(CommentDetailPage,{n_id:this.curr_nid})
+          alert('评论详情')
+          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid})
+        }else if(this.sType == 'fork'){
+          alert('决策详情')
+          this.navCtrl.push(DecisionDetailPage, {n_id: this.curr_nid.nid})
+        }else{
+          this.showToast('bottom','当前场景不能进入详情')
         }
 
 
@@ -198,31 +207,33 @@ export class PadGroupPage {
 
       if (s.g_id == this.currGid) {
         if (s.s_data.length != 0) {
-          tempScence= s
+          tempScence = s
         }
       }
     }
-    if(tempScence){
+    if (tempScence) {
       return tempScence
-    }else{
+    } else {
       for (let s of this.currNode) {
 
         console.log(s.g_id)
         console.log(this.currGid)
         if (s.s_data.length != 0) {
-          this.currGid=s.g_id
-          tempScence= s
+          this.currGid = s.g_id
+          tempScence = s
         }
       }
       return tempScence
     }
   }
-  changeSType(sType){
+
+  changeSType(sType) {
     this.sType = '';
-    setTimeout(()=>{
-      this.sType=sType
-    },500)
+    setTimeout(() => {
+      this.sType = sType
+    }, 500)
   }
+
   currGid = '-1';
 
   free() {
@@ -250,9 +261,13 @@ export class PadGroupPage {
   }
 
   currScence;
-  addStart(params){
-    this.http.addExercisesStep(params).subscribe(res => {console.log(res)})
+
+  addStart(params) {
+    this.http.addExercisesStep(params).subscribe(res => {
+      console.log(res)
+    })
   }
+
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
 
@@ -275,7 +290,7 @@ export class PadGroupPage {
         return;
       }
 
-      this.curr_nid.nid=this.currScence.n_id;
+      this.curr_nid.nid = this.currScence.n_id;
 
       console.log(this.currScence)
       //tieba QQ weibo brain bullet select web
@@ -372,16 +387,16 @@ export class PadGroupPage {
         listScenes.push({
           g_id: startBean[0].g_id,
           n_id: startBean[0].curr_n_id,
-          type:startBean[0].type,
+          type: startBean[0].type,
           s_data: JSON.parse(res['list'][0]["s_data"])
         })
         this.currNode = listScenes
 
         this.processJson.setCurrNode(this.currNode)
         this.currScence = this.getSelectScence();
-        this.sType='default'
+        this.sType = 'default'
         console.log(this.currScence)
-        this.curr_nid.nid=this.currScence.n_id;
+        this.curr_nid.nid = this.currScence.n_id;
         let beans = this.processJson.getSendStart(this.sim_id)
         this.addStart({type: "start", datas: beans})
       })
@@ -398,15 +413,13 @@ export class PadGroupPage {
         console.log(curr)
         switch (action) {
           case 'phone_insert_group':
-            let arr= curr.list;
+            let arr = curr.list;
 
 
-
-
-            for(let g of arr){
-              for(let group of  this.groupList.GroupId){
-                if(g['g_id']==group.id){
-                  group.num=g['StuTotal']
+            for (let g of arr) {
+              for (let group of  this.groupList.GroupId) {
+                if (g['g_id'] == group.id) {
+                  group.num = g['StuTotal']
                 }
               }
             }
@@ -423,18 +436,28 @@ export class PadGroupPage {
 
   }
 
-  getcomment(){
-    const params = {sim_id: this.sim_id,g_id: this.currGid,u_id: this.userId, n_id: this.curr_nid.nid, answer: this.content}
+  getcomment() {
+    const params = {
+      sim_id: this.sim_id,
+      g_id: this.currGid,
+      u_id: this.userId,
+      n_id: this.curr_nid.nid,
+      answer: this.content
+    }
     this.http.addStuAnswer(params).subscribe(res => {
       console.log(res)
+
+
     });
+    this.keyInput = false;
+    this.content = '';
   }
 
-  getOut(){
+  getOut() {
     this.navCtrl.pop();
   }
 
-  mapOpen(){
+  mapOpen() {
     this.mapShow = false;
   }
 

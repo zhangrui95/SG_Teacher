@@ -22,9 +22,7 @@ export class DecisionDetailPage {
   }
 
   ionViewWillEnter() {
-    this.userData.getSimid().then(value=>{
-      this.sim_id = value;
-    });
+
     this.g_id = this.navParams.get('g_id');
     this.n_id = this.navParams.get('n_id');
     let params = {sim_id:this.sim_id,g_id:this.g_id,n_id:this.n_id};

@@ -10,6 +10,7 @@ export class UserData {
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
   public userToken;
+  public simType
 
   constructor(public events: Events,
               public storage: Storage) {
@@ -117,7 +118,16 @@ export class UserData {
       return value;
     });
   };
+  setSimType(token: string): void {
+    this.storage.set('simtype', token);
+    this.simType=token
+  };
 
+  getSimType(): Promise<string> {
+    return this.storage.get('simtype').then((value) => {
+      return value;
+    });
+  };
   getUsername(): Promise<string> {
     return this.storage.get('username').then((value) => {
       return value;

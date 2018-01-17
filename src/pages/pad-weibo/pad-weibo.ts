@@ -40,7 +40,23 @@ export class PadWeiboPage implements OnInit,OnDestroy {
         console.log(res)
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            this.items.push(JSON.parse(res)['list'])
+            let item = this.items.concat(JSON.parse(res)['list'])
+
+            console.log('---------------------------this.items.length----------------------'+this.items.length)
+            // console.log('-----------------this.items--------------'+JSON.stringify(this.items))
+            // console.log('-----------------this.items--------------'+this.items['UserName'])
+
+            for (var i = 0; i < item.length; i++) {
+              let url=item[i].imagePath;
+              // console.log('url:'+url)
+              if(url==''||url.length==0){
+                item[i].imagePath = "assets/img/header.png";
+              }else{
+                // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+                item[i].imagePath=this.http.getBaseurl() + url;
+              }
+            }
+            this.items=item
             setTimeout(() => {
 
               this.ion_content.scrollToBottom(500);

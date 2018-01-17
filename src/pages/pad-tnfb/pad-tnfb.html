@@ -1,8 +1,8 @@
 <ion-content #ion_content>
   <div #topBox class="top_box">
-    <div class="div_img">
-      <img src="assets/img/bdtb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
-    </div>
+    <!--<div class="div_img">-->
+      <!--<img src="assets/img/bdtb.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>-->
+    <!--</div>-->
     <div class="div_title">
       <span>{{title}}</span>
     </div>
@@ -27,12 +27,18 @@
   <!--</div>-->
   <div #list>
     <div *ngFor="let item of items;let n=index">
-      <div>
-        <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-        <h3 style="color:white; margin:-73px 0px 25px 185px; ">{{item.UserName}}</h3><br>
-        <h5 style="color: white;margin: -30px 0px 25px 185px;">第{{n+1}}楼 | {{item.createtime}}</h5>
-        <div style="background-color: black;background: rgba(0,0,0,0.5);float: left;margin: -20px 0px 0px 185px;width: 71%;height: auto;">
-          <h5 style="color:#d8d8d8;margin: 10px 20px 10px 25px;">
+      <div style="margin:50px 0px 0px 5px;">
+        <img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px;float:left;"/>
+        <div style="color:white; margin:10px 0px 0px 16px;float:left;width:80%;">
+          <span style="font-size: large">{{item.userName}}</span>
+          <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>
+        </div>
+
+        <span style="color: white;margin: 25px 0px 25px 15px;float:left;width:80%;font-size: initial;">
+          第{{n+1}}楼 | {{item.createtime}}
+        </span>
+        <div style="width: 85%">
+          <h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">
             {{item.answer}}
           </h5>
         </div>

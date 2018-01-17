@@ -20,7 +20,8 @@ import {Subscription} from "rxjs/Subscription";
 })
 
 export class PadBdtbPage implements OnInit,OnDestroy {
-  @ViewChild('ion_content') ion_content
+  @ViewChild('ion_content')
+  ion_content
 
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
@@ -43,9 +44,28 @@ export class PadBdtbPage implements OnInit,OnDestroy {
       this.ws.messages.subscribe(res => {
         console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
         console.log(res)
+        console.log('-------------------res.list--------------------')
+        console.log(JSON.parse(res))
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            this.items.push(JSON.parse(res)['list'])
+            // this.items.push(JSON.parse(res)['list'])
+            let item = this.items.concat(JSON.parse(res)['list'])
+
+            console.log('---------------------------this.items.length----------------------'+this.items.length)
+            // console.log('-----------------this.items--------------'+JSON.stringify(this.items))
+            // console.log('-----------------this.items--------------'+this.items['UserName'])
+
+            for (var i = 0; i < item.length; i++) {
+              let url=item[i].imagePath;
+              // console.log('url:'+url)
+              if(url==''||url.length==0){
+                item[i].imagePath = "assets/img/header.png";
+              }else{
+                // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
+                item[i].imagePath=this.http.getBaseurl() + url;
+              }
+            }
+            this.items=item
             setTimeout(() => {
 
               this.ion_content.scrollToBottom(500);
@@ -128,9 +148,10 @@ export class PadBdtbPage implements OnInit,OnDestroy {
     console.log('sim_id:'+this.param.sim_id)
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
-
+      // console.log('this.items:'+res['list'].length)
       for (var i = 0; i < res['list'].length; i++) {
         let url=res['list'][i].ImagePath;
+        // console.log('url:'+url)
         if(url==''||url.length==0){
           res['list'][i].ImagePath = "assets/img/header.png";
         }else{
@@ -140,6 +161,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
       }
 
       this.items = res['list']
+
       setTimeout(() => {
 
         this.ion_content.scrollToBottom(500);

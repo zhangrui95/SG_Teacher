@@ -12,23 +12,22 @@
   </div>
   <div #list>
     <div *ngFor="let item of items;let n=index">
-      <div>
-        <img [src]="item.ImagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-        <div style="color:white; margin:-85px 0px 50px 185px; ">
-          <span style="font-size: x-large">{{item.UserName}}</span>
+      <div style="margin:50px 0px 0px 5px;">
+        <img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px;float:left;"/>
+        <div style="color:white; margin:10px 0px 0px 16px;float:left;width:80%;">
+          <span style="font-size: large">{{item.userName}}</span>
           <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>
         </div>
-        <h5 style="color: white;margin: -30px 0px 25px 185px;">第{{n+1}}楼 | {{item.createtime}}</h5>
-        <div style="float: right;margin:-85px 115px 0px 0px;">
-          <!--<img src="../../assets/img/view.png" />-->
-          <!--<h1 style="color:#d8d8d8;float:right;margin: 3px 0px 0px 5px;">666</h1>-->
-        </div>
+
+        <span style="color: white;margin: 25px 0px 25px 15px;float:left;width:80%;font-size: initial;">
+          第{{n+1}}楼 | {{item.createtime}}
+        </span>
         <div style="width: 85%">
-          <h5 style="color:#d8d8d8;margin: -13px 0px 0px 185px;display: inline-block;">
+          <h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">
             {{item.answer}}
           </h5>
         </div>
-        <hr style="border-top: 1px dashed #929292;width: 80%;margin: 50px 0px 15px 95px"/>
+        <hr style="border-top: 1px dashed white;width: 80%;margin: 50px 0px 15px 95px"/>
       </div>
     </div>
   </div>

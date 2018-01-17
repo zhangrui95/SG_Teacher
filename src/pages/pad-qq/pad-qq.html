@@ -1,28 +1,49 @@
 <ion-content #ion_content class="cards-bg social-cards">
   <div #topBox class="top_box">
     <div class="div_img">
-      <img src="assets/img/qqun.png" style="margin: 5px 0px 0px 6px;width: 41px;height: 44px"/>
+      <img src="assets/img/qqun.png"/>
     </div>
     <div class="div_title">
-      <span>dasdasdasdas</span>
+      <span>{{title}}</span>
     </div>
     <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
     <p class="p_content">
-      dasdasdasdasdsd</p>
+      {{content}}</p>
   </div>
   <div #list>
+    <!--<div *ngFor="let item of items;let n=index">-->
+      <!--<div style="margin:50px 0px 0px 5px;">-->
+        <!--<img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px;float:left;"/>-->
+        <!--<div style="color:white; margin:10px 0px 0px 16px;float:left;width:80%;">-->
+          <!--<span style="font-size: large">{{item.userName}}</span>-->
+          <!--<span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>-->
+        <!--</div>-->
+
+        <!--<span style="color: white;margin: 25px 0px 25px 15px;float:left;width:80%;font-size: initial;">-->
+          <!--第{{n+1}}楼 | {{item.createtime}}-->
+        <!--</span>-->
+        <!--<div style="width: 85%">-->
+          <!--<h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">-->
+            <!--{{item.answer}}-->
+          <!--</h5>-->
+        <!--</div>-->
+        <!--<hr style="border-top: 1px dashed white;width: 80%;margin: 50px 0px 15px 95px"/>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
     <!--<div *ngFor="let item of items">-->
       <!--<div *ngIf="item.UserName!=name" style="float: left">-->
         <div style="">
-          <img [src]="" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
-          <div style="color:white; margin:-85px 0px 50px 185px; ">
-            <span style="font-size: x-large">dasdasdasdas</span>
-            <span style="font-size: medium;padding-left: 10px">dasdasdasdasd</span>
+          <img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
+          <div style="color:white; margin:-85px 0px 50px 185px; width:80%;">
+            <span style="font-size: x-large">{{item.userName}}</span>
+            <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>
           </div>
         </div>
         <div
           style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: -5px 0px 0px 170px;width: 43%;height: auto;float: left">
-          <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">dasdsadasdasd</h5>
+          <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>
         </div>
       <!--</div>-->
       <!--<div *ngIf="item.UserName==name" style="float: right">-->

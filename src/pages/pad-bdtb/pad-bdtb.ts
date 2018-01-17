@@ -50,9 +50,19 @@ export class PadBdtbPage implements OnInit,OnDestroy {
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
             // this.items.push(JSON.parse(res)['list'])
-            let item = this.items.concat(JSON.parse(res)['list'])
-            this.items=item
-            this.refresh()
+
+
+            let list=JSON.parse(res)['list'];
+            for(let item of list){
+              if(item.n_id==this.n_id){
+                let item = this.items.concat(JSON.parse(res)['list'])
+                this.items=item
+                this.refresh()
+                break;
+              }
+            }
+
+
           }
         }
       })

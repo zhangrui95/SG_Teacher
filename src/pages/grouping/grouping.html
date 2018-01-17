@@ -3,7 +3,7 @@
     <div class="group-list-box" *ngFor="let item of list.GroupId">
       <div class="group-list">
         <div class="float-l head-icon">
-          <img src="{{item.img}}"/>
+          <img src="{{item.img?getFullPath(item.img):'assets/img/header.png'}}"/>
         </div>
         <div class="float-l group-name">{{item.text}}</div>
         <div class="float-l group-num">{{item.num?item.num:'0'}}/{{item.limit}}</div>

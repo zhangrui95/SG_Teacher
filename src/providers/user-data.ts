@@ -118,6 +118,17 @@ export class UserData {
       return value;
     });
   };
+  setHasGrouped(token: string): void {
+    this.storage.set('hasgroup', token);
+    this.simType=token
+  };
+
+  getHasGrouped(): Promise<string> {
+    return this.storage.get('hasgroup').then((value) => {
+      return value;
+    });
+  };
+
   setSimType(token: string): void {
     this.storage.set('simtype', token);
     this.simType=token

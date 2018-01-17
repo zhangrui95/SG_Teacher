@@ -121,7 +121,7 @@ export class ProxyHttpService {
   }
 
   getBaseurl(){
-    return ProxyHttpService.IP_PORT+ProxyHttpService.PROJECT_PACKAGE;
+    return ProxyHttpService.IP_PORT;
   }
 
   _post(url, params?: any) {

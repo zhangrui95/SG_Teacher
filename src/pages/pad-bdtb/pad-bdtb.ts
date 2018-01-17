@@ -51,21 +51,6 @@ export class PadBdtbPage implements OnInit,OnDestroy {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
             // this.items.push(JSON.parse(res)['list'])
             let item = this.items.concat(JSON.parse(res)['list'])
-
-            console.log('---------------------------this.items.length----------------------'+this.items.length)
-            // console.log('-----------------this.items--------------'+JSON.stringify(this.items))
-            // console.log('-----------------this.items--------------'+this.items['UserName'])
-
-            // for (var i = 0; i < item.length; i++) {
-            //   let url=item[i].imagePath;
-            //   // console.log('url:'+url)
-            //   if(url==''||url.length==0){
-            //     item[i].imagePath = "assets/img/header.png";
-            //   }else{
-            //     // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
-            //     item[i].imagePath=this.http.getBaseurl() + url;
-            //   }
-            // }
             this.items=item
             this.refresh()
           }
@@ -90,26 +75,6 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   content;
   param;
   items = [];
-  // items = [
-  //   {
-  //     src: '../../assets/img/user.png',
-  //     name: '洋洋',
-  //     time: '第1楼 | 今天18:54',
-  //     nr: '好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教,好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   },
-  //   {
-  //     src: '../../assets/img/user.png',
-  //     name: '龙龙',
-  //     time: '第2楼 | 今天18:54',
-  //     nr: '好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教,好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   },
-  //   {
-  //     src: '../../assets/img/user.png',
-  //     name: '旺旺',
-  //     time: '第3楼 | 今天18:54',
-  //     nr: '好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教,好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   }
-  // ];
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -122,19 +87,6 @@ export class PadBdtbPage implements OnInit,OnDestroy {
     this.datas = this.s_data.s_data.componentList[0].data.fillData;
     this.title = this.datas.title;
     this.content = this.datas.content;
-
-    // if(this.content==""){
-    //   this.show_hide.nativeElement.style.display = 'none';
-    //   this.hr_hid.nativeElement.style.display = 'none';
-    //
-    // }
-    // else {
-    //   this.show_hide.nativeElement.style.display = 'block';
-    //   this.hr_hid.nativeElement.style.display = 'block';
-    // }
-
-    // this.title = 'jdsiajdoi';
-    // this.content = '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十';
   }
 
   getAnswerOfStuList() {
@@ -146,18 +98,6 @@ export class PadBdtbPage implements OnInit,OnDestroy {
     console.log('sim_id:'+this.param.sim_id)
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
-      // console.log('this.items:'+res['list'].length)
-      // for (var i = 0; i < res['list'].length; i++) {
-      //   let url=res['list'][i].ImagePath;
-      //   // console.log('url:'+url)
-      //   if(url==''||url.length==0){
-      //     res['list'][i].ImagePath = "assets/img/header.png";
-      //   }else{
-      //     // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
-      //     res['list'][i].ImagePath=this.http.getBaseurl() + url;
-      //   }
-      // }
-
       this.items = res['list']
       // this.ion_content.scrollToBottom(500);
 

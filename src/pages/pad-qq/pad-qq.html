@@ -35,7 +35,7 @@
     <!--<div *ngFor="let item of items">-->
       <!--<div *ngIf="item.UserName!=name" style="float: left">-->
         <div style="">
-          <img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
+          <img [src]="item.imagePath?getFullPath(item.imagePath):'assets/img/header.png'" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>
           <div style="color:white; margin:-85px 0px 50px 185px; width:80%;">
             <span style="font-size: x-large">{{item.userName}}</span>
             <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>

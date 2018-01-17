@@ -47,36 +47,28 @@ export class PadTnfbPage implements OnInit,OnDestroy {
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
             let item = this.items.concat(JSON.parse(res)['list'])
-
-            console.log('---------------------------this.items.length----------------------'+this.items.length)
-            // console.log('-----------------this.items--------------'+JSON.stringify(this.items))
-            // console.log('-----------------this.items--------------'+this.items['UserName'])
-
-            for (var i = 0; i < item.length; i++) {
-              let url=item[i].imagePath;
-              // console.log('url:'+url)
-              if(url==''||url.length==0){
-                item[i].imagePath = "assets/img/header.png";
-              }else{
-                // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
-                item[i].imagePath=this.http.getBaseurl() + url;
-              }
-            }
             this.items=item
-            setTimeout(() => {
-
-              this.ion_content.scrollToBottom(500);
-              console.log(this.ion_content.scrollToBottom)
-            }, 1000)
+            this.refresh()
           }
         }
       })
     }
   }
 
+  refresh(){
+    setTimeout(()=>{
+      this.ion_content.resize();
+      this.ion_content.scrollToBottom(500);
+    },500)
+
+  }
+
   ngOnDestroy() {
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
+  }
+  getFullPath(path){
+    return this.http.getBaseurl()+path
   }
 
   n_id;
@@ -87,28 +79,6 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   param;
   items = [];
 
-  // items=[
-  //   {
-  //     src:'../../assets/img/user.png',
-  //     name:'洋洋',
-  //     nr:'好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   },
-  //   {
-  //     src:'../../assets/img/user.png',
-  //     name:'阿呆',
-  //     nr:'好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   },
-  //   {
-  //     src:'../../assets/img/user.png',
-  //     name:'朵拉',
-  //     nr:'好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   },
-  //   {
-  //     src:'../../assets/img/user.png',
-  //     name:'对讲机',
-  //     nr:'好的,我啊想跳极大祭司的技术地阿斯加屌丝啊接地极道具卡三角地哦啊是降低挂号费基地哦啊是基督教'
-  //   }
-  // ]
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public ws: ServerSocket,
@@ -131,23 +101,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
     console.log('sim_id:'+this.param.sim_id)
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {
-
-      for (var i = 0; i < res['list'].length; i++) {
-        let url=res['list'][i].ImagePath;
-        if(url==''||url.length==0){
-          res['list'][i].ImagePath = "assets/img/header.png";
-        }else{
-          // res['list'][i].ImagePath=this.sanitizer.bypassSecurityTrustResourceUrl(this.http.getBaseurl() + url);
-          res['list'][i].ImagePath=this.http.getBaseurl() + url;
-        }
-      }
-
       this.items = res['list']
-      console.log(this.items)
-      setTimeout(() => {
-
-        this.ion_content.scrollToBottom(500);
-      }, 1000)
     });
   }
 

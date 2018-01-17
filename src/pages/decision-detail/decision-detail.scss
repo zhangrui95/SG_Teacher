@@ -1,0 +1,84 @@
+page-decision-detail {
+  .toolbar-title{
+    font-size: 18px;
+    font-weight: 100;
+  }
+  .top-words{
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 24px;
+    width: 90%;
+    margin: 40px auto;
+    color: #fff;
+    border-radius: 2px;
+  }
+  .choice-list-box{
+    width: 90%;
+    margin: 10px auto;
+    color: #fff;
+    border-bottom: 1px dashed #eee;
+    overflow: hidden;
+    padding: 10px;
+  }
+  .choice-style{
+    background: #1aa7b8;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    line-height: 60px;
+    border-radius: 50px;
+    text-align: center;
+  }
+  .choice-person-num{
+    width: 60px;
+    text-align: center;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
+  }
+  .til-box{
+    width: 70%;
+    .yellow-box{
+      width: calc(70% - 50px);
+      background: #ffbf00;
+      border-radius: 50px;
+      height: 15px;
+      margin: 15px 0;
+    }
+    .num-bfb{
+      width: 50px;
+      text-align: center;
+      margin: 12px 0;
+    }
+  }
+  .look-stu-btn{
+    text-align: center;
+    height: 40px;
+    padding: 0 20px;
+    border: 1px solid #ffbf00;
+    color: #ffbf00;
+    background: none;
+    line-height: 40px;
+  }
+  .stu-list{
+    float: left;
+    width: 90%;
+    padding: 0 60px 0 0;
+    li{
+      float: left;
+      border: 1px solid #fff;
+      height: 38px;
+      line-height: 38px;
+      width: 100px;
+      text-align: center;
+      margin: 8px;
+    }
+  }
+  .choice-list-box-height{
+    height: 102px;
+  }
+  .choice-list-box-auto{
+    height: auto;
+  }
+}

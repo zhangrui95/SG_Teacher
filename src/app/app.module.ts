@@ -71,6 +71,7 @@ import {PadDanmuPage} from "../pages/pad-danmu/pad-danmu";
 import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
 import {PadDefaultPage} from "../pages/pad-default/pad-default";
 import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
+import {DecisionDetailPage} from "../pages/decision-detail/decision-detail";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -121,7 +122,7 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
     PadDanmuPage,
     PadDecisionPage,
     PadDefaultPage,
-    PadDecisionPage,
+    DecisionDetailPage,
     CommentDetailPage
   ],
   imports: [
@@ -151,6 +152,7 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
         // { component: IndexPage, name: 'IndexPage', segment: 'index' },
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
+        { component: DecisionDetailPage, name: 'DecisionDetailPage', segment: 'decisionDetail' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
         { component: RecordsListPage, name: 'RecordsListPage', segment: 'recordsList' },
@@ -236,7 +238,8 @@ import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
     PadDecisionPage,
     CommentDetailPage,
     PadDecisionPage,
-    PadDefaultPage
+    PadDefaultPage,
+    DecisionDetailPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

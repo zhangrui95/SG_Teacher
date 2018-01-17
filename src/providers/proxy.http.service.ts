@@ -112,6 +112,9 @@ export class ProxyHttpService {
     return this._get('/tabletController/addDiscussion.do', params);
   }
 
+  getDecide(params){
+    return this._get('/tabletController/getDecide.do', params);
+  }
 
   addStuAnswer(params){
     return this._post("/phoneAppController/addStuAnswer.do",params);

@@ -4,7 +4,7 @@
     <!--<div style="color: white;font-size:large;margin:100px 0px 20px 0px;">{{issue}}</div>-->
   <!--<form class="form-box">-->
     <label style="font-size:larger;color:white;margin-bottom:20px; display:-webkit-box;" *ngFor="let item of select;let n = index" (change)="getForm(item)">
-      <input type="radio" name="choice" /><span class="word">{{item.value}}</span><br>
+      <input type="radio" disabled name="choice" /><span class="word">{{item.value}}</span><br>
     </label>
     <!--<label *ngFor="let item of options" style="font-size:larger;color:white;margin-bottom:20px; display:-webkit-box;">-->
       <!--<input type="radio" name="choice" /><span class="option">{{item.option}}</span><span class="word">{{item.text}}</span><br>-->

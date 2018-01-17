@@ -28,9 +28,10 @@ export class PadGroupPage {
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
     // this.ws.connect();
-    this.sim_id = navParams.data.sim_id + ""
+    // this.sim_id = navParams.data.sim_id + ""
     this.userData.getSimid().then(val=>{
       this.sim_id=val;
+      console.log(val)
     })
     this.userData.getUserID().then(value => this.userId=value)
     this.n_id = this.navParams.get('n_id');
@@ -62,6 +63,7 @@ export class PadGroupPage {
       }
       if (!this.currScence) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
+
         return;
       }
       let beans = new Array<NextBean>();
@@ -104,11 +106,11 @@ export class PadGroupPage {
       let action
       for (let s of this.currNode) {
         if (s.g_id == this.currGid) {
-          action = {action: 'screen', datas: s}
+          action = {action: 'screen', datas: s,n_id:this.currScence.n_id,sim_id:this.sim_id}
         }
       }
       if(this.sType=='group'){
-        action = {action: 'screen', datas: this.groupList}
+        action = {action: 'screen', datas: this.groupList,n_id:this.currScence.n_id,sim_id:this.sim_id}
       }
       this.getPushScreen(action)
     } else if (ev == 'InputShow') {
@@ -188,17 +190,31 @@ export class PadGroupPage {
     if (this.currNode && this.currNode.length == 1) {
       return this.currNode[0]
     }
+    let tempScence
     for (let s of this.currNode) {
 
       console.log(s.g_id)
       console.log(this.currGid)
 
       if (s.g_id == this.currGid) {
-        if (s.s_data.length == 0) {
-          return null
+        if (s.s_data.length != 0) {
+          tempScence= s
         }
-        return s
       }
+    }
+    if(tempScence){
+      return tempScence
+    }else{
+      for (let s of this.currNode) {
+
+        console.log(s.g_id)
+        console.log(this.currGid)
+        if (s.s_data.length != 0) {
+          this.currGid=s.g_id
+          tempScence= s
+        }
+      }
+      return tempScence
     }
   }
   changeSType(sType){
@@ -252,6 +268,8 @@ export class PadGroupPage {
 
       this.processJson.setCurrNode(this.currNode)
       this.currScence = this.getSelectScence();
+      console.log("*-*-*-*-*--*--*-*-*-*-*++++++++")
+      console.log(this.currScence)
       if (!this.currScence) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         return;
@@ -354,6 +372,7 @@ export class PadGroupPage {
         listScenes.push({
           g_id: startBean[0].g_id,
           n_id: startBean[0].curr_n_id,
+          type:startBean[0].type,
           s_data: JSON.parse(res['list'][0]["s_data"])
         })
         this.currNode = listScenes

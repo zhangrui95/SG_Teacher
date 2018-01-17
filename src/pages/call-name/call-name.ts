@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {UserData} from "../../providers/user-data";
@@ -13,50 +13,59 @@ export class CallNamePage {
   list = [];
   StuIndex;
   sim_id;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
               public http: ProxyHttpService,
-              public userData:UserData) {
-    this.userData.getSimid().then(val=>{
-      this.sim_id=val;
-    })
+              public userData: UserData) {
+
   }
 
   ionViewDidLoad() {
+    this.userData.getSimid().then(val => {
+      console.log('fucker')
+      console.log(val)
+      this.sim_id = val;
+      const params = {sim_id: this.sim_id}
+      this.http.getAllStuList(params).subscribe(res => {
+        this.list = res['stuList'];
+      });
+    })
     // const params = {sim_id: this.sim_id}
-    const params = {sim_id: this.userData}
-    this.http.getAllStuList(params).subscribe(res => {
-      this.list  = res['stuList'];
-    });
-  }
-  inRandom=false;
 
-  randomCheck(){
-    if(this.inRandom){
+  }
+  getFullpath(path){
+   return  this.http.getBaseurl()+path
+  }
+  inRandom = false;
+
+  randomCheck() {
+    if (this.inRandom) {
       return
     }
-    this.inRandom=true;
-    let times=0;
-    let int=setInterval(()=>{
+    this.inRandom = true;
+    let times = 0;
+    let int = setInterval(() => {
       times++
-      if(times<=20){
-        let random=Math.floor(Math.random()*this.list.length)
+      if (times <= 20) {
+        let random = Math.floor(Math.random() * this.list.length)
         console.log(random)
-        this.StuIndex =random
+        this.StuIndex = random
 
-      }else{
+      } else {
         clearInterval(int)
-        this.inRandom=false;
+        this.inRandom = false;
       }
-    },500);
+    }, 500);
     // this.StuIndex
   }
-  callStu(i){
+
+  callStu(i) {
     this.StuIndex = i;
   }
 
-  callName(){
+  callName() {
     let u_id = this.list[this.StuIndex]['Id'];
     const params = {u_id: u_id}
     this.http.getPushCallStuId(params).subscribe(res => {

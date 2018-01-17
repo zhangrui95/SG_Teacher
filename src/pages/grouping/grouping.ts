@@ -49,7 +49,9 @@ export class GroupingPage implements OnInit,OnDestroy{
       })
     }
   }
-
+  getFullPath(path){
+    return this.http.getBaseurl()+path
+  }
   @Input()
   sim_id =new Object()
   @Input()

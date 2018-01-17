@@ -156,19 +156,23 @@ export class PadGroupPage {
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
           this.changeSType('fork')
-        } else {
+        } else if (this.currScence.s_data && this.currScence.s_data.length > 0) {
 
           this.changeSType('default')
+        } else {
+          this.changeSType('empty')
         }
-      } else {
-        this.changeSType('empty')
       }
       console.log(ev.g_id)
     } else if (ev == "grouped") {
       this.grouped = true;
     } else if (ev == 'detail') {
       if (this.sType == "group") {
-        alert('分组详情')
+        if (!this.grouped) {
+          this.showToast("bottom", '请先选择分组类型')
+          return;
+        }
+
         this.navCtrl.push(PadGroupListPage)
       } else {
         if (this.sType == 'weibo' ||
@@ -177,13 +181,11 @@ export class PadGroupPage {
           this.sType == 'qq' ||
           this.sType == 'baidu'
         ) {
-          alert('评论详情')
           this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid})
-        }else if(this.sType == 'fork'){
-          alert('决策详情')
+        } else if (this.sType == 'fork') {
           this.navCtrl.push(DecisionDetailPage, {n_id: this.curr_nid.nid})
-        }else{
-          this.showToast('bottom','当前场景不能进入详情')
+        } else {
+          this.showToast('bottom', '当前场景不能进入详情')
         }
 
 
@@ -370,6 +372,7 @@ export class PadGroupPage {
   }
 
   ionViewDidLoad() {
+
     this.counter = setTimeout(() => {
       this.showFlag = false;
     }, 5000)

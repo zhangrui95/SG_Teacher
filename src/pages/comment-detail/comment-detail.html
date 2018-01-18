@@ -7,6 +7,7 @@
   <div class="left-box">
     <div class="til-box">学生姓名 [{{StuNum}}] </div>
     <div class="scroll-right-box">
+      <div *ngIf="noDate" class="no-date">暂无数据</div>
       <dl *ngFor="let item of list;let i = index;" (click)="getStuClick(i)">
         <dt>
           <img src="{{ item.ImagePath?getFullPath(item.ImagePath):'assets/img/header.png'}}" class="{{StuIndex === i?'img-xm img-choice-border':'img-xm'}}"/>
@@ -19,8 +20,10 @@
   <div class="right-box">
     <div class="til-box pad-left">讨论详情 [{{commentNum}}] </div>
     <div>
+     <div *ngIf="noComment" class="no-date">暂无数据</div>
      <div class="comment" *ngFor="let comment of commentList">{{comment.answer}}</div>
     </div>
   </div>
 </ion-content>
+
 

@@ -17,6 +17,8 @@ export class CommentDetailPage {
   StuIndex = 0;
   sim_id;
   n_id;
+  noDate = false;
+  noComment = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService,public userData:UserData) {
 
     this.n_id = this.navParams.get('n_id');
@@ -33,22 +35,36 @@ export class CommentDetailPage {
       this.sim_id=val;
       const params = {sim_id: this.sim_id, n_id: this.n_id}
       this.http.getComment(params).subscribe(res => {
-        this.list = res['stuList'];
-        this.StuNum = res['stuList'].length;
-
-        this.commentList = res['stuList'][0].commentList;
-        this.commentNum = this.commentList.length;
-        for(let i in this.list){
-          this.StuNumList.push(res['stuList'][i].commentList.length);
+        if(res['stuList'] == ''){
+          this.noDate = true;
+        }else{
+          this.noDate = false;
+          this.list = res['stuList'];
+          this.StuNum = res['stuList'].length;
+          if(res['stuList'][0].commentList == ''){
+            this.noComment = true;
+          }else{
+            this.noComment = false;
+            this.commentList = res['stuList'][0].commentList;
+            this.commentNum = this.commentList.length;
+            for(let i in this.list){
+              this.StuNumList.push(res['stuList'][i].commentList.length);
+            }
+          }
         }
       });
     })
 
   }
   getStuClick(i){
-    this.commentList = this.list[i].commentList;
-    this.commentNum = this.commentList.length;
-    this.StuIndex = i;
+    if(this.list[i].commentList == ''){
+      this.noComment = true;
+    }else{
+      this.noComment = false;
+      this.commentList = this.list[i].commentList;
+      this.commentNum = this.commentList.length;
+      this.StuIndex = i;
+    }
   }
 
 }

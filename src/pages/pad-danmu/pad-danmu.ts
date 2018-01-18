@@ -4,6 +4,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Subscription} from "rxjs/Subscription";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
+import {UserData} from "../../providers/user-data";
 
 /**
  * Generated class for the BaidutbPage page.
@@ -32,6 +33,7 @@ export class PadDanmuPage implements OnInit,OnDestroy {
   @ViewChild('list') list: ElementRef;
 
   ngOnInit() {
+
     console.log("grouping====================>")
     console.log(this.s_data.s_data.componentList[0].data.fillData)
     this.n_id=this.s_data.n_id;
@@ -89,6 +91,7 @@ export class PadDanmuPage implements OnInit,OnDestroy {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public ws: ServerSocket,
+              public userData:UserData,
               public http: ProxyHttpService) {
 
   }
@@ -100,22 +103,26 @@ export class PadDanmuPage implements OnInit,OnDestroy {
   }
 
   getAnswerOfStuList() {
-    this.param = {
-      n_id: this.n_id,
-      g_id: this.g_id,
-      sim_id: this.sim_id
-    };
-    console.log('sim_id:'+this.param.sim_id)
-    console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
-    this.http.getAnswerOfStuList(this.param).subscribe(res => {
-      this.items = res['list']
-    });
+    this.userData.getSimid().then(res=>{
+      this.sim_id=res;
+      this.param = {
+        n_id: this.n_id,
+        g_id: this.g_id,
+        sim_id: this.sim_id
+      };
+      console.log('sim_id:'+this.param.sim_id)
+      console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
+      this.http.getAnswerOfStuList(this.param).subscribe(res => {
+        this.items = res['list']
+      });
+    })
+
   }
 
   private socketSubscription: Subscription
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BaidutbPage');
+
   }
 
   // ngAfterViewInit() {

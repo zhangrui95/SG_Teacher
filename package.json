@@ -12,7 +12,7 @@
     "build": "ionic-app-scripts build",
     "clean": "ionic-app-scripts clean",
     "lint": "ionic-app-scripts lint",
-    "ionic:android": "ionic cordova run android",
+    "ionic:ios": "ionic cordova run ios",
     "ionic:build": "npm run build",
     "ionic:serve": "npm run serve",
     "ionic:lint": "npm run lint"

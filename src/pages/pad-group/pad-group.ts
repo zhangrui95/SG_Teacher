@@ -139,8 +139,8 @@ export class PadGroupPage {
         return;
       }
       this.curr_nid.nid = this.currScence.n_id;
+
       console.log(this.currScence)
-      console.log(this.currNode)
       if (this.currScence) {
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
 

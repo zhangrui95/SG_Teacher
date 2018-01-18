@@ -21,9 +21,9 @@ page-pad-tnfb {
   }
   .p_content {
     color: white;
-    margin: 15px 10px 25px 70px;
     display: inline-block;
-    font-size: large;
+    font-size: 20px;
+    line-height: 30px;
     //overflow: hidden;
     //text-overflow: ellipsis;
     //display: -webkit-box;
@@ -34,9 +34,10 @@ page-pad-tnfb {
     background-color: black;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 1em;
-    margin: 65px 0px 0px 90px;
+    margin: 65px 0px 40px 90px;
     width: 80%;
     min-height: 100px;
+    padding: 10px 20px;
   }
   .div_img {
     background-color: white;
@@ -51,15 +52,11 @@ page-pad-tnfb {
     width: 41px;
     height: 44px
   }
-  .div_title {
-    margin: 60px 70px -20px 0px;
-    display: inline-block;
-  }
 
-  .div_title span {
+  .til-box{
+    font-size: 26px;
     color: white;
     float: left;
-    margin: -40px 0px 0px 70px;
-    font-size: x-large;
+    margin: 5px 0;
   }
 }

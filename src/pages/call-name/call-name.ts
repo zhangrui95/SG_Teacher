@@ -11,7 +11,7 @@ import {UserData} from "../../providers/user-data";
 })
 export class CallNamePage {
   list = [];
-  StuIndex;
+  StuIndex = -1;
   sim_id;
 
   constructor(public navCtrl: NavController,
@@ -66,11 +66,15 @@ export class CallNamePage {
   }
 
   callName() {
-    let u_id = this.list[this.StuIndex]['Id'];
-    const params = {u_id: u_id}
-    this.http.getPushCallStuId(params).subscribe(res => {
-      this.showToast('bottom', res['msg']);
-    });
+    if(this.StuIndex == -1){
+      this.showToast('bottom', '请选择学生');
+    }else{
+      let u_id = this.list[this.StuIndex]['Id'];
+      const params = {u_id: u_id}
+      this.http.getPushCallStuId(params).subscribe(res => {
+        this.showToast('bottom', res['msg']);
+      });
+    }
   }
 
   showToast(position: string, text: string) {

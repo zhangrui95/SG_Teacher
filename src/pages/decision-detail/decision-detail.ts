@@ -22,29 +22,31 @@ export class DecisionDetailPage {
   }
 
   ionViewWillEnter() {
-
     this.g_id = this.navParams.get('g_id');
     this.n_id = this.navParams.get('n_id');
-    let params = {sim_id:this.sim_id,g_id:this.g_id,n_id:this.n_id};
-    this.http.getDecide(params).subscribe(res => {
-      this.list = res['select'];
-      this.StuTotal = res['StuTotal'];
-      this.title = res['text'];
-      for(let i in this.list){
-        this.list[i]['lookStu'] = false;
-        this.list[i]['btnText'] = '查看投票学生';
-        let Num = String.fromCharCode(65 + parseInt(i));
-        this.Choice.push(Num);
-        let percent;
-        if(this.list[i].total == 0){
-          percent = 0;
-        }else{
-          percent = parseInt(this.list[i].total) / parseInt(this.StuTotal)*100;
+    this.userData.getSimid().then(value=>{
+      this.sim_id = value;
+      let params = {sim_id:this.sim_id,g_id:this.g_id,n_id:this.n_id};
+      this.http.getDecide(params).subscribe(res => {
+        this.list = res['select'];
+        this.StuTotal = res['StuTotal'];
+        this.title = res['text'];
+        for(let i in this.list){
+          this.list[i]['lookStu'] = false;
+          this.list[i]['btnText'] = '查看投票学生';
+          let Num = String.fromCharCode(65 + parseInt(i));
+          this.Choice.push(Num);
+          let percent;
+          if(this.list[i].total == 0){
+            percent = 0;
+          }else{
+            percent = parseInt(this.list[i].total) / parseInt(this.StuTotal)*100;
+          }
+          this.percentageNum.push(percent +'%');
+          let p =  {width: 'calc('+ percent +'% - 50px)'};
+          this.percentage.push(p);
         }
-        this.percentageNum.push(percent +'%');
-        let p =  {width: 'calc('+ percent +'% - 50px)'};
-        this.percentage.push(p);
-      }
+      });
     });
   }
 

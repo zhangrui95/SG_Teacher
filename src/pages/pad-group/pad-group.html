@@ -5,7 +5,7 @@
     <!--<img src="assets/img/user.png" class="head-img" (click)="getUser()"/>-->
   </ion-navbar>
 </ion-header>
-<page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList" ></page-rsidebar>
+<page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList"  [sType]="sType"></page-rsidebar>
 <page-operation (ev)="onNext($event)" *ngIf="showFlag" [SimId]="sim_id" ></page-operation>
 <ion-content  (click)="onbActive()">
   <page-pad-default *ngIf="sType=='empty'"></page-pad-default>

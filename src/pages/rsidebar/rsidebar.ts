@@ -21,6 +21,7 @@ export class RsidebarPage {
   groupList=new GroupBean()
   @Output()
   onNext= new EventEmitter<any>();
+  @Input() sType;
 
   isGold=false;
 

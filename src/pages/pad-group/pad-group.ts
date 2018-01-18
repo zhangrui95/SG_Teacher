@@ -181,9 +181,9 @@ export class PadGroupPage {
           this.sType == 'qq' ||
           this.sType == 'baidu'
         ) {
-          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid})
+          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid,g_id:this.currGid})
         } else if (this.sType == 'fork') {
-          this.navCtrl.push(DecisionDetailPage, {n_id: this.curr_nid.nid})
+          this.navCtrl.push(DecisionDetailPage, {n_id: this.curr_nid.nid,g_id:this.currGid})
         } else {
           this.showToast('bottom', '当前场景不能进入详情')
         }

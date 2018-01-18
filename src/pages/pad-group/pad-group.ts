@@ -24,6 +24,9 @@ export class PadGroupPage {
   keyInput = false;
   content;
   n_id;
+  groupsCount
+  simType
+  memberCount
   userId;
   mapShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
@@ -35,7 +38,10 @@ export class PadGroupPage {
       console.log(val)
     })
     this.userData.getUserID().then(value => this.userId = value)
+    this.userData.getSimType().then(value => this.simType = value)
     this.n_id = this.navParams.get('n_id');
+    this.groupsCount = this.navParams.get('groupsCount');
+    this.memberCount = this.navParams.get('memberCount');
   }
 
   wsReciever
@@ -84,7 +90,17 @@ export class PadGroupPage {
             console.log(this.currScence)
             if (o.id == this.currScence.n_id) {
               if (o.type == 'grouping') {
-                this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
+
+                if(this.simType=='gold'){
+                  this.groupList = this.processJson.goldGroup(this.sim_id,this.groupsCount,this.memberCount);
+
+                }else{
+                  this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
+                }
+
+
+
+
                 console.log(this.groupList)
                 this.sType = "group"
                 this.isGrouped = true;

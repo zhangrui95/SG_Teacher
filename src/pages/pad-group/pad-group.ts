@@ -67,11 +67,12 @@ export class PadGroupPage {
       this.canNext = false;
       if (!this.grouped) {
         this.showToast("bottom", '请先选择分组类型')
+        this.canNext = true;
         return;
       }
       if (!this.currScence) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
-
+        this.canNext = true;
         return;
       }
       let beans = new Array<NextBean>();

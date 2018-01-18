@@ -139,8 +139,8 @@ export class PadGroupPage {
         return;
       }
       this.curr_nid.nid = this.currScence.n_id;
-
       console.log(this.currScence)
+      console.log(this.currNode)
       if (this.currScence) {
         if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
 
@@ -163,7 +163,7 @@ export class PadGroupPage {
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
           this.changeSType('fork')
-        } else if (this.currScence.s_data && this.currScence.s_data.length > 0) {
+        } else if (this.currScence.s_data && this.currScence.s_data.name) {
 
           this.changeSType('default')
         } else {
@@ -220,20 +220,21 @@ export class PadGroupPage {
         }
       }
     }
-    if (tempScence) {
-      return tempScence
-    } else {
-      for (let s of this.currNode) {
-
-        console.log(s.g_id)
-        console.log(this.currGid)
-        if (s.s_data.length != 0) {
-          this.currGid = s.g_id
-          tempScence = s
-        }
-      }
-      return tempScence
-    }
+    return tempScence
+    // if (tempScence) {
+    //   return tempScence
+    // } else {
+    //   // for (let s of this.currNode) {
+    //   //
+    //   //   console.log(s.g_id)
+    //   //   console.log(this.currGid)
+    //   //   if (s.s_data.length != 0) {
+    //   //     this.currGid = s.g_id
+    //   //     tempScence = s
+    //   //   }
+    //   // }
+    //   return tempScence
+    // }
   }
 
   changeSType(sType) {
@@ -287,13 +288,13 @@ export class PadGroupPage {
           }
         }
 
-
-        for (let sdata of res['listScenes']) {
-          if (!sdata.n_id || sdata.n_id.length == 0) {
-            this.showToast('bottom', '请各组参与人员配合完成当前步骤')
-            return
-          }
-        }
+        //
+        // for (let sdata of res['listScenes']) {
+        //   if (!sdata.n_id || sdata.n_id.length == 0) {
+        //     this.showToast('bottom', '请各组参与人员配合完成当前步骤')
+        //     return
+        //   }
+        // }
 
         this.currNode = res['listScenes']
 
@@ -301,16 +302,17 @@ export class PadGroupPage {
         this.currScence = this.getSelectScence();
         console.log("*-*-*-*-*--*--*-*-*-*-*++++++++")
         console.log(this.currScence)
-        if (!this.currScence) {
-          this.showToast("bottom", '请各组参与人员配合完成当前步骤')
-          return;
-        }
+        // if (!this.currScence) {
+        //   this.showToast("bottom", '请各组参与人员配合完成当前步骤')
+        //   return;
+        // }
 
-        this.curr_nid.nid = this.currScence.n_id;
+
 
         console.log(this.currScence)
         //tieba QQ weibo brain bullet select web
         if (this.currScence) {
+          this.curr_nid.nid = this.currScence.n_id;
           if (JSON.stringify(this.currScence).indexOf('SG_tieba') != -1) {
 
             this.changeSType('baidu')
@@ -332,12 +334,14 @@ export class PadGroupPage {
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
             this.changeSType('fork')
-          } else if (this.currScence.s_data && this.currScence.s_data.length > 0) {
+          } else if (this.currScence.s_data && this.currScence.s_data.name) {
 
             this.changeSType('default')
           } else {
             this.changeSType('empty')
           }
+        }else {
+          this.changeSType('empty')
         }
         // this.processJson.setCurrNode("");
       }

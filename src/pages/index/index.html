@@ -15,7 +15,7 @@
       </div>
       <dl *ngFor="let project of projectList;let i = index;" (click)="getClickProject(i)">
         <dt>
-          <img src="{{project.p_image}}" class="{{i==check?'img-xm img-choice-border':'img-xm'}}"/>
+          <img src="{{project.p_image?getFullPath(project.p_image):''}}" class="{{i==check?'img-xm img-choice-border':'img-xm'}}"/>
         </dt>
         <dd>{{project.p_name}}</dd>
       </dl>

@@ -74,7 +74,9 @@ export class IndexPage {
       setTimeout(() => this.registerBackButton = false, 2000);//2秒内没有再次点击返回则将触发标志标记为false
     }
   }
-
+  getFullPath(path){
+    return this.http.getBaseurl()+path
+  }
   constructor(public ionicApp: IonicApp, public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public navParams: NavParams, public keyboard: Keyboard, public toastCtrl: ToastController,
               public platform: Platform, public userData:UserData,public http:ProxyHttpService,public ws:ServerSocket) {
     this.registerBackEvent = this.platform.registerBackButtonAction(() => {

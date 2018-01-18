@@ -30,7 +30,7 @@
     </div>
   </li>
   <li>
-    <div class="r-list-icon" (click)="onInput()">
+    <div class="r-list-icon" (click)="onInput()" *ngIf="sType!='default'&&sType!='empty'&&sType!='fork'">
       <img src="assets/img/key.png" class="img-icon"/>
     </div>
   </li>

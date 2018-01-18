@@ -16,7 +16,8 @@
 <div class="center">
   <div class="img-box" >
     <div *ngIf="name=='img'">
-      <img src="{{src}}"/>
+      <img src="{{src}}" style="width:450px;height:200px;"/>
+
       <!--<img src="{{items.data.src}}"
               style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}"/>-->
       <!--<img src="../assets/img/add.png"-->
@@ -25,7 +26,7 @@
     <div *ngIf="name=='video'">
       <!--<v src=""/>-->
       <video>
-        <source src="{{src}}" type='video/mp4'>
+        <source src="{{src}}" type='video/mp4' style="width:450px;height:200px;">
         <!--<source src="{{items.data.src}}" type='video/mp4'-->
                 <!--style="width: {{items.style.width+'px'}};height:{{items.style.width+'px'}};left:{{items.style.x+'px'}};top:{{items.style.y+'px'}}">-->
 

@@ -316,7 +316,7 @@ export class IndexPage {
   }
 
   getLoading(){
-    if(this.selectedProject === ''||this.selectedClass === ''){
+    if(this.selectedProject === ''||this.selectedClass === ''||this.selectedCourse === ''){
       this.showToast('bottom',"请选择授课班级和课程");
     }else{
       this.next();

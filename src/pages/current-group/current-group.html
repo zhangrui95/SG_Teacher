@@ -20,12 +20,12 @@
       </dl>
     </div>
     <div style="clear: both;">
-      <img src="../../assets/img/add.png" class="add-img" (click)="add()" style="margin-top: 10px;"/>
+      <img src="assets/img/add.png" class="add-img" (click)="add()" style="margin-top: 10px;"/>
       <div class="float-l">
         <div class="input-box" *ngFor="let i of box;let index = index;">
           <input type="text" class="input-name float-l" placeholder="请输入角色名称" [(ngModel)] = "i.roleDatas"/>
           <input type="number" class="input-name num-input float-l" placeholder="请输入角色人数" [(ngModel)]="i.roleNum"/>
-          <img src="../../assets/img/del-icon.png" class="add-img" (click)="del(index)"/>
+          <img src="assets/img/del-icon.png" class="add-img" (click)="del(index)"/>
         </div>
       </div>
     </div>

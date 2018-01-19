@@ -126,6 +126,7 @@ export class IndexPage {
     this.http.getProjectList({pi:'1',ps:'9999',key:''}).subscribe(resProject=>{
       this.loading = false;
       this.projectList=resProject['list'];
+      console.log(this.projectList)
       if(!this.projectList||this.projectList.length==0){
         return
       }
@@ -165,9 +166,9 @@ export class IndexPage {
       }
     })
   }
-  groupsCount
+  groupsCount = ''
   simType
-  memberCount
+  memberCount = ''
   next(){
     console.log('*****************')
     console.log(this.selectedProject)
@@ -327,6 +328,8 @@ export class IndexPage {
     if(this.selectedProject === ''||this.selectedClass === ''||this.selectedCourse === ''){
       this.showToast('bottom',"请选择授课班级和课程");
     }else{
+      this.groupsCount = '';
+      this.memberCount = '';
       this.next();
     }
   }
@@ -352,8 +355,12 @@ export class IndexPage {
   }
 
   getStart(){
-    this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
-    this.load = false;
+    if(this.groupsCount == ''||this.memberCount == ''){
+      this.showToast('bottom',"请输入分组数和每组人数");
+    }else{
+      this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
+      this.load = false;
+    }
   }
 
 }

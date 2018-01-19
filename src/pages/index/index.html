@@ -83,9 +83,9 @@
         <div class="loading-word">等待学生加入…</div>
         <div class="input-box-num" *ngIf="simType=='gold'">
           <div class="float-l">分组数：</div>
-          <input class="num-input" type="text" name='g' [(ngModel)]="groupsCount"/>
+          <input class="num-input" type="number" name='g' [(ngModel)]="groupsCount" required/>
           <div class="float-l" style="margin-left: 30px;">每组人数：</div>
-          <input class="num-input" type="text" name='m' [(ngModel)]="memberCount"/>
+          <input class="num-input" type="number" name='m' [(ngModel)]="memberCount" required/>
         </div>
         <button class="load-btn" (click)="getStart()">继  续</button>
       </div>

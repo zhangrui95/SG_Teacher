@@ -14,7 +14,7 @@
   <div class="center center-box">
     <div>
       <dl *ngFor="let item of list;let i = index;" (click)="pChoice(i)">
-        <dt><img class="{{PIndex == i?'call-stu-header-img call-stu':'call-stu-header-img'}}" src="{{item.g_image}}"/></dt>
+        <dt><img class="{{PIndex == i?'call-stu-header-img call-stu':'call-stu-header-img'}}" src="{{item.g_image!=null?getFullpath(item.g_image):'assets/img/header.png'}}"/></dt>
         <dd class="{{PIndex == i?'call-stu-name':''}}">{{item.g_name}}</dd>
         <div class="group-num">{{num[i]}}/{{item.g_limit}}</div>
       </dl>

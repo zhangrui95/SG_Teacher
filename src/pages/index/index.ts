@@ -132,7 +132,8 @@ export class IndexPage {
       this.selectedProject = this.projectList[0].p_id;
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
-      this.pType = this.projectList[0].p_type;
+      this.pType =  JSON.parse(this.projectList[0].p_type).label;
+
       // this.getclassList();
     })
   }
@@ -170,7 +171,11 @@ export class IndexPage {
   next(){
     console.log('*****************')
     console.log(this.selectedProject)
-    this.http.start({p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{
+    let p_type='';
+    if(this.selectedProject['p_type']&&this.selectedProject['p_type'].length>0){
+      p_type=JSON.parse(this.selectedProject['p_type']).value
+    }
+    this.http.start({p_type:p_type,p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{
 
      if(res['code']=='0'){
        this.load = true;
@@ -280,7 +285,7 @@ export class IndexPage {
       this.getclassList();
       this.pName = this.projectList[i].p_name;
       this.pDescription = this.projectList[i].p_description;
-      this.pType = this.projectList[i].p_type;
+      this.pType = JSON.parse(this.projectList[i].p_type).label;
 
     }
 

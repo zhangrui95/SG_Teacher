@@ -187,7 +187,7 @@ export class ProcessJSONUtil {
       item.img='';
       item.text='第'+(i+1)+'组';
       item.limit=mnum
-      item.id="random_group_"+new Date().getTime();
+      item.id="random_group_"+new Date().getTime()+i;
       arr.push(item)
     }
     let bean =new GroupBean();

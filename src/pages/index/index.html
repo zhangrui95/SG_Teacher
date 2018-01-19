@@ -81,9 +81,11 @@
       <div class="pop-box">
         <img src="assets/img/load.gif" class="loading"/>
         <div class="loading-word">等待学生加入…</div>
-        <div *ngIf="simType=='gold'">
-          分组数：<input type="text" name='g'[(ngModel)]="groupsCount"/>
-          每组人数：<input  type="text" name='m'[(ngModel)]="memberCount"/>
+        <div class="input-box-num" *ngIf="simType=='gold'">
+          <div class="float-l">分组数：</div>
+          <input class="num-input" type="text" name='g' [(ngModel)]="groupsCount"/>
+          <div class="float-l" style="margin-left: 30px;">每组人数：</div>
+          <input class="num-input" type="text" name='m' [(ngModel)]="memberCount"/>
         </div>
         <button class="load-btn" (click)="getStart()">继  续</button>
       </div>

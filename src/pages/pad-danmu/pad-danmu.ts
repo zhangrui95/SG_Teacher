@@ -1,5 +1,5 @@
 ///<reference path="../../../node_modules/ionic-angular/tap-click/tap-click.d.ts"/>
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Subscription} from "rxjs/Subscription";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
@@ -19,12 +19,12 @@ import {UserData} from "../../providers/user-data";
   templateUrl: 'pad-danmu.html',
 })
 
-export class PadDanmuPage implements OnInit,OnDestroy {
+export class PadDanmuPage implements OnInit, OnDestroy {
 
   @Input()
-  sim_id :any=new Object();
+  sim_id: any = new Object();
   @Input()
-  s_data :any=new Object();
+  s_data: any = new Object();
 
   @ViewChild('ion_content')
   ion_content
@@ -36,8 +36,8 @@ export class PadDanmuPage implements OnInit,OnDestroy {
 
     console.log("grouping====================>")
     console.log(this.s_data.s_data.componentList[0].data.fillData)
-    this.n_id=this.s_data.n_id;
-    this.g_id=this.s_data.g_id;
+    this.n_id = this.s_data.n_id;
+    this.g_id = this.s_data.g_id;
     this.getData();
     this.getAnswerOfStuList();
     this.ws.connect();
@@ -48,11 +48,11 @@ export class PadDanmuPage implements OnInit,OnDestroy {
         console.log(res)
         if (JSON.parse(res)['action'] != null) {
           if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            let list=JSON.parse(res)['list'];
-            for(let item of list){
-              if(item.n_id==this.n_id){
+            let list = JSON.parse(res)['list'];
+            for (let item of list) {
+              if (item.n_id == this.n_id) {
                 let item = this.items.concat(JSON.parse(res)['list'])
-                this.items=item
+                this.items = item
                 this.refresh()
                 break;
               }
@@ -68,15 +68,15 @@ export class PadDanmuPage implements OnInit,OnDestroy {
       this.socketSubscription.unsubscribe();
   }
 
-  getFullPath(path){
-    return this.http.getBaseurl()+path
+  getFullPath(path) {
+    return this.http.getBaseurl() + path
   }
 
-  refresh(){
-    setTimeout(()=>{
+  refresh() {
+    setTimeout(() => {
       this.ion_content.resize();
       this.ion_content.scrollToBottom(500);
-    },500)
+    }, 500)
 
   }
 
@@ -91,27 +91,50 @@ export class PadDanmuPage implements OnInit,OnDestroy {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public ws: ServerSocket,
-              public userData:UserData,
+              public userData: UserData,
               public http: ProxyHttpService) {
 
   }
 
+  src
+  name
+
   getData() {
-    this.datas = this.s_data.s_data.componentList[0].data.fillData;
-    this.title = this.datas.title;
-    this.content = this.datas.content;
+
+
+    // this.result = JSON.parse(this.s_data[0].s_data)
+    // this.common = this.result['componentList'];
+    for (let com of this.s_data.s_data.componentList) {
+      let name = com.name;
+
+      if (name == 'video') {
+        this.name = name;
+        this.src = com.data.src;
+        console.log(this.src)
+      }
+      else {
+
+      }
+
+    }
+    // this.datas = this.s_data.s_data.componentList[0].data.fillData;
+    // this.title = this.datas.title;
+    // this.content = this.datas.content;
+    //
+
+
   }
 
   getAnswerOfStuList() {
-    this.userData.getSimid().then(res=>{
-      this.sim_id=res;
+    this.userData.getSimid().then(res => {
+      this.sim_id = res;
       this.param = {
         n_id: this.n_id,
         g_id: this.g_id,
         sim_id: this.sim_id
       };
-      console.log('sim_id:'+this.param.sim_id)
-      console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
+      console.log('sim_id:' + this.param.sim_id)
+      console.log('n_id:' + this.param.n_id + "   g_id:" + this.param.g_id)
       this.http.getAnswerOfStuList(this.param).subscribe(res => {
         this.items = res['list']
       });

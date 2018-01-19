@@ -80,6 +80,40 @@ export class ProcessJSONUtil {
       }
     }
   }
+
+
+  public parseGoldGroupingNext(sim_id,obj,groupList):Array<NextBean>{
+    let arr=new Array <NextBean>()
+
+    for(let node of this.currNodes){
+      console.log("***========>")
+      console.log(node)
+      let bean =new NextBean();
+      bean.sim_id=sim_id;
+      for(let o of obj){
+        if(o.id==node.n_id){
+          let nidvalue ;
+          for(let nid of o.node_id){
+              nidvalue=nid;
+          }
+          for(let group of groupList.GroupId){
+            bean.next_n_id.push({g_id:group.id.group_id,n_id:nidvalue});
+          }
+
+        }
+      }
+
+      bean.type=node.type;
+
+      bean.curr_n_id=node.n_id;
+      bean.g_id=node.g_id;
+      bean.n_name=node.s_data.name;
+      console.log(bean)
+      arr.push(bean)
+    }
+    return arr;
+  }
+
   public parseGroupingNext(sim_id,obj):Array<NextBean>{
     let arr=new Array <NextBean>()
 

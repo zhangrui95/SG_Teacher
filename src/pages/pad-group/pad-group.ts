@@ -62,7 +62,9 @@ export class PadGroupPage {
     toast.present(toast);
   }
 
+  currStatus;
   canNext = true;
+  currday = -1;
 
   onNext(ev?) {
     this.resetTimer()
@@ -71,6 +73,11 @@ export class PadGroupPage {
         return
       }
       this.canNext = false;
+      if(this.simType=='gold'){
+        if(this.currday>=26){
+          this.sendEnd()
+        }
+      }
       if (!this.grouped) {
         this.showToast("bottom", '请先选择分组类型')
         this.canNext = true;
@@ -91,14 +98,12 @@ export class PadGroupPage {
             if (o.id == this.currScence.n_id) {
               if (o.type == 'grouping') {
 
-                if(this.simType=='gold'){
-                  this.groupList = this.processJson.goldGroup(this.sim_id,this.groupsCount,this.memberCount);
+                if (this.simType == 'gold') {
+                  this.groupList = this.processJson.goldGroup(this.sim_id, this.groupsCount, this.memberCount);
 
-                }else{
+                } else {
                   this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
                 }
-
-
 
 
                 console.log(this.groupList)
@@ -118,10 +123,18 @@ export class PadGroupPage {
         let f = confirm("是否确定结束分组并进入下一步？");
         if (f) {
           let remain_g_id = this.processJson.getRemainGroup(this.jsonData)
-          beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-          this.sendNext({type: 'grouping', datas: beans, remain_g_id: remain_g_id, sim_id: this.sim_id})
+          if (this.simType == 'gold') {
+            beans = this.processJson.parseGoldGroupingNext(this.sim_id, this.jsonData, this.groupList)
+          } else {
+            beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
+          }
+
+
+          this.currday = 0;
+          this.sendNext({type: 'grouping', datas: beans, remain_g_id: remain_g_id || '', sim_id: this.sim_id})
           return;
         }
+        this.canNext = true;
 
       } else {
         beans = this.processJson.parseNext(this.sim_id)
@@ -130,14 +143,20 @@ export class PadGroupPage {
 
     } else if (ev == 'screen') {
       let action
-      for (let s of this.currNode) {
-        if (s.g_id == this.currGid) {
-          action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
+      if (this.simType == 'gold') {
+        for (let s of this.currNode) {
+          if (s.g_id == this.currGid) {
+            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
+          }
         }
+        if (this.sType == 'group') {
+          action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        }
+      } else {
+        action = {action: 'screen', datas: this.currStatus, n_id: this.currScence.n_id, sim_id: this.sim_id}
+
       }
-      if (this.sType == 'group') {
-        action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
-      }
+
       this.getPushScreen(action)
     } else if (ev == 'InputShow') {
       this.keyInput = true;
@@ -207,6 +226,10 @@ export class PadGroupPage {
         ) {
           this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid})
         } else if (this.sType == 'fork') {
+          if (this.simType == 'gold') {
+            this.showToast('bottom', '当前场景不能进入详情')
+            return
+          }
           this.navCtrl.push(DecisionDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid})
         } else {
           this.showToast('bottom', '当前场景不能进入详情')
@@ -253,7 +276,10 @@ export class PadGroupPage {
     //   return tempScence
     // }
   }
-
+  sendEnd(){
+    //todo 结束场景
+    alert('结束')
+  }
   changeSType(sType) {
     this.sType = '';
     setTimeout(() => {
@@ -296,6 +322,9 @@ export class PadGroupPage {
 
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
+        if (this.currday >= 0) {
+          this.currday++;
+        }
 
         this.canNext = true;
         if (params.type == 'grouping') {
@@ -323,7 +352,6 @@ export class PadGroupPage {
         //   this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         //   return;
         // }
-
 
 
         console.log(this.currScence)
@@ -357,7 +385,7 @@ export class PadGroupPage {
           } else {
             this.changeSType('empty')
           }
-        }else {
+        } else {
           this.changeSType('empty')
         }
         // this.processJson.setCurrNode("");

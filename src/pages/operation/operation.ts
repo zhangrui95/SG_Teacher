@@ -47,7 +47,7 @@ export class OperationPage {
   }
 
   goCurrentGroup(){
-    this.navCtrl.push(CurrentGroupPage,{sim_id: this.SimId});
+    this.navCtrl.push(CurrentGroupPage,{sim_id: this.SimId,n_id:this.nId});
   }
 
   goCallName(){

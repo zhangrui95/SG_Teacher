@@ -13,25 +13,26 @@ export class CurrentGroupPage {
   list;
   PIndex;
   sim_id;
+  n_id;
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public http: ProxyHttpService,public userData:UserData) {
-    this.userData.getSimid().then(val=>{
-      this.sim_id=val;
-    })
+    this.n_id = this.navParams.get('n_id');
   }
   box = [{roleDatas:'', roleNum:''}];
   num = [];
   roleDatas = [];
 
   ionViewDidLoad() {
-    const params = {sim_id:this.sim_id}
-    this.http.getGroupDetail(params).subscribe(res => {
-      console.log(res);
-      this.list = res;
-      for(let i in res){
-        this.num.push(res[i].listStus.length);
-      }
-    });
-
+    this.userData.getSimid().then(val=>{
+      this.sim_id=val;
+      const params = {sim_id:this.sim_id}
+      this.http.getGroupDetail(params).subscribe(res => {
+        console.log(res);
+        this.list = res;
+        for(let i in res){
+          this.num.push(res[i].listStus.length);
+        }
+      });
+    })
   }
 
   pChoice(i){
@@ -64,7 +65,8 @@ export class CurrentGroupPage {
     }else if(roleNum <= 0){
       this.showToast('bottom', '人数最少为1');
     }else{
-      const params = {sim_id: this.sim_id, g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
+      console.log(this.n_id);
+      const params = {n_id: this.n_id, sim_id: this.sim_id, g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
       this.http.addRoleForGro(params).subscribe(res => {
         this.showToast('bottom', res['msg']);
       });
@@ -78,5 +80,9 @@ export class CurrentGroupPage {
       position: position
     });
     toast.present(toast);
+  }
+
+  getFullpath(path){
+    return  this.http.getBaseurl()+path
   }
 }

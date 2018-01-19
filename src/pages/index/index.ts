@@ -355,8 +355,13 @@ export class IndexPage {
   }
 
   getStart(){
-    if(this.groupsCount == ''||this.memberCount == ''){
-      this.showToast('bottom',"请输入分组数和每组人数");
+    if(this.simType=='gold'){
+      if(this.groupsCount == ''||this.memberCount == ''){
+        this.showToast('bottom',"请输入分组数和每组人数");
+      }else{
+        this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
+        this.load = false;
+      }
     }else{
       this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
       this.load = false;

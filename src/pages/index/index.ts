@@ -164,7 +164,9 @@ export class IndexPage {
       }
     })
   }
-
+  groupsCount
+  simType
+  memberCount
   next(){
     console.log('*****************')
     console.log(this.selectedProject)
@@ -176,9 +178,10 @@ export class IndexPage {
 
        this.userData.setSimType(JSON.parse(res['list'][0]['p_type']).value)
        this.userData.getSimType().then(res=>{
-         console.log(res)
+         this.simType=res;
        })
        this.userData.setSimid(this.sim_id)
+
        this.userData.setProcessJsonData(res['list'][0]['p_data'])
        // this.http.testAddStus({sim_id: this.sim_id}).subscribe(res=>{
        //   console.log(res)
@@ -344,7 +347,7 @@ export class IndexPage {
   }
 
   getStart(){
-    this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id});
+    this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
     this.load = false;
   }
 

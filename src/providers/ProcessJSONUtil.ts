@@ -178,7 +178,24 @@ export class ProcessJSONUtil {
     return arr;
   }
 
+  public goldGroup(sim_id,gnum,mnum) {
 
+    let arr = new Array<GroupItem>();
+    for(let i =0;i< gnum;i++){
+      let item=new GroupItem();
+      item.type='fixed';
+      item.img='';
+      item.text='第'+(i+1)+'组';
+      item.limit=mnum
+      item.id="random_group_"+new Date().getTime();
+      arr.push(item)
+    }
+    let bean =new GroupBean();
+    bean.sim_id=sim_id;
+    bean.GroupId=arr;
+    console.log(bean)
+    return bean;
+  }
   public parseGroup(obj,sim_id) {
     let arr = new Array<GroupItem>();
 

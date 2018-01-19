@@ -15,6 +15,7 @@ export class OperationPage {
   showAnimate=false;
   @Input() SimId;
   @Input() nId;
+  @Input() gid;
   @Output() ev:EventEmitter<any>= new EventEmitter<any>();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -47,7 +48,12 @@ export class OperationPage {
   }
 
   goCurrentGroup(){
-    this.navCtrl.push(CurrentGroupPage,{sim_id: this.SimId});
+    if(this.gid=='-1'){
+      //todo 提示 本次演练暂未分组，不能进行角色分配
+    }else{
+      this.navCtrl.push(CurrentGroupPage,{sim_id: this.SimId,n_id:this.nId});
+    }
+
   }
 
   goCallName(){

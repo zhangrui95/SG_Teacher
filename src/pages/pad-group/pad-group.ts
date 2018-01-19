@@ -74,7 +74,7 @@ export class PadGroupPage {
       }
       this.canNext = false;
       if(this.simType=='gold'){
-        if(this.currday>=26){
+        if(this.currday>=18){
           this.sendEnd()
         }
       }

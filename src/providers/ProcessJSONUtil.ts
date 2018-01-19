@@ -219,7 +219,7 @@ export class ProcessJSONUtil {
       let item=new GroupItem();
       item.type='fixed';
       item.img='';
-      item.text='第'+(i+1)+'组';
+      item.text='第'+(i+1)+'小队';
       item.limit=mnum
       item.id="random_group_"+new Date().getTime()+i;
       arr.push(item)

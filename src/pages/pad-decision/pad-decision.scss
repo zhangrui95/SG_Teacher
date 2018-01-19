@@ -21,15 +21,13 @@ page-pad-decision {
     }
     .option{
       float: left;
-      width: 50px;
+      width: 25px;
       text-align: center;
       margin-right: 0.5em;
-      color: white;
     }
     .word{
-      float: left;
-      width: 78%;
-      color: white;
+      //float: left;
+      //width: 87%;
     }
     input[type="radio"] + .option::before {
       position: relative;
@@ -46,16 +44,16 @@ page-pad-decision {
       padding: .25em;
     }
     input[type="radio"]:checked+ .option::before {
-      background-color: #2c3550;
+      background-color: #1aa7b8;
       border:1px solid #d6d6d6;
       background-clip: content-box;
       padding: .25em;
     }
     input[type="radio"]:checked + span{
-      color: #2c3550;
+      color: #1aa7b8;
     }
     input[type="radio"]:checked + .option + .word{
-      color: #2c3550;
+      color: #1aa7b8;
     }
     input[type="radio"] {
       position: absolute;
@@ -65,11 +63,14 @@ page-pad-decision {
   .mar-btn{
     button{
       height: 50px;
-      background: #2c3550;
+      background: #1aa7b8;
       width: 84%;
       position: fixed;
       bottom: 60px;
       left: 8%;
     }
+  }
+  .scroll-content{
+    color: #fff;
   }
 }

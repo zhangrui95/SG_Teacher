@@ -264,10 +264,10 @@ export class IndexPage {
   }
 
   getClickProject(i){
+    this.projectBrief = true;
+    this.choiceClass = false;
     this.check = i;
-
     this.Class_loading = true;
-
     this.btnShowChoice = true;
     this.nextBtnShowChoice = false;
     this.classIndex = 0;

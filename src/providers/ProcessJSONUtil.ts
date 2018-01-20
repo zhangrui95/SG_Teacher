@@ -160,6 +160,17 @@ export class ProcessJSONUtil {
     }
     return arr;
   }
+  public isEnd(obj,currnid){
+    for(let n of obj){
+      if(n){
+        if(n.id==currnid){
+          if(n.type=='end'){
+            return true
+          }
+        }
+      }
+    }
+  }
   public parseNext(sim_id):Array<NextBean>{
     let arr=new Array <NextBean>()
 

@@ -199,7 +199,7 @@ export class PadGroupPage {
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
           this.changeSType('fork')
-        } else if (this.currScence.s_data && this.currScence.s_data.name) {
+        } else if (this.currScence.s_data && this.currScence.s_data.comeList.length>0) {
 
           this.changeSType('default')
         } else {
@@ -379,7 +379,7 @@ export class PadGroupPage {
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
             this.changeSType('fork')
-          } else if (this.currScence.s_data && this.currScence.s_data.name) {
+          } else if (this.currScence.s_data && this.currScence.s_data.comeList.length>0) {
 
             this.changeSType('default')
           } else {

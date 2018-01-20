@@ -521,7 +521,7 @@ export class PadGroupPage {
   }
 
   getOut() {
-    this.navCtrl.pop();
+    this.navCtrl.pop({animate: false});
   }
 
   mapOpen() {

@@ -96,7 +96,7 @@ export class PadDanmuPage implements OnInit, OnDestroy {
 
   }
 
-  src
+  src={changingThisBreaksApplicationSecurity:''}
   name
 
   getData() {

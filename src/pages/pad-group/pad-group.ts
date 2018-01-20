@@ -144,16 +144,21 @@ export class PadGroupPage {
     } else if (ev == 'screen') {
       let action
       if (this.simType == 'gold') {
-        for (let s of this.currNode) {
-          if (s.g_id == this.currGid) {
-            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
-          }
-        }
+        action = {action: 'screen', datas: this.currStatus, n_id: this.currScence.n_id, sim_id: this.sim_id}
+
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
         }
       } else {
-        action = {action: 'screen', datas: this.currStatus, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        for (let s of this.currNode) {
+          if (s.g_id == this.currGid) {
+            action = {action: 'screen', datas:s , n_id: this.currScence.n_id, sim_id: this.sim_id}
+          }
+        }
+
+        if (this.sType == 'group') {
+          action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        }
 
       }
 

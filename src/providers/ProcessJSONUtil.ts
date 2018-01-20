@@ -226,6 +226,7 @@ export class ProcessJSONUtil {
     }
     let bean =new GroupBean();
     bean.sim_id=sim_id;
+    bean.project_type='gold'
     bean.GroupId=arr;
     console.log(bean)
     return bean;
@@ -250,6 +251,7 @@ export class ProcessJSONUtil {
     let bean =new GroupBean();
     bean.sim_id=sim_id;
     bean.GroupId=arr;
+    bean.project_type=''
     console.log(bean)
     return bean;
   }
@@ -267,12 +269,14 @@ export class NextBean {
 }
 export class GroupBean{
   public sim_id;
+  public project_type
   public GroupId:Array<GroupItem> =new Array();
 }
 export class GroupItem{
   public id;
   public img;
   public text;
+
   public type;
   public num=0;
   public limit;

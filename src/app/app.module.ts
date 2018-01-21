@@ -168,7 +168,7 @@ import {DecisionDetailPage} from "../pages/decision-detail/decision-detail";
         { component: CurrentGroupPage, name: 'CurrentGroupPage', segment: 'currentGroup' },
         { component: CommentPage, name: 'CommentPage', segment: 'comment' },
         { component: CommentDetailPage, name: 'CommentDetailPage', segment: 'commentDetail' },
-        { component: GroupIndexPage, name: 'GroupIndexPage', segment: 'comment' },
+        { component: GroupIndexPage, name: 'GroupIndexPage', segment: 'groupIndex' },
         { component: PadGroupPage, name: 'PadGroupPage', segment: 'padGroup' },
         { component: WaitPage, name: 'WaitPage', segment: 'wait' },
         { component: PadBdtbPage, name: 'PadBdtbPage', segment: 'pad-bdtb' },

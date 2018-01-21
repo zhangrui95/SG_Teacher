@@ -25,7 +25,7 @@ export class PadGroupPage {
   content;
   n_id;
   groupsCount
-  simType
+  simType=""
   memberCount
   userId;
   mapShow = false;
@@ -38,7 +38,7 @@ export class PadGroupPage {
       console.log(val)
     })
     this.userData.getUserID().then(value => this.userId = value)
-    this.userData.getSimType().then(value => this.simType = value)
+    this.userData.getSimType().then(value => this.simType = value||'')
     this.n_id = this.navParams.get('n_id');
     this.groupsCount = this.navParams.get('groupsCount');
     this.memberCount = this.navParams.get('memberCount');
@@ -131,14 +131,14 @@ export class PadGroupPage {
 
 
           this.currday = 0;
-          this.sendNext({type: 'grouping', datas: beans, remain_g_id: remain_g_id || '', sim_id: this.sim_id})
+          this.sendNext({type: 'grouping', datas: beans, remain_g_id: remain_g_id || '', sim_id: this.sim_id,project_type:this.simType})
           return;
         }
         this.canNext = true;
 
       } else {
         beans = this.processJson.parseNext(this.sim_id)
-        this.sendNext({type: "", datas: beans})
+        this.sendNext({type: "", datas: beans,project_type:this.simType})
       }
 
     } else if (ev == 'screen') {
@@ -152,6 +152,7 @@ export class PadGroupPage {
       } else {
         for (let s of this.currNode) {
           if (s.g_id == this.currGid) {
+            s.
             action = {action: 'screen', datas:s , n_id: this.currScence.n_id, sim_id: this.sim_id}
           }
         }

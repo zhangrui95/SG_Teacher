@@ -50,7 +50,7 @@ export class CurrentGroupPage {
   }
 
   back(){
-    window.history.back();
+    this.navCtrl.pop();
   }
   getOk(){
     let roleName;

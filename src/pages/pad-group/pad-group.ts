@@ -150,7 +150,7 @@ export class PadGroupPage {
     } else if (ev == 'screen') {
       let action
       if (this.simType == 'gold') {
-        action = {action: 'screen', datas: this.currStatus, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id}
 
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
@@ -161,7 +161,7 @@ export class PadGroupPage {
       } else {
         for (let s of this.currNode) {
           if (s.g_id == this.currGid) {
-            s.action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
+            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
           }
         }
 

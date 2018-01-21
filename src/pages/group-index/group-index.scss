@@ -1,8 +1,8 @@
 page-group-index {
   .img-box{
-    width: 450px;
-    min-height: 200px;
-    border:2px solid #aaa;
+    width: 100%;
+    height: auto;
+    border: 1px solid #aaa;
     margin: 20% auto 20px;
   }
   .tile-img{
@@ -12,10 +12,11 @@ page-group-index {
     width: 100%;
   }
   .words{
-    width: 70%;
+    width: 100%;
     margin: 20px auto;
     color: #fff;
     font-size: 16px;
     line-height: 24px;
+    text-indent: 2em;
   }
 }

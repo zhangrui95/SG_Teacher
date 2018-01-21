@@ -497,7 +497,7 @@ export class PadGroupPage {
         console.log(this.currScence)
         this.curr_nid.nid = this.currScence.n_id;
         let beans = this.processJson.getSendStart(this.sim_id)
-        this.addStart({type: "start", datas: beans})
+        this.addStart({type: "start", datas: beans ,project_type:this.simType,sim_id:this.sim_id})
       })
 
 

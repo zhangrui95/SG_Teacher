@@ -91,7 +91,7 @@ export class PadQQPage implements OnInit,OnDestroy {
 
   getData() {
     this.datas = this.s_data.s_data.componentList[0].data.fillData;
-    this.title = this.datas.title;
+    this.title = this.datas.fillName;
     this.content = this.datas.content;
   }
 

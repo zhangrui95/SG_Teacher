@@ -24,7 +24,7 @@ export class CommentPage {
   }
 
   back(){
-    window.history.back();
+    this.navCtrl.pop();
   }
 
   getcomment(){

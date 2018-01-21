@@ -553,7 +553,11 @@ export class PadGroupPage {
   }
 
   getOut() {
-    this.navCtrl.pop({animate: false});
+    let params = {sim_id:this.sim_id}
+    this.http.updateExeState(params).subscribe(res => {
+      console.log(res)
+      this.navCtrl.pop({animate: false});
+    });
   }
 
   mapOpen() {

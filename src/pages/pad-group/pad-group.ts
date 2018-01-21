@@ -25,7 +25,7 @@ export class PadGroupPage {
   content;
   n_id;
   groupsCount
-  simType=""
+  simType = ""
   memberCount
   userId;
   mapShow = false;
@@ -38,7 +38,7 @@ export class PadGroupPage {
       console.log(val)
     })
     this.userData.getUserID().then(value => this.userId = value)
-    this.userData.getSimType().then(value => this.simType = value||'')
+    this.userData.getSimType().then(value => this.simType = value || '')
     this.n_id = this.navParams.get('n_id');
     this.groupsCount = this.navParams.get('groupsCount');
     this.memberCount = this.navParams.get('memberCount');
@@ -73,8 +73,8 @@ export class PadGroupPage {
         return
       }
       this.canNext = false;
-      if(this.simType=='gold'){
-        if(this.currday>=18){
+      if (this.simType == 'gold') {
+        if (this.currday >= 18) {
           this.sendEnd()
         }
       }
@@ -131,14 +131,20 @@ export class PadGroupPage {
 
 
           this.currday = 0;
-          this.sendNext({type: 'grouping', datas: beans, remain_g_id: remain_g_id || '', sim_id: this.sim_id,project_type:this.simType})
+          this.sendNext({
+            type: 'grouping',
+            datas: beans,
+            remain_g_id: remain_g_id || '',
+            sim_id: this.sim_id,
+            project_type: this.simType
+          })
           return;
         }
         this.canNext = true;
 
       } else {
         beans = this.processJson.parseNext(this.sim_id)
-        this.sendNext({type: "", datas: beans,project_type:this.simType})
+        this.sendNext({type: "", datas: beans, project_type: this.simType})
       }
 
     } else if (ev == 'screen') {
@@ -149,11 +155,13 @@ export class PadGroupPage {
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
         }
+        if (this.sType == 'goldend') {
+          action = {action: 'screen', datas:{op:'end',list:this.rankList}, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        }
       } else {
         for (let s of this.currNode) {
           if (s.g_id == this.currGid) {
-            s.
-            action = {action: 'screen', datas:s , n_id: this.currScence.n_id, sim_id: this.sim_id}
+            s.action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
           }
         }
 
@@ -205,7 +213,7 @@ export class PadGroupPage {
         }
         else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
           this.changeSType('fork')
-        } else if (this.currScence.s_data && this.currScence.s_data.comeList.length>0) {
+        } else if (this.currScence.s_data && this.currScence.s_data.comeList.length > 0) {
 
           this.changeSType('default')
         } else {
@@ -247,7 +255,7 @@ export class PadGroupPage {
 
     }
   }
-
+  rankList
   grouped = true;
 
   getSelectScence() {
@@ -282,10 +290,28 @@ export class PadGroupPage {
     //   return tempScence
     // }
   }
-  sendEnd(){
+
+  sendEnd() {
     //todo 结束场景
-    alert('结束')
+    this.http.getRankingForU({sim_id: this.sim_id}).subscribe(res => {
+      console.log(res)
+      this.rankList=res['list']
+      this.changeSType('goldend')
+      alert(res)
+      //todo 单独做一个结束场景显示排名
+    })
+
+    // "list": [
+    //   {
+    //     "g_name": "三特",
+    //     "money_g": "123",
+    //     "g_image": "\\files\\Image\\20180117170749_911.jpg",
+    //     "g_id": "1516180064216"
+    //   },
+
+
   }
+
   changeSType(sType) {
     this.sType = '';
     setTimeout(() => {
@@ -385,7 +411,7 @@ export class PadGroupPage {
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
             this.changeSType('fork')
-          } else if (this.currScence.s_data && this.currScence.s_data.comeList.length>0) {
+          } else if (this.currScence.s_data && this.currScence.s_data.comeList.length > 0) {
 
             this.changeSType('default')
           } else {

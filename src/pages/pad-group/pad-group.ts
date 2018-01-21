@@ -98,14 +98,14 @@ export class PadGroupPage {
             if (o.id == this.currScence.n_id) {
               if (o.type == 'grouping') {
 
-                if (this.simType == 'gold') {
-                  this.groupList = this.processJson.goldGroup(this.sim_id, this.groupsCount, this.memberCount);
+                // if (this.simType == 'gold') {
+                //   this.groupList = this.processJson.goldGroup(this.sim_id, this.groupsCount, this.memberCount);
+                //
+                // } else {
+                //   this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
+                // }
 
-                } else {
-                  this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
-                }
-
-
+                this.groupList = this.processJson.parseGroup(this.jsonData, this.sim_id);
                 console.log(this.groupList)
                 this.sType = "group"
                 this.isGrouped = true;
@@ -164,7 +164,6 @@ export class PadGroupPage {
             action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
           }
         }
-
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
         }
@@ -513,8 +512,6 @@ export class PadGroupPage {
         switch (action) {
           case 'phone_insert_group':
             let arr = curr.list;
-
-
             for (let g of arr) {
               for (let group of  this.groupList.GroupId) {
                 if (g['g_id'] == group.id) {

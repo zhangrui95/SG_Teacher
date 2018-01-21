@@ -25,8 +25,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   @Input()
   s_data :any=new Object();
 
-  @ViewChild('ion_content')
-  ion_content
+  @ViewChild('ion_content') ion_content
 
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
@@ -63,8 +62,11 @@ export class PadTnfbPage implements OnInit,OnDestroy {
 
   refresh(){
     setTimeout(()=>{
-      this.ion_content.resize();
-      this.ion_content.scrollToBottom(500);
+      if(this.ion_content){
+        this.ion_content.resize();
+        this.ion_content.scrollToBottom(500);
+      }
+
     },500)
 
   }

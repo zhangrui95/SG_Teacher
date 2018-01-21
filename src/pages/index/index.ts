@@ -131,6 +131,7 @@ export class IndexPage {
         return
       }
       this.selectedProject = this.projectList[0].p_id;
+      this.currProject=this.projectList[0]
       this.pName = this.projectList[0].p_name;
       this.pDescription = this.projectList[0].p_description;
       this.pType =  JSON.parse(this.projectList[0].p_type).label;
@@ -166,6 +167,7 @@ export class IndexPage {
       }
     })
   }
+  currProject
   groupsCount = ''
   simType
   memberCount = ''
@@ -173,9 +175,10 @@ export class IndexPage {
     console.log('*****************')
     console.log(this.selectedProject)
     let p_type='';
-    if(this.selectedProject['p_type']&&this.selectedProject['p_type'].length>0){
-      p_type=JSON.parse(this.selectedProject['p_type']).value
+    if(this.currProject['p_type']&&this.currProject['p_type'].length>0){
+      p_type=JSON.parse(this.currProject['p_type']).value
     }
+    console.log(p_type)
     this.http.start({p_type:p_type,p_id: this.selectedProject,cla_id:this.selectedClass,cour_id:this.selectedCourse,exercisetypes:"0",token:this.userData.userToken,deviceType:"pad"}).subscribe(res=>{
 
      if(res['code']=='0'){
@@ -281,7 +284,7 @@ export class IndexPage {
     this.className="";
     this.CourseName="";
     if(this.projectList[i]){
-
+      this.currProject=this.projectList[i]
       this.selectedProject = this.projectList[i].p_id;
       this.getclassList();
       this.pName = this.projectList[i].p_name;
@@ -356,12 +359,8 @@ export class IndexPage {
 
   getStart(){
     if(this.simType=='gold'){
-      if(this.groupsCount == ''||this.memberCount == ''){
-        this.showToast('bottom',"请输入分组数和每组人数");
-      }else{
-        this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
-        this.load = false;
-      }
+      this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
+      this.load = false;
     }else{
       this.navCtrl.push(PadGroupPage,{sim_id:this.sim_id,groupsCount:this.groupsCount,memberCount:this.memberCount});
       this.load = false;

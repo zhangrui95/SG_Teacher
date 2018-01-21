@@ -147,6 +147,22 @@ export class PadDanmuPage implements OnInit, OnDestroy {
   ionViewDidLoad() {
 
   }
+  playVideo(){
+    let params = {action: 'screen', datas: {op:'play'}, n_id: this.n_id, sim_id: this.sim_id};
+    this.http.getPushScreen(params).subscribe(res => {
+      console.log("play=======>")
+      console.log(res)
+    })
+  }
+
+  pauseVideo(){
+    let params = {action: 'screen', datas: {op:'pause'}, n_id: this.n_id, sim_id: this.sim_id};
+
+    this.http.getPushScreen(params).subscribe(res => {
+      console.log("pause=======>")
+      console.log(res)
+    })
+  }
 
   // ngAfterViewInit() {
   //   const height = this.topBox.nativeElement.offsetHeight;

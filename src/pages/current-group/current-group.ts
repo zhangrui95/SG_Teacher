@@ -11,7 +11,7 @@ import {UserData} from "../../providers/user-data";
 })
 export class CurrentGroupPage {
   list;
-  PIndex;
+  PIndex = '';
   sim_id;
   n_id;
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public http: ProxyHttpService,public userData:UserData) {
@@ -60,7 +60,9 @@ export class CurrentGroupPage {
       roleNum = this.box[i].roleNum;
       this.roleDatas[i] = {roleName: roleName, roleNum: roleNum.toString()}
     }
-    if(roleName === ''||roleNum === ''){
+    if(this.PIndex === ''){
+      this.showToast('bottom', '请选择组');
+    }else if(roleName === ''||roleNum === ''){
       this.showToast('bottom', '角色名称和人数不能为空');
     }else if(roleNum <= 0){
       this.showToast('bottom', '人数最少为1');

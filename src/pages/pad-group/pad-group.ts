@@ -83,7 +83,7 @@ export class PadGroupPage {
         this.canNext = true;
         return;
       }
-      if (!this.currScence) {
+      if (!this.currScence||!this.currScence.s_data||this.currScence.s_data.length==0) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         this.canNext = true;
         return;

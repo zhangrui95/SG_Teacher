@@ -17,7 +17,7 @@
   <page-pad-bdtb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='baidu'"></page-pad-bdtb>
   <page-pad-decision  [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='fork'"></page-pad-decision>
   <page-pad-danmu [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='danmu'"></page-pad-danmu>
-  <page-pad-danmu [sim_id]="sim_id" [s_data]="rankList"*ngIf="sType=='goldend'"></page-pad-danmu>
+  <page-gold-end [sim_id]="sim_id" *ngIf="sType=='goldend'"></page-gold-end>
 </ion-content>
 <div *ngIf="keyInput" class="input-key-box">
   <input class="input-key" type="text" [(ngModel)]="content"/>

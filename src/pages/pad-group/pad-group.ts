@@ -83,11 +83,13 @@ export class PadGroupPage {
         this.canNext = true;
         return;
       }
-      if (!this.currScence) {
+      if (!this.currScence||!this.currScence.s_data||this.currScence.s_data.length==0) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         this.canNext = true;
         return;
       }
+
+
       let beans = new Array<NextBean>();
 
       if (!this.isGrouped) {
@@ -166,6 +168,11 @@ export class PadGroupPage {
         }
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        }
+        if(!action){
+          if(this.currNode.length==1){
+            action= {action: 'screen', datas: this.currNode[0], n_id: this.currScence.n_id, sim_id: this.sim_id}
+          }
         }
 
       }
@@ -292,6 +299,7 @@ export class PadGroupPage {
 
   sendEnd() {
     //todo 结束场景
+
     this.http.getRankingForU({sim_id: this.sim_id}).subscribe(res => {
       console.log(res)
       this.rankList=res['list']
@@ -373,6 +381,12 @@ export class PadGroupPage {
         //   }
         // }
 
+      if(res['listScenes'].length==1){
+        if(res['listScenes'][0]['n_id']==''){
+          this.showToast('bottom','当前演练已结束')
+          return
+        }
+      }
         this.currNode = res['listScenes']
 
         this.processJson.setCurrNode(this.currNode)

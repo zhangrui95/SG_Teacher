@@ -32,6 +32,9 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   // @ViewChild('hr_hid') hr_hid: ElementRef;
   refresh(){
     setTimeout(()=>{
+      if(!this.ion_content){
+        return
+      }
       this.ion_content.resize();
       this.ion_content.scrollToBottom(500);
     },500)

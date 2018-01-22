@@ -56,6 +56,9 @@ export class PadQQPage implements OnInit,OnDestroy {
   }
   refresh(){
     setTimeout(()=>{
+      if(!this.ion_content){
+        return
+      }
       this.ion_content.resize();
       this.ion_content.scrollToBottom(500);
     },500)

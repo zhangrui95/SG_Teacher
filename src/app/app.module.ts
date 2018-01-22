@@ -72,6 +72,7 @@ import {PadDecisionPage} from "../pages/pad-decision/pad-decision";
 import {PadDefaultPage} from "../pages/pad-default/pad-default";
 import {CommentDetailPage} from "../pages/comment-detail/comment-detail";
 import {DecisionDetailPage} from "../pages/decision-detail/decision-detail";
+import {GoldEndPage} from "../pages/gold-end/gold-end";
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -123,6 +124,7 @@ import {DecisionDetailPage} from "../pages/decision-detail/decision-detail";
     PadDecisionPage,
     PadDefaultPage,
     DecisionDetailPage,
+    GoldEndPage,
     CommentDetailPage
   ],
   imports: [
@@ -153,6 +155,7 @@ import {DecisionDetailPage} from "../pages/decision-detail/decision-detail";
         { component: ClassroomPage, name: 'ClassroomPage', segment: 'classroom' },
         { component: DecisionPage, name: 'DecisionPage', segment: 'decision' },
         { component: DecisionDetailPage, name: 'DecisionDetailPage', segment: 'decisionDetail' },
+        { component: GoldEndPage, name: 'GoldEndPage', segment: 'goldEnd' },
         { component: GroupingPage, name: 'GroupingPage', segment: 'grouping' },
         { component: RecordsPage, name: 'RecordsPage', segment: 'records' },
         { component: RecordsListPage, name: 'RecordsListPage', segment: 'recordsList' },
@@ -239,7 +242,8 @@ import {DecisionDetailPage} from "../pages/decision-detail/decision-detail";
     CommentDetailPage,
     PadDecisionPage,
     PadDefaultPage,
-    DecisionDetailPage
+    DecisionDetailPage,
+    GoldEndPage
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

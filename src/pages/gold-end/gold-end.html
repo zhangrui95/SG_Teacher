@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>沙漠掘金</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="center">
+    <ion-list no-lines style="margin-top: 15px;">
+      <button ion-item *ngFor="let item of rankList;let i = index;">
+        <div class="float-l list-num">{{i+1}}</div>
+        <div class="float-l list-g">|</div>
+        <div class="float-l list-name">
+          <span class="float-l">{{item.g_name}}</span>
+          <span class="float-r" style="margin-right: 50px;">金子：{{item.money_g}}</span>
+        </div>
+        <ion-icon class="icon-forward" name="ios-arrow-forward"  item-end></ion-icon>
+      </button>
+    </ion-list>
+  </div>
+</ion-content>

@@ -22,9 +22,6 @@ export class ProxyHttpService {
   getProjectList(params) {
     return this._get("/privateProjectController/getPrivateProjectList.do", params)
   }
-  getRankingForU(params) {
-    return this._get("/tabletController/getRankingForU.do", params)
-  }
   updatePhone(params) {
     return this._post("/userstu/updatePhone.do", params)
   }
@@ -117,6 +114,9 @@ export class ProxyHttpService {
   getDecide(params){
     return this._get('/tabletController/getDecide.do', params);
   }
+  getRankingForU(params){
+      return this._get('/tabletController/getRankingForU.do', params);
+    }
 
   addStuAnswer(params){
     return this._post("/phoneAppController/addStuAnswer.do",params);

@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {ServerSocket} from "../../providers/ws.service";
 import {Subscription} from "rxjs/Subscription";
+import {ProxyHttpService} from "../../providers/proxy.http.service";
 
 
 @IonicPage()
@@ -58,7 +59,9 @@ src;
       }
       else {
         this.name=name;
-        this.src=com.data.src;
+
+
+        this.src=this.getFullpath(com.data.src);
       }
 
     }
@@ -79,7 +82,9 @@ src;
 
   intervalTimer
   messagesSubscription;
-
+  getFullpath(path){
+    return  this.http.getBaseurl()+path
+  }
   registeReciever() {
     console.log(this.ws.messages)
     this.ws.messages.subscribe(res => {
@@ -94,7 +99,7 @@ src;
       this.socketSubscription.unsubscribe();
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket,public http:ProxyHttpService) {
   }
 
   getData() {

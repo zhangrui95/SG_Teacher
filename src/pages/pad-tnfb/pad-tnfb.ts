@@ -41,17 +41,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
     this.getData();
     this.getAnswerOfStuList();
     this.ws.connect();
-    this.intervalTimer = setInterval(() => {
-      if (!this.ws.messages) {
-        this.ws.connect();
-
-      }
-      if (this.ws.messages && !this.messagesSubscription) {
-        this.registeReciever()
-      }
-
-    }, 5000)
-    if (this.ws.messages && !this.messagesSubscription) {
+    if (this.ws.messages ) {
       this.registeReciever()
     }
   }

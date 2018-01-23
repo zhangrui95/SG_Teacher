@@ -37,17 +37,7 @@ export class PadWeiboPage implements OnInit,OnDestroy {
     this.getAnswerOfStuList();
     this.ws.connect();
 
-    this.intervalTimer = setInterval(() => {
-      if (!this.ws.messages) {
-        this.ws.connect();
-
-      }
-      if (this.ws.messages && !this.messagesSubscription) {
-        this.registeReciever()
-      }
-
-    }, 5000)
-    if (this.ws.messages && !this.messagesSubscription) {
+    if (this.ws.messages ) {
       this.registeReciever()
     }
   }

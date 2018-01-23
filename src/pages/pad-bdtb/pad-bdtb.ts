@@ -24,6 +24,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   ion_content
   refreshdata(){
     console.log('bd')
+    this.getAnswerOfStuList();
   }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;

@@ -23,6 +23,7 @@ export class PadWeiboPage implements OnInit,OnDestroy {
   ion_content
   refreshdata(){
     console.log('weibo')
+    this.getAnswerOfStuList();
   }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;

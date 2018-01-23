@@ -32,7 +32,7 @@ export class PadGroupPage {
   mapShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
-    // this.ws.connect();
+    this.ws.connect();
     // this.sim_id = navParams.data.sim_id + ""
     this.userData.getSimid().then(val => {
       this.sim_id = val;

@@ -9,76 +9,33 @@
     <hr style="background-color: white;width: 95%;margin: 5px 0px 0px 25px;display: inline-flex;">
     <p class="p_content">{{content}}</p>
   </div>
-  <!--<div #list>-->
-    <!--&lt;!&ndash;<div *ngFor="let item of items;let n=index">&ndash;&gt;-->
-      <!--&lt;!&ndash;<div style="margin:50px 0px 0px 5px;">&ndash;&gt;-->
-        <!--&lt;!&ndash;<img [src]="item.imagePath" style="margin:10px 0px 0px 85px;width: 80px;height: 80px;float:left;"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div style="color:white; margin:10px 0px 0px 16px;float:left;width:80%;">&ndash;&gt;-->
-          <!--&lt;!&ndash;<span style="font-size: large">{{item.userName}}</span>&ndash;&gt;-->
-          <!--&lt;!&ndash;<span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-        <!--&lt;!&ndash;<span style="color: white;margin: 25px 0px 25px 15px;float:left;width:80%;font-size: initial;">&ndash;&gt;-->
-          <!--&lt;!&ndash;第{{n+1}}楼 | {{item.createtime}}&ndash;&gt;-->
-        <!--&lt;!&ndash;</span>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div style="width: 85%">&ndash;&gt;-->
-          <!--&lt;!&ndash;<h5 style="color:#d8d8d8;margin: 3px 0px 0px 185px;display: inline-block;">&ndash;&gt;-->
-            <!--&lt;!&ndash;{{item.answer}}&ndash;&gt;-->
-          <!--&lt;!&ndash;</h5>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<hr style="border-top: 1px dashed white;width: 80%;margin: 50px 0px 15px 95px"/>&ndash;&gt;-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-
-    <!--<div *ngFor="let item of items">-->
-      <!--&lt;!&ndash;<div *ngIf="item.UserName!=name" style="float: left">&ndash;&gt;-->
-        <!--<div>-->
-          <!--<img [src]="item.imagePath?getFullPath(item.imagePath):'assets/img/header.png'" style="margin:10px 0px 0px 85px;width: 80px;height: 80px"/>-->
-          <!--<div style="color:white; margin:-85px 0px 50px 185px; width:80%;">-->
-            <!--<span style="font-size: x-large">{{item.userName}}</span>-->
-            <!--<span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div-->
-          <!--style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: -5px 0px 0px 170px;width: 43%;height: auto;float: left">-->
-          <!--<h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>-->
-        <!--</div>-->
-      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--&lt;!&ndash;<div *ngIf="item.UserName==name" style="float: right">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div style="">&ndash;&gt;-->
-          <!--&lt;!&ndash;<img [src]="item.ImagePath" style="margin:10px 125px 0px 0px;width: 80px;height: 80px;float: right;"/>&ndash;&gt;-->
-          <!--&lt;!&ndash;<h3 style="color:white; margin:25px 8px 25px 0px;float: right">{{item.UserName}}</h3>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<div&ndash;&gt;-->
-            <!--&lt;!&ndash;style="background-color: black;background: rgba(0,0,0,0.5);float: right;border-radius: 1em;margin: 70px -50px 0px 0px;width: 43%;height: auto;">&ndash;&gt;-->
-            <!--&lt;!&ndash;<h5 style="color:#d8d8d8;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--&lt;!&ndash;<div&ndash;&gt;-->
-            <!--&lt;!&ndash;style="background-color: #1aa7b8;border-radius: 2em;margin: 10px 370px 0px 0px;width: 27%;background: rgba(26, 167, 184, 0.5);float: right;">&ndash;&gt;-->
-            <!--&lt;!&ndash;<h5 style="color:white;margin: 7px 0px 7px 15px;display: inline-block;">&ndash;&gt;-->
-              <!--&lt;!&ndash;15秒之内可撤销此消息&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color:white ">撤销</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</h5>&ndash;&gt;-->
-          <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<div style="padding: 20px 0 50px;overflow: hidden;">
+  <!--<div class="float-l" *ngFor="let item of items;let n=index;">-->
+    <!--<div style="overflow: hidden;height: 80px;width: 80%;margin: 10px auto 0;">-->
+      <!--<img class="float-l" [src]="item.imagePath?getFullPath(item.imagePath):'assets/img/header.png'"  style="width: 80px;height: 80px"/>-->
+      <!--<div class="float-l" style="color:white; margin:18px 20px;">-->
+        <!--<span style="font-size: x-large">{{item.userName}}</span>-->
+        <!--<span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div style="overflow: hidden;width: 80%;margin: 10px auto 0;">-->
+      <!--<div class="float-l"-->
+           <!--style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: 0 100px;width: 43%;height: auto;">-->
+        <!--<h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>-->
       <!--</div>-->
     <!--</div>-->
   <!--</div>-->
-
-<div style="padding: 20px 0 50px;overflow: hidden;">
-  <div class="float-l" *ngFor="let item of items;let n=index;">
-    <div style="overflow: hidden;height: 80px;width: 80%;margin: 10px auto 0;">
-      <img class="float-l" [src]="item.imagePath?getFullPath(item.imagePath):'assets/img/header.png'"  style="width: 80px;height: 80px"/>
+  <div class="float-l" style="width: 100%;" *ngFor="let item of items;let n=index;">
+    <div style="overflow: hidden;height: 80px;margin: 10px 10% 0;width: 80%;">
+      <img class="float-l" [src]="item.imagePath?getFullPath(item.imagePath):'assets/img/header.png'"  style="width:70px;height: 70px;border-radius: 70px;border: 1px solid #fff;"/>
       <div class="float-l" style="color:white; margin:18px 20px;">
-        <span style="font-size: x-large">{{item.userName}}</span>
-        <span style="font-size: medium;padding-left: 10px">{{item.role_name}}</span>
+        <span style="font-size: 22px;">{{item.userName}}</span>
       </div>
     </div>
-    <div style="overflow: hidden;width: 80%;margin: 10px auto 0;">
-      <div class="float-l"
-           style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 1em;margin: 0 100px;width: 43%;height: auto;">
-        <h5 style="color:#F5F5F5;margin: 15px 25px 15px 25px;display: inline-block;">{{item.answer}}</h5>
+    <div style="overflow: hidden;width: 80%;margin: -15px 92px 0;">
+      <div class="float-l" style="background-color: black;background: rgba(0,0,0,0.5);border-radius: 7px;margin: 0 100px;height: auto;color: #fff;padding: 10px 15px;font-size: 18px;">
+        {{item.answer}}
       </div>
     </div>
   </div>

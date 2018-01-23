@@ -23,6 +23,8 @@ export class PadQQPage implements OnInit,OnDestroy {
   ion_content
   refreshdata(){
     console.log('qq')
+    this.ws.connect()
+    this.registeReciever();
     this.getAnswerOfStuList();
   }
   @ViewChild('topBox') topBox: ElementRef;

@@ -22,6 +22,8 @@ import {UserData} from "../../providers/user-data";
 export class PadDanmuPage implements OnInit, OnDestroy {
   refreshdata(){
     console.log('danm')
+    this.ws.connect()
+    this.registeReciever();
     this.getAnswerOfStuList();
   }
   @Input()

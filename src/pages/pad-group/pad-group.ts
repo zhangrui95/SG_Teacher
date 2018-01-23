@@ -535,7 +535,7 @@ export class PadGroupPage {
     //   }
     //
     // }, 5000)
-    if(this.ws.messages != null&&this.wsReciever==null){
+    if(this.ws.messages){
       this.registeReciever()
     }
 

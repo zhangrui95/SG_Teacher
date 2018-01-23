@@ -11,9 +11,10 @@ import {UserData} from "../../providers/user-data";
 })
 export class CurrentGroupPage {
   list;
-  PIndex;
+  PIndex = '';
   sim_id;
   n_id;
+  g_id = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,public toastCtrl: ToastController, public http: ProxyHttpService,public userData:UserData) {
     this.n_id = this.navParams.get('n_id');
   }
@@ -28,6 +29,11 @@ export class CurrentGroupPage {
       this.http.getGroupDetail(params).subscribe(res => {
         console.log(res);
         this.list = res;
+        if(this.list.length == 0){
+          this.g_id = '';
+        }else{
+          this.g_id = this.list[0].g_id;
+        }
         for(let i in res){
           this.num.push(res[i].listStus.length);
         }
@@ -37,6 +43,7 @@ export class CurrentGroupPage {
 
   pChoice(i){
     this.PIndex = i;
+    this.g_id = this.list[i].g_id;
   }
   add(){
     this.box.push({roleDatas:'', roleNum:''});
@@ -60,13 +67,15 @@ export class CurrentGroupPage {
       roleNum = this.box[i].roleNum;
       this.roleDatas[i] = {roleName: roleName, roleNum: roleNum.toString()}
     }
-    if(roleName === ''||roleNum === ''){
+    if(this.g_id == ''){
+      this.showToast('bottom', '请选择组');
+    }else if(roleName === ''||roleNum === ''){
       this.showToast('bottom', '角色名称和人数不能为空');
     }else if(roleNum <= 0){
       this.showToast('bottom', '人数最少为1');
     }else{
       console.log(this.n_id);
-      const params = {n_id: this.n_id, sim_id: this.sim_id, g_id: this.list[this.PIndex].g_id, roleDatas: this.roleDatas}
+      const params = {n_id: this.n_id, sim_id: this.sim_id, g_id: this.g_id, roleDatas: this.roleDatas}
       this.http.addRoleForGro(params).subscribe(res => {
         this.showToast('bottom', res['msg']);
       });

@@ -11,6 +11,7 @@ export class ServerSocket {
   public messages: Observable<string>
 
   constructor(private userData: UserData) {
+
   }
 
   public connect() {

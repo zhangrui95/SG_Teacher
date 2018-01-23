@@ -8,7 +8,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PadDefaultPage {
   name='weibo'
-
+  refreshdata(){
+    console.log('empty')
+  }
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 
   }

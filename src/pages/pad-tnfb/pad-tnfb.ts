@@ -24,7 +24,9 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   sim_id :any=new Object();
   @Input()
   s_data :any=new Object();
-
+  refreshdata(){
+    console.log('tnfb')
+  }
   @ViewChild('ion_content') ion_content
 
   @ViewChild('topBox') topBox: ElementRef;

@@ -21,7 +21,9 @@ import {Subscription} from "rxjs/Subscription";
 export class PadQQPage implements OnInit,OnDestroy {
   @ViewChild('ion_content')
   ion_content
-
+  refreshdata(){
+    console.log('qq')
+  }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
 

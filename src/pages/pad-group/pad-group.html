@@ -2,21 +2,21 @@
   <ion-navbar  hideBackButton="true" color="dark">
     <ion-title>{{sType!='group'?(currScence?currScence.s_data.name:'SG平台'):'分组'}}</ion-title>
     <div class="zc-new-num" (click)="getOut()">终止演练</div>
-    <!--<img src="assets/img/user.png" class="head-img" (click)="getUser()"/>-->
+    <img src="assets/img/back.png" class="head-img" (click)="refresh()"/>
   </ion-navbar>
 </ion-header>
 <page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList"  [sType]="sType"></page-rsidebar>
 <page-operation (ev)="onNext($event)" *ngIf="showFlag" [SimId]="sim_id" [nId]="curr_nid.nid" [gid]="currGid"></page-operation>
 <ion-content  (click)="onbActive()">
-  <page-pad-default *ngIf="sType=='empty'"></page-pad-default>
-  <page-group-index [sim_id]="sim_id"[s_data]="currScence"*ngIf="sType=='default'"></page-group-index>
-  <page-grouping [sim_id]="sim_id" [list]="groupList" (onGrouped)="onNext($event)"  *ngIf="sType=='group'"></page-grouping>
-  <page-pad-qq  [sim_id]="sim_id" [s_data]="currScence" *ngIf="sType=='qq'"></page-pad-qq>
-  <page-pad-tnfb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='storm'"></page-pad-tnfb>
-  <page-pad-weibo   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='weibo'"></page-pad-weibo>
-  <page-pad-bdtb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='baidu'"></page-pad-bdtb>
-  <page-pad-decision  [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='fork'"></page-pad-decision>
-  <page-pad-danmu [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='danmu'"></page-pad-danmu>
+  <page-pad-default *ngIf="sType=='empty'" #currpage></page-pad-default>
+  <page-group-index [sim_id]="sim_id"[s_data]="currScence"*ngIf="sType=='default'" #currpage></page-group-index>
+  <page-grouping [sim_id]="sim_id" [list]="groupList" (onGrouped)="onNext($event)"  *ngIf="sType=='group'" #currpage></page-grouping>
+  <page-pad-qq  [sim_id]="sim_id" [s_data]="currScence" *ngIf="sType=='qq'" #currpage></page-pad-qq>
+  <page-pad-tnfb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='storm'"#currpage></page-pad-tnfb>
+  <page-pad-weibo   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='weibo'"#currpage></page-pad-weibo>
+  <page-pad-bdtb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='baidu'"#currpage></page-pad-bdtb>
+  <page-pad-decision  [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='fork'"#currpage></page-pad-decision>
+  <page-pad-danmu [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='danmu'"#currpage></page-pad-danmu>
   <page-gold-end *ngIf="sType=='goldend'"></page-gold-end>
 </ion-content>
 <div *ngIf="keyInput" class="input-key-box">

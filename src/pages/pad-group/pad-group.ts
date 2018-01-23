@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
@@ -14,7 +14,7 @@ import {DecisionDetailPage} from "../decision-detail/decision-detail";
   templateUrl: 'pad-group.html',
 })
 export class PadGroupPage {
-
+  @ViewChild('currpage') currpage
   list = [];
   style = [];
   jsonData: any;
@@ -358,7 +358,9 @@ export class PadGroupPage {
       console.log(res)
     })
   }
-
+  refresh(){
+    this.currpage.refreshdata();
+  }
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
         if (this.currday >= 0) {

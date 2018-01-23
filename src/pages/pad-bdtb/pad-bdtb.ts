@@ -22,7 +22,9 @@ import {Subscription} from "rxjs/Subscription";
 export class PadBdtbPage implements OnInit,OnDestroy {
   @ViewChild('co')
   ion_content
-
+  refreshdata(){
+    console.log('bd')
+  }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
   // @ViewChild('show') show: ElementRef;

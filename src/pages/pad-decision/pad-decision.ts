@@ -13,7 +13,9 @@ export class PadDecisionPage implements OnInit {
     console.log(this.s_data.s_data.componentList[0].data.fillData)
     this.getData();
   }
-
+  refreshdata(){
+    console.log('des')
+  }
   @Input()
   s_data :any=new Object();
   @Input()

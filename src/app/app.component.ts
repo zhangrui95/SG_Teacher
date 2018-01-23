@@ -91,7 +91,11 @@ export class ConferenceApp {
               public toastCtrl: ToastController,
               public ws:ServerSocket) {
     this.platformReady()
-    this.ws.connect()
+
+    this.userData.getToken().then(res=>{
+      this.userData.setToken(res)
+    })
+
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       if(hasLoggedIn){
         this.rootPage=IndexPage;

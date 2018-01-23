@@ -20,7 +20,9 @@ import {UserData} from "../../providers/user-data";
 })
 
 export class PadDanmuPage implements OnInit, OnDestroy {
-
+  refreshdata(){
+    console.log('danm')
+  }
   @Input()
   sim_id: any = new Object();
   @Input()

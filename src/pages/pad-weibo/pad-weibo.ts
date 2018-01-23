@@ -21,7 +21,9 @@ import {ProxyHttpService} from "../../providers/proxy.http.service";
 export class PadWeiboPage implements OnInit,OnDestroy {
   @ViewChild('ion_content')
   ion_content
-
+  refreshdata(){
+    console.log('weibo')
+  }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
 

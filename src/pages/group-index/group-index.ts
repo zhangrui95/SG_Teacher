@@ -22,7 +22,9 @@ src;
   title;
   content;
   txt_length;
-
+  refreshdata(){
+    console.log('group')
+  }
   private socketSubscription: Subscription
 
   ngOnInit(): void {

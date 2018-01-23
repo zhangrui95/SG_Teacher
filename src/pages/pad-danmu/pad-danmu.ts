@@ -22,6 +22,7 @@ import {UserData} from "../../providers/user-data";
 export class PadDanmuPage implements OnInit, OnDestroy {
   refreshdata(){
     console.log('danm')
+    this.getAnswerOfStuList();
   }
   @Input()
   sim_id: any = new Object();

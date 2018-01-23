@@ -26,6 +26,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   s_data :any=new Object();
   refreshdata(){
     console.log('tnfb')
+    this.getAnswerOfStuList();
   }
   @ViewChild('ion_content') ion_content
 

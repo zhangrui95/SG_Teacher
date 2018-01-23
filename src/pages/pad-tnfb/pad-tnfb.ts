@@ -41,26 +41,43 @@ export class PadTnfbPage implements OnInit,OnDestroy {
     this.getData();
     this.getAnswerOfStuList();
     this.ws.connect();
-    if (this.ws.messages) {
-      console.log(this.ws.messages)
-      this.ws.messages.subscribe(res => {
-        console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        console.log(res)
-        if (JSON.parse(res)['action'] != null) {
-          if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            let list=JSON.parse(res)['list'];
-            for(let item of list){
-              if(item.n_id==this.n_id){
-                let item = this.items.concat(JSON.parse(res)['list'])
-                this.items=item
-                this.refresh()
-                break;
-              }
+    this.intervalTimer = setInterval(() => {
+      if (!this.ws.messages) {
+        this.ws.connect();
+
+      }
+      if (this.ws.messages && !this.messagesSubscription) {
+        this.registeReciever()
+      }
+
+    }, 5000)
+    if (this.ws.messages && !this.messagesSubscription) {
+      this.registeReciever()
+    }
+  }
+
+  intervalTimer
+  messagesSubscription;
+
+  registeReciever() {
+    console.log(this.ws.messages)
+    this.ws.messages.subscribe(res => {
+      console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      console.log(res)
+      if (JSON.parse(res)['action'] != null) {
+        if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
+          let list=JSON.parse(res)['list'];
+          for(let item of list){
+            if(item.n_id==this.n_id){
+              let item = this.items.concat(JSON.parse(res)['list'])
+              this.items=item
+              this.refresh()
+              break;
             }
           }
         }
-      })
-    }
+      }
+    })
   }
 
   refresh(){

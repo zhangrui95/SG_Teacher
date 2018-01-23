@@ -50,29 +50,47 @@ export class PadBdtbPage implements OnInit,OnDestroy {
     this.getData();
     this.getAnswerOfStuList();
     this.ws.connect();
-    if (this.ws.messages) {
-      this.ws.messages.subscribe(res => {
 
-        if (JSON.parse(res)['action'] != null) {
-          if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
-            // this.items.push(JSON.parse(res)['list'])
+    this.intervalTimer = setInterval(() => {
+      if (!this.ws.messages) {
+        this.ws.connect();
 
+      }
+      if (this.ws.messages && !this.messagesSubscription) {
+        this.registeReciever()
+      }
 
-            let list=JSON.parse(res)['list'];
-            for(let item of list){
-              if(item.n_id==this.n_id){
-                let item = this.items.concat(JSON.parse(res)['list'])
-                this.items=item
-                this.refresh()
-                break;
-              }
-            }
-
-
-          }
-        }
-      })
+    }, 5000)
+    if (this.ws.messages && !this.messagesSubscription) {
+      this.registeReciever()
     }
+  }
+
+  intervalTimer
+  messagesSubscription;
+
+  registeReciever() {
+    this.ws.messages.subscribe(res => {
+
+      if (JSON.parse(res)['action'] != null) {
+        if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {
+          // this.items.push(JSON.parse(res)['list'])
+
+
+          let list=JSON.parse(res)['list'];
+          for(let item of list){
+            if(item.n_id==this.n_id){
+              let item = this.items.concat(JSON.parse(res)['list'])
+              this.items=item
+              this.refresh()
+              break;
+            }
+          }
+
+
+        }
+      }
+    })
   }
 
   ngOnDestroy() {

@@ -31,13 +31,19 @@ src;
     console.log(this.s_data.s_data.componentList)
     this.datas = this.s_data.s_data.componentList;
     this.ws.connect();
-    if (this.ws.messages) {
-      console.log(this.ws.messages)
-      this.ws.messages.subscribe(res => {
-        console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        console.log(res)
-        //{"action":"push_content_start","content":"11111"}
-      })
+
+    this.intervalTimer = setInterval(() => {
+      if (!this.ws.messages) {
+        this.ws.connect();
+
+      }
+      if (this.ws.messages && !this.messagesSubscription) {
+        this.registeReciever()
+      }
+
+    }, 5000)
+    if (this.ws.messages && !this.messagesSubscription) {
+      this.registeReciever()
     }
 
     let txtValues = new Array();
@@ -69,6 +75,18 @@ src;
 
     this.title=title;
     this.content=content;
+  }
+
+  intervalTimer
+  messagesSubscription;
+
+  registeReciever() {
+    console.log(this.ws.messages)
+    this.ws.messages.subscribe(res => {
+      console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+      console.log(res)
+      //{"action":"push_content_start","content":"11111"}
+    })
   }
 
   ngOnDestroy() {

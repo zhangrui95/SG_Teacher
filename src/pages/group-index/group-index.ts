@@ -61,7 +61,7 @@ src;
         this.name=name;
 
 
-        this.src=this.getFullpath(com.data.src);
+        this.src=com.data.src
       }
 
     }

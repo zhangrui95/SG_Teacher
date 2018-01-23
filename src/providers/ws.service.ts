@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable'
 import websocketConnect from 'rxjs-websockets'
 import 'rxjs/add/operator/share'
 import {UserData} from "./user-data";
+import "rxjs/add/operator/delay";
 
 @Injectable()
 export class ServerSocket {
@@ -26,7 +27,8 @@ export class ServerSocket {
         'ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken + "&type=pad",
         this.inputStream =
           new QueueingSubject<string>()
-      ).messages.share()
+      ).messages.retryWhen(errors => errors.delay(1000)).share()
+
     }
 
   }

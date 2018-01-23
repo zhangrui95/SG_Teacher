@@ -7,6 +7,7 @@ import {GroupBean, NextBean, ProcessJSONUtil} from "../../providers/ProcessJSONU
 import {CommentDetailPage} from "../comment-detail/comment-detail";
 import {PadGroupListPage} from "../pad-group-list/pad-group-list";
 import {DecisionDetailPage} from "../decision-detail/decision-detail";
+import "rxjs/add/operator/retryWhen";
 
 @IonicPage()
 @Component({
@@ -524,36 +525,48 @@ export class PadGroupPage {
 
     })
 
+    // setInterval(() => {
+    //   if (!this.ws.messages ) {
+    //     this.ws.connect();
+    //
+    //   }
+    //   if(this.ws.messages&&this.wsReciever==null){
+    //     this.registeReciever()
+    //   }
+    //
+    // }, 5000)
+    // if(this.ws.messages != null&&this.wsReciever==null){
+    //   this.registeReciever()
+    // }
 
-    if (this.ws.messages) {
-      this.wsReciever = this.ws.messages.subscribe(msg => {
-        let curr = JSON.parse(msg);
-        let action = curr.action
-        console.log('curr========>')
-        console.log(curr)
-        switch (action) {
-          case 'phone_insert_group':
-            let arr = curr.list;
-            for (let g of arr) {
-              for (let group of  this.groupList.GroupId) {
-                if (g['g_id'] == group.id) {
-                  group.num = g['StuTotal']
-                }
-              }
-            }
-
-            //todo 自由分组 更新分组信息
-            break;
-          case 'pad_process_upadte':
-            // this.currNode = curr
-            break
-        }
-
-      })
-    }
 
   }
+  registeReciever(){
+    this.wsReciever = this.ws.messages.subscribe(msg => {
+      let curr = JSON.parse(msg);
+      let action = curr.action
+      console.log('curr========>')
+      console.log(curr)
+      switch (action) {
+        case 'phone_insert_group':
+          let arr = curr.list;
+          for (let g of arr) {
+            for (let group of  this.groupList.GroupId) {
+              if (g['g_id'] == group.id) {
+                group.num = g['StuTotal']
+              }
+            }
+          }
 
+          //todo 自由分组 更新分组信息
+          break;
+        case 'pad_process_upadte':
+          // this.currNode = curr
+          break
+      }
+
+    })
+  }
   getcomment() {
     const params = {
       sim_id: this.sim_id,

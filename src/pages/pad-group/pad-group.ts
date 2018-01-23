@@ -383,7 +383,13 @@ export class PadGroupPage {
 
       if(res['listScenes'].length==1){
         if(res['listScenes'][0]['n_id']==''){
-          this.showToast('bottom','当前演练已结束')
+          if(this.simType=='gold'){
+            this.showToast('bottom','正在等待各队投票')
+
+          }else{
+            this.showToast('bottom','当前演练已结束')
+
+          }
           return
         }
       }

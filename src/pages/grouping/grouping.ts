@@ -112,7 +112,7 @@ export class GroupingPage implements OnInit,OnDestroy{
         }
       }else{
         this.getPushFreeGroListForPhone()
-        this.showToast('bottom',"当前参与人数不满足随机分组最低人数要求，系统将自动进行自由分组");
+        // this.showToast('bottom',"当前参与人数不满足随机分组最低人数要求，系统将自动进行自由分组");
       }
 
 

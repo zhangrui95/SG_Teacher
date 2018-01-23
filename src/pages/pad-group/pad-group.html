@@ -2,7 +2,7 @@
   <ion-navbar  hideBackButton="true" color="dark">
     <ion-title>{{sType!='group'?(currScence?currScence.s_data.name:'SG平台'):'分组'}}</ion-title>
     <div class="zc-new-num" (click)="getOut()">终止演练</div>
-    <img src="assets/img/back.png" class="head-img" (click)="refresh()"/>
+    <img src="assets/img/sx.png" class="head-img" (click)="refresh()"/>
   </ion-navbar>
 </ion-header>
 <page-rsidebar (onNext)="onNext($event)" *ngIf="showFlag" [groupList]="groupList"  [sType]="sType"></page-rsidebar>

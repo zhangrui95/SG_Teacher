@@ -69,6 +69,8 @@ export class CurrentGroupPage {
     }
     if(this.g_id == ''){
       this.showToast('bottom', '请选择组');
+    }else if(this.num[this.PIndex] == 0){
+      this.showToast('bottom', '组内暂无学生，无法进行分配');
     }else if(roleName === ''||roleNum === ''){
       this.showToast('bottom', '角色名称和人数不能为空');
     }else if(roleNum <= 0){

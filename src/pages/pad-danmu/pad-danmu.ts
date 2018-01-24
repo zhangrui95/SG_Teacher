@@ -57,7 +57,7 @@ export class PadDanmuPage implements OnInit, OnDestroy {
 
   registeReciever() {
     console.log(this.ws.messages)
-    this.ws.messages.subscribe(res => {
+    this.socketSubscription= this.ws.messages.subscribe(res => {
       console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       console.log(res)
       if (JSON.parse(res)['action'] != null) {

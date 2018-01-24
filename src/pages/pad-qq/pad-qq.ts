@@ -35,20 +35,11 @@ export class PadQQPage implements OnInit,OnDestroy {
     console.log(this.s_data.s_data.componentList[0].data.fillData)
     this.n_id=this.s_data.n_id;
     this.g_id=this.s_data.g_id;
-    // this.getData();
+    this.getData();
     this.getAnswerOfStuList();
     this.ws.connect();
 
-    // this.intervalTimer = setInterval(() => {
-    //   if (!this.ws.messages) {
-    //     this.ws.connect();
-    //
-    //   }
-    //   if (this.ws.messages && !this.messagesSubscription) {
-    //     this.registeReciever()
-    //   }
-    //
-    // }, 5000)
+
     if (this.ws.messages ) {
       this.registeReciever()
     }
@@ -59,7 +50,7 @@ export class PadQQPage implements OnInit,OnDestroy {
 
   registeReciever() {
     console.log(this.ws.messages)
-    this.ws.messages.subscribe(res => {
+    this.socketSubscription=this.ws.messages.subscribe(res => {
       console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       console.log(res)
       if (JSON.parse(res)['action'] != null) {

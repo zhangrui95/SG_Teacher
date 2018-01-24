@@ -62,7 +62,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   messagesSubscription;
 
   registeReciever() {
-    this.ws.messages.subscribe(res => {
+    this.socketSubscription=this.ws.messages.subscribe(res => {
 
       if (JSON.parse(res)['action'] != null) {
         if (JSON.parse(res)['action'] == 'pad_scene_answers_update') {

@@ -53,7 +53,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
 
   registeReciever() {
     console.log(this.ws.messages)
-    this.ws.messages.subscribe(res => {
+    this.socketSubscription=this.ws.messages.subscribe(res => {
       console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       console.log(res)
       if (JSON.parse(res)['action'] != null) {
@@ -61,9 +61,11 @@ export class PadTnfbPage implements OnInit,OnDestroy {
           let list=JSON.parse(res)['list'];
           for(let item of list){
             if(item.n_id==this.n_id){
+              if(this.items.indexOf(JSON.parse(res)['list'][0])==-1){
               let item = this.items.concat(JSON.parse(res)['list'])
               this.items=item
               this.refresh()
+              }
               break;
             }
           }

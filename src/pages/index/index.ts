@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
 import {IonicApp, IonicPage, Keyboard, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {UsersPage} from "../users/users";
-import {ClassroomPage} from "../classroom/classroom";
 import {RecordsPage} from "../records/records";
-import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {SimulationPage} from "../simulation/simulation";
 import {UserData} from "../../providers/user-data";
 import {GradePage} from "../grade/grade";
@@ -77,7 +75,7 @@ export class IndexPage {
   getFullPath(path){
     return this.http.getBaseurl()+path
   }
-  constructor(public ionicApp: IonicApp, public navCtrl: NavController, public barcodeScanner: BarcodeScanner, public navParams: NavParams, public keyboard: Keyboard, public toastCtrl: ToastController,
+  constructor(public ionicApp: IonicApp, public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard, public toastCtrl: ToastController,
               public platform: Platform, public userData:UserData,public http:ProxyHttpService,public ws:ServerSocket) {
     this.registerBackEvent = this.platform.registerBackButtonAction(() => {
 
@@ -214,26 +212,7 @@ export class IndexPage {
     });
     toast.present(toast);
   }
-  getClassRoom() {
-    this.barcodeScanner.scan({resultDisplayDuration:0}).then((barcodeData) => {
-      // Success! Barcode data is here
-      if(!barcodeData.cancelled){
 
-        if (barcodeData.text.indexOf('4dec1f9e20f86b62335ba913ae29fa0d')!=-1 ) {
-          let data=JSON.parse(barcodeData.text)
-          this.navCtrl.push(ClassroomPage, {data:data});
-        } else{
-          this.showToast('bottom',"扫描到的二维码有误，请重新尝试")
-        }
-      }
-
-    }, (err) => {
-      // An error occurred
-      console.log(err)
-      this.showToast('bottom',"扫描到的二维码有误，请重新尝试")
-    });
-
-  }
 
   getRecords() {
     this.navCtrl.push(RecordsPage);

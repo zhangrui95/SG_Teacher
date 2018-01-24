@@ -4,15 +4,12 @@ import {
   LoadingController, ToastController
 } from 'ionic-angular';
 
-import {ImagePicker, ImagePickerOptions} from "@ionic-native/image-picker";
-import {Camera, CameraOptions} from "@ionic-native/camera";
 
 import { PasswordPage } from "../password/password"
 import { UpdatePage } from '../update/update'
 import { LoginsPage } from '../logins/logins'
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {UserData} from "../../providers/user-data";
-import {Base64} from "@ionic-native/base64";
 import {PhonePage} from "../phone/phone";
 
 @IonicPage()
@@ -30,9 +27,6 @@ export class UsersPage {
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
               public alertCtrl: AlertController,
-              public imagePicker: ImagePicker,
-              private base64: Base64,
-              public camera: Camera,
               public userData:UserData,
               public http: ProxyHttpService,
               public toastCtrl: ToastController,
@@ -141,55 +135,55 @@ export class UsersPage {
   }
 
   takePhoto() {
-    const options: CameraOptions = {
-      quality: 100,
-      allowEdit: true,
-      targetWidth: 70,
-      targetHeight: 70,
-      saveToPhotoAlbum: true,
-    };
-
-    this.camera.getPicture(options).then(image => {
-      console.log('Image URI: ' + image);
-
-      this.avatar = image.slice(7);
-
-      let filePath: string = this.avatar
-
-      this.base64.encodeFile(filePath).then((base64File: string) => {
-        this.imgAdd(base64File);
-      }, (err) => {
-        console.log(err);
-      });
-
-    }, error => {
-      console.log('Error: ' + error);
-    });
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   allowEdit: true,
+    //   targetWidth: 70,
+    //   targetHeight: 70,
+    //   saveToPhotoAlbum: true,
+    // };
+    //
+    // this.camera.getPicture(options).then(image => {
+    //   console.log('Image URI: ' + image);
+    //
+    //   this.avatar = image.slice(7);
+    //
+    //   let filePath: string = this.avatar
+    //
+    //   this.base64.encodeFile(filePath).then((base64File: string) => {
+    //     this.imgAdd(base64File);
+    //   }, (err) => {
+    //     console.log(err);
+    //   });
+    //
+    // }, error => {
+    //   console.log('Error: ' + error);
+    // });
   }
 
   chooseFromAlbum() {
-    const options: ImagePickerOptions = {
-      maximumImagesCount: 1,
-      width: 70,
-      height: 70
-    };
-    this.imagePicker.getPictures(options).then(images => {
-      if (images.length > 1) {
-        this.presentAlert();
-      } else if (images.length === 1) {
-        console.log('Image URI: ' + images[0]);
-
-        this.avatar = images[0].slice(7);
-        let filePath: string = this.avatar
-        this.base64.encodeFile(filePath).then((base64File: string) => {
-          this.imgAdd(base64File);
-        }, (err) => {
-          console.log(err);
-        });
-      }
-    }, error => {
-      console.log('Error: ' + error);
-    });
+    // const options: ImagePickerOptions = {
+    //   maximumImagesCount: 1,
+    //   width: 70,
+    //   height: 70
+    // };
+    // this.imagePicker.getPictures(options).then(images => {
+    //   if (images.length > 1) {
+    //     this.presentAlert();
+    //   } else if (images.length === 1) {
+    //     console.log('Image URI: ' + images[0]);
+    //
+    //     this.avatar = images[0].slice(7);
+    //     let filePath: string = this.avatar
+    //     this.base64.encodeFile(filePath).then((base64File: string) => {
+    //       this.imgAdd(base64File);
+    //     }, (err) => {
+    //       console.log(err);
+    //     });
+    //   }
+    // }, error => {
+    //   console.log('Error: ' + error);
+    // });
   }
 
   presentAlert() {

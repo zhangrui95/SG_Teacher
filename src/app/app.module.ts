@@ -35,19 +35,15 @@ import { UserData } from '../providers/user-data';
 import {HttpClientModule} from "@angular/common/http";
 import {ProxyHttpService} from "../providers/proxy.http.service";
 
-import {Camera} from "@ionic-native/camera";
-import {ImagePicker} from "@ionic-native/image-picker";
 import {IndexPage} from "../pages/index/index";
 import {ClassroomPage} from "../pages/classroom/classroom";
 import {GroupingPage} from "../pages/grouping/grouping";
 import {DecisionPage} from "../pages/decision/decision";
-import {Base64} from "@ionic-native/base64";
 import {RecordsPage} from "../pages/records/records";
 import {SimulationPage} from "../pages/simulation/simulation";
 
 import {BaidutbPage} from "../pages/baidutb/baidutb";
 import {FindPasswordPage} from "../pages/find-password/find-password";
-import {BarcodeScanner} from "@ionic-native/barcode-scanner";
 import {SimulationListPage} from "../pages/simulation-list/simulation-list";
 import {RecordsListPage} from "../pages/records-list/records-list";
 import {GradePage} from "../pages/grade/grade";
@@ -251,10 +247,6 @@ import {GoldEndPage} from "../pages/gold-end/gold-end";
     ProxyHttpService,
     UserData,
     InAppBrowser,
-    Camera,
-    Base64,
-    BarcodeScanner,
-    ImagePicker,
     ServerSocket,
     ProcessJSONUtil,
     SplashScreen

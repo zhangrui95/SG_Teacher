@@ -1,6 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {ServerSocket} from "../../providers/ws.service";
 import {Subscription} from "rxjs/Subscription";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 
@@ -31,21 +30,9 @@ src;
   ngOnInit(): void {
     console.log(this.s_data.s_data.componentList)
     this.datas = this.s_data.s_data.componentList;
-    this.ws.connect();
 
-    this.intervalTimer = setInterval(() => {
-      if (!this.ws.messages) {
-        this.ws.connect();
 
-      }
-      if (this.ws.messages && !this.messagesSubscription) {
-        this.registeReciever()
-      }
 
-    }, 5000)
-    if (this.ws.messages && !this.messagesSubscription) {
-      this.registeReciever()
-    }
 
     let txtValues = new Array();
     let title;
@@ -85,21 +72,14 @@ src;
   getFullpath(path){
     return  this.http.getBaseurl()+path
   }
-  registeReciever() {
-    console.log(this.ws.messages)
-    this.ws.messages.subscribe(res => {
-      console.log("2$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-      console.log(res)
-      //{"action":"push_content_start","content":"11111"}
-    })
-  }
+
 
   ngOnDestroy() {
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket,public http:ProxyHttpService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService) {
   }
 
   getData() {

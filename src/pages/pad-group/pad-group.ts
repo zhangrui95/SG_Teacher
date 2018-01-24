@@ -84,7 +84,7 @@ export class PadGroupPage {
         this.canNext = true;
         return;
       }
-      if (!this.currScence||!this.currScence.s_data||this.currScence.s_data.length==0) {
+      if (!this.currScence || !this.currScence.s_data || this.currScence.s_data.length == 0) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         this.canNext = true;
         return;
@@ -159,7 +159,12 @@ export class PadGroupPage {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
         }
         if (this.sType == 'goldend') {
-          action = {action: 'screen', datas:{op:'end',list:this.rankList}, n_id: this.currScence.n_id, sim_id: this.sim_id}
+          action = {
+            action: 'screen',
+            datas: {op: 'end', list: this.rankList},
+            n_id: this.currScence.n_id,
+            sim_id: this.sim_id
+          }
         }
       } else {
         for (let s of this.currNode) {
@@ -170,9 +175,9 @@ export class PadGroupPage {
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
         }
-        if(!action){
-          if(this.currNode.length==1){
-            action= {action: 'screen', datas: this.currNode[0], n_id: this.currScence.n_id, sim_id: this.sim_id}
+        if (!action) {
+          if (this.currNode.length == 1) {
+            action = {action: 'screen', datas: this.currNode[0], n_id: this.currScence.n_id, sim_id: this.sim_id}
           }
         }
 
@@ -262,6 +267,7 @@ export class PadGroupPage {
 
     }
   }
+
   rankList
   grouped = true;
 
@@ -303,7 +309,7 @@ export class PadGroupPage {
 
     this.http.getRankingForU({sim_id: this.sim_id}).subscribe(res => {
       console.log(res)
-      this.rankList=res['list']
+      this.rankList = res['list']
       this.changeSType('goldend')
       alert(res)
       //todo 单独做一个结束场景显示排名
@@ -359,9 +365,11 @@ export class PadGroupPage {
       console.log(res)
     })
   }
-  refresh(){
+
+  refresh() {
     this.currpage.refreshdata();
   }
+
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
         if (this.currday >= 0) {
@@ -384,18 +392,18 @@ export class PadGroupPage {
         //   }
         // }
 
-      if(res['listScenes'].length==1){
-        if(res['listScenes'][0]['n_id']==''){
-          if(this.simType=='gold'){
-            this.showToast('bottom','正在等待各队投票')
+        if (res['listScenes'].length == 1) {
+          if (res['listScenes'][0]['n_id'] == '') {
+            if (this.simType == 'gold') {
+              this.showToast('bottom', '正在等待各队投票')
 
-          }else{
-            this.showToast('bottom','当前演练已结束')
+            } else {
+              this.showToast('bottom', '当前演练已结束')
 
+            }
+            return
           }
-          return
         }
-      }
         this.currNode = res['listScenes']
 
         this.processJson.setCurrNode(this.currNode)
@@ -519,7 +527,7 @@ export class PadGroupPage {
         console.log(this.currScence)
         this.curr_nid.nid = this.currScence.n_id;
         let beans = this.processJson.getSendStart(this.sim_id)
-        this.addStart({type: "start", datas: beans ,project_type:this.simType,sim_id:this.sim_id})
+        this.addStart({type: "start", datas: beans, project_type: this.simType, sim_id: this.sim_id})
       })
 
 
@@ -535,13 +543,14 @@ export class PadGroupPage {
     //   }
     //
     // }, 5000)
-    if(this.ws.messages){
+    if (this.ws.messages) {
       this.registeReciever()
     }
 
 
   }
-  registeReciever(){
+
+  registeReciever() {
     this.wsReciever = this.ws.messages.subscribe(msg => {
       let curr = JSON.parse(msg);
       let action = curr.action
@@ -567,6 +576,7 @@ export class PadGroupPage {
 
     })
   }
+
   getcomment() {
     const params = {
       sim_id: this.sim_id,
@@ -585,7 +595,7 @@ export class PadGroupPage {
   }
 
   getOut() {
-    let params = {sim_id:this.sim_id}
+    let params = {sim_id: this.sim_id}
     this.http.updateExeState(params).subscribe(res => {
       console.log(res)
       this.navCtrl.pop({animate: false});

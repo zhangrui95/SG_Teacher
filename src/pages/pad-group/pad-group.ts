@@ -32,7 +32,7 @@ export class PadGroupPage {
   mapShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
   constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
-    this.ws.connect();
+    // this.ws.connect();
     // this.sim_id = navParams.data.sim_id + ""
     this.userData.getSimid().then(val => {
       this.sim_id = val;
@@ -543,39 +543,39 @@ export class PadGroupPage {
     //   }
     //
     // }, 5000)
-    if (this.ws.messages) {
-      this.registeReciever()
-    }
+    // if (this.ws.messages) {
+    //   this.registeReciever()
+    // }
 
 
   }
 
-  registeReciever() {
-    this.wsReciever = this.ws.messages.subscribe(msg => {
-      let curr = JSON.parse(msg);
-      let action = curr.action
-      console.log('curr========>')
-      console.log(curr)
-      switch (action) {
-        case 'phone_insert_group':
-          let arr = curr.list;
-          for (let g of arr) {
-            for (let group of  this.groupList.GroupId) {
-              if (g['g_id'] == group.id) {
-                group.num = g['StuTotal']
-              }
-            }
-          }
-
-          //todo 自由分组 更新分组信息
-          break;
-        case 'pad_process_upadte':
-          // this.currNode = curr
-          break
-      }
-
-    })
-  }
+  // registeReciever() {
+  //   this.wsReciever = this.ws.messages.subscribe(msg => {
+  //     let curr = JSON.parse(msg);
+  //     let action = curr.action
+  //     console.log('curr========>')
+  //     console.log(curr)
+  //     switch (action) {
+  //       case 'phone_insert_group':
+  //         let arr = curr.list;
+  //         for (let g of arr) {
+  //           for (let group of  this.groupList.GroupId) {
+  //             if (g['g_id'] == group.id) {
+  //               group.num = g['StuTotal']
+  //             }
+  //           }
+  //         }
+  //
+  //         //todo 自由分组 更新分组信息
+  //         break;
+  //       case 'pad_process_upadte':
+  //         // this.currNode = curr
+  //         break
+  //     }
+  //
+  //   })
+  // }
 
   getcomment() {
     const params = {

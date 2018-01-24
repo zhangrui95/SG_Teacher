@@ -126,11 +126,7 @@ export class PadGroupPage {
         let f = confirm("是否确定结束分组并进入下一步？");
         if (f) {
           let remain_g_id = this.processJson.getRemainGroup(this.jsonData)
-          if (this.simType == 'gold') {
-            beans = this.processJson.parseGoldGroupingNext(this.sim_id, this.jsonData, this.groupList)
-          } else {
-            beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-          }
+          beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
 
 
           this.currday = 0;

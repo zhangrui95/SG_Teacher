@@ -57,7 +57,7 @@ export class OperationPage {
   }
 
   goCallName(){
-    this.navCtrl.push(CallNamePage,{sim_id: this.SimId});
+    this.navCtrl.push(CallNamePage,{sim_id: this.SimId,n_id:this.nId});
   }
 
   sendEv(){

@@ -13,15 +13,15 @@ export class CallNamePage {
   list = [];
   StuIndex = -1;
   sim_id;
+  n_id;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl: ToastController,
               public http: ProxyHttpService,
               public userData: UserData) {
-
+    this.n_id = this.navParams.get('n_id');
   }
-
   ionViewDidLoad() {
     this.userData.getSimid().then(val => {
       console.log('fucker')
@@ -29,11 +29,24 @@ export class CallNamePage {
       this.sim_id = val;
       const params = {sim_id: this.sim_id}
       this.http.getAllStuList(params).subscribe(res => {
+        console.log(res['stuList']);
+        for(let i in res['stuList']){
+          res['stuList'][i].picked = false;
+        }
         this.list = res['stuList'];
+        this.getPick(this.list);
       });
     })
     // const params = {sim_id: this.sim_id}
 
+  }
+  getPick(stuList){
+    console.log('stuList', stuList)
+    let params = {action: 'screen', datas: {op:'pick', list: stuList}, n_id: this.n_id, sim_id: this.sim_id};
+    this.http.getPushScreen(params).subscribe(res => {
+      console.log('pick====>' ,stuList);
+      console.log(res)
+    })
   }
   getFullpath(path){
    return  this.http.getBaseurl()+path
@@ -71,6 +84,8 @@ export class CallNamePage {
     }else{
       let u_id = this.list[this.StuIndex]['Id'];
       const params = {u_id: u_id}
+      this.list[this.StuIndex].picked = true;
+      this.getPick(this.list);
       this.http.getPushCallStuId(params).subscribe(res => {
         this.showToast('bottom', res['msg']);
       });

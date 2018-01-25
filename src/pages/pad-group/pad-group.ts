@@ -94,9 +94,10 @@ export class PadGroupPage {
       let beans = new Array<NextBean>();
 
       if (!this.isGrouped) {
-        console.log(this.currScence)
+
         if (this.currScence) {
           for (let o of this.jsonData) {
+            console.log(o)
             console.log(this.currScence)
             if (o.id == this.currScence.n_id) {
               if (o.type == 'grouping') {

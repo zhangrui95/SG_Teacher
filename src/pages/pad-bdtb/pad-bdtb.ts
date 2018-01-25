@@ -24,9 +24,15 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   ion_content
   refreshdata(){
     console.log('bd')
-    this.ws.connect()
-    this.registeReciever();
-    this.getAnswerOfStuList();
+    if(this.messagesSubscription){
+      this.messagesSubscription.unsubscribe()
+    }
+    setTimeout(()=>{
+      this.ws.connect()
+      this.registeReciever();
+      this.getAnswerOfStuList();
+    },1000)
+
   }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;

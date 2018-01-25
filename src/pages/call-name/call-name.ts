@@ -79,6 +79,9 @@ export class CallNamePage {
   }
 
   callName() {
+    for(let i in this.list){
+      this.list[i].picked = false;
+    }
     if(this.StuIndex == -1){
       this.showToast('bottom', '请选择学生');
     }else{

@@ -17,13 +17,15 @@ export class ServerSocket {
 
   public connect() {
 
-
+    if(this.messages){
+      return
+    }
     // Using share() causes a single websocket to be created when the first
     // observer subscribes. This socket is shared with subsequent observers
     // and closed when the observer count falls to zero.
     if (this.userData.userToken) {
       this.messages = websocketConnect(
-        'ws://192.168.0.52:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken + "&type=pad",
+        'ws://139.196.189.173:8080/VisualizationMgt/websocket.do?token=' + this.userData.userToken + "&type=pad",
         this.inputStream =
           new QueueingSubject<string>()
       ).messages.retryWhen(errors => errors.delay(1000)).share()

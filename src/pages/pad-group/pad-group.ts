@@ -366,7 +366,7 @@ export class PadGroupPage {
             //     }
             //   }
             // }
-            dnode.gold={goldBG:'', weatherICON:weatherICON,currentStatus:status}
+            dnode.gold={goldBG:'/files/Image/'+status.position+'.png', weatherICON:weatherICON,currentStatus:status}
             action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id}
             this.getPushScreen(action)
             return

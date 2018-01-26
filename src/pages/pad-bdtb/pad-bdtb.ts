@@ -52,7 +52,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
 
   }
   ngOnInit() {
-    this.polling()
+    // this.polling()
     this.n_id = this.s_data.n_id;
     this.g_id = this.s_data.g_id;
     this.getData();
@@ -100,7 +100,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
-    clearTimeout(this.timer)
+    // clearTimeout(this.timer)
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
   }

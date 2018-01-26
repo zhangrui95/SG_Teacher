@@ -49,7 +49,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
     }, 3000)
   }
   ngOnInit() {
-    this.polling()
+    // this.polling()
     console.log("grouping====================>")
     console.log(this.s_data.s_data.componentList[0].data.fillData)
     this.n_id=this.s_data.n_id;
@@ -100,7 +100,7 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
-    clearTimeout(this.timer)
+    // clearTimeout(this.timer)
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
   }

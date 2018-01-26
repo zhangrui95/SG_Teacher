@@ -8,6 +8,10 @@ import {CommentDetailPage} from "../comment-detail/comment-detail";
 import {PadGroupListPage} from "../pad-group-list/pad-group-list";
 import {DecisionDetailPage} from "../decision-detail/decision-detail";
 import "rxjs/add/operator/retryWhen";
+const WEATHER_SUNNY = 11101
+const WEATHER_HOT = 11102
+const WEATHER_SANDSTORM = 11103
+const WEATHER_HOT_SANDSTORM = 11104
 
 @IonicPage()
 @Component({
@@ -18,6 +22,155 @@ export class PadGroupPage {
   @ViewChild('currpage') currpage
   list = [];
   style = [];
+  public weathers = [
+    {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_HOT,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }, {
+      desert: WEATHER_HOT,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SANDSTORM,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_HOT,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_HOT_SANDSTORM,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_HOT,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SANDSTORM,
+      mountain: WEATHER_HOT,
+      base: WEATHER_SUNNY
+    }, {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_HOT,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_HOT,
+      mountain: WEATHER_HOT,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_HOT,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SANDSTORM,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_HOT,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_HOT,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SANDSTORM,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SANDSTORM,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_HOT,
+      base: WEATHER_SUNNY
+    }
+
+    , {
+      desert: WEATHER_HOT_SANDSTORM,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SUNNY,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+
+    , {
+      desert: WEATHER_SUNNY,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_HOT,
+      mountain: WEATHER_SUNNY,
+      base: WEATHER_SUNNY
+    }
+
+    , {
+      desert: WEATHER_SANDSTORM,
+      village: WEATHER_SUNNY,
+      oasis: WEATHER_SUNNY,
+      tombs: WEATHER_SANDSTORM,
+      mountain: WEATHER_HOT,
+      base: WEATHER_SUNNY
+    }
+
+  ]
   jsonData: any;
   currNode;
   sim_id = "111";
@@ -28,6 +181,7 @@ export class PadGroupPage {
   groupsCount
   simType = ""
   memberCount
+  day = 0
   userId;
   mapShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
@@ -75,7 +229,7 @@ export class PadGroupPage {
       }
       this.canNext = false;
       if (this.simType == 'gold') {
-        if (this.currday >= 18) {
+        if (this.day >= 18) {
           this.sendEnd()
         }
       }
@@ -150,7 +304,71 @@ export class PadGroupPage {
     } else if (ev == 'screen') {
       let action
       if (this.simType == 'gold') {
-        action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id}
+        //gold:{goldBG:'图片地址', weatherICON:['图片地址','图片地址']，currentStatus:{food:10,water:10,compass:10,tent:10,gold:10,money:10}}
+        let params = {sim_id: this.sim_id, n_id: this.n_id, g_id: this.currGid,day:this.day}
+        this.http.getGoldStatus(params).subscribe(res => {
+          if (res['listGDK'].length > 0) {
+           let status= JSON.parse(res['listGDK'][0]['current_status'])
+            let dnode=this.currScence;
+
+
+            let weatherICON=[];
+            let weather;
+
+            switch (status.place){
+              case '营地':
+
+                weather=this.weathers[status.days - 1].base
+
+                break
+              case '沙漠':
+                weather=this.weathers[status.days - 1].desert
+
+                break
+              case '村庄':
+                weather=this.weathers[status.days - 1].village
+                break
+              case '绿洲':
+                weather=this.weathers[status.days - 1].oasis
+                break
+              case '王陵':
+                weather=this.weathers[status.days - 1].tombs
+                break
+              case '矿山':
+                weather=this.weathers[status.days - 1].mountain
+                break
+            }
+
+            switch (weather){
+              case WEATHER_SANDSTORM:
+                weatherICON.push('/files/Image/tq3.png')
+                break
+              case WEATHER_HOT_SANDSTORM:
+                weatherICON.push('/files/Image/tq2.png')
+                weatherICON.push('/files/Image/tq3.png')
+                break
+              case WEATHER_HOT:
+                weatherICON.push('/files/Image/tq2.png')
+                break
+              case WEATHER_SUNNY:
+                weatherICON.push('/files/Image/tq1.png')
+                break
+            }
+            // for (let statu of status.status) {
+            //
+            //   if (statu.status_type == 1111101) {
+            //     if (statu.status_duration > 0) {
+            //       weatherICON.push('')
+            //     }
+            //   }
+            // }
+            dnode.gold={goldBG:'', weatherICON:weatherICON,currentStatus:status}
+            action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id}
+            this.getPushScreen(action)
+            return
+          }
+        })
+
 
         if (this.sType == 'group') {
           action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
@@ -247,7 +465,7 @@ export class PadGroupPage {
           this.sType == 'qq' ||
           this.sType == 'baidu'
         ) {
-          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid})
+          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid,day:this.day})
         } else if (this.sType == 'fork') {
           if (this.simType == 'gold') {
             this.showToast('bottom', '当前场景不能进入详情')
@@ -308,7 +526,7 @@ export class PadGroupPage {
       console.log(res)
       this.rankList = res['list']
       this.changeSType('goldend')
-      alert(res)
+      // alert(res)
       //todo 单独做一个结束场景显示排名
     })
 
@@ -368,10 +586,11 @@ export class PadGroupPage {
   }
 
   addExercisesStep(params) {
+    if (this.day = 0) {
+      this.day = 1
+    }
+    params.day = this.day + ''
     this.http.addExercisesStep(params).subscribe(res => {
-        if (this.currday >= 0) {
-          this.currday++;
-        }
 
         this.canNext = true;
         if (params.type == 'grouping') {
@@ -389,18 +608,18 @@ export class PadGroupPage {
         //   }
         // }
 
-        if (res['listScenes'].length == 1) {
-          if (res['listScenes'][0]['n_id'] == '') {
-            if (this.simType == 'gold') {
-              this.showToast('bottom', '正在等待各队投票')
-
-            } else {
-              this.showToast('bottom', '当前演练已结束')
-
-            }
-            return
-          }
-        }
+        // if (res['listScenes'].length == 1) {
+        //   if (res['listScenes'][0]['n_id'] == '') {
+        //     if (this.simType == 'gold') {
+        //       this.showToast('bottom', '正在等待各队投票')
+        //
+        //     } else {
+        //       this.showToast('bottom', '当前演练已结束')
+        //
+        //     }
+        //     return
+        //   }
+        // }
         this.currNode = res['listScenes']
 
         this.processJson.setCurrNode(this.currNode)
@@ -430,6 +649,9 @@ export class PadGroupPage {
             this.changeSType('weibo')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
+            if (this.simType == 'gold') {
+              this.day++
+            }
 
             this.changeSType('storm')
           }
@@ -468,6 +690,7 @@ export class PadGroupPage {
   }
 
   getPushScreen(params) {
+    params.day = this.day + ""
     this.http.getPushScreen(params).subscribe(res => {
       console.log("=======>")
       console.log(res)
@@ -580,7 +803,8 @@ export class PadGroupPage {
       g_id: this.currGid,
       u_id: this.userId,
       n_id: this.curr_nid.nid,
-      answer: this.content
+      answer: this.content,
+      day: this.day + ''
     }
     this.http.addStuAnswer(params).subscribe(res => {
       console.log(res)

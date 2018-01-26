@@ -12,7 +12,7 @@
   <page-group-index [sim_id]="sim_id"[s_data]="currScence"*ngIf="sType=='default'" #currpage></page-group-index>
   <page-grouping [sim_id]="sim_id" [list]="groupList" (onGrouped)="onNext($event)"  *ngIf="sType=='group'" #currpage></page-grouping>
   <page-pad-qq  [sim_id]="sim_id" [s_data]="currScence" *ngIf="sType=='qq'" #currpage></page-pad-qq>
-  <page-pad-tnfb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='storm'"#currpage></page-pad-tnfb>
+  <page-pad-tnfb  [days]="day" [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='storm'"#currpage></page-pad-tnfb>
   <page-pad-weibo   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='weibo'"#currpage></page-pad-weibo>
   <page-pad-bdtb   [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='baidu'"#currpage></page-pad-bdtb>
   <page-pad-decision  [sim_id]="sim_id" [s_data]="currScence"*ngIf="sType=='fork'"#currpage></page-pad-decision>

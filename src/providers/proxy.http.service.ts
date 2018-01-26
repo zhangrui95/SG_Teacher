@@ -11,7 +11,7 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class ProxyHttpService {
 
-  public static IP_PORT = "http://192.168.0.52:8080";
+  public static IP_PORT = "http://139.196.189.173:8080";
   public static PROJECT_PACKAGE = "/VisualizationMgt"
   public BASE_URL = ProxyHttpService.IP_PORT + ProxyHttpService.PROJECT_PACKAGE
 
@@ -32,6 +32,9 @@ export class ProxyHttpService {
     return this._post("/phoneAppController/getAnswerOfStuList.do", params)
   }
 
+  getGoldStatus(params) {
+    return this._get("/phoneAppController/getGDKDataByNId.do", params)
+  }
 
   updatePass(params) {
     return this._post("/userstu/updatePass.do", params)
@@ -131,13 +134,23 @@ export class ProxyHttpService {
     params.token=this.userData.userToken;
     console.log('params=======>')
     console.log(JSON.stringify(params))
+    if(!params.day){
+      params.day="1"
+    }
     return this.http.post(this.BASE_URL + url, JSON.stringify(params))
   }
 
   _get(url, params?: HttpParams) {
     var p = new HttpParams();
+    let hasDay =false;
     for (let key in params) {
+      if(key=='day'){
+        hasDay=true
+      }
       p = p.append(key, params[key])
+    }
+    if(!hasDay){
+      p = p.append('day',"1")
     }
     p = p.append("deviceType", "pad");
     p = p.append("token", this.userData.userToken)

@@ -24,6 +24,8 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   sim_id :any=new Object();
   @Input()
   s_data :any=new Object();
+  @Input()
+  days
   refreshdata(){
     console.log('tnfb')
     if(this.messagesSubscription){
@@ -121,10 +123,14 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   }
 
   getAnswerOfStuList() {
+    if(this.days==0){
+      this.days=1
+    }
     this.param = {
       n_id: this.n_id,
       g_id: this.g_id,
-      sim_id: this.sim_id
+      sim_id: this.sim_id,
+      day:this.days+''
     };
     console.log('sim_id:'+this.param.sim_id)
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)

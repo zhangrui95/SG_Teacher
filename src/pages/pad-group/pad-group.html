@@ -27,3 +27,19 @@
   <img src="assets/img/open.png" (click)="mapOpen()" class="open-body"/>
   <img class="map-img-box" src="assets/img/smjj.jpg"/>
 </div>
+<div class="pop-box" *ngIf="loadShow">
+  <div class="loader">
+    <div class="loader-inner ball-spin-fade-loader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="load-word">跳转中…</div>
+  </div>
+</div>
+

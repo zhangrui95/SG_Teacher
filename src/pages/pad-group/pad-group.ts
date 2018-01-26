@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {UserData} from "../../providers/user-data";
@@ -184,8 +184,9 @@ export class PadGroupPage {
   day = 0
   userId;
   mapShow = false;
+  loadShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
-  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
+  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil,public alertCtrl: AlertController) {
     // this.ws.connect();
     // this.sim_id = navParams.data.sim_id + ""
     this.userData.getSimid().then(val => {
@@ -238,6 +239,8 @@ export class PadGroupPage {
         this.canNext = true;
         return;
       }
+
+
       if (!this.currScence || !this.currScence.s_data || this.currScence.s_data.length == 0) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         this.canNext = true;
@@ -297,6 +300,7 @@ export class PadGroupPage {
         this.canNext = true;
 
       } else {
+        this.loadShow = true;
         beans = this.processJson.parseNext(this.sim_id)
         this.sendNext({type: "", datas: beans, project_type: this.simType})
       }
@@ -397,7 +401,6 @@ export class PadGroupPage {
         }
 
       }
-
       this.getPushScreen(action)
     } else if (ev == 'InputShow') {
       this.keyInput = true;
@@ -560,7 +563,6 @@ export class PadGroupPage {
   }
 
   sendNext(next) {
-
     this.addExercisesStep(next)
   }
 
@@ -586,11 +588,14 @@ export class PadGroupPage {
   }
 
   addExercisesStep(params) {
+
     if (this.day = 0) {
       this.day = 1
     }
     params.day = this.day + ''
     this.http.addExercisesStep(params).subscribe(res => {
+        this.loadShow = false;
+
 
         this.canNext = true;
         if (params.type == 'grouping') {
@@ -816,11 +821,27 @@ export class PadGroupPage {
   }
 
   getOut() {
-    let params = {sim_id: this.sim_id}
-    this.http.updateExeState(params).subscribe(res => {
-      console.log(res)
-      this.navCtrl.pop({animate: false});
+    let confirm = this.alertCtrl.create({
+      title: '确定终止演练吗?',
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            let params = {sim_id: this.sim_id}
+            this.http.updateExeState(params).subscribe(res => {
+              console.log(res)
+              this.navCtrl.pop({animate: false});
+            });
+          }
+        }
+      ]
     });
+    confirm.present();
   }
 
   mapOpen() {

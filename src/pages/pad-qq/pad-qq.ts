@@ -36,8 +36,16 @@ export class PadQQPage implements OnInit,OnDestroy {
   }
   @ViewChild('topBox') topBox: ElementRef;
   @ViewChild('list') list: ElementRef;
+  timer
 
+  polling() {
+    this.timer = setTimeout(() => {
+      this.getAnswerOfStuList()
+      this.polling()
+    }, 3000)
+  }
   ngOnInit() {
+    // this.polling()
     console.log("grouping====================>")
     console.log(this.s_data.s_data.componentList[0].data.fillData)
     this.n_id=this.s_data.n_id;
@@ -90,6 +98,7 @@ export class PadQQPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
+    // clearTimeout(this.timer)
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
   }

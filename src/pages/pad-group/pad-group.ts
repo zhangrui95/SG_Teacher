@@ -84,6 +84,8 @@ export class PadGroupPage {
         this.canNext = true;
         return;
       }
+
+
       if (!this.currScence || !this.currScence.s_data || this.currScence.s_data.length == 0) {
         this.showToast("bottom", '请各组参与人员配合完成当前步骤')
         this.canNext = true;
@@ -389,18 +391,27 @@ export class PadGroupPage {
         //   }
         // }
 
-        if (res['listScenes'].length == 1) {
-          if (res['listScenes'][0]['n_id'] == '') {
-            if (this.simType == 'gold') {
-              this.showToast('bottom', '正在等待各队投票')
 
-            } else {
-              this.showToast('bottom', '当前演练已结束')
 
-            }
+      for(let o of res['listScenes']){
+          if(o['n_id'] == ''){
+            this.showToast('bottom', '正在等待各组投票')
             return
           }
-        }
+      }
+
+        // if (res['listScenes'].length == 1) {
+        //   if (res['listScenes'][0]['n_id'] == '') {
+        //     if (this.simType == 'gold') {
+        //       this.showToast('bottom', '正在等待各队投票')
+        //
+        //     } else {
+        //       this.showToast('bottom', '当前演练已结束')
+        //
+        //     }
+        //     return
+        //   }
+        // }
         this.currNode = res['listScenes']
 
         this.processJson.setCurrNode(this.currNode)

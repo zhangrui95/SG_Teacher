@@ -52,7 +52,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
 
   }
   ngOnInit() {
-
+    this.polling()
     this.n_id = this.s_data.n_id;
     this.g_id = this.s_data.g_id;
     this.getData();
@@ -62,6 +62,14 @@ export class PadBdtbPage implements OnInit,OnDestroy {
     if (this.ws.messages ) {
       this.registeReciever()
     }
+  }
+  timer;
+
+  polling() {
+    this.timer = setTimeout(() => {
+      this.getAnswerOfStuList()
+      this.polling()
+    }, 3000)
   }
 
   intervalTimer
@@ -92,6 +100,7 @@ export class PadBdtbPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
+    clearTimeout(this.timer)
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
   }

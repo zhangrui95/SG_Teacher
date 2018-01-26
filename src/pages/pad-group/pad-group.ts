@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, AlertController} from 'ionic-angular';
 import {ProxyHttpService} from "../../providers/proxy.http.service";
 import {ServerSocket} from "../../providers/ws.service";
 import {UserData} from "../../providers/user-data";
@@ -30,8 +30,9 @@ export class PadGroupPage {
   memberCount
   userId;
   mapShow = false;
+  loadShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
-  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil) {
+  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil,public alertCtrl: AlertController) {
     // this.ws.connect();
     // this.sim_id = navParams.data.sim_id + ""
     this.userData.getSimid().then(val => {
@@ -143,6 +144,7 @@ export class PadGroupPage {
         this.canNext = true;
 
       } else {
+        this.loadShow = true;
         beans = this.processJson.parseNext(this.sim_id)
         this.sendNext({type: "", datas: beans, project_type: this.simType})
       }
@@ -179,7 +181,6 @@ export class PadGroupPage {
         }
 
       }
-
       this.getPushScreen(action)
     } else if (ev == 'InputShow') {
       this.keyInput = true;
@@ -342,7 +343,6 @@ export class PadGroupPage {
   }
 
   sendNext(next) {
-
     this.addExercisesStep(next)
   }
 
@@ -369,6 +369,7 @@ export class PadGroupPage {
 
   addExercisesStep(params) {
     this.http.addExercisesStep(params).subscribe(res => {
+        this.loadShow = false;
         if (this.currday >= 0) {
           this.currday++;
         }
@@ -592,11 +593,27 @@ export class PadGroupPage {
   }
 
   getOut() {
-    let params = {sim_id: this.sim_id}
-    this.http.updateExeState(params).subscribe(res => {
-      console.log(res)
-      this.navCtrl.pop({animate: false});
+    let confirm = this.alertCtrl.create({
+      title: '确定终止演练吗?',
+      buttons: [
+        {
+          text: '取消',
+          handler: () => {
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            let params = {sim_id: this.sim_id}
+            this.http.updateExeState(params).subscribe(res => {
+              console.log(res)
+              this.navCtrl.pop({animate: false});
+            });
+          }
+        }
+      ]
     });
+    confirm.present();
   }
 
   mapOpen() {

@@ -305,7 +305,7 @@ export class PadGroupPage {
           beans = this.processJson.parseNext(this.sim_id,this.day+1)
 
         }else{
-          beans = this.processJson.parseNext(this.sim_id,this.day)
+          beans = this.processJson.parseNext(this.sim_id,'1')
 
         }
 

@@ -287,7 +287,6 @@ export class PadGroupPage {
         if (f) {
           let remain_g_id = this.processJson.getRemainGroup(this.jsonData)
           beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-          this.day=1
 
           this.currday = 0;
           this.sendNext({
@@ -704,7 +703,9 @@ export class PadGroupPage {
             this.changeSType('weibo')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
-
+            if(this.simType=='gold'){
+              this.day++
+            }
             this.changeSType('storm')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_bullet') != -1) {
@@ -717,7 +718,9 @@ export class PadGroupPage {
 
             this.changeSType('default')
           } else {
-
+            if(this.simType=='gold'){
+              this.day++
+            }
             this.changeSType('empty')
           }
         } else {

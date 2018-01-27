@@ -54,10 +54,11 @@ export class PadQQPage implements OnInit,OnDestroy {
     this.getAnswerOfStuList();
     this.ws.connect();
 
-
-    if (this.ws.messages ) {
-      this.registeReciever()
-    }
+    setTimeout(()=>{
+      if (this.ws.messages ) {
+        this.registeReciever()
+      }
+    },2000)
   }
 
   intervalTimer

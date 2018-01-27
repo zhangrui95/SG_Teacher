@@ -225,6 +225,8 @@ export class PadGroupPage {
   currday = -1;
 
   onNext(ev?) {
+
+
     this.resetTimer()
     if (ev == 'next') {
       if (!this.canNext) {
@@ -287,7 +289,6 @@ export class PadGroupPage {
         if (f) {
           let remain_g_id = this.processJson.getRemainGroup(this.jsonData)
           beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-
           this.currday = 0;
           this.sendNext({
             type: 'grouping',
@@ -303,7 +304,6 @@ export class PadGroupPage {
       } else {
         this.loadShow = true;
         if(this.simType=='gold'){
-          this.step+1
           beans = this.processJson.parseNext(this.sim_id,this.day)
 
         }else{
@@ -631,7 +631,6 @@ export class PadGroupPage {
       console.log(res)
     })
   }
-
   refresh() {
     this.currpage.refreshdata();
   }
@@ -645,7 +644,10 @@ export class PadGroupPage {
     this.http.addExercisesStep(params).subscribe(res => {
         this.loadShow = false;
 
-
+        this.step++
+        if(this.step>this.preCount){
+          this.day=Math.ceil((this.step-this.preCount)/2)
+        }
         this.canNext = true;
         if (params.type == 'grouping') {
 
@@ -704,7 +706,6 @@ export class PadGroupPage {
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
             if(this.simType=='gold'){
-              this.day++
             }
             this.changeSType('storm')
           }
@@ -719,7 +720,6 @@ export class PadGroupPage {
             this.changeSType('default')
           } else {
             if(this.simType=='gold'){
-              this.day++
             }
             this.changeSType('empty')
           }

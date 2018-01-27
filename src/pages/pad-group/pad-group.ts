@@ -454,14 +454,15 @@ export class PadGroupPage {
     } else if (ev == 'mapShow') {
       this.mapShow = true;
     } else if (ev.g_id) {
-      if (this.currNode.length <= 1) {
-        this.showToast("bottom", '尚未进行分组操作，不能切换')
-        return;
-      }
+
       this.currGid = ev.g_id
       this.currScence = this.getSelectScence();
       if (!this.currScence) {
         this.showToast("bottom", '该分组暂无法查看状态')
+        return;
+      }
+      if (this.currNode.length <= 1) {
+        this.showToast("bottom", '尚未进行分组操作，不能切换')
         return;
       }
       this.curr_nid.nid = this.currScence.n_id;

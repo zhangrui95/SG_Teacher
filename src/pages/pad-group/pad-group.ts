@@ -285,7 +285,7 @@ export class PadGroupPage {
         if (f) {
           let remain_g_id = this.processJson.getRemainGroup(this.jsonData)
           beans = this.processJson.parseGroupingNext(this.sim_id, this.jsonData)
-
+          this.day=1
 
           this.currday = 0;
           this.sendNext({
@@ -301,13 +301,35 @@ export class PadGroupPage {
 
       } else {
         this.loadShow = true;
-        beans = this.processJson.parseNext(this.sim_id)
+        if(this.simType=='gold'){
+          beans = this.processJson.parseNext(this.sim_id,this.day+1)
+
+        }else{
+          beans = this.processJson.parseNext(this.sim_id,this.day)
+
+        }
+
         this.sendNext({type: "", datas: beans, project_type: this.simType})
       }
 
     } else if (ev == 'screen') {
       let action
       if (this.simType == 'gold') {
+        if (this.sType == 'group') {
+          action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
+          this.getPushScreen(action)
+          return
+        }
+        if (this.sType == 'goldend') {
+          action = {
+            action: 'screen',
+            datas: {op: 'end', list: this.rankList},
+            n_id: this.currScence.n_id,
+            sim_id: this.sim_id
+          }
+          this.getPushScreen(action)
+          return
+        }
         //gold:{goldBG:'图片地址', weatherICON:['图片地址','图片地址']，currentStatus:{food:10,water:10,compass:10,tent:10,gold:10,money:10}}
         let params = {sim_id: this.sim_id, n_id: this.n_id, g_id: this.currGid,day:this.day}
         this.http.getGoldStatus(params).subscribe(res => {
@@ -358,37 +380,61 @@ export class PadGroupPage {
                 weatherICON.push('/files/Image/tq1.png')
                 break
             }
-            // for (let statu of status.status) {
-            //
-            //   if (statu.status_type == 1111101) {
-            //     if (statu.status_duration > 0) {
-            //       weatherICON.push('')
-            //     }
-            //   }
-            // }
+            for (let statu of status.status) {
+
+              if (statu.status_type == 1111101) {
+                if (statu.status_duration > 0) {
+                  weatherICON.push('')
+                }
+              }
+            }
             dnode.gold={goldBG:'/files/Image/'+status.position+'.png', weatherICON:weatherICON,currentStatus:status}
-            action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id}
+            action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id,day:this.day}
+            this.getPushScreen(action)
+            return
+          }else{
+            let dnode=this.currScence
+            dnode.gold={goldBG:'/files/Image/'+1+'.png', weatherICON:['/files/Image/tq1.png'],currentStatus:{
+              position: '1',
+              place: '营地',
+              money: 900,
+              weight: 900,
+              food: 0,
+              days: 1,
+              water: 0,
+              tent: 0,
+              compass: 0,
+              gold: 0,
+              useTent: false,
+              useCompass: false,
+              asked: false,
+              isSuccess: false,
+              isDead: false,
+              status: [],
+              events: []
+            }}
+            action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id,day:this.day}
             this.getPushScreen(action)
             return
           }
-        })
 
 
-        if (this.sType == 'group') {
-          action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
+
         }
-        if (this.sType == 'goldend') {
-          action = {
-            action: 'screen',
-            datas: {op: 'end', list: this.rankList},
-            n_id: this.currScence.n_id,
-            sim_id: this.sim_id
-          }
-        }
+
+
+
+        )
+
+
+
+
+
       } else {
         for (let s of this.currNode) {
           if (s.g_id == this.currGid) {
-            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id}
+            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id,day:'1'}
+
           }
         }
         if (this.sType == 'group') {
@@ -588,11 +634,11 @@ export class PadGroupPage {
   }
 
   addExercisesStep(params) {
-
-    if (this.day = 0) {
-      this.day = 1
+    if (this.day == 0) {
+      params.day = '1'
+    }else{
+      params.day = this.day+''
     }
-    params.day = this.day + ''
     this.http.addExercisesStep(params).subscribe(res => {
         this.loadShow = false;
 
@@ -654,9 +700,6 @@ export class PadGroupPage {
             this.changeSType('weibo')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
-            if (this.simType == 'gold') {
-              this.day++
-            }
 
             this.changeSType('storm')
           }
@@ -664,11 +707,17 @@ export class PadGroupPage {
             this.changeSType('danmu')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
+            if(this.simType=='gold'){
+              this.day++
+            }
             this.changeSType('fork')
           } else if (this.currScence.s_data && this.currScence.s_data.comeList.length > 0) {
 
             this.changeSType('default')
           } else {
+            if (this.simType == 'gold') {
+              this.day++
+            }
             this.changeSType('empty')
           }
         } else {
@@ -676,7 +725,10 @@ export class PadGroupPage {
         }
         // this.processJson.setCurrNode("");
       }
-    )
+   ,error2 => {
+      console.log(error2)
+        this.loadShow = false;
+      } )
   }
 
   getPushFreeGroListForPhone(params) {
@@ -695,7 +747,11 @@ export class PadGroupPage {
   }
 
   getPushScreen(params) {
-    params.day = this.day + ""
+    if (this.day == 0) {
+      params.day = '1'
+    }else{
+      params.day = this.day+''
+    }
     this.http.getPushScreen(params).subscribe(res => {
       console.log("=======>")
       console.log(res)

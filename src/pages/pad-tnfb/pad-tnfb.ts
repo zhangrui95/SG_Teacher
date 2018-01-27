@@ -132,15 +132,18 @@ export class PadTnfbPage implements OnInit,OnDestroy {
   }
 
   getAnswerOfStuList() {
-    if(this.days==0){
-      this.days=1
-    }
+
     this.param = {
       n_id: this.n_id,
       g_id: this.g_id,
       sim_id: this.sim_id,
       day:this.days+''
     };
+    if(this.days==0){
+      this.param.day='1'
+    }else{
+      this.param.day=this.days+''
+    }
     console.log('sim_id:'+this.param.sim_id)
     console.log('n_id:'+this.param.n_id+"   g_id:"+this.param.g_id)
     this.http.getAnswerOfStuList(this.param).subscribe(res => {

@@ -172,7 +172,10 @@ export class ProcessJSONUtil {
       }
     }
   }
-  public parseNext(sim_id):Array<NextBean>{
+  public parseNext(sim_id,day?):Array<NextBean>{
+    if(day==0){
+      day='1'
+    }
     let arr=new Array <NextBean>()
 
     for(let node of this.currNodes){
@@ -182,7 +185,7 @@ export class ProcessJSONUtil {
       let bean =new NextBean();
       bean.sim_id=sim_id;
       bean.type=node.type;
-
+      bean.day=day+''
       bean.curr_n_id=node.n_id;
       bean.g_id=node.g_id;
       bean.n_name=node.s_data.name;
@@ -275,6 +278,7 @@ export class NextBean {
   public next_n_id=new Array();
   public n_id;
   public n_name;
+  public day;
   public type;
   public curr_n_id
 

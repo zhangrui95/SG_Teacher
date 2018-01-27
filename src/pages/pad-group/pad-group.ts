@@ -183,6 +183,8 @@ export class PadGroupPage {
   memberCount
   day = 0
   userId;
+  step=0
+  preCount=2;
   mapShow = false;
   loadShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
@@ -302,7 +304,8 @@ export class PadGroupPage {
       } else {
         this.loadShow = true;
         if(this.simType=='gold'){
-          beans = this.processJson.parseNext(this.sim_id,this.day+1)
+          this.step+1
+          beans = this.processJson.parseNext(this.sim_id,this.day)
 
         }else{
           beans = this.processJson.parseNext(this.sim_id,'1')
@@ -708,17 +711,13 @@ export class PadGroupPage {
             this.changeSType('danmu')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_select') != -1) {
-            if(this.simType=='gold'){
-              this.day++
-            }
+
             this.changeSType('fork')
           } else if (this.currScence.s_data && this.currScence.s_data.comeList.length > 0) {
 
             this.changeSType('default')
           } else {
-            if (this.simType == 'gold') {
-              this.day++
-            }
+
             this.changeSType('empty')
           }
         } else {

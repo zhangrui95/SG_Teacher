@@ -645,8 +645,8 @@ export class PadGroupPage {
         this.loadShow = false;
 
         this.step++
-        if(this.step>this.preCount){
-          this.day=Math.ceil((this.step-this.preCount)/2)
+       if(this.step>this.preCount){
+          this.day=Math.ceil((this.step-this.preCount-1)/2)
         }
         this.canNext = true;
         if (params.type == 'grouping') {

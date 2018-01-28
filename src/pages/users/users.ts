@@ -22,7 +22,7 @@ export class UsersPage {
   phone;
   userId;
   imagepath;
-  avatar = "assets/img/header.png";
+  avatar = "assets/img/teacher.jpg";
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public actionSheetCtrl: ActionSheetController,
@@ -70,13 +70,14 @@ export class UsersPage {
     let url;
     this.userData.getAvatar().then(value => {
       url=value;
+      this.avatar = "assets/img/teacher.jpg";
 
-
-      if(!url||url.length==0){
-        this.avatar = "assets/img/head1.jpg";
-      }else{
-        this.avatar=url;
-      }
+      // if(!url||url.length==0){
+      //   this.avatar = "assets/img/teacher.jpg";
+      // }else{
+      //   this.avatar=url;
+      //
+      // }
 
 
 

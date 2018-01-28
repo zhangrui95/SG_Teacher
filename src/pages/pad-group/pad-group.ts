@@ -8,6 +8,7 @@ import {CommentDetailPage} from "../comment-detail/comment-detail";
 import {PadGroupListPage} from "../pad-group-list/pad-group-list";
 import {DecisionDetailPage} from "../decision-detail/decision-detail";
 import "rxjs/add/operator/retryWhen";
+
 const WEATHER_SUNNY = 11101
 const WEATHER_HOT = 11102
 const WEATHER_SANDSTORM = 11103
@@ -183,12 +184,12 @@ export class PadGroupPage {
   memberCount
   day = 0
   userId;
-  step=0
-  preCount=2;
+  step = 0
+  preCount = 2;
   mapShow = false;
   loadShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
-  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil,public alertCtrl: AlertController) {
+  constructor(public toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, public ws: ServerSocket, public http: ProxyHttpService, public userData: UserData, public processJson: ProcessJSONUtil, public alertCtrl: AlertController) {
     // this.ws.connect();
     // this.sim_id = navParams.data.sim_id + ""
     this.userData.getSimid().then(val => {
@@ -303,11 +304,11 @@ export class PadGroupPage {
 
       } else {
         this.loadShow = true;
-        if(this.simType=='gold'){
-          beans = this.processJson.parseNext(this.sim_id,this.day)
+        if (this.simType == 'gold') {
+          beans = this.processJson.parseNext(this.sim_id, this.day)
 
-        }else{
-          beans = this.processJson.parseNext(this.sim_id,'1')
+        } else {
+          beans = this.processJson.parseNext(this.sim_id, '1')
 
         }
 
@@ -318,7 +319,13 @@ export class PadGroupPage {
       let action
       if (this.simType == 'gold') {
         if (this.sType == 'group') {
-          action = {action: 'screen', datas: this.groupList, n_id: this.currScence.n_id, sim_id: this.sim_id}
+          action = {
+            action: 'screen',
+            datas: this.groupList,
+            n_id: this.currScence.n_id,
+            sim_id: this.sim_id,
+            day: this.day
+          }
           this.getPushScreen(action)
           return
         }
@@ -327,115 +334,126 @@ export class PadGroupPage {
             action: 'screen',
             datas: {op: 'end', list: this.rankList},
             n_id: this.currScence.n_id,
-            sim_id: this.sim_id
+            sim_id: this.sim_id, day: this.day
           }
           this.getPushScreen(action)
           return
         }
         //gold:{goldBG:'图片地址', weatherICON:['图片地址','图片地址']，currentStatus:{food:10,water:10,compass:10,tent:10,gold:10,money:10}}
-        let params = {sim_id: this.sim_id, n_id: this.n_id, g_id: this.currGid,day:this.day}
+        let params = {sim_id: this.sim_id, n_id: this.curr_nid.nid, g_id: this.currGid, day: this.day}
         this.http.getGoldStatus(params).subscribe(res => {
-          if (res['listGDK'].length > 0) {
-           let status= JSON.parse(res['listGDK'][0]['current_status'])
-            let dnode=this.currScence;
+            if (res['listGDK'].length > 0) {
+              let status = JSON.parse(res['listGDK'][0]['current_status'])
+              let dnode = this.currScence;
 
 
-            let weatherICON=[];
-            let weather;
+              let weatherICON = [];
+              let weather;
 
-            switch (status.place){
-              case '营地':
+              switch (status.place) {
+                case '营地':
 
-                weather=this.weathers[status.days - 1].base
+                  weather = this.weathers[status.days - 1].base
 
-                break
-              case '沙漠':
-                weather=this.weathers[status.days - 1].desert
+                  break
+                case '沙漠':
+                  weather = this.weathers[status.days - 1].desert
 
-                break
-              case '村庄':
-                weather=this.weathers[status.days - 1].village
-                break
-              case '绿洲':
-                weather=this.weathers[status.days - 1].oasis
-                break
-              case '王陵':
-                weather=this.weathers[status.days - 1].tombs
-                break
-              case '矿山':
-                weather=this.weathers[status.days - 1].mountain
-                break
-            }
+                  break
+                case '村庄':
+                  weather = this.weathers[status.days - 1].village
+                  break
+                case '绿洲':
+                  weather = this.weathers[status.days - 1].oasis
+                  break
+                case '王陵':
+                  weather = this.weathers[status.days - 1].tombs
+                  break
+                case '矿山':
+                  weather = this.weathers[status.days - 1].mountain
+                  break
+              }
 
-            switch (weather){
-              case WEATHER_SANDSTORM:
-                weatherICON.push('/files/Image/tq3.png')
-                break
-              case WEATHER_HOT_SANDSTORM:
-                weatherICON.push('/files/Image/tq2.png')
-                weatherICON.push('/files/Image/tq3.png')
-                break
-              case WEATHER_HOT:
-                weatherICON.push('/files/Image/tq2.png')
-                break
-              case WEATHER_SUNNY:
-                weatherICON.push('/files/Image/tq1.png')
-                break
-            }
-            for (let statu of status.status) {
+              switch (weather) {
+                case WEATHER_SANDSTORM:
+                  weatherICON.push('/files/Image/tq3.png')
+                  break
+                case WEATHER_HOT_SANDSTORM:
+                  weatherICON.push('/files/Image/tq2.png')
+                  weatherICON.push('/files/Image/tq3.png')
+                  break
+                case WEATHER_HOT:
+                  weatherICON.push('/files/Image/tq2.png')
+                  break
+                case WEATHER_SUNNY:
+                  weatherICON.push('/files/Image/tq1.png')
+                  break
+              }
+              for (let statu of status.status) {
 
-              if (statu.status_type == 1111101) {
-                if (statu.status_duration > 0) {
-                  weatherICON.push('')
+                if (statu.status_type == 1111101) {
+                  if (statu.status_duration > 0) {
+                    weatherICON.push('')
+                  }
                 }
               }
+              dnode.gold = {
+                goldBG: '/files/Image/' + status.position + '.png',
+                weatherICON: weatherICON,
+                currentStatus: status
+              }
+              action = {
+                action: 'screen',
+                datas: this.currScence,
+                n_id: this.currScence.n_id,
+                sim_id: this.sim_id,
+                day: this.day
+              }
+              this.getPushScreen(action)
+              return
+            } else {
+              let dnode = this.currScence
+              dnode.gold = {
+                goldBG: '/files/Image/' + 1 + '.png', weatherICON: ['/files/Image/tq1.png'], currentStatus: {
+                  position: '1',
+                  place: '营地',
+                  money: 900,
+                  weight: 900,
+                  food: 0,
+                  days: 1,
+                  water: 0,
+                  tent: 0,
+                  compass: 0,
+                  gold: 0,
+                  useTent: false,
+                  useCompass: false,
+                  asked: false,
+                  isSuccess: false,
+                  isDead: false,
+                  status: [],
+                  events: []
+                }
+              }
+              action = {
+                action: 'screen',
+                datas: this.currScence,
+                n_id: this.currScence.n_id,
+                sim_id: this.sim_id,
+                day: this.day
+              }
+              this.getPushScreen(action)
+              return
             }
-            dnode.gold={goldBG:'/files/Image/'+status.position+'.png', weatherICON:weatherICON,currentStatus:status}
-            action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id,day:this.day}
-            this.getPushScreen(action)
-            return
-          }else{
-            let dnode=this.currScence
-            dnode.gold={goldBG:'/files/Image/'+1+'.png', weatherICON:['/files/Image/tq1.png'],currentStatus:{
-              position: '1',
-              place: '营地',
-              money: 900,
-              weight: 900,
-              food: 0,
-              days: 1,
-              water: 0,
-              tent: 0,
-              compass: 0,
-              gold: 0,
-              useTent: false,
-              useCompass: false,
-              asked: false,
-              isSuccess: false,
-              isDead: false,
-              status: [],
-              events: []
-            }}
-            action = {action: 'screen', datas: this.currScence, n_id: this.currScence.n_id, sim_id: this.sim_id,day:this.day}
-            this.getPushScreen(action)
-            return
+
+
           }
-
-
-
-        }
-
-
-
         )
-
-
-
 
 
       } else {
         for (let s of this.currNode) {
           if (s.g_id == this.currGid) {
-            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id,day:'1'}
+            action = {action: 'screen', datas: s, n_id: this.currScence.n_id, sim_id: this.sim_id, day: '1'}
 
           }
         }
@@ -444,12 +462,18 @@ export class PadGroupPage {
         }
         if (!action) {
           if (this.currNode.length == 1) {
-            action = {action: 'screen', datas: this.currNode[0], n_id: this.currScence.n_id, sim_id: this.sim_id}
+            action = {
+              action: 'screen',
+              datas: this.currNode[0],
+              n_id: this.currScence.n_id,
+              sim_id: this.sim_id,
+              day: this.day
+            }
           }
         }
-
+        this.getPushScreen(action)
       }
-      this.getPushScreen(action)
+
     } else if (ev == 'InputShow') {
       this.keyInput = true;
       this.showFlag = false;
@@ -517,7 +541,7 @@ export class PadGroupPage {
           this.sType == 'qq' ||
           this.sType == 'baidu'
         ) {
-          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid,day:this.day})
+          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid, day: this.day})
         } else if (this.sType == 'fork') {
           if (this.simType == 'gold') {
             this.showToast('bottom', '当前场景不能进入详情')
@@ -574,12 +598,22 @@ export class PadGroupPage {
   sendEnd() {
     //todo 结束场景
 
+
     this.http.getRankingForU({sim_id: this.sim_id}).subscribe(res => {
       console.log(res)
       this.rankList = res['list']
       this.changeSType('goldend')
       // alert(res)
       //todo 单独做一个结束场景显示排名
+
+      let par = {
+        action: 'screen',
+        datas: {op: 'end', list: this.rankList},
+        n_id: this.currScence.n_id,
+        sim_id: this.sim_id
+      }
+      this.getPushScreen(par)
+
     })
 
     // "list": [
@@ -631,6 +665,7 @@ export class PadGroupPage {
       console.log(res)
     })
   }
+
   refresh() {
     this.currpage.refreshdata();
   }
@@ -638,15 +673,18 @@ export class PadGroupPage {
   addExercisesStep(params) {
     if (this.day == 0) {
       params.day = '1'
-    }else{
-      params.day = this.day+''
+    } else {
+      params.day = this.day + ''
     }
     this.http.addExercisesStep(params).subscribe(res => {
         this.loadShow = false;
 
         this.step++
-       if(this.step>this.preCount){
-          this.day=Math.ceil((this.step-this.preCount-1)/2)
+        if (this.step == this.preCount) {
+          this.day = 1;
+        }
+        if (this.step > this.preCount) {
+          this.day = Math.ceil((this.step - this.preCount + 1) / 2)
         }
         this.canNext = true;
         if (params.type == 'grouping') {
@@ -657,12 +695,17 @@ export class PadGroupPage {
         }
 
         //
-        // for (let sdata of res['listScenes']) {
-        //   if (!sdata.n_id || sdata.n_id.length == 0) {
-        //     this.showToast('bottom', '请各组参与人员配合完成当前步骤')
-        //     return
-        //   }
-        // }
+        let isEnd = true
+        for (let sdata of res['listScenes']) {
+          if (sdata.n_id && sdata.n_id != '') {
+            isEnd = false
+          }
+        }
+        if (isEnd) {
+          this.sendEnd()
+          this.showToast('bottom', '所有小队都已经完成游戏，开始结算')
+          return
+        }
 
         // if (res['listScenes'].length == 1) {
         //   if (res['listScenes'][0]['n_id'] == '') {
@@ -705,7 +748,7 @@ export class PadGroupPage {
             this.changeSType('weibo')
           }
           else if (JSON.stringify(this.currScence).indexOf('SG_brain') != -1) {
-            if(this.simType=='gold'){
+            if (this.simType == 'gold') {
             }
             this.changeSType('storm')
           }
@@ -719,7 +762,7 @@ export class PadGroupPage {
 
             this.changeSType('default')
           } else {
-            if(this.simType=='gold'){
+            if (this.simType == 'gold') {
             }
             this.changeSType('empty')
           }
@@ -728,10 +771,10 @@ export class PadGroupPage {
         }
         // this.processJson.setCurrNode("");
       }
-   ,error2 => {
-      console.log(error2)
+      , error2 => {
+        console.log(error2)
         this.loadShow = false;
-      } )
+      })
   }
 
   getPushFreeGroListForPhone(params) {
@@ -750,10 +793,8 @@ export class PadGroupPage {
   }
 
   getPushScreen(params) {
-    if (this.day == 0) {
+    if (params.day == 0 || params.day == '1') {
       params.day = '1'
-    }else{
-      params.day = this.day+''
     }
     this.http.getPushScreen(params).subscribe(res => {
       console.log("=======>")

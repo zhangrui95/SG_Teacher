@@ -6,8 +6,6 @@ import {SimulationPage} from "../simulation/simulation";
 import {UserData} from "../../providers/user-data";
 import {GradePage} from "../grade/grade";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
-import {ServerSocket} from "../../providers/ws.service";
-import {Subscription} from "rxjs/Subscription";
 import {PadGroupPage} from "../pad-group/pad-group"
 
 @IonicPage()
@@ -76,12 +74,12 @@ export class IndexPage {
     return this.http.getBaseurl()+path
   }
   constructor(public ionicApp: IonicApp, public navCtrl: NavController, public navParams: NavParams, public keyboard: Keyboard, public toastCtrl: ToastController,
-              public platform: Platform, public userData:UserData,public http:ProxyHttpService,public ws:ServerSocket) {
+              public platform: Platform, public userData:UserData,public http:ProxyHttpService) {
     this.registerBackEvent = this.platform.registerBackButtonAction(() => {
 
       this.exitApp()
     }, 10)
-    this.ws.connect()
+    // this.ws.connect()
 
   }
   selectedProject = '';
@@ -102,22 +100,16 @@ export class IndexPage {
   CourseText= '';
 
 
-  private socketSubscription: Subscription
 
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad')
    this.getProjectList();
-    if(this.ws.messages){
-      this.socketSubscription = this.ws.messages.subscribe((message: string) => {
-        console.log('received message from server11111: ', message)
-      })
-    }
+
 
   }
   ionViewDidLeave(){
-    if(this.socketSubscription)
-    this.socketSubscription.unsubscribe()
+
   }
 
   getProjectList(){

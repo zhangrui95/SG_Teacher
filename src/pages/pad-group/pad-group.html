@@ -1,6 +1,6 @@
 <ion-header  (click)="onbActive()">
   <ion-navbar  hideBackButton="true" color="dark">
-    <ion-title>{{sType!='group'?(currScence?currScence.s_data.name:'SG平台'):'分组'}}</ion-title>
+    <ion-title>{{sType!='group'?(currScence?currScence.s_data.name:'SG平台'):'分组'}}{{day>0&&simType=="gold"?'(第'+day+'天)':''}}</ion-title>
     <div class="zc-new-num" (click)="getOut()">终止演练</div>
     <img src="assets/img/sx.png" class="head-img" (click)="refresh()"/>
   </ion-navbar>

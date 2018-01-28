@@ -22,7 +22,6 @@ import {UsersPage} from "../pages/users/users";
 import {LoginsPage} from "../pages/logins/logins";
 // import {PadGroupPage} from "../pages/pad-group/pad-group";
 import {IndexPage} from "../pages/index/index";
-import {ServerSocket} from "../providers/ws.service";
 
 export interface PageInterface {
   title: string;
@@ -88,8 +87,8 @@ export class ConferenceApp {
               public confData: ConferenceData,
               public storage: Storage,
               public splashScreen: SplashScreen,
-              public toastCtrl: ToastController,
-              public ws:ServerSocket) {
+              public toastCtrl: ToastController
+             ) {
     this.platformReady()
 
     this.userData.getToken().then(res=>{

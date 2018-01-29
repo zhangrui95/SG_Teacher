@@ -20,9 +20,11 @@ export class CommentDetailPage {
   noDate = false;
   noComment = false;
   day
+  simType
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: ProxyHttpService,public userData:UserData) {
     this.day=this.navParams.get('day');
     this.n_id = this.navParams.get('n_id');
+    this.simType = this.navParams.get('simType');
   }
 
   ionViewWillEnter() {
@@ -37,7 +39,10 @@ export class CommentDetailPage {
       if(this.day==0){
         this.day=1
       }
-      const params = {sim_id: this.sim_id, n_id: this.n_id,day:this.day}
+      if(this.simType!='gold'){
+        this.day='1'
+      }
+      const params = {sim_id: this.sim_id, n_id: this.n_id,day:this.day+''}
       this.http.getComment(params).subscribe(res => {
         if(res['stuList'] == ''){
           this.noDate = true;

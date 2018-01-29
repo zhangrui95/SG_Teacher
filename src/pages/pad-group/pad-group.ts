@@ -541,7 +541,7 @@ export class PadGroupPage {
           this.sType == 'qq' ||
           this.sType == 'baidu'
         ) {
-          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid, day: this.day})
+          this.navCtrl.push(CommentDetailPage, {n_id: this.curr_nid.nid, g_id: this.currGid, day: this.day,simType: this.simType})
         } else if (this.sType == 'fork') {
           if (this.simType == 'gold') {
             this.showToast('bottom', '当前场景不能进入详情')

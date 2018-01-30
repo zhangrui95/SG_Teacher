@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Subscription} from "rxjs/Subscription";
 import {ProxyHttpService} from "../../providers/proxy.http.service";
+import {UserData} from "../../providers/user-data";
 
 
 @IonicPage()
@@ -25,15 +26,18 @@ export class GroupIndexPage implements OnInit, OnDestroy {
   refreshdata(){
     console.log('group')
   }
+  constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService,public userData: UserData) {
+    this.userData.getSimid().then(val => {
+      this.sim_id = val;
+      console.log(val)
+    })
+  }
   private socketSubscription: Subscription
 
   ngOnInit(): void {
     console.log(this.s_data.s_data.componentList)
     this.datas = this.s_data.s_data.componentList;
-
-
-
-
+    this.n_id = this.s_data.n_id;
     let txtValues = new Array();
     let title;
     let content;
@@ -75,9 +79,6 @@ export class GroupIndexPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.socketSubscription)
       this.socketSubscription.unsubscribe();
-  }
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,public http:ProxyHttpService) {
   }
 
   getData() {

@@ -185,7 +185,7 @@ export class PadGroupPage {
   day = 0
   userId;
   step = 0
-  preCount = 2;
+  preCount = 3;
   mapShow = false;
   loadShow = false;
   sType = '';//fork,baidu,weibo,qq,storm,danmu,taolun?group,default
@@ -246,11 +246,7 @@ export class PadGroupPage {
       }
 
 
-      if (!this.currScence || !this.currScence.s_data || this.currScence.s_data.length == 0) {
-        this.showToast("bottom", '请各组参与人员配合完成当前步骤')
-        this.canNext = true;
-        return;
-      }
+
 
 
       let beans = new Array<NextBean>();
@@ -696,16 +692,28 @@ export class PadGroupPage {
 
         //
         let isEnd = true
+        let hasEndTeam=false
         for (let sdata of res['listScenes']) {
           if (sdata.n_id && sdata.n_id != '') {
             isEnd = false
           }
+          if(sdata.n_id ==''){
+            hasEndTeam=true
+
+          }
         }
+
         if (isEnd) {
           this.sendEnd()
           this.showToast('bottom', '所有小队都已经完成游戏，开始结算')
           return
         }
+        // if(hasEndTeam){
+        //   let c=confirm('是否确定继续下一步？')
+        //   if(!c){
+        //     return
+        //   }
+        // }
 
         // if (res['listScenes'].length == 1) {
         //   if (res['listScenes'][0]['n_id'] == '') {
@@ -773,6 +781,7 @@ export class PadGroupPage {
       }
       , error2 => {
         console.log(error2)
+        this.canNext = true;
         this.loadShow = false;
       })
   }

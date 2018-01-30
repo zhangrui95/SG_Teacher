@@ -4,7 +4,7 @@
       <img src="{{src}}" style="width:100%;height:auto;border:1px solid #aaa;"/>
     </div>
     <div *ngIf="name=='video'">
-      <video controls="controls" src="{{src}}" (play)="playVideo()" (pause)="pauseVideo()" style="width:100%;height:auto;"></video>
+      <video controls="controls" src="{{src.changingThisBreaksApplicationSecurity}}" (play)="playVideo()" (pause)="pauseVideo()" style="width:100%;height:auto;"></video>
     </div>
   </div>
     <div class="tile-img">

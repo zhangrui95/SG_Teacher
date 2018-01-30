@@ -18,7 +18,7 @@ export class GroupIndexPage implements OnInit, OnDestroy {
   n_id;
   g_id;
   name;
-src;
+  src={changingThisBreaksApplicationSecurity:''};
   title;
   content;
   txt_length;
@@ -46,9 +46,7 @@ src;
       }
       else {
         this.name=name;
-
-
-        this.src=com.data.src
+        this.src = com.data.src;
       }
 
     }
